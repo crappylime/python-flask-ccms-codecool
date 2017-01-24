@@ -6,3 +6,7 @@ class Mentor:
         self.name = name
         self.mail = mail
         self.password = password
+
+    @classmethod
+    def add_mentor(cls, mentor):
+        cls.mentor_list.append(mentor)
