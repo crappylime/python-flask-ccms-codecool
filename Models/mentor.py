@@ -16,3 +16,7 @@ class Mentor:
         self.mail = mail
         self.password = password
 
+    @classmethod
+    def remove_mentor(cls, mentor):
+        cls.mentor_list.remove(mentor)
+
