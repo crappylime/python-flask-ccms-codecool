@@ -10,3 +10,9 @@ class Mentor:
     @classmethod
     def add_mentor(cls, mentor):
         cls.mentor_list.append(mentor)
+
+    def edit_mentor(self, name, mail, password):
+        self.name = name
+        self.mail = mail
+        self.password = password
+
