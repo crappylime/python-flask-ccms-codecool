@@ -20,3 +20,6 @@ class Mentor:
     def remove_mentor(cls, mentor):
         cls.mentor_list.remove(mentor)
 
+    @classmethod
+    def get_list_mentor(cls):
+        return cls.mentor_list
