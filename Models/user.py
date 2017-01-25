@@ -82,6 +82,12 @@ class Mentor(Employee):
     def get_list_mentor(cls):
         return cls.mentor_list
 
+    @classmethod
+    def get_mentor(cls, name):
+        for mentor in cls.menotr_list:
+            if mentor.name == name:
+                return mentor
+
 
 class Boss(Employee):
 
