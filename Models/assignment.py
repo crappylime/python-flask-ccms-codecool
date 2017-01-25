@@ -1,9 +1,12 @@
+from Models.user import *
+
+
 class Assignment:
     """This is class representing Assignment given by Mentor."""
 
     assignment_list = []
 
-    def __init__(self, title, content, due_date, max_points, submission_list=None):
+    def __init__(self, title, content, due_date, max_points):
         self.title = title
         self.content = content
         self.due_date = due_date
@@ -71,13 +74,24 @@ class Assignment:
 
         Raises:
             TypeError: If points limit has been exceeded.
+            NameError: There's no submission with given student name.
         """
-        if points < self.max_points:
-            return self.points = points
-        raise TypeError("Points limit has been exceeded")
+        try:
+            self.points = int(points)
+        except (TypeError, ValueError):
+            raise TypeError('An argument must be integer type')
+
+        if points not in range(0, self.max_points):
+            raise ValueError("Points limit has been exceeded")
+
+        student = Student.get_student(owner_name)
+        for submission in self.submission_list:
+            if submission.owner == student:
+                return self.points = points
+            raise NameError("There's no submission with given student name")
 
     @classmethod
-    def get_list_assignmnent():
+    def get_list_assignmnent(cls):
         """
         Returns assignments list.
         """
