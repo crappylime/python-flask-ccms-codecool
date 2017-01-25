@@ -1,10 +1,10 @@
-Assignment_title,Student_name,Content,Date,Points
-OOP1,Marek Frankowicz,bla bla bla,2017-02-01,11
-OOP2,Joanna Gargas,bla bla bla,2017-01-18,10
-OOP3,Marta Sajdak,bla bla bla,2017-02-03,2
-OOP1,Marek Frankowicz,bla bla bla,2017-01-20,11
-OOP2,Joanna Gargas,bla bla bla,2017-03-01,
-OOP3,Marta Sajdak,bla bla bla,2017-02-09,
-OOP1,Marek Frankowicz,bla bla bla,2017-02-07,10
-OOP2,Joanna Gargas,bla bla bla,2017-01-30,
-OOP3,Marta Sajdak,bla bla bla,2017-02-09,
+assignment_title,student_name,content,date,points,title
+OOP1,Marek Frankowicz,bla bla bla,2017-02-01,11,
+OOP2,Joanna Gargas,bla bla bla,2017-01-18,10,b
+OOP3,Marta Sajdak,bla bla bla,2017-02-03,2,c
+OOP1,Marek Frankowicz,bla bla bla,2017-01-20,11,c
+OOP2,Joanna Gargas,bla bla bla,2017-03-01,,d
+OOP3,Marta Sajdak,bla bla bla,2017-02-09,,s
+OOP1,Marek Frankowicz,bla bla bla,2017-02-07,10,ab
+OOP2,Joanna Gargas,bla bla bla,2017-01-30,,d
+OOP3,Marta Sajdak,bla bla bla,2017-02-09,,e

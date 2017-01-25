@@ -45,6 +45,7 @@ class UserInterface:
             print("Your submission haven't been grade yet")
 
 
+
     @staticmethod
     def mentor_menu():
         options = ['Show students list', 'Add an assignment', 'Grade an assignment', 'Check attendance', 'Add student',
@@ -121,7 +122,9 @@ class UserInterface:
         for index, option in enumerate(list):
             print('  (' + (str(index + 1)) + ') ' + str(option))
 
+
     @staticmethod
     def show_list(user_list):
         for user in user_list:
             print(user.User.get_name())
+

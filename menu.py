@@ -1,4 +1,7 @@
-from Models.user import *
+from Models.submission import *
+from Models.assignment import *
+import program
+
 from ui import *
 
 class Menu:
@@ -9,7 +12,7 @@ class Menu:
                 user = student
                 StudentMenu(user)
 
-        for mentor in Mentor.get_mentor_list():
+        for mentor in Mentor.get_list_mentor():
             if user_name == mentor.name:
                 user = mentor
                 MentorMenu(user)
@@ -21,6 +24,8 @@ class Menu:
 
 
     def __init__(self):
+
+        program.Program.import_all_csv()
 
         while True:
             user_choice = UserInterface.main_menu()
@@ -40,7 +45,7 @@ class StudentMenu:
             elif user_choice == "View my grades":
                 UserInterface.view_grade(user)
             elif user_choice == "Log out":
-                break
+
 
 class MentorMenu:
     def __init__(self, user):
@@ -102,5 +107,8 @@ class StaffMenu:
 def main():
     Menu()
 
+
+
 if __name__ == "__main__":
     main()
+
