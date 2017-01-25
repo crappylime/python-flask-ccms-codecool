@@ -75,17 +75,14 @@ class BossMenu:
         while True:
             user_choice = UserInterface.boss_menu()
             if user_choice == "Add a mentor":
-                new_mentor_data = UserInterface.new_mentor()
-                Mentor.add_mentor(new_mentor_data[0], new_mentor_data[1], new_mentor_data[2])
+                Mentor.add_mentor(*UserInterface.new_mentor())
             elif user_choice == "Remove a mentor":
-                mentor_to_remove_name = UserInterface.mentor_to_remove_data()
-                mentor_to_remove = Mentor.get_mentor(mentor_to_remove_name)
-                Mentor.get_list_mentor().remove(mentor_to_remove)
+                mentor_to_remove_name = UserInterface.user_name_from_list(Mentor.get_list_mentor)
+                Mentor.remove_mentor(mentor_to_remove_name)
             elif user_choice == "Edit mentor data":
-                mentor_to_edit_name = UserInterface.mentor_to_edit_name()
+                mentor_to_edit_name = UserInterface.user_name_from_list(Mentor.get_list_mentor)
                 mentor_to_edit = Mentor.get_mentor(mentor_to_edit_name)
-                mentor_to_edit.name, mentor_to_edit.mail, mentor_to_edit.password = \
-                    UserInterface.edit_mentor_data(mentor_to_edit)
+                mentor_to_edit.edit_mentor(*UserInterface.edit_mentor_data(mentor_to_edit))
             elif user_choice == "Show mentors list":
                 UserInterface.show_list(Mentor.get_list_mentor())
             elif user_choice == "Show students list":

@@ -105,14 +105,13 @@ class UserInterface:
         return mentor_name, mentor_mail, mentor_password
 
     @staticmethod
-    def mentor_to_remove_data():
-        mentor_name = input('Please provide mentor\'s to remove name: ')
-        return mentor_name
-
-    @staticmethod
-    def mentor_to_edit_name():
-        mentor_name = input('Please provide mentor\'s to edit name: ')
-        return mentor_name
+    def user_name_from_list(list):
+        UserInterface.show_list_with_index(list)
+        try:
+            user_choice = int(input('Please choose person by index: '))
+            return list[user_choice - 1].get_name()
+        except ValueError:
+            print("Wrong input")
 
     @staticmethod
     def edit_mentor_data(mentor_to_edit):
@@ -134,4 +133,9 @@ class UserInterface:
     def show_list(user_list):
         for user in user_list:
             print(user.User.get_name())
+
+    @staticmethod
+    def show_list_with_index(user_list):
+        for index, user in enumerate(user_list):
+            print('  (' + (str(index + 1)) + ') ' + user.get_name())
 
