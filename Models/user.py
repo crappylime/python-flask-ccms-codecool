@@ -54,6 +54,7 @@ class Student(User):
             else:
                 print('there is no such student in students list')
 
+
 class Employee(User):
     pass
 
@@ -75,8 +76,10 @@ class Mentor(Employee):
         self.password = password
 
     @classmethod
-    def remove_mentor(cls, mentor):
-        cls.mentor_list.remove(mentor)
+    def remove_mentor(cls, name):
+        for mentor in cls.mentor_list:
+            if mentor.name == name:
+                cls.mentor_list.remove(mentor)
 
     @classmethod
     def get_list_mentor(cls):
@@ -84,7 +87,7 @@ class Mentor(Employee):
 
     @classmethod
     def get_mentor(cls, name):
-        for mentor in cls.menotr_list:
+        for mentor in cls.mentor_list:
             if mentor.name == name:
                 return mentor
 
