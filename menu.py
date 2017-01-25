@@ -1,4 +1,7 @@
-from Models.user import *
+from Models.submission import *
+from Models.assignment import *
+import program
+
 from ui import *
 
 class Menu:
@@ -9,7 +12,7 @@ class Menu:
                 user = student
                 StudentMenu(user)
 
-        for mentor in Mentor.get_mentor_list():
+        for mentor in Mentor.get_list_mentor():
             if user_name == mentor.name:
                 user = mentor
                 MentorMenu(user)
@@ -21,6 +24,8 @@ class Menu:
 
 
     def __init__(self):
+
+        program.Program.import_all_csv()
 
         while True:
             user_choice = UserInterface.main_menu()
@@ -40,7 +45,7 @@ class StudentMenu:
             elif user_choice == "View my grades":
                 UserInterface.view_grade(user)
             elif user_choice == "Log out":
-                break
+
 
 class MentorMenu:
     def __init__(self, user):
@@ -70,18 +75,24 @@ class BossMenu:
         while True:
             user_choice = UserInterface.boss_menu()
             if user_choice == "Add a mentor":
-                pass
+                new_mentor_data = UserInterface.new_mentor()
+                Mentor.add_mentor(new_mentor_data[0], new_mentor_data[1], new_mentor_data[2])
             elif user_choice == "Remove a mentor":
-                pass
+                mentor_to_remove_name = UserInterface.mentor_to_remove_data()
+                mentor_to_remove = Mentor.get_mentor(mentor_to_remove_name)
+                Mentor.get_list_mentor().remove(mentor_to_remove)
             elif user_choice == "Edit mentor data":
-                pass
+                mentor_to_edit_name = UserInterface.mentor_to_edit_name()
+                mentor_to_edit = Mentor.get_mentor(mentor_to_edit_name)
+                mentor_to_edit.name, mentor_to_edit.mail, mentor_to_edit.password = \
+                    UserInterface.edit_mentor_data(mentor_to_edit)
             elif user_choice == "Show mentors list":
-                pass
+                UserInterface.show_list(Mentor.get_list_mentor())
             elif user_choice == "Show students list":
-                pass
+                UserInterface.show_list(Student.get_student_list())
             elif user_choice == "Log out":
-                pass
-            break
+                break
+
 
 class StaffMenu:
     def __init__(self, user):
@@ -89,13 +100,15 @@ class StaffMenu:
         while True:
             user_choice = UserInterface.staff_menu()
             if user_choice == "Show students list":
-                pass
+                UserInterface.show_list(Student.get_student_list())
             elif user_choice == "Log out":
                 break
-
 
 def main():
     Menu()
 
+
+
 if __name__ == "__main__":
     main()
+
