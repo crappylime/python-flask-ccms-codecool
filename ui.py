@@ -77,6 +77,11 @@ class UserInterface:
         return name, mail, password
 
     @staticmethod
+    def get_remove_data:
+        name = input("Please provide name of the person you would like to remove: ")
+        return name
+
+    @staticmethod
     def staff_menu():
         options = ['Show students list', 'Log out']
         UserInterface.print_options_list(options)
