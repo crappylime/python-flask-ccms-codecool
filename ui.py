@@ -82,3 +82,8 @@ class UserInterface:
         """print indices (each increased by 1) and elements from provided list as a column"""
         for index, option in enumerate(list):
             print('  (' + (str(index + 1)) + ') ' + str(option))
+
+    @staticmethod
+    def show_list(user_list):
+        for user in user_list:
+            print(user.User.get_name())

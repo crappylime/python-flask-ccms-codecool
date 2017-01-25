@@ -49,7 +49,7 @@ class MentorMenu:
         while True:
             user_choice = UserInterface.mentor_menu()
             if user_choice == "Show students list":
-                pass
+                UserInterface.show_list(Student.get_student_list())
             elif user_choice == "Add an assignment":
                 pass
             elif user_choice == "Grade an assignment":
