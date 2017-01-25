@@ -34,6 +34,7 @@ class StudentMenu:
             if user_choice == "Submit an assignment":
                 submission_data = UserInterface.submit_assignment()
                 Submission.add_submission(submission_data)
+
             elif user_choice == "View my grades":
 
             elif user_choice == "Log out":
