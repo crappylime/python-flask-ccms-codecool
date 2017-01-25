@@ -21,7 +21,7 @@ class Student(User):
         cls.student_list.append(Student(name, mail, password))
 
     @classmethod
-    def edit_student(cls, name):
+    def edit_student(cls, name, mail, password):
         self.name = name
         self.mail = mail
         self.password = password
