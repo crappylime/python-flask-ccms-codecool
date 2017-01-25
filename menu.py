@@ -45,11 +45,11 @@ class StudentMenu:
             elif user_choice == "View my grades":
                 UserInterface.view_grade(user)
             elif user_choice == "Log out":
+                pass
 
 
 class MentorMenu:
     def __init__(self, user):
-
         while True:
             user_choice = UserInterface.mentor_menu()
             if user_choice == "Show students list":

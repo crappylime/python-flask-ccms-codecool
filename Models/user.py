@@ -1,11 +1,8 @@
 class User:
-<<<<<<< HEAD
 
-    def __init__(self, name, mail, password):
-=======
     user_list = []
+
     def __init__ (self, name, mail, password):
->>>>>>> 85c2bca00c30841f5b0072ea02a6e1503bb2ab4b
         self.name = name
         self.mail = mail
         self.password = password
@@ -36,8 +33,7 @@ class User:
     def set_password(self, new_password):
         self.password = new_password
 
-
-    def get_name(self):
+    def get_name(self):  # To chyba powinno być usunięte, b
         return self
 
 
