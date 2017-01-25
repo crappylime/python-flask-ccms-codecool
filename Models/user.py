@@ -6,14 +6,12 @@ class User:
         self.password = password
 
 
-class Student:
+class Student(User):
 
     student_list = []
 
     def __init__(self, name, mail, password):
-        self.name = name
-        self.mail = mail
-        self.password = password
+        User.__init__(self, name, mail, password)
         self.grade_list = []
         self.attendance_list = []
         self.submission_list = []
@@ -24,22 +22,9 @@ class Student:
 
     @classmethod
     def edit_student(cls, name):
-        for student in cls.student_list:
-            if student.name == name:
-                print(student.name)
-                new_name = input('Please provide new name or press enter')
-                if new_name != '':
-                    student.name = new_name
-                print(student.mail)
-                new_mail = input('Please provide new mail or press enter')
-                if new_mail != '':
-                    student.mail = new_mail
-                print(student.password)
-                new_password = input('Please proviede new password')
-                if new_password != '':
-                    student.password = new_password
-            else:
-                print('no such student in students list')
+        self.name = name
+        self.mail = mail
+        self.password = password
 
     @classmethod
     def remove_student(cls, name):
@@ -69,19 +54,20 @@ class Student:
             else:
                 print('there is no such student in students list')
 
+class Employee(User):
+    pass
 
-class Mentor:
+
+class Mentor(Employee):
 
     mentor_list = []
 
     def __init__(self, name, mail, password):
-        self.name = name
-        self.mail = mail
-        self.password = password
+        super().__init__(name, mail, password)
 
     @classmethod
-    def add_mentor(cls, mentor):
-        cls.mentor_list.append(mentor)
+    def add_mentor(cls, name, mail, password):
+        cls.mentor_list.append(Mentor(name, mail, password))
 
     def edit_mentor(self, name, mail, password):
         self.name = name
@@ -95,3 +81,15 @@ class Mentor:
     @classmethod
     def get_list_mentor(cls):
         return cls.mentor_list
+
+
+class Boss(Employee):
+
+    def __init__(self, name, mail, password):
+        super().__init__(name, mail, password)
+
+
+class Staff(Employee):
+
+    def __init__(self, name, mail, password):
+        super().__init__(name, mail, password)
