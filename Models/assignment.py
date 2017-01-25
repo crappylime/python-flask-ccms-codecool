@@ -3,7 +3,7 @@ class Assignment:
 
     assignment_list = []
 
-    def __init__(self, title, content, due_date, max_points, submission_list=None):
+    def __init__(self, title, content, due_date, max_points):
         self.title = title
         self.content = content
         self.due_date = due_date

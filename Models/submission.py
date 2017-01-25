@@ -1,5 +1,5 @@
-from assignment import Assignment
-from Student import *
+from Models.assignment import Assignment
+from Models.user import *
 
 
 class Submission:
