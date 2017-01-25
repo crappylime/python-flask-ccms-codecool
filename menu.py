@@ -21,9 +21,13 @@ class Menu:
 
 
     def __init__(self):
-        
+
         while True:
-            self.log_in()
+            user_choice = UserInterface.main_menu()
+            if user_choice == "Log in":
+                self.log_in()
+            else:
+                break
 
 
 class StudentMenu:
@@ -32,11 +36,9 @@ class StudentMenu:
         while True:
             user_choice = UserInterface.student_menu()
             if user_choice == "Submit an assignment":
-                submission_data = UserInterface.submit_assignment()
-                Submission.add_submission(submission_data)
-
+                Submission.add_submission(UserInterface.submit_assignment())
             elif user_choice == "View my grades":
-                
+                UserInterface.view_grade(user)
             elif user_choice == "Log out":
                 break
 
@@ -46,12 +48,19 @@ class MentorMenu:
         while True:
             user_choice = UserInterface.mentor_menu()
             if user_choice == "Show students list":
+                UserInterface.show_list(Student.get_student_list())
             elif user_choice == "Add an assignment":
+                Assignment.add_assignment(UserInterface.add_assignment())
             elif user_choice == "Grade an assignment":
+                pass
             elif user_choice == "Check attendance":
+                pass
             elif user_choice == "Add student":
+                pass
             elif user_choice == "Remove student":
+                pass
             elif user_choice == "Edit student data":
+                pass
             elif user_choice == "Log out":
                 break
 
@@ -79,6 +88,7 @@ class BossMenu:
             elif user_choice == "Log out":
                 break
 
+
 class StaffMenu:
     def __init__(self, user):
 
@@ -89,6 +99,8 @@ class StaffMenu:
             elif user_choice == "Log out":
                 break
 
-
 def main():
     Menu()
+
+if __name__ == "__main__":
+    main()
