@@ -1,7 +1,14 @@
-
-
-
 class UserInterface:
+
+    @staticmethod
+    def main_menu():
+        options = ['Log in', 'Exit']
+        UserInterface.print_options_list(options)
+        try:
+            user_choice = int(input('Chose action: '))
+        except ValueError:
+            print("Wrong input")
+        return options[user_choice - 1]
 
     @staticmethod
     def login():
@@ -13,12 +20,30 @@ class UserInterface:
     def student_menu():
         options = ['Submit an assignment', 'View my grades', 'Log out']
         UserInterface.print_options_list(options)
-        user_choice = int(input('Chose action: '))
+        try:
+            user_choice = int(input('Chose action: '))
+        except ValueError:
+            print("Wrong input")
         return options[user_choice - 1]
 
     @staticmethod
-    def s_submit_an_assignment():
-        pass
+    def submit_assignment():
+        title = input("Please provide title of submission: ")
+        content = input("Please provide link to your assignment: ")
+        date = input("What date is it today? ;p ") # Remember to import date
+        assignment_title = input("Please provide title of assignment: ")
+        owner_name = input("Please provide your name") # Use caller object next
+        return title, content, date, assignment_title, owner_name
+
+    @staticmethod
+    def view_grade(student):
+        submission_title = input("What submission are you interested in? ")
+        grade = student.Student.get_grade(submission_title)
+        if grade:
+            print("Your score is :{}".format(grade))
+        else:
+            print("Your submission haven't been grade yet")
+
 
 
     @staticmethod
@@ -26,23 +51,40 @@ class UserInterface:
         options = ['Show students list', 'Add an assignment', 'Grade an assignment', 'Check attendance', 'Add student',
                    'Remove student', 'Edit student data', 'Log out']
         UserInterface.print_options_list(options)
-        user_choice = input('Chose action: ')
-        return option[user_choice - 1]
+        try:
+            user_choice = int(input('Chose action: '))
+        except ValueError:
+            print("Wrong input")
+        return options[user_choice - 1]
+
+    @staticmethod
+    def add_assignment():
+        title = input("Please provide assignment title: ")
+        content = input("Please provide assignment content: ")
+        due_date = input("Please provide due date: ")
+        max_points = input("Plese set max points for this assignment: ")
+        return title, content, due_date, max_points
 
     @staticmethod
     def staff_menu():
         options = ['Show students list', 'Log out']
         UserInterface.print_options_list(options)
-        user_choice = input('Chose action: ')
-        return option[user_choice - 1]
+        try:
+            user_choice = int(input('Chose action: '))
+        except ValueError:
+            print("Wrong input")
+        return options[user_choice - 1]
 
     @staticmethod
     def boss_menu():
         options = ['Add a mentor', 'Remove a mentor', 'Edit mentor data', 'Show mentors list', 'Show students list',
                    'Log out']
         UserInterface.print_options_list(options)
-        user_choice = input('Chose action: ')
-        return option[user_choice - 1]
+        try:
+            user_choice = int(input('Chose action: '))
+        except ValueError:
+            print("Wrong input")
+        return options[user_choice - 1]
 
     @staticmethod
     def print_options_list(list):
@@ -51,11 +93,8 @@ class UserInterface:
             print('  (' + (str(index + 1)) + ') ' + str(option))
 
 
-
-
-
-
-
-
-
+    @staticmethod
+    def show_list(user_list):
+        for user in user_list:
+            print(user.User.get_name())
 

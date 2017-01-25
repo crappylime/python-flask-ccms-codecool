@@ -77,7 +77,7 @@ class Assignment:
             NameError: There's no submission with given student name.
         """
         try:
-            self.points = int(points)
+            points = int(points)
         except (TypeError, ValueError):
             raise TypeError('An argument must be integer type')
 
