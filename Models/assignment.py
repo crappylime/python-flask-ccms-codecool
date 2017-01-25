@@ -87,7 +87,8 @@ class Assignment:
         student = Student.get_student(owner_name)
         for submission in self.submission_list:
             if submission.owner == student:
-                return self.points = points
+                self.points = points
+                return self.points
             raise NameError("There's no submission with given student name")
 
     @classmethod
