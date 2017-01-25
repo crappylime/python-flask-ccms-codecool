@@ -1,7 +1,11 @@
 import csv
 from Models.user import *
+from Models.submission import *
+from Models.assignment import *
+
 
 class Program:
+
     @staticmethod
     def import_csv_users(filepath):
         with open(filepath) as source:
@@ -13,9 +17,9 @@ class Program:
                 elif user["Role"] == "mentor":
                     Mentor.add_mentor(user["Name"], user["E-mail"], user["Password"])
                 elif user["Role"] == "staff":
-                    Staff.add_mentor(user["Name"], user["E-mail"], user["Password"])
+                    Staff.add_staff(user["Name"], user["E-mail"], user["Password"])
                 elif user["Role"] == "boss":
-                    Boss.add_user(user["Name"], user["E-mail"], user["Password"])
+                    Boss.add_boss(user["Name"], user["E-mail"], user["Password"])
                 else:
                     raise KeyError("There is no such role")
 
@@ -29,16 +33,16 @@ class Program:
     @staticmethod
     def import_csv_assigment(filepath):
         with open(filepath) as source:
-            assigment_csv_list = csv.DictReader(source)
-            for assigment in assigment_csv_list:
-                Assigment.add_assigment(assigment["Title"], assigment["Content"], assigment["Due_date"], assigment["Max_points"])
+            assignment_csv_list = csv.DictReader(source)
+            for assignment in assignment_csv_list:
+                Assignment.add_assignment(assignment["Title"], assignment["Content"], assignment["Due_date"], assignment["Max_points"])
 
     @staticmethod
     def import_csv_submission(filepath):
         with open(filepath) as source:
             submission_csv_list = csv.DictReader(source)
             for submission in submission_csv_list:
-                Submission.add_submision(submission["Title"], submission["Student_name"], submission["Content"], submission["Date"], submission["Points"])
+                Submission.add_submission(submission["Title"], submission["Student_name"], submission["Content"], submission["Date"], submission["Points"])
 
 
 
