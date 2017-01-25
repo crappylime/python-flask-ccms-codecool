@@ -17,13 +17,14 @@ class Program:
                 elif user["Role"] == "boss":
                     Boss.add_user(user["Name"], user["E-mail"], user["Password"])
                 else:
-                    raise KeyError
+                    raise KeyError("There is no such role")
 
-    # @staticmethod
-    # def import_csv_attendance(filepath):
-    #     with open(filepath) as source:
-    #         attendance_csv_list = csv.DictReader(source)
-    #         for attendance in attendance_csv_list:
+    @staticmethod
+    def import_csv_attendance(filepath):
+        with open(filepath) as source:
+            attendance_csv_list = csv.DictReader(source)
+            for attendance in attendance_csv_list:
+                Attendance.add_attendance(attendance["Student name"], attendance["Date"], attendance["Status"])
 
     @staticmethod
     def import_csv_assigment(filepath):
@@ -36,8 +37,8 @@ class Program:
     def import_csv_submission(filepath):
         with open(filepath) as source:
             submission_csv_list = csv.DictReader(source)
-             for submission in submission_csv_list:
-                Submission.add_submision(submission["Title"], submission["Content"], assigment["Due_date"], assigment["Max_points"])
+            for submission in submission_csv_list:
+                Submission.add_submision(submission["Title"], submission["Student_name"], submission["Content"], submission["Date"], submission["Points"])
 
 
 
