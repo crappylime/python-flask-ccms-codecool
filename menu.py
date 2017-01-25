@@ -31,6 +31,7 @@ class StudentMenu:
         while True:
             user_choice = UserInterface.student_menu()
             if user_choice == "Submit an assignment":
+
             elif user_choice == "View my grades":
             elif user_choice == "Log out":
                 break

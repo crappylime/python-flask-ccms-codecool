@@ -17,6 +17,10 @@ class UserInterface:
         return option[user_choice - 1]
 
     @staticmethod
+    def s_submit_an_assignment():
+        
+
+    @staticmethod
     def mentor_menu():
         options = ['Show students list', 'Add an assignment', 'Grade an assignment', 'Check attendance', 'Add student',
                    'Remove student', 'Edit student data', 'Log out']
