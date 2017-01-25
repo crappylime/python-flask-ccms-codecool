@@ -22,6 +22,15 @@ class User:
     def get_class_name(self):
         return self.__class__.__name__
 
+    def set_name(self, new_name):
+        self.name = new_name
+
+    def set_mail(self, new_mail):
+        self.mail = new_mail
+
+    def set_password(self, new_password):
+        self.password = new_password
+
 
 
 class Student(User):
