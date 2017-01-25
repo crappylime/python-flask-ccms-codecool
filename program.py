@@ -42,7 +42,7 @@ class Program:
         with open(filepath) as source:
             submission_csv_list = csv.DictReader(source)
             for submission in submission_csv_list:
-                Submission.add_submission(submission["Title"], submission["Student_name"], submission["Content"], submission["Date"], submission["Points"])
+                Submission.add_submission(submission["Title"], submission["Content"], submission["Date"], submission["Assignment_title"], submission["Student_name"], submission["Points"])
 
 
 
