@@ -4,7 +4,6 @@ from ui import *
 class Menu:
     def log_in(self):
         (user_name, user_password) = UserInterface.login()
-        user = None
         for student in Student.get_student_list():
             if user_name == student.name:
                 user = student
