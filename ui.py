@@ -1,7 +1,11 @@
-
-
-
 class UserInterface:
+
+    @staticmethod
+    def main_menu():
+        options = ['Log in', 'Exit']
+        UserInterface.print_options_list(options)
+        user_choice = input('Chose action: ')
+        return option[user_choice - 1]
 
     @staticmethod
     def login():
@@ -17,8 +21,13 @@ class UserInterface:
         return option[user_choice - 1]
 
     @staticmethod
-    def s_submit_an_assignment():
-
+    def submit_assignment():
+        title = input("Please provide title of submission: ")
+        content = input("Please provide link to your assignment: ")
+        date = input("What date is it today? ;p ") # Remember to import date
+        assignment_title = input("Please provide title of assignment: ")
+        owner_name = input("Please provide your name") # Use caller object next
+        return title, content, date, assignment_title, owner_name
 
     @staticmethod
     def mentor_menu():
@@ -48,13 +57,3 @@ class UserInterface:
         """print indices (each increased by 1) and elements from provided list as a column"""
         for index, option in enumerate(list):
             print('  (' + (str(index + 1)) + ') ' + str(option))
-
-
-
-
-
-
-
-
-
->>>>>>> df3de584d75ce1a4ab20acabe1cd3eaa6716d925
