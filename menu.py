@@ -57,7 +57,7 @@ class MentorMenu:
             elif user_choice == "Add an assignment":
                 Assignment.add_assignment(UserInterface.get_assignment_data())
             elif user_choice == "Grade an assignment":
-                Assignment.set_grade_submission(UserInterface.get_grade_assignment_data()data())
+                Assignment.set_grade_submission(UserInterface.get_grade_assignment_data())
             elif user_choice == "Check attendance":
                 pass
             elif user_choice == "Add student":
