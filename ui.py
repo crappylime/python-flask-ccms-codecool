@@ -45,6 +45,7 @@ class UserInterface:
             print("Your submission haven't been grade yet")
 
 
+
     @staticmethod
     def mentor_menu():
         options = ['Show students list', 'Add an assignment', 'Grade an assignment', 'Check attendance', 'Add student',
@@ -55,6 +56,14 @@ class UserInterface:
         except ValueError:
             print("Wrong input")
         return options[user_choice - 1]
+
+    @staticmethod
+    def add_assignment():
+        title = input("Please provide assignment title: ")
+        content = input("Please provide assignment content: ")
+        due_date = input("Please provide due date: ")
+        max_points = input("Plese set max points for this assignment: ")
+        return title, content, due_date, max_points
 
     @staticmethod
     def staff_menu():
@@ -78,12 +87,44 @@ class UserInterface:
         return options[user_choice - 1]
 
     @staticmethod
+    def new_mentor():
+        mentor_name = input('Please provide new mentor\'s name: ')
+        mentor_mail = input('Please provide new mentor\'s mail')
+        mentor_password = input('Please provide new mentor\'s password')
+        return mentor_name, mentor_mail, mentor_password
+
+    @staticmethod
+    def mentor_to_remove_data():
+        mentor_name = input('Please provide mentor\'s to remove name: ')
+        return mentor_name
+
+    @staticmethod
+    def mentor_to_edit_name():
+        mentor_name = input('Please provide mentor\'s to edit name: ')
+        return mentor_name
+
+    @staticmethod
+    def edit_mentor_data(mentor_to_edit):
+        print(mentor_to_edit.get_name)
+        new_name = input('Please provide new name: ')
+        print(mentor_to_edit.get_mail)
+        new_mail = input('Please provide new mail: ')
+        print(mentor_to_edit.get_password)
+        new_password = input('Please provide new password: ')
+        return new_name, new_mail, new_password
+
+
+
+
+    @staticmethod
     def print_options_list(list):
         """print indices (each increased by 1) and elements from provided list as a column"""
         for index, option in enumerate(list):
             print('  (' + (str(index + 1)) + ') ' + str(option))
 
+
     @staticmethod
     def show_list(user_list):
         for user in user_list:
             print(user.User.get_name())
+
