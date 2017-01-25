@@ -68,7 +68,7 @@ class Assignment:
         """
         cls.assignment_list.remove(assignment)
 
-    def set_grade_submission(self, points, student_name):
+    def set_grade_submission(self, points, owner_name):
         """
         Sets grade to submission.
 
