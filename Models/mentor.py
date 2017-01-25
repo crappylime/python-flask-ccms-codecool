@@ -23,3 +23,9 @@ class Mentor:
     @classmethod
     def get_mentor_list(cls):
         return cls.mentor_list
+
+    @classmethod
+    def get_mentor(cls, name):
+        for mentor in cls.menotr_list:
+            if mentor.name == name:
+                return mentor
