@@ -1,11 +1,8 @@
 class User:
-<<<<<<< HEAD
 
-    def __init__(self, name, mail, password):
-=======
     user_list = []
+
     def __init__ (self, name, mail, password):
->>>>>>> 85c2bca00c30841f5b0072ea02a6e1503bb2ab4b
         self.name = name
         self.mail = mail
         self.password = password
@@ -27,9 +24,6 @@ class User:
     def get_class_name(self):
         return self.__class__.__name__
 
-
-    def get_name(self):
-        return self
 
 
 
