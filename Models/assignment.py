@@ -28,7 +28,10 @@ class Assignment:
     @classmethod
     def get_assignment(cls, title):
         """
-        Returns assignment's details as __str__.
+        Returns assignment object.
+
+        Raises:
+            NameError: If assignment's title was NOT found.
         """
         for item in cls.assignment_list:
             if item.title == title:
@@ -37,7 +40,10 @@ class Assignment:
 
     def get_submission(self, submission_title):
         """
-        Returns submission's details as __str__.
+        Returns submission object.
+
+        Raises:
+            NameError: If submission's title was NOT found.
         """
         for submission in self.submission_list:
             if submission.title == submission_title:
@@ -55,16 +61,20 @@ class Assignment:
     @classmethod
     def remove_assignment(cls, assignment):
         """
-        Removes assignment and returns True if succeeded?.
+        Removes assignment.
         """
         cls.assignment_list.remove(assignment)
 
     def set_grade_submission(self, points, student_name):
         """
         Sets grade to submission.
+
+        Raises:
+            TypeError: If points limit has been exceeded.
         """
-        if points < self.max_points
-        self.points = points
+        if points < self.max_points:
+            return self.points = points
+        raise TypeError("Points limit has been exceeded")
 
     @classmethod
     def get_list_assignmnent():

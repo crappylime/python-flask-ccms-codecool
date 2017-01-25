@@ -20,11 +20,11 @@ class Submission:
         return info
 
     @classmethod
-    def add_submission(cls, title, content, date, assignment_title, owner_name):
+    def add_submission(cls, title, content, date, assignment_title, owner_name, points=None):
         """
-        Adds submission to submissions list.
+        Adds submission to Assignment and Student submissions list.
         """
-        submission = Submission(title, content, date)
+        submission = Submission(title, content, date, points)
         assignment = Assignment.get_assignment(assignment_title)
         assignment.submission_list.append(submission)
 
