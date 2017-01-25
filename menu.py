@@ -36,7 +36,7 @@ class StudentMenu:
                 Submission.add_submission(submission_data)
 
             elif user_choice == "View my grades":
-
+                
             elif user_choice == "Log out":
                 break
 
@@ -61,12 +61,23 @@ class BossMenu:
         while True:
             user_choice = UserInterface.boss_menu()
             if user_choice == "Add a mentor":
+                new_mentor_data = UserInterface.new_mentor()
+                Mentor.add_mentor(new_mentor_data[0], new_mentor_data[1], new_mentor_data[2])
             elif user_choice == "Remove a mentor":
+                mentor_to_remove_name = UserInterface.mentor_to_remove_data()
+                mentor_to_remove = Mentor.get_mentor(mentor_to_remove_name)
+                Mentor.get_list_mentor().remove(mentor_to_remove)
             elif user_choice == "Edit mentor data":
+                mentor_to_edit_name = UserInterface.mentor_to_edit_name()
+                mentor_to_edit = Mentor.get_mentor(mentor_to_edit_name)
+                mentor_to_edit.name, mentor_to_edit.mail, mentor_to_edit.password = \
+                    UserInterface.edit_mentor_data(mentor_to_edit)
             elif user_choice == "Show mentors list":
+                UserInterface.show_list(Mentor.get_list_mentor())
             elif user_choice == "Show students list":
+                UserInterface.show_list(Student.get_student_list())
             elif user_choice == "Log out":
-            break
+                break
 
 class StaffMenu:
     def __init__(self, user):
@@ -74,6 +85,7 @@ class StaffMenu:
         while True:
             user_choice = UserInterface.staff_menu()
             if user_choice == "Show students list":
+                UserInterface.show_list(Student.get_student_list())
             elif user_choice == "Log out":
                 break
 

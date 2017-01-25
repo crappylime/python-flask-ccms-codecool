@@ -1,9 +1,13 @@
 class User:
 
-    def __init__ (self, name, mail, password):
+    def __init__(self, name, mail, password):
         self.name = name
         self.mail = mail
         self.password = password
+
+    def get_name(self):
+        return self
+
 
 
 class Student(User):
