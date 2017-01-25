@@ -21,6 +21,7 @@ class Menu:
 
 
     def __init__(self):
+        
         while True:
             self.log_in()
 
@@ -31,8 +32,11 @@ class StudentMenu:
         while True:
             user_choice = UserInterface.student_menu()
             if user_choice == "Submit an assignment":
+                submission_data = UserInterface.submit_assignment()
+                Submission.add_submission(submission_data)
 
             elif user_choice == "View my grades":
+
             elif user_choice == "Log out":
                 break
 
@@ -74,4 +78,5 @@ class StaffMenu:
                 break
 
 
-x = Menu()
+def main():
+    Menu()
