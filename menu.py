@@ -36,8 +36,7 @@ class StudentMenu:
         while True:
             user_choice = UserInterface.student_menu()
             if user_choice == "Submit an assignment":
-                submission_data = UserInterface.submit_assignment()
-                Submission.add_submission(submission_data)
+                Submission.add_submission(UserInterface.submit_assignment())
             elif user_choice == "View my grades":
                 UserInterface.view_grade(user)
             elif user_choice == "Log out":
@@ -51,7 +50,7 @@ class MentorMenu:
             if user_choice == "Show students list":
                 UserInterface.show_list(Student.get_student_list())
             elif user_choice == "Add an assignment":
-                pass
+                Assignment.add_assignment(UserInterface.add_assignment())
             elif user_choice == "Grade an assignment":
                 pass
             elif user_choice == "Check attendance":

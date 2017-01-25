@@ -57,6 +57,14 @@ class UserInterface:
         return options[user_choice - 1]
 
     @staticmethod
+    def add_assignment():
+        title = input("Please provide assignment title: ")
+        content = input("Please provide assignment content: ")
+        due_date = input("Please provide due date: ")
+        max_points = input("Plese set max points for this assignment: ")
+        return title, content, due_date, max_points
+
+    @staticmethod
     def staff_menu():
         options = ['Show students list', 'Log out']
         UserInterface.print_options_list(options)
