@@ -1,4 +1,4 @@
-from user import *
+from Models.user import *
 
 
 class Assignment:

@@ -1,5 +1,5 @@
-from assignment import *
-from user import *
+from Models.assignment import *
+from Models.user import *
 
 
 

@@ -18,6 +18,7 @@ class UserInterface:
 
     @staticmethod
     def s_submit_an_assignment():
+        pass
 
 
     @staticmethod
@@ -57,4 +58,4 @@ class UserInterface:
 
 
 
->>>>>>> df3de584d75ce1a4ab20acabe1cd3eaa6716d925
+
