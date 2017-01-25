@@ -41,7 +41,7 @@ class StudentMenu:
         while True:
             user_choice = UserInterface.student_menu()
             if user_choice == "Submit an assignment":
-                Submission.add_submission(UserInterface.submit_assignment())
+                Submission.add_submission(*UserInterface.get_submit_data())
             elif user_choice == "View my grades":
                 UserInterface.view_grade(user)
             elif user_choice == "Log out":
@@ -55,15 +55,15 @@ class MentorMenu:
             if user_choice == "Show students list":
                 UserInterface.show_list(Student.get_student_list())
             elif user_choice == "Add an assignment":
-                Assignment.add_assignment(UserInterface.add_assignment())
+                Assignment.add_assignment(*UserInterface.get_assignment_data())
             elif user_choice == "Grade an assignment":
-                pass
+                Assignment.set_grade_submission(*UserInterface.get_grade_assignment_data())
             elif user_choice == "Check attendance":
                 pass
             elif user_choice == "Add student":
-                pass
+                Student.add_student(*UserInterface.get_user_data())
             elif user_choice == "Remove student":
-                pass
+                Student.remove_student(UserInterface.get_remove_data())
             elif user_choice == "Edit student data":
                 pass
             elif user_choice == "Log out":
@@ -75,17 +75,14 @@ class BossMenu:
         while True:
             user_choice = UserInterface.boss_menu()
             if user_choice == "Add a mentor":
-                new_mentor_data = UserInterface.new_mentor()
-                Mentor.add_mentor(new_mentor_data[0], new_mentor_data[1], new_mentor_data[2])
+                Mentor.add_mentor(*UserInterface.new_mentor())
             elif user_choice == "Remove a mentor":
-                mentor_to_remove_name = UserInterface.mentor_to_remove_data()
-                mentor_to_remove = Mentor.get_mentor(mentor_to_remove_name)
-                Mentor.get_list_mentor().remove(mentor_to_remove)
+                mentor_to_remove_name = UserInterface.user_name_from_list(Mentor.get_list_mentor)
+                Mentor.remove_mentor(mentor_to_remove_name)
             elif user_choice == "Edit mentor data":
-                mentor_to_edit_name = UserInterface.mentor_to_edit_name()
+                mentor_to_edit_name = UserInterface.user_name_from_list(Mentor.get_list_mentor)
                 mentor_to_edit = Mentor.get_mentor(mentor_to_edit_name)
-                mentor_to_edit.name, mentor_to_edit.mail, mentor_to_edit.password = \
-                    UserInterface.edit_mentor_data(mentor_to_edit)
+                mentor_to_edit.edit_mentor(*UserInterface.edit_mentor_data(mentor_to_edit))
             elif user_choice == "Show mentors list":
                 UserInterface.show_list(Mentor.get_list_mentor())
             elif user_choice == "Show students list":

@@ -27,6 +27,7 @@ class User:
     def set_name(self, new_name):
         self.name = new_name
 
+
     def set_mail(self, new_mail):
         self.mail = new_mail
 
@@ -35,6 +36,7 @@ class User:
 
     def get_name(self):  # To chyba powinno być usunięte, b
         return self
+
 
 
 
