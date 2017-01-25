@@ -18,7 +18,7 @@ class UserInterface:
 
     @staticmethod
     def s_submit_an_assignment():
-        
+
 
     @staticmethod
     def mentor_menu():
