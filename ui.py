@@ -13,8 +13,8 @@ class UserInterface:
     def student_menu():
         options = ['Submit an assignment', 'View my grades', 'Log out']
         UserInterface.print_options_list(options)
-        user_choice = input('Chose action: ')
-        return option[user_choice - 1]
+        user_choice = int(input('Chose action: '))
+        return options[user_choice - 1]
 
     @staticmethod
     def s_submit_an_assignment():

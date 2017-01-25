@@ -1,4 +1,3 @@
-import Models.user as users
 from Models.submission import *
 from Models.assignment import *
 import program
@@ -8,12 +7,12 @@ from ui import *
 class Menu:
     def log_in(self):
         (user_name, user_password) = UserInterface.login()
-        for student in users.Student.get_student_list():
+        for student in Student.get_student_list():
             if user_name == student.name:
                 user = student
                 StudentMenu(user)
 
-        for mentor in users.Mentor.get_list_mentor():
+        for mentor in Mentor.get_list_mentor():
             if user_name == mentor.name:
                 user = mentor
                 MentorMenu(user)
@@ -26,8 +25,9 @@ class Menu:
 
     def __init__(self):
         program.Program.import_all_csv()
-        print(users.Student.student_list)
-        print(users.Student.student_list[0].submission_list)
+        print(Student.student_list)
+        print(Student.student_list[0].submission_list)
+        print(User.user_list)
         while True:
             self.log_in()
 
@@ -44,7 +44,7 @@ class StudentMenu:
             elif user_choice == "View my grades":
                 pass
             elif user_choice == "Log out":
-                break
+                program.Program.export_all_cvs()
 
 class MentorMenu:
     def __init__(self, user):
