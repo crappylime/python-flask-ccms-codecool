@@ -20,16 +20,17 @@ class Menu:
                         StaffMenu(user)
                     elif user.get_class_name() == "Student":
                         StudentMenu(user)
-        # else:
-        #     UserInterface.login_error()
+        else:
+            UserInterface.login_error()
 
 
     def __init__(self):
+        os.system("clear")
         Program.import_all_csv()
 
         while True:
-            os.system("clear")
             user_choice = UserInterface.main_menu()
+            os.system("clear")
             if user_choice == "Log in":
                 self.log_in()
             else:

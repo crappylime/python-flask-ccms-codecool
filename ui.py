@@ -26,10 +26,9 @@ class UserInterface:
         user_password = input('Provide your password: ')
         return user_name, user_password
 
-    # @staticmethod
-    # def login_error():
-    #     print("Username or password is incorrect!")
-    #     time.sleep(1)
+    @staticmethod
+    def login_error():
+        print("Username or password is incorrect!")
 
     @staticmethod
     def student_menu():
