@@ -55,7 +55,7 @@ class UserInterface:
     @staticmethod
     def mentor_menu():
         options = ['Show students list', 'Show assignments', 'Add an assignment', 'Grade an assignment',
-                   'Check attendance', 'Add student', 'Remove student', 'Edit student data', 'Log out']
+                   'Check attendance', 'Show attendance', 'Add student', 'Remove student', 'Edit student data', 'Log out']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
@@ -160,6 +160,17 @@ class UserInterface:
         list_for_table = []
         for index, user in enumerate(users):
             list_for_table.append([index + 1, user.get_name()])
+
+        UserInterface.show_table(headers, list_for_table)
+
+    staticmethod
+    def show_attendance_table(attendance_list):
+
+        headers = ['idx', 'student', 'date', 'status']
+        list_for_table = []
+
+        for index, row in enumerate(attendance_list):
+            list_for_table.append([index + 1, row.get_student().get_name(), row.get_date(), row.get_status()])
 
         UserInterface.show_table(headers, list_for_table)
 
