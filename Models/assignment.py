@@ -26,7 +26,7 @@ class Assignment:
         """
         Adds assignment to assignments list.
         """
-        cls.assignment_list.append(Assignment(title, content, due_date, max_points))
+        cls.assignment_list.append(Assignment(title, content, due_date, int(max_points)))
 
     @classmethod
     def get_assignment(cls, title):
