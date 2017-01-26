@@ -28,7 +28,8 @@ class Program:
         with open(filepath) as source:
             attendance_csv_list = csv.DictReader(source)
             for attendance in attendance_csv_list:
-                Attendance.add_attendance(attendance["student_name"], attendance["date"], attendance["status"])
+                student = Student.get_student(attendance["student_name"])
+                Attendance.add_attendance(student, attendance["date"], attendance["status"])
 
     @staticmethod
     def import_csv_assignment(filepath):
