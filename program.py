@@ -36,7 +36,8 @@ class Program:
         with open(filepath) as source:
             assignment_csv_list = csv.DictReader(source)
             for assignment in assignment_csv_list:
-                Assignment.add_assignment(assignment["title"], assignment["content"], assignment["due_date"], assignment["max_points"])
+                Assignment.add_assignment(assignment["title"], assignment["content"], assignment["due_date"],
+                                          assignment["max_points"])
 
     @staticmethod
     def import_csv_submission(filepath):
