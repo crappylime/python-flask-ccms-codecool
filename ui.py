@@ -1,16 +1,22 @@
 from tabulate import tabulate
 
+
 class UserInterface:
+    @staticmethod
+    def user_choice(options):
+        while True:
+            user_choice = input('Choose action: ')
+            for index, option in enumerate(options):
+                if user_choice == str(index + 1):
+                    return option
+            else:
+                print("Wrong input")
 
     @staticmethod
     def main_menu():
         options = ['Log in', 'Exit']
         UserInterface.print_options_list(options)
-        try:
-            user_choice = int(input('Chose action: '))
-        except ValueError:
-            print("Wrong input")
-        return options[user_choice - 1]
+        return UserInterface.user_choice(options)
 
     @staticmethod
     def login():
@@ -26,11 +32,7 @@ class UserInterface:
     def student_menu():
         options = ['View assignments', 'Submit an assignment', 'View my grades', 'View my submissions', 'Log out']
         UserInterface.print_options_list(options)
-        try:
-            user_choice = int(input('Chose action: '))
-        except ValueError:
-            print("Wrong input")
-        return options[user_choice - 1]
+        return UserInterface.user_choice(options)
 
     @staticmethod
     def get_submit_data(user):
@@ -54,11 +56,7 @@ class UserInterface:
         options = ['Show students list', 'Add an assignment', 'Grade an assignment', 'Check attendance', 'Add student',
                    'Remove student', 'Edit student data', 'Log out']
         UserInterface.print_options_list(options)
-        try:
-            user_choice = int(input('Chose action: '))
-        except ValueError:
-            print("Wrong input")
-        return options[user_choice - 1]
+        return UserInterface.user_choice(options)
 
     @staticmethod
     def get_assignment_data():
@@ -97,22 +95,14 @@ class UserInterface:
     def staff_menu():
         options = ['Show students list', 'Log out']
         UserInterface.print_options_list(options)
-        try:
-            user_choice = int(input('Chose action: '))
-        except ValueError:
-            print("Wrong input")
-        return options[user_choice - 1]
+        return UserInterface.user_choice(options)
 
     @staticmethod
     def boss_menu():
         options = ['Add a mentor', 'Remove a mentor', 'Edit mentor data', 'Show mentors list', 'Show students list',
                    'Log out']
         UserInterface.print_options_list(options)
-        try:
-            user_choice = int(input('Chose action: '))
-        except ValueError:
-            print("Wrong input")
-        return options[user_choice - 1]
+        return UserInterface.user_choice(options)
 
     @staticmethod
     def new_mentor():
@@ -206,9 +196,3 @@ class UserInterface:
 
 
         UserInterface.show_table(headers, list_for_table)
-
-
-
-
-
-
