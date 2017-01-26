@@ -26,10 +26,10 @@ class UserInterface:
         user_password = input('Provide your password: ')
         return user_name, user_password
 
-    @staticmethod
-    def login_error():
-        print("Username or password is incorrect!")
-        time.sleep(1)
+    # @staticmethod
+    # def login_error():
+    #     print("Username or password is incorrect!")
+    #     time.sleep(1)
 
     @staticmethod
     def student_menu():
@@ -105,8 +105,12 @@ class UserInterface:
     def get_attendance_data(student):
         date = time.strftime("%Y-%m-%-d")
         print(student.get_name())
-        status = input("Is the student present?(0/1/L): ")
-        return student, date, status
+        while True:
+            status = input("Is the student present?(0/1/L): ")
+            if status not in ["0", "1", "L"]:
+                print("Wrong input")
+            else:
+                return student, date, status
 
     @staticmethod
     def staff_menu():
@@ -124,8 +128,8 @@ class UserInterface:
     @staticmethod
     def new_mentor():
         mentor_name = input('Please provide new mentor\'s name: ')
-        mentor_mail = input('Please provide new mentor\'s mail')
-        mentor_password = input('Please provide new mentor\'s password')
+        mentor_mail = input('Please provide new mentor\'s mail: ')
+        mentor_password = input('Please provide new mentor\'s password: ')
         return mentor_name, mentor_mail, mentor_password
 
 
