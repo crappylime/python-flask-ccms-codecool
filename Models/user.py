@@ -74,8 +74,8 @@ class Student(User):
         for student in cls.student_list:
             if student.name == name:
                 for submission in student.submission_list:
-                    if submission.title == assignment_title:
-                        return submission.grade
+                    if assignment_title:
+                        return submission.points
                     else:
                         print('there is no such submission added by {}'.format(student.name))
             else:

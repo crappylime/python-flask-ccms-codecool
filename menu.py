@@ -43,7 +43,7 @@ class StudentMenu:
             user_choice = UserInterface.student_menu()
             if user_choice == "Submit an assignment":
                 UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
-                Submission.add_submission(*UserInterface.get_submit_data())
+                Submission.add_submission(*UserInterface.get_submit_data(user))
             elif user_choice == "View my grades":
                 UserInterface.view_grade(user)
             elif user_choice == "Log out":
