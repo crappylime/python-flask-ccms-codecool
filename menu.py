@@ -2,8 +2,8 @@ from Models.submission import *
 from Models.assignment import *
 from Models.attendance import *
 from program import *
-
 from ui import *
+
 
 class Menu:
     def log_in(self):
@@ -19,15 +19,11 @@ class Menu:
                         StaffMenu(user)
                     elif user.get_class_name() == "Student":
                         StudentMenu(user)
-        else:
-            UserInterface.login_error()
-
-
-
-
+                else:
+                    UserInterface.login_error()
+                    break
 
     def __init__(self):
-
         Program.import_all_csv()
 
         while True:
@@ -41,7 +37,6 @@ class Menu:
 
 class StudentMenu:
     def __init__(self, user):
-
         while True:
             user_choice = UserInterface.student_menu()
             if user_choice == "Submit an assignment":
@@ -88,7 +83,6 @@ class MentorMenu:
 class BossMenu:
 
     def __init__(self, user):
-
         while True:
             user_choice = UserInterface.boss_menu()
             if user_choice == "Add a mentor":
@@ -110,7 +104,6 @@ class BossMenu:
 
 class StaffMenu:
     def __init__(self, user):
-
         while True:
             user_choice = UserInterface.staff_menu()
             if user_choice == "Show students list":
@@ -118,11 +111,9 @@ class StaffMenu:
             elif user_choice == "Log out":
                 break
 
+
 def main():
     Menu()
 
-
-
 if __name__ == "__main__":
     main()
-
