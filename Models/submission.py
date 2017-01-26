@@ -28,7 +28,9 @@ class Submission:
         student = Student.get_student(owner_name)
 
         assignment = Assignment.get_assignment(assignment_title)
-        submission = Submission(assignment, student, content, date, points)
+
+        submission = Submission(assignment, student, content, date, int(points) if type(points) == str else None)
+
         assignment.submission_list.append(submission)
 
         student.submission_list.append(submission)
@@ -47,3 +49,6 @@ class Submission:
 
     def get_points(self):
         return self.points
+
+    def get_content(self):
+        return self.content
