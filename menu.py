@@ -51,9 +51,10 @@ class StudentMenu:
                 UserInterface.show_submissions_table(user.submission_list, 'graded')
             elif user_choice == "View my submissions":
                 UserInterface.show_submissions_table(user.submission_list)
+            elif user_choice == "View assignments":
+                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
             elif user_choice == "Log out":
                 break
-
 
 
 class MentorMenu:
@@ -61,7 +62,7 @@ class MentorMenu:
         while True:
             user_choice = UserInterface.mentor_menu()
             if user_choice == "Show students list":
-                UserInterface.show_list(Student.get_student_list())
+                UserInterface.show_students_table(Student.get_student_list())
             elif user_choice == "Add an assignment":
                 Assignment.add_assignment(*UserInterface.get_assignment_data())
             elif user_choice == "Grade an assignment":
