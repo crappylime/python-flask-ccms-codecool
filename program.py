@@ -2,6 +2,7 @@ import csv
 
 from Models.submission import *
 from Models.assignment import *
+from Models.attendance import *
 
 
 class Program:
@@ -50,10 +51,19 @@ class Program:
             user_writer = csv.DictWriter(user_csv, fieldnames=fieldnames)
             user_writer.writeheader()
             user_list = User.get_user_list()
-            print(user_list)
             for user in user_list:
                 user_dict = {'name': user.get_name(), 'mail': user.get_mail(), 'password': user.get_password(), 'role': user.get_class_name().lower()}
                 user_writer.writerow(user_dict)
+    @staticmethod
+    def export_csv_attendance(filepath):
+        with open(filepath, "w") as attendance_csv:
+            fieldnames = ['name', 'mail' , 'password', 'role']
+            attendance_writer = csv.DictWriter(attendance_csv, fieldnames=fieldnames)
+            attendance_writer.writeheader()
+            user_list = User.get_user_list()
+            for user in user_list:
+                user_dict = {'name': user.get_name(), 'mail': user.get_mail(), 'password': user.get_password(), 'role': user.get_class_name().lower()}
+                attendance_writer.writerow(user_dict)
 
     @staticmethod
     def import_all_csv():
