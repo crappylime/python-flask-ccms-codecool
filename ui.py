@@ -138,7 +138,7 @@ class UserInterface:
     @staticmethod
     def show_list(user_list):
         for user in user_list:
-            print(user.User.get_name())
+            print(user.get_name())
 
     @staticmethod
     def show_list_with_index(user_list):

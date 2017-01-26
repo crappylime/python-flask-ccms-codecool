@@ -1,6 +1,6 @@
 from Models.submission import *
 from Models.assignment import *
-import program
+from program import *
 
 from ui import *
 
@@ -25,7 +25,7 @@ class Menu:
 
     def __init__(self):
 
-        program.Program.import_all_csv()
+        Program.import_all_csv()
 
         while True:
             user_choice = UserInterface.main_menu()
@@ -33,6 +33,7 @@ class Menu:
                 self.log_in()
             else:
                 break
+        Program.export_all_cvs()
 
 
 class StudentMenu:
@@ -48,9 +49,9 @@ class StudentMenu:
                 break
 
 
+
 class MentorMenu:
     def __init__(self, user):
-
         while True:
             user_choice = UserInterface.mentor_menu()
             if user_choice == "Show students list":
