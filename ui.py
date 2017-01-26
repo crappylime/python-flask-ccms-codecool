@@ -130,7 +130,7 @@ class UserInterface:
             user_choice = input('Please choose specific attendance by index: ')
             for index, attendance in enumerate(attendance_list):
                 if user_choice == str(index + 1):
-                    return attendance.get_status()
+                    return attendance
             else:
                 print("Wrong input :-(")
 

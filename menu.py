@@ -67,8 +67,9 @@ class MentorMenu:
             student_to_edit = Student.get_student(student_to_edit_name)
             os.system("clear")
             if option_choice == "Edit student attendance status":
-                student_attendances_to_edit_one = UserInterface.attendance_id_from_list(Attendance.get_attendance_list(), student_to_edit)
+                student_attendances_to_edit_one = UserInterface.attendance_id_from_list(student_to_edit.attendance_list, student_to_edit)
                 student_attendance_to_edit = UserInterface.edit_user_status(student_attendances_to_edit_one)
+                student_attendances_to_edit_one.set_status(student_attendance_to_edit)
             elif option_choice == "Edit student name":
                 student_to_edit.edit_student_name(UserInterface.edit_user_name(student_to_edit))
             elif option_choice == "Edit student mail":
