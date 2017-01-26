@@ -37,7 +37,7 @@ class UserInterface:
     @staticmethod
     def get_submit_data(user):
         assignment_title = input("Please provide title of assignment: ")
-        content = input("Please provide link to your assignment: ")
+        content = input("Please provide link to your submission: ")
         date = input("What date is it today? ;p ") # Remember to import date
         owner_name = user.name
         return content, date, assignment_title, owner_name
@@ -53,8 +53,8 @@ class UserInterface:
 
     @staticmethod
     def mentor_menu():
-        options = ['Show students list', 'Add an assignment', 'Grade an assignment', 'Check attendance', 'Add student',
-                   'Remove student', 'Edit student data', 'Log out']
+        options = ['Show students list', 'Show assignments', 'Add an assignment', 'Grade an assignment',
+                   'Check attendance', 'Add student', 'Remove student', 'Edit student data', 'Log out']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
@@ -123,11 +123,11 @@ class UserInterface:
 
     @staticmethod
     def edit_user_data(user_to_edit):
-        print(user_to_edit.get_name)
+        print(user_to_edit.get_name())
         new_name = input('Please provide new name: ')
-        print(user_to_edit.get_mail)
+        print(user_to_edit.get_mail())
         new_mail = input('Please provide new mail: ')
-        print(user_to_edit.get_password)
+        print(user_to_edit.get_password())
         new_password = input('Please provide new password: ')
         return new_name, new_mail, new_password
 
