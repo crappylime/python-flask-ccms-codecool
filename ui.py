@@ -19,8 +19,12 @@ class UserInterface:
         return (user_name, user_password)
 
     @staticmethod
+    def login_error():
+        print("Username or password is incorrect! ")
+
+    @staticmethod
     def student_menu():
-        options = ['Submit an assignment', 'View my grades', 'Log out']
+        options = ['Submit an assignment', 'View my grades', 'Log out', 'View my submissions']
         UserInterface.print_options_list(options)
         try:
             user_choice = int(input('Chose action: '))
@@ -81,6 +85,13 @@ class UserInterface:
     def get_remove_data():
         name = input("Please provide name of the person you would like to remove: ")
         return name
+
+    @staticmethod
+    def get_attendance_data(student):
+        date = input("What date is it today? :) ")
+        print(student.get_name())
+        status = input("Is the student present?(0/1/L) ")
+        return student, date, status
 
     @staticmethod
     def staff_menu():
@@ -158,9 +169,29 @@ class UserInterface:
         list_for_table = []
 
         for index, ass in enumerate(assignments_list):
-            list_for_table.append([index + 1, assignments_list[ass].title, assignments_list[ass].content,
-                                   assignments_list[ass].due_date, assignments_list[ass].max_points])
+            list_for_table.append([index + 1, ass.title, ass.content, ass.due_date, ass.max_points])
 
-        show_table(headers, list_for_table)
+        UserInterface.show_table(headers, list_for_table)
+
+    @staticmethod
+    def show_submissions_table(submission_list, option='all'):
+
+        headers = ['idx', 'assignment title', 'content', 'date', 'points']
+        list_for_table = []
+
+        if option == 'all':
+            for index, ass in enumerate(submission_list):
+                list_for_table.append([index + 1, ass.assignment_title, ass.content, ass.date, ass.points])
+        else:
+            for index, ass in enumerate(submission_list):
+                if ass.points != None:
+                    list_for_table.append([index + 1, ass.assignment_title, ass.content, ass.date, ass.points])
+
+
+        UserInterface.show_table(headers, list_for_table)
+
+
+
+
 
 

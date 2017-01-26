@@ -11,11 +11,11 @@ class Attendance:
         Attendance.attendance_list.append(self)
 
     @classmethod
-    def add_attendance(cls, student_name, date, status):
+    def add_attendance(cls, student, date, status):
         """
          Adds attendance to Student submissions list.
          """
-        student = Student.get_student(student_name)
+
         attendance = Attendance(student, date, status)
         student.attendance_list.append(attendance)
 
