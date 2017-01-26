@@ -1,5 +1,6 @@
 from tabulate import tabulate
 import time
+import re
 
 
 class UserInterface:
@@ -63,11 +64,15 @@ class UserInterface:
     def get_assignment_data():
         title = input("Please provide assignment title: ")
         content = input("Please provide assignment content: ")
-        due_date = time.strftime("%Y-%m-%-d %H:%M")
+
+        date_pattern = re.compile(r'^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$')
+        date_input = input("Please provide due date (yyyy-mm-dd): ")
+        while not re.match(date_pattern, date_input):
+            date_input = input("Please provide due date (yyyy-mm-dd): ")
         while True:
             max_points = input("Please set max points for this assignment: ")
             if max_points.isdigit():
-                return title, content, due_date, max_points
+                return title, content, date_input, max_points
             else:
                 print("Points must be a number! ")
 
