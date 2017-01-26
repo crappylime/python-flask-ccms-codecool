@@ -87,6 +87,13 @@ class UserInterface:
         return name
 
     @staticmethod
+    def get_attendance_data(student):
+        date = input("What date is it today? :) ")
+        print(student.get_name())
+        status = input("Is the student present?(0/1/L) ")
+        return student, date, status
+
+    @staticmethod
     def staff_menu():
         options = ['Show students list', 'Log out']
         UserInterface.print_options_list(options)

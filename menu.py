@@ -1,5 +1,6 @@
 from Models.submission import *
 from Models.assignment import *
+from Models.attendance import *
 from program import *
 
 from ui import *
@@ -65,7 +66,8 @@ class MentorMenu:
                 UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
                 Assignment.set_grade_submission(*UserInterface.get_grade_assignment_data())
             elif user_choice == "Check attendance":
-                pass
+                for student in Student.get_student_list():
+                    Attendance.add_attendance(*UserInterface.get_attendance_data(student))
             elif user_choice == "Add student":
                 Student.add_student(*UserInterface.get_user_data())
             elif user_choice == "Remove student":
