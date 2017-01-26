@@ -45,6 +45,7 @@ class StudentMenu:
             elif user_choice == "View my grades":
                 UserInterface.view_grade(user)
             elif user_choice == "Log out":
+                break
 
 
 class MentorMenu:
@@ -65,7 +66,9 @@ class MentorMenu:
             elif user_choice == "Remove student":
                 Student.remove_student(UserInterface.get_remove_data())
             elif user_choice == "Edit student data":
-                pass
+                student_to_edit_name = UserInterface.user_name_from_list(Student.get_list_student)
+                student_to_edit = Student.get_student(student_to_edit_name)
+                student_to_edit.edit_student(*UserInterface.edit_user_data(student_to_edit))
             elif user_choice == "Log out":
                 break
 

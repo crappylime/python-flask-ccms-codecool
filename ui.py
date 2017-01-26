@@ -77,7 +77,7 @@ class UserInterface:
         return name, mail, password
 
     @staticmethod
-    def get_remove_data:
+    def get_remove_data():
         name = input("Please provide name of the person you would like to remove: ")
         return name
 
@@ -120,12 +120,12 @@ class UserInterface:
 
 
     @staticmethod
-    def edit_mentor_data(mentor_to_edit):
-        print(mentor_to_edit.get_name)
+    def edit_user_data(user_to_edit):
+        print(user_to_edit.get_name)
         new_name = input('Please provide new name: ')
-        print(mentor_to_edit.get_mail)
+        print(user_to_edit.get_mail)
         new_mail = input('Please provide new mail: ')
-        print(mentor_to_edit.get_password)
+        print(user_to_edit.get_password)
         new_password = input('Please provide new password: ')
         return new_name, new_mail, new_password
 
