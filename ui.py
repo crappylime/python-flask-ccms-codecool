@@ -19,6 +19,10 @@ class UserInterface:
         return (user_name, user_password)
 
     @staticmethod
+    def login_error():
+        print("Username or password is incorrect! ")
+
+    @staticmethod
     def student_menu():
         options = ['Submit an assignment', 'View my grades', 'Log out']
         UserInterface.print_options_list(options)
