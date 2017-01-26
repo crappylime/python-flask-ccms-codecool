@@ -29,11 +29,20 @@ class Submission:
 
         assignment = Assignment.get_assignment(assignment_title)
 
-        submission = Submission(assignment, student, content, date, int(points) if type(points) == str and len(points)>0 else None)
+        unique = True
 
-        assignment.submission_list.append(submission)
+        for item in student.submission_list:
+            if item.assignment == assignment:
+                unique = False
 
-        student.submission_list.append(submission)
+        if unique is True:
+            submission = Submission(assignment, student, content, date,
+                                    int(points) if type(points) == str and len(points) > 0 else None)
+            assignment.submission_list.append(submission)
+            student.submission_list.append(submission)
+        else:
+            raise NameError('This assignment has already been submitted!')
+
 
     def get_owner(self):
         return self.owner
