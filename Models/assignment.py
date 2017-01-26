@@ -41,15 +41,16 @@ class Assignment:
                 return item
         raise NameError("There's no assignment with given title")
 
-    def get_submission(self, submission_title):
+    def get_submission(self, owner_name):
         """
         Returns submission object.
 
         Raises:
             NameError: If submission's title was NOT found.
         """
+        student = Student.get_student(owner_name)
         for submission in self.submission_list:
-            if submission.title == submission_title:
+            if submission.owner == student:
                 return submission
         raise NameError("There's no submission with given title")
 
@@ -87,8 +88,8 @@ class Assignment:
         student = Student.get_student(owner_name)
         for submission in self.submission_list:
             if submission.owner == student:
-                self.points = points
-                return self.points
+                submission.points = points
+                return submission.points
             raise NameError("There's no submission with given student name")
 
     @classmethod
