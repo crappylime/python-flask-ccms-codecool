@@ -24,7 +24,7 @@ class UserInterface:
 
     @staticmethod
     def student_menu():
-        options = ['Submit an assignment', 'View my grades', 'Log out', 'View my submissions']
+        options = ['View assignments', 'Submit an assignment', 'View my grades', 'View my submissions', 'Log out']
         UserInterface.print_options_list(options)
         try:
             user_choice = int(input('Chose action: '))
@@ -163,6 +163,15 @@ class UserInterface:
         print(table)
 
     @staticmethod
+    def show_students_table(users):
+        headers = ['idx', 'name']
+        list_for_table = []
+        for index, user in enumerate(users):
+            list_for_table.append([index +1, user.get_name()])
+
+        UserInterface.show_table(headers, list_for_table)
+
+    @staticmethod
     def show_assignments_table(assignments_list):
 
         headers = ['idx', 'title', 'content', 'due_date', 'max_points']
@@ -181,7 +190,7 @@ class UserInterface:
 
         if option == 'all':
             for index, ass in enumerate(submission_list):
-                list_for_table.append([index + 1, ass.assignment_title, ass.content, ass.date, ass.points])
+                list_for_table.append([index + 1, ass.assignment.get_title(), ass.content, ass.date, ass.points])
         else:
             for index, ass in enumerate(submission_list):
                 if ass.points != None:
