@@ -171,6 +171,12 @@ class UserInterface:
         return UserInterface.user_choice(options)
 
     @staticmethod
+    def edit_mentor_menu():
+        options = ['Edit mentor name', 'Edit mentor mail', 'Edit mentor password', 'Back']
+        UserInterface.print_options_list(options)
+        return UserInterface.user_choice(options)
+
+    @staticmethod
     def edit_user_status(student_attendances_to_edit_one):
         while True:
             new_status = input("Is the student present?(0/1/L): ")

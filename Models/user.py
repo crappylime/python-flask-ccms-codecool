@@ -33,6 +33,15 @@ class User:
     def set_password(self, new_password):
         self.password = new_password
 
+    def edit_user_name(self, name):
+        self.name = name
+
+    def edit_user_mail(self, mail):
+        self.mail = mail
+
+    def edit_user_password(self, password):
+        self.password = password
+
 
 class Student(User):
 
@@ -51,15 +60,6 @@ class Student(User):
     def edit_student(self, name, mail, password):
         self.name = name
         self.mail = mail
-        self.password = password
-
-    def edit_student_name(self, name):
-        self.name = name
-
-    def edit_student_mail(self, mail):
-        self.mail = mail
-
-    def edit_student_password(self, password):
         self.password = password
 
     def edit_student_attendance_list(self, attendance_list):
@@ -129,7 +129,6 @@ class Mentor(Employee):
         for mentor in cls.mentor_list:
             if mentor.name == name:
                 return mentor
-
 
 
 class Boss(Employee):

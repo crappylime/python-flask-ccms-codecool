@@ -74,11 +74,11 @@ class MentorMenu:
                 student_attendance_to_edit = UserInterface.edit_user_status(student_attendances_to_edit_one)
                 student_attendances_to_edit_one.set_status(student_attendance_to_edit)
             elif option_choice == "Edit student name":
-                student_to_edit.edit_student_name(UserInterface.edit_user_name(student_to_edit))
+                student_to_edit.edit_user_name(UserInterface.edit_user_name(student_to_edit))
             elif option_choice == "Edit student mail":
-                student_to_edit.edit_student_mail(UserInterface.edit_user_mail(student_to_edit))
+                student_to_edit.edit_user_mail(UserInterface.edit_user_mail(student_to_edit))
             elif option_choice == "Edit student password":
-                student_to_edit.edit_student_password(UserInterface.edit_user_password(student_to_edit))
+                student_to_edit.edit_user_password(UserInterface.edit_user_password(student_to_edit))
 
     def __init__(self, user):
         while True:
@@ -114,6 +114,22 @@ class MentorMenu:
 
 class BossMenu:
 
+    @staticmethod
+    def edit_user_data():
+        while True:
+            option_choice = UserInterface.edit_mentor_menu()
+            if option_choice == "Back":
+                break
+            mentor_to_edit_name = UserInterface.user_name_from_list(Mentor.get_list_mentor())
+            mentor_to_edit = Mentor.get_mentor(mentor_to_edit_name)
+            os.system("clear")
+            if option_choice == "Edit mentor name":
+                mentor_to_edit.edit_user_name(UserInterface.edit_user_name(mentor_to_edit))
+            elif option_choice == "Edit mentor mail":
+                mentor_to_edit.edit_user_mail(UserInterface.edit_user_mail(mentor_to_edit))
+            elif option_choice == "Edit mentor password":
+                mentor_to_edit.edit_user_password(UserInterface.edit_user_password(mentor_to_edit))
+
     def __init__(self, user):
         while True:
             user_choice = UserInterface.boss_menu()
@@ -124,9 +140,7 @@ class BossMenu:
                 mentor_to_remove_name = UserInterface.user_name_from_list(Mentor.get_list_mentor())
                 Mentor.remove_mentor(mentor_to_remove_name)
             elif user_choice == "Edit mentor data":
-                mentor_to_edit_name = UserInterface.user_name_from_list(Mentor.get_list_mentor())
-                mentor_to_edit = Mentor.get_mentor(mentor_to_edit_name)
-                mentor_to_edit.edit_mentor(*UserInterface.edit_user_data(mentor_to_edit))
+                BossMenu.edit_user_data()
             elif user_choice == "Show mentors list":
                 UserInterface.show_list(Mentor.get_list_mentor())
             elif user_choice == "Show students list":
