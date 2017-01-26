@@ -3,6 +3,7 @@ from Models.assignment import *
 from Models.attendance import *
 from program import *
 from ui import *
+import os
 
 
 class Menu:
@@ -27,6 +28,7 @@ class Menu:
         Program.import_all_csv()
 
         while True:
+            os.system("clear")
             user_choice = UserInterface.main_menu()
             if user_choice == "Log in":
                 self.log_in()
@@ -39,6 +41,7 @@ class StudentMenu:
     def __init__(self, user):
         while True:
             user_choice = UserInterface.student_menu()
+            os.system("clear")
             if user_choice == "Submit an assignment":
                 UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
                 Submission.add_submission(*UserInterface.get_submit_data(user))
@@ -56,6 +59,7 @@ class MentorMenu:
     def __init__(self, user):
         while True:
             user_choice = UserInterface.mentor_menu()
+            os.system("clear")
             if user_choice == "Show students list":
                 UserInterface.show_students_table(Student.get_student_list())
             elif user_choice == "Show assignments":
@@ -89,6 +93,7 @@ class BossMenu:
     def __init__(self, user):
         while True:
             user_choice = UserInterface.boss_menu()
+            os.system("clear")
             if user_choice == "Add a mentor":
                 Mentor.add_mentor(*UserInterface.new_mentor())
             elif user_choice == "Remove a mentor":
@@ -110,6 +115,7 @@ class StaffMenu:
     def __init__(self, user):
         while True:
             user_choice = UserInterface.staff_menu()
+            os.system("clear")
             if user_choice == "Show students list":
                 UserInterface.show_list(Student.get_student_list())
             elif user_choice == "Log out":
