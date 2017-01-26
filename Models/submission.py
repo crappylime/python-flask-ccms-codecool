@@ -32,3 +32,15 @@ class Submission:
         assignment.submission_list.append(submission)
 
         student.submission_list.append(submission)
+
+    def get_owner(self):
+        return self.owner
+
+    def get_assignment(self):
+        return self.assignment
+
+    def get_date(self):
+        return self.date
+
+    def get_points(self):
+        return self.points

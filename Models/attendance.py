@@ -23,5 +23,14 @@ class Attendance:
     def get_attendance_list(cls):
         return cls.attendance_list
 
+    def get_student(self):
+        return self.student
+
+    def get_date(self):
+        return self.date
+
+    def get_status(self):
+        return self.status
+
     def set_status(self, new_status):
         self.status = new_status
