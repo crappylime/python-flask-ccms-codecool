@@ -29,7 +29,7 @@ class Submission:
 
         assignment = Assignment.get_assignment(assignment_title)
 
-        submission = Submission(assignment, student, content, date, int(points) if type(points) == str else None)
+        submission = Submission(assignment, student, content, date, int(points) if type(points) == str and len(points)>0 else None)
 
         assignment.submission_list.append(submission)
 
