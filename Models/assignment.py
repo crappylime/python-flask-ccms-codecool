@@ -41,6 +41,18 @@ class Assignment:
                 return item
         raise NameError("There's no assignment with given title")
 
+    def get_title(self):
+        return self.title
+
+    def get_content(self):
+        return self.content
+
+    def get_due_date(self):
+        return self.due_date
+
+    def get_max_points(self):
+        return self.max_points
+
     def get_submission(self, owner_name):
         """
         Returns submission object.
