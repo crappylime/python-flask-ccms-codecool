@@ -48,7 +48,7 @@ class StudentMenu:
                 UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
                 Submission.add_submission(*UserInterface.get_submit_data(user))
             elif user_choice == "View my grades":
-                UserInterface.view_grade(user)
+                UserInterface.show_submissions_table(user.submission_list, 'graded')
             elif user_choice == "View my submissions":
                 UserInterface.show_submissions_table(user.submission_list)
             elif user_choice == "Log out":
@@ -79,6 +79,7 @@ class MentorMenu:
                 student_to_edit.edit_student(*UserInterface.edit_user_data(student_to_edit))
             elif user_choice == "Log out":
                 break
+
 
 class BossMenu:
 

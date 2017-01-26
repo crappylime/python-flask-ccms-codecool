@@ -174,13 +174,19 @@ class UserInterface:
         UserInterface.show_table(headers, list_for_table)
 
     @staticmethod
-    def show_submissions_table(submission_list):
+    def show_submissions_table(submission_list, option='all'):
 
         headers = ['idx', 'assignment title', 'content', 'date', 'points']
         list_for_table = []
 
-        for index, ass in enumerate(submission_list):
-            list_for_table.append([index + 1, ass.assignment_title, ass.content, ass.date, ass.points])
+        if option == 'all':
+            for index, ass in enumerate(submission_list):
+                list_for_table.append([index + 1, ass.assignment_title, ass.content, ass.date, ass.points])
+        else:
+            for index, ass in enumerate(submission_list):
+                if ass.points != None:
+                    list_for_table.append([index + 1, ass.assignment_title, ass.content, ass.date, ass.points])
+
 
         UserInterface.show_table(headers, list_for_table)
 
