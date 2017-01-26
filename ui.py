@@ -162,9 +162,8 @@ class UserInterface:
         list_for_table = []
 
         for index, ass in enumerate(assignments_list):
-            list_for_table.append([index + 1, assignments_list[ass].title, assignments_list[ass].content,
-                                   assignments_list[ass].due_date, assignments_list[ass].max_points])
+            list_for_table.append([index + 1, ass.title, ass.content, ass.due_date, ass.max_points])
 
-        show_table(headers, list_for_table)
+        UserInterface.show_table(headers, list_for_table)
 
 
