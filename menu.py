@@ -58,7 +58,10 @@ class MentorMenu:
             user_choice = UserInterface.mentor_menu()
             if user_choice == "Show students list":
                 UserInterface.show_students_table(Student.get_student_list())
+            elif user_choice == "Show assignments":
+                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
             elif user_choice == "Add an assignment":
+                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
                 Assignment.add_assignment(*UserInterface.get_assignment_data())
             elif user_choice == "Grade an assignment":
                 UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
@@ -71,6 +74,7 @@ class MentorMenu:
             elif user_choice == "Add student":
                 Student.add_student(*UserInterface.get_user_data())
             elif user_choice == "Remove student":
+                UserInterface.show_students_table(Student.get_student_list())
                 Student.remove_student(UserInterface.get_remove_data())
             elif user_choice == "Edit student data":
                 student_to_edit_name = UserInterface.user_name_from_list(Student.get_student_list())

@@ -54,8 +54,8 @@ class UserInterface:
 
     @staticmethod
     def mentor_menu():
-        options = ['Show students list', 'Add an assignment', 'Grade an assignment', 'Check attendance', 'Add student',
-                   'Remove student', 'Edit student data', 'Log out']
+        options = ['Show students list', 'Show assignments', 'Add an assignment', 'Grade an assignment',
+                   'Check attendance', 'Add student', 'Remove student', 'Edit student data', 'Log out']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
@@ -125,11 +125,11 @@ class UserInterface:
 
     @staticmethod
     def edit_user_data(user_to_edit):
-        print(user_to_edit.get_name)
+        print(user_to_edit.get_name())
         new_name = input('Please provide new name: ')
-        print(user_to_edit.get_mail)
+        print(user_to_edit.get_mail())
         new_mail = input('Please provide new mail: ')
-        print(user_to_edit.get_password)
+        print(user_to_edit.get_password())
         new_password = input('Please provide new password: ')
         return new_name, new_mail, new_password
 
