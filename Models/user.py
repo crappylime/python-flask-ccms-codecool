@@ -119,6 +119,7 @@ class Mentor(Employee):
                 return mentor
 
 
+
 class Boss(Employee):
 
     boss_list = []
@@ -129,6 +130,27 @@ class Boss(Employee):
     @classmethod
     def add_boss(cls, name, mail, password):
         cls.boss_list.append(Boss(name, mail, password))
+
+    def edit_boss(self, name, mail, password):
+        self.name = name
+        self.mail = mail
+        self.password = password
+
+    @classmethod
+    def remove_boss(cls, name):
+        for boss in cls.boss_list:
+            if boss.name == name:
+                cls.boss_list.remove(boss)
+
+    @classmethod
+    def get_boss_list(cls):
+        return cls.boss_list
+
+    @classmethod
+    def get_boss(cls, name):
+        for boss in cls.boss_list:
+            if boss.name == name:
+                return boss
 
 
 class Staff(Employee):
@@ -141,3 +163,24 @@ class Staff(Employee):
     @classmethod
     def add_staff(cls, name, mail, password):
         cls.staff_list.append(Staff(name, mail, password))
+
+    def edit_staff(self, name, mail, password):
+        self.name = name
+        self.mail = mail
+        self.password = password
+
+    @classmethod
+    def remove_staff(cls, name):
+        for staff in cls.staff_list:
+            if staff.name == name:
+                cls.staff_list.remove(staff)
+
+    @classmethod
+    def get_staff_list(cls):
+        return cls.staff_list
+
+    @classmethod
+    def get_staff(cls, name):
+        for staff in cls.staff_list:
+            if staff.name == name:
+                return staff
