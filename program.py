@@ -64,7 +64,7 @@ class Program:
             attendance_writer.writeheader()
             attendance_list = Attendance.get_attendance_list()
             for attendance in attendance_list:
-                attendance_dict = {'student_name': attendance.get_student.get_name(), 'date': attendance.get_date(), 'status': attendance.get_status()}
+                attendance_dict = {'student_name': attendance.get_student().get_name(), 'date': attendance.get_date(), 'status': attendance.get_status()}
                 attendance_writer.writerow(attendance_dict)
 
     @staticmethod
@@ -87,7 +87,7 @@ class Program:
             assignment_list = Assignment.get_list_assignmnent()
             for assignment in assignment_list:
                 for submission in assignment.get_list_submission():
-                    submission_dict = {'assignment_title': submission.get_assignment.get_title(), 'student_name': submission.get_owner().get_name(), 'content': submission.get_content(), 'date': submission.get_date(), 'points': submission.get_points()}
+                    submission_dict = {'assignment_title': submission.get_assignment().get_title(), 'student_name': submission.get_owner().get_name(), 'content': submission.get_content(), 'date': submission.get_date(), 'points': submission.get_points()}
                     submission_writer.writerow(submission_dict)
 
     @staticmethod
@@ -99,6 +99,7 @@ class Program:
 
     @staticmethod
     def export_all_cvs():
-        Program.export_csv_users("Data/user.csv")
-        Program.export_csv_attendance("Data/attendance.csv")
-
+        Program.export_csv_users("Data/user2.csv")
+        Program.export_csv_attendance("Data/attendance2.csv")
+        Program.export_csv_assignment("Data/assignment2.csv")
+        Program.export_csv_submission("Data/submission2.csv")
