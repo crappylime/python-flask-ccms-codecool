@@ -105,8 +105,12 @@ class UserInterface:
     def get_attendance_data(student):
         date = time.strftime("%Y-%m-%-d")
         print(student.get_name())
-        status = input("Is the student present?(0/1/L): ")
-        return student, date, status
+        while True:
+            status = input("Is the student present?(0/1/L): ")
+            if status not in ["0", "1", "L"]:
+                print("Wrong input")
+            else:
+                return student, date, status
 
     @staticmethod
     def staff_menu():
