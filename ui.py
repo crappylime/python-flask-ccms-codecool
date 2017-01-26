@@ -24,11 +24,12 @@ class UserInterface:
     def login():
         user_name = input('Provide your username: ')
         user_password = input('Provide your password: ')
-        return (user_name, user_password)
+        return user_name, user_password
 
     @staticmethod
     def login_error():
         print("Username or password is incorrect!")
+        time.sleep(1)
 
     @staticmethod
     def student_menu():

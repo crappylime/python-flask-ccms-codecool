@@ -20,9 +20,9 @@ class Menu:
                         StaffMenu(user)
                     elif user.get_class_name() == "Student":
                         StudentMenu(user)
-                else:
-                    UserInterface.login_error()
-                    break
+        else:
+            UserInterface.login_error()
+
 
     def __init__(self):
         Program.import_all_csv()

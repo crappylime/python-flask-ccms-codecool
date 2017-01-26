@@ -1,0 +1,35 @@
+[1mdiff --git a/menu.py b/menu.py[m
+[1mindex a42b7e4..3fffbcc 100644[m
+[1m--- a/menu.py[m
+[1m+++ b/menu.py[m
+[36m@@ -20,9 +20,9 @@[m [mclass Menu:[m
+                         StaffMenu(user)[m
+                     elif user.get_class_name() == "Student":[m
+                         StudentMenu(user)[m
+[31m-                else:[m
+[31m-                    UserInterface.login_error()[m
+[31m-                    break[m
+[32m+[m[32m        else:[m
+[32m+[m[32m            UserInterface.login_error()[m
+[32m+[m
+ [m
+     def __init__(self):[m
+         Program.import_all_csv()[m
+[1mdiff --git a/ui.py b/ui.py[m
+[1mindex 5d0013c..40b3bdc 100644[m
+[1m--- a/ui.py[m
+[1m+++ b/ui.py[m
+[36m@@ -24,11 +24,12 @@[m [mclass UserInterface:[m
+     def login():[m
+         user_name = input('Provide your username: ')[m
+         user_password = input('Provide your password: ')[m
+[31m-        return (user_name, user_password)[m
+[32m+[m[32m        return user_name, user_password[m
+ [m
+     @staticmethod[m
+     def login_error():[m
+         print("Username or password is incorrect!")[m
+[32m+[m[32m        time.sleep(1)[m
+ [m
+     @staticmethod[m
+     def student_menu():[m
