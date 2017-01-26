@@ -26,10 +26,9 @@ class UserInterface:
         user_password = input('Provide your password: ')
         return user_name, user_password
 
-    # @staticmethod
-    # def login_error():
-    #     print("Username or password is incorrect!")
-    #     time.sleep(1)
+    @staticmethod
+    def login_error():
+        print("Username or password is incorrect!")
 
     @staticmethod
     def student_menu():
@@ -186,8 +185,12 @@ class UserInterface:
 
     @staticmethod
     def edit_user_status(student_attendances_to_edit_one):
-        new_status = input('Please provide new status: ')
-        return new_status
+        while True:
+            new_status = input("Is the student present?(0/1/L): ")
+            if new_status not in ["0", "1", "L"]:
+                print("Wrong input")
+            else:
+                return new_status
 
     @staticmethod
     def edit_user_name(user_to_edit):
