@@ -73,7 +73,7 @@ class MentorMenu:
             elif user_choice == "Remove student":
                 Student.remove_student(UserInterface.get_remove_data())
             elif user_choice == "Edit student data":
-                student_to_edit_name = UserInterface.user_name_from_list(Student.get_list_student)
+                student_to_edit_name = UserInterface.user_name_from_list(Student.get_student_list())
                 student_to_edit = Student.get_student(student_to_edit_name)
                 student_to_edit.edit_student(*UserInterface.edit_user_data(student_to_edit))
             elif user_choice == "Log out":

@@ -1,4 +1,5 @@
 from tabulate import tabulate
+import time
 
 
 class UserInterface:
@@ -10,7 +11,7 @@ class UserInterface:
                 if user_choice == str(index + 1):
                     return option
             else:
-                print("Wrong input")
+                print("Wrong input :-(")
 
     @staticmethod
     def main_menu():
@@ -26,7 +27,7 @@ class UserInterface:
 
     @staticmethod
     def login_error():
-        print("Username or password is incorrect! ")
+        print("Username or password is incorrect!")
 
     @staticmethod
     def student_menu():
@@ -38,7 +39,7 @@ class UserInterface:
     def get_submit_data(user):
         assignment_title = input("Please provide title of assignment: ")
         content = input("Please provide link to your assignment: ")
-        date = input("What date is it today? ;p ") # Remember to import date
+        date = time.strftime("%Y-%m-%-d %H:%M")
         owner_name = user.name
         return content, date, assignment_title, owner_name
 
@@ -49,7 +50,7 @@ class UserInterface:
         if grade:
             print("Your score is :{}".format(grade))
         else:
-            print("Your submission haven't been grade yet")
+            print("Your submission haven't been grade yet.")
 
     @staticmethod
     def mentor_menu():
@@ -62,7 +63,7 @@ class UserInterface:
     def get_assignment_data():
         title = input("Please provide assignment title: ")
         content = input("Please provide assignment content: ")
-        due_date = input("Please provide due date: ")
+        due_date = time.strftime("%Y-%m-%-d %H:%M")
         max_points = input("Plese set max points for this assignment: ")
         return title, content, due_date, max_points
 
@@ -86,9 +87,9 @@ class UserInterface:
 
     @staticmethod
     def get_attendance_data(student):
-        date = input("What date is it today? :) ")
+        date = time.strftime("%Y-%m-%-d")
         print(student.get_name())
-        status = input("Is the student present?(0/1/L) ")
+        status = input("Is the student present?(0/1/L): ")
         return student, date, status
 
     @staticmethod
@@ -112,14 +113,15 @@ class UserInterface:
         return mentor_name, mentor_mail, mentor_password
 
     @staticmethod
-    def user_name_from_list(list):
-        UserInterface.show_list_with_index(list)
-        try:
-            user_choice = int(input('Please choose person by index: '))
-            return list[user_choice - 1].get_name()
-        except ValueError:
-            print("Wrong input")
-
+    def user_name_from_list(user_list):
+        UserInterface.show_list_with_index(user_list)
+        while True:
+            user_choice = input('Please choose person by index: ')
+            for index, user in enumerate(user_list):
+                if user_choice == str(index + 1):
+                    return user.get_name()
+            else:
+                print("Wrong input :-(")
 
     @staticmethod
     def edit_user_data(user_to_edit):
@@ -157,7 +159,7 @@ class UserInterface:
         headers = ['idx', 'name']
         list_for_table = []
         for index, user in enumerate(users):
-            list_for_table.append([index +1, user.get_name()])
+            list_for_table.append([index + 1, user.get_name()])
 
         UserInterface.show_table(headers, list_for_table)
 
@@ -190,9 +192,8 @@ class UserInterface:
                                        ass.get_content(), ass.get_date(), ass.get_points()])
         else:
             for index, ass in enumerate(submission_list):
-                if ass.points != None:
+                if ass.points is not None:
                     list_for_table.append([index + 1, ass.get_assignment().get_title(), ass.get_owner().get_name(),
                                            ass.get_content(), ass.get_date(), ass.get_points()])
-
 
         UserInterface.show_table(headers, list_for_table)
