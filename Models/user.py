@@ -48,6 +48,11 @@ class Student(User):
     def add_student(cls, name, mail, password):
         cls.student_list.append(Student(name, mail, password))
 
+    def edit_student(self, name, mail, password):
+        self.name = name
+        self.mail = mail
+        self.password = password
+
     @classmethod
     def remove_student(cls, name):
         for student in cls.student_list:
@@ -116,11 +121,23 @@ class Mentor(Employee):
 
 class Boss(Employee):
 
+    boss_list = []
+
     def __init__(self, name, mail, password):
         super().__init__(name, mail, password)
+
+    @classmethod
+    def add_boss(cls, name, mail, password):
+        cls.boss_list.append(Boss(name, mail, password))
 
 
 class Staff(Employee):
 
+    staff_list = []
+
     def __init__(self, name, mail, password):
         super().__init__(name, mail, password)
+
+    @classmethod
+    def add_staff(cls, name, mail, password):
+        cls.staff_list.append(Staff(name, mail, password))
