@@ -118,6 +118,7 @@ class UserInterface:
         except ValueError:
             print("Wrong input")
 
+
     @staticmethod
     def edit_mentor_data(mentor_to_edit):
         print(mentor_to_edit.get_name)
