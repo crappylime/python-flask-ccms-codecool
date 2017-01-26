@@ -1,5 +1,6 @@
 from Models.submission import *
 from Models.assignment import *
+from Models.attendance import *
 from program import *
 
 from ui import *
@@ -7,19 +8,21 @@ from ui import *
 class Menu:
     def log_in(self):
         (user_name, user_password) = UserInterface.login()
-        for student in Student.get_student_list():
-            if user_name == student.name:
-                user = student
-                StudentMenu(user)
+        for user in User.get_user_list():
+            if user_name == user.get_name():
+                if user_password == user.get_password():
+                    if user.get_class_name() == "Boss":
+                        BossMenu(user)
+                    elif user.get_class_name() == "Mentor":
+                        MentorMenu(user)
+                    elif user.get_class_name() == "Staff":
+                        StaffMenu(user)
+                    elif user.get_class_name() == "Student":
+                        StudentMenu(user)
+        else:
+            UserInterface.login_error()
 
-        for mentor in Mentor.get_list_mentor():
-            if user_name == mentor.name:
-                user = mentor
-                MentorMenu(user)
 
-        if user_name == Boss.get_boss().name:
-            user = Boss.get_boss()
-            BossMenu(user)
 
 
 
@@ -64,7 +67,8 @@ class MentorMenu:
             elif user_choice == "Grade an assignment":
                 Assignment.set_grade_submission(*UserInterface.get_grade_assignment_data())
             elif user_choice == "Check attendance":
-                pass
+                for student in Student.get_student_list():
+                    Attendance.add_attendance(*UserInterface.get_attendance_data(student))
             elif user_choice == "Add student":
                 Student.add_student(*UserInterface.get_user_data())
             elif user_choice == "Remove student":
