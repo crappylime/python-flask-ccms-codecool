@@ -1,3 +1,5 @@
+from tabulate import tabulate
+
 class UserInterface:
 
     @staticmethod
@@ -143,4 +145,22 @@ class UserInterface:
     def show_list_with_index(user_list):
         for index, user in enumerate(user_list):
             print('  (' + (str(index + 1)) + ') ' + user.get_name())
+
+    @staticmethod
+    def show_table(headers, data):
+        table = tabulate(data, headers, tablefmt='fancy_grid')
+        print(table)
+
+    @staticmethod
+    def show_assignments_table(assignments_list):
+
+        headers = ['idx', 'title', 'content', 'due_date', 'max_points']
+        list_for_table = []
+
+        for index, ass in enumerate(assignments_list):
+            list_for_table.append([index + 1, assignments_list[ass].title, assignments_list[ass].content,
+                                   assignments_list[ass].due_date, assignments_list[ass].max_points])
+
+        show_table(headers, list_for_table)
+
 
