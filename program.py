@@ -16,10 +16,8 @@ class Program:
                 elif user["role"] == "mentor":
                     Mentor.add_mentor(user["name"], user["mail"], user["password"])
                 elif user["role"] == "staff":
-                    continue
                     Staff.add_staff(user["name"], user["mail"], user["password"])
                 elif user["role"] == "boss":
-                    continue
                     Boss.add_boss(user["name"], user["mail"], user["password"])
                 else:
                     raise KeyError("There is no such role")

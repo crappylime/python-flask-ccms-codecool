@@ -27,17 +27,11 @@ class User:
     def set_name(self, new_name):
         self.name = new_name
 
-
     def set_mail(self, new_mail):
         self.mail = new_mail
 
     def set_password(self, new_password):
         self.password = new_password
-
-    def get_name(self):  # To chyba powinno być usunięte, b
-        return self
-
-
 
 
 class Student(User):
@@ -53,12 +47,6 @@ class Student(User):
     @classmethod
     def add_student(cls, name, mail, password):
         cls.student_list.append(Student(name, mail, password))
-
-    @classmethod
-    def edit_student(cls, name, mail, password):
-        self.name = name
-        self.mail = mail
-        self.password = password
 
     @classmethod
     def remove_student(cls, name):

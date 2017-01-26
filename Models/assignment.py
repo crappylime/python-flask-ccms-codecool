@@ -61,17 +61,18 @@ class Assignment:
         self.due_date = due_date
         self.max_points = max_points
 
-    @classmethod
-    def remove_assignment(cls, assignment):
-        """
-        Removes assignment.
-        """
-        cls.assignment_list.remove(assignment)
+    list.remove(assignment)
 
     def set_grade_submission(self, points, owner_name):
         """
         Sets grade to submission.
 
+@classmethod
+def remove_assignment(cls, assignment):
+    """
+        Removes assignment.
+        """
+        cls.assignment_
         Raises:
             TypeError: If points limit has been exceeded.
             NameError: There's no submission with given student name.

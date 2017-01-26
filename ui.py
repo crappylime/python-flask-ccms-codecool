@@ -77,7 +77,7 @@ class UserInterface:
         return name, mail, password
 
     @staticmethod
-    def get_remove_data:
+    def get_remove_data():
         name = input("Please provide name of the person you would like to remove: ")
         return name
 
@@ -137,7 +137,7 @@ class UserInterface:
     @staticmethod
     def show_list(user_list):
         for user in user_list:
-            print(user.User.get_name())
+            print(user.get_name())
 
     @staticmethod
     def show_list_with_index(user_list):
