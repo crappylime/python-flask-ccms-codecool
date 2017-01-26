@@ -27,17 +27,17 @@ class UserInterface:
         return options[user_choice - 1]
 
     @staticmethod
-    def get_submit_data():
+    def get_submit_data(user):
         assignment_title = input("Please provide title of assignment: ")
         content = input("Please provide link to your assignment: ")
         date = input("What date is it today? ;p ") # Remember to import date
-        owner_name = input("Please provide your name") # Use caller object next
+        owner_name = user.name
         return content, date, assignment_title, owner_name
 
     @staticmethod
     def view_grade(student):
         submission_title = input("What submission are you interested in? ")
-        grade = student.Student.get_grade(submission_title)
+        grade = student.get_grade(student.name, submission_title)
         if grade:
             print("Your score is :{}".format(grade))
         else:
