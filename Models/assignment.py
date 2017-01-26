@@ -26,7 +26,11 @@ class Assignment:
         """
         Adds assignment to assignments list.
         """
-        cls.assignment_list.append(Assignment(title, content, due_date, int(max_points)))
+        try:
+            max_points = int(max_points)
+        except TypeError:
+            raise TypeError("Points must be a number")
+        cls.assignment_list.append(Assignment(title, content, due_date, max_points))
 
     @classmethod
     def get_assignment(cls, title):

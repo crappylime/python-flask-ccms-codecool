@@ -64,8 +64,12 @@ class UserInterface:
         title = input("Please provide assignment title: ")
         content = input("Please provide assignment content: ")
         due_date = time.strftime("%Y-%m-%-d %H:%M")
-        max_points = input("Plese set max points for this assignment: ")
-        return title, content, due_date, max_points
+        while True:
+            max_points = input("Please set max points for this assignment: ")
+            if max_points.isdigit():
+                return title, content, due_date, max_points
+            else:
+                print("Points must be a number! ")
 
     @staticmethod
     def get_grade_assignment_data():
