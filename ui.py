@@ -112,6 +112,28 @@ class UserInterface:
         mentor_password = input('Please provide new mentor\'s password')
         return mentor_name, mentor_mail, mentor_password
 
+
+    @staticmethod
+    def show_attendance_with_index(attendance_list, student_to_edit):
+        person_attendance_list = []
+        for attendance in attendance_list:
+            if attendance.get_student().get_name() == student_to_edit.get_name():
+                person_attendance_list.append(attendance)
+
+        for index, attendance in enumerate(person_attendance_list):
+                print("({}) {} {}".format(str(index + 1), attendance.get_date(), attendance.get_status()))
+
+    @staticmethod
+    def attendance_id_from_list(attendance_list, student_to_edit):
+        UserInterface.show_attendance_with_index(attendance_list, student_to_edit)
+        while True:
+            user_choice = input('Please choose specific attendance by index: ')
+            for index, attendance in enumerate(attendance_list):
+                if user_choice == str(index + 1):
+                    return attendance.get_status()
+            else:
+                print("Wrong input :-(")
+
     @staticmethod
     def user_name_from_list(user_list):
         UserInterface.show_list_with_index(user_list)
@@ -124,14 +146,33 @@ class UserInterface:
                 print("Wrong input :-(")
 
     @staticmethod
-    def edit_user_data(user_to_edit):
+    def edit_user_menu():
+        options = ['Edit student attendance status', 'Edit student name', 'Edit student mail', 'Edit student password', 'Back']
+        UserInterface.print_options_list(options)
+        return UserInterface.user_choice(options)
+
+    @staticmethod
+    def edit_user_status(student_attendances_to_edit_one):
+        new_status = input('Please provide new status: ')
+        return new_status
+
+    @staticmethod
+    def edit_user_name(user_to_edit):
         print(user_to_edit.get_name())
         new_name = input('Please provide new name: ')
+        return new_name
+
+    @staticmethod
+    def edit_user_mail(user_to_edit):
         print(user_to_edit.get_mail())
         new_mail = input('Please provide new mail: ')
+        return new_mail
+
+    @staticmethod
+    def edit_user_password(user_to_edit):
         print(user_to_edit.get_password())
         new_password = input('Please provide new password: ')
-        return new_name, new_mail, new_password
+        return new_password
 
     @staticmethod
     def print_options_list(list):

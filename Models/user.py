@@ -53,6 +53,18 @@ class Student(User):
         self.mail = mail
         self.password = password
 
+    def edit_student_name(self, name):
+        self.name = name
+
+    def edit_student_mail(self, mail):
+        self.mail = mail
+
+    def edit_student_password(self, password):
+        self.password = password
+
+    def edit_student_attendance_list(self, attendance_list):
+        self.attendance_list = attendance_list
+
     @classmethod
     def remove_student(cls, name):
         for student in cls.student_list:

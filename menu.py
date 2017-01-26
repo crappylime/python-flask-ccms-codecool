@@ -56,6 +56,26 @@ class StudentMenu:
 
 
 class MentorMenu:
+
+    @staticmethod
+    def edit_user_data():
+        while True:
+            option_choice = UserInterface.edit_user_menu()
+            if option_choice == "Back":
+                break
+            student_to_edit_name = UserInterface.user_name_from_list(Student.get_student_list())
+            student_to_edit = Student.get_student(student_to_edit_name)
+            os.system("clear")
+            if option_choice == "Edit student attendance status":
+                student_attendances_to_edit_one = UserInterface.attendance_id_from_list(Attendance.get_attendance_list(), student_to_edit)
+                student_attendance_to_edit = UserInterface.edit_user_status(student_attendances_to_edit_one)
+            elif option_choice == "Edit student name":
+                student_to_edit.edit_student_name(UserInterface.edit_user_name(student_to_edit))
+            elif option_choice == "Edit student mail":
+                student_to_edit.edit_student_mail(UserInterface.edit_user_mail(student_to_edit))
+            elif option_choice == "Edit student password":
+                student_to_edit.edit_student_password(UserInterface.edit_user_password(student_to_edit))
+
     def __init__(self, user):
         while True:
             user_choice = UserInterface.mentor_menu()
@@ -83,9 +103,7 @@ class MentorMenu:
                 UserInterface.show_students_table(Student.get_student_list())
                 Student.remove_student(UserInterface.get_remove_data())
             elif user_choice == "Edit student data":
-                student_to_edit_name = UserInterface.user_name_from_list(Student.get_student_list())
-                student_to_edit = Student.get_student(student_to_edit_name)
-                student_to_edit.edit_student(*UserInterface.edit_user_data(student_to_edit))
+                MentorMenu.edit_user_data()
             elif user_choice == "Log out":
                 break
 
