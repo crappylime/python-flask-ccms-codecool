@@ -38,10 +38,16 @@ class UserInterface:
     @staticmethod
     def get_submit_data(user):
         assignment_title = input("Please provide title of assignment: ")
-        content = input("Please provide link to your assignment: ")
-        date = time.strftime("%Y-%m-%-d %H:%M")
-        owner_name = user.name
-        return content, date, assignment_title, owner_name
+        unique = True
+        for item in user.submission_list:
+            if item.assignment.title == assignment_title:
+                unique = False
+                print('This assignment has already been submitted!')
+        if unique is True:
+            content = input("Please provide link to your assignment: ")
+            date = time.strftime("%Y-%m-%-d %H:%M")
+            owner_name = user.name
+            return content, date, assignment_title, owner_name
 
     @staticmethod
     def view_grade(student):
