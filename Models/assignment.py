@@ -78,7 +78,7 @@ class Assignment:
         """
         try:
             points = int(points)
-        except (TypeError, ValueError):
+        except TypeError:
             raise TypeError('An argument must be integer type')
 
         if points not in range(0, self.max_points):

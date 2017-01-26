@@ -2,7 +2,7 @@ class User:
 
     user_list = []
 
-    def __init__ (self, name, mail, password):
+    def __init__(self, name, mail, password):
         self.name = name
         self.mail = mail
         self.password = password

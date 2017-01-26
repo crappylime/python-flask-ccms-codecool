@@ -28,12 +28,11 @@ class UserInterface:
 
     @staticmethod
     def get_submit_data():
-        title = input("Please provide title of submission: ")
+        assignment_title = input("Please provide title of assignment: ")
         content = input("Please provide link to your assignment: ")
         date = input("What date is it today? ;p ") # Remember to import date
-        assignment_title = input("Please provide title of assignment: ")
         owner_name = input("Please provide your name") # Use caller object next
-        return title, content, date, assignment_title, owner_name
+        return content, date, assignment_title, owner_name
 
     @staticmethod
     def view_grade(student):

@@ -41,7 +41,7 @@ class Program:
         with open(filepath) as source:
             submission_csv_list = csv.DictReader(source)
             for submission in submission_csv_list:
-                Submission.add_submission(submission["title"], submission["content"], submission["date"], submission["assignment_title"], submission["student_name"], submission["points"])
+                Submission.add_submission(submission["content"], submission["date"], submission["assignment_title"], submission["student_name"], submission["points"])
 
     @staticmethod
     def export_csv_users(filepath):
