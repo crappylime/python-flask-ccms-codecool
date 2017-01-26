@@ -84,10 +84,23 @@ class UserInterface:
                 print("Points must be a number! ")
 
     @staticmethod
-    def get_grade_assignment_data():
-        points = int(input("How much points do you want to add? "))
+    def get_grade_assignment_data(submission_list, assigment_to_grade):
+        points = None
+
+        while points is None or points > assigment_to_grade.max_points:
+            provided_value = input("How much points do you want to add? ")
+            if provided_value.isdigit() is True:
+                points = int(provided_value)
+                if int(points) > assigment_to_grade.max_points:
+                    print('You exceed max points level for this assignment!')
+            else:
+                print('Please provide whole number!')
+
         owner_name = input("Whose assignment is it? ")
-        return points, owner_name
+        for item in submission_list:
+            if item.owner.name == owner_name:
+                return points, owner_name
+        print("\nThere's no submission with given student name!\n")
 
     @staticmethod
     def get_user_data():
@@ -224,7 +237,7 @@ class UserInterface:
 
         UserInterface.show_table(headers, list_for_table)
 
-    staticmethod
+    @staticmethod
     def show_attendance_table(attendance_list):
 
         headers = ['idx', 'student', 'date', 'status']
@@ -248,9 +261,12 @@ class UserInterface:
         UserInterface.show_table(headers, list_for_table)
 
     @staticmethod
-    def assignment_title_provide():
+    def assignment_title_provide(assignments_list):
         title = input('Provide assignment title: ')
-        return title
+        for item in assignments_list:
+            if item.title == title:
+                return title
+        print("There's no assignment with given title!")
 
     @staticmethod
     def show_submissions_table(submission_list, option='all'):

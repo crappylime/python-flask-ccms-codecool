@@ -92,9 +92,13 @@ class MentorMenu:
                 Assignment.add_assignment(*UserInterface.get_assignment_data())
             elif user_choice == "Grade an assignment":
                 UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
-                assignment = Assignment.get_assignment(UserInterface.assignment_title_provide())
-                UserInterface.show_submissions_table(assignment.get_list_submission())
-                assignment.set_grade_submission(*UserInterface.get_grade_assignment_data())
+                assignment_title = UserInterface.assignment_title_provide(Assignment.get_list_assignmnent())
+                if assignment_title is not None:
+                    assignment = Assignment.get_assignment(assignment_title)
+                    UserInterface.show_submissions_table(assignment.get_list_submission())
+                    grade_data = UserInterface.get_grade_assignment_data(assignment.get_list_submission(), assignment)
+                    if grade_data is not None:
+                        assignment.set_grade_submission(*grade_data)
             elif user_choice == "Check attendance":
                 for student in Student.get_student_list():
                     Attendance.add_attendance(*UserInterface.get_attendance_data(student))
