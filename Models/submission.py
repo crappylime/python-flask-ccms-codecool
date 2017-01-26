@@ -6,7 +6,7 @@ class Submission:
     """This is class representing student submission for Assignment graded by Mentor."""
 
     def __init__(self, assignment, owner, content, date, points=None):
-        self.assignment_title = assignment
+        self.assignment = assignment
         self.owner = owner
         self.content = content
         self.date = date
@@ -28,7 +28,7 @@ class Submission:
         student = Student.get_student(owner_name)
 
         assignment = Assignment.get_assignment(assignment_title)
-        submission = Submission(assignment_title, student, content, date, points)
+        submission = Submission(assignment, student, content, date, int(points) if type(points) == str else None)
         assignment.submission_list.append(submission)
 
         student.submission_list.append(submission)
@@ -44,3 +44,6 @@ class Submission:
 
     def get_points(self):
         return self.points
+
+    def get_content(self):
+        return self.content

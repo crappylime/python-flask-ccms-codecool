@@ -70,7 +70,7 @@ class UserInterface:
 
     @staticmethod
     def get_grade_assignment_data():
-        points = input("How much points do you want to add? ")
+        points = int(input("How much points do you want to add? "))
         owner_name = input("Whose assignment is it? ")
         return points, owner_name
 
@@ -178,23 +178,31 @@ class UserInterface:
         list_for_table = []
 
         for index, ass in enumerate(assignments_list):
-            list_for_table.append([index + 1, ass.title, ass.content, ass.due_date, ass.max_points])
+            list_for_table.append([index + 1, ass.get_title(), ass.get_content(),
+                                   ass.get_due_date(), ass.get_max_points()])
 
         UserInterface.show_table(headers, list_for_table)
 
     @staticmethod
+    def assignment_title_provide():
+        title = input('Provide assignment title: ')
+        return title
+
+    @staticmethod
     def show_submissions_table(submission_list, option='all'):
 
-        headers = ['idx', 'assignment title', 'content', 'date', 'points']
+        headers = ['idx', 'assignment title', 'owner', 'content', 'date', 'points']
         list_for_table = []
 
         if option == 'all':
             for index, ass in enumerate(submission_list):
-                list_for_table.append([index + 1, ass.assignment.get_title(), ass.content, ass.date, ass.points])
+                list_for_table.append([index + 1, ass.get_assignment().get_title(), ass.get_owner().get_name(),
+                                       ass.get_content(), ass.get_date(), ass.get_points()])
         else:
             for index, ass in enumerate(submission_list):
                 if ass.points != None:
-                    list_for_table.append([index + 1, ass.assignment_title, ass.content, ass.date, ass.points])
+                    list_for_table.append([index + 1, ass.get_assignment().get_title(), ass.get_owner().get_name(),
+                                           ass.get_content(), ass.get_date(), ass.get_points()])
 
 
         UserInterface.show_table(headers, list_for_table)
