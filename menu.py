@@ -73,11 +73,11 @@ class MentorMenu:
                 student_attendance_to_edit = UserInterface.edit_user_status(student_attendances_to_edit_one)
                 student_attendances_to_edit_one.set_status(student_attendance_to_edit)
             elif option_choice == "Edit student name":
-                student_to_edit.edit_student_name(UserInterface.edit_user_name(student_to_edit))
+                student_to_edit.set_name(UserInterface.edit_user_name(student_to_edit))
             elif option_choice == "Edit student mail":
-                student_to_edit.edit_student_mail(UserInterface.edit_user_mail(student_to_edit))
+                student_to_edit.set_mail(UserInterface.edit_user_mail(student_to_edit))
             elif option_choice == "Edit student password":
-                student_to_edit.edit_student_password(UserInterface.edit_user_password(student_to_edit))
+                student_to_edit.set_password(UserInterface.edit_user_password(student_to_edit))
 
     def __init__(self, user):
         while True:

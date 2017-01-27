@@ -1,6 +1,7 @@
 class User:
+    """Parent class for all user instances - represents all users"""
 
-    user_list = []
+    user_list = []  # collects all user instances - needed for login and csv export
 
     def __init__(self, name, mail, password):
         self.name = name
@@ -10,60 +11,52 @@ class User:
 
     @classmethod
     def get_user_list(cls):
+        """Returns list with all users instances"""
         return cls.user_list
 
     def get_name(self):
+        """Returns user instance name"""
         return self.name
 
     def get_mail(self):
+        """Returns user instance mail"""
         return self.mail
 
     def get_password(self):
+        """Returns user instance password"""
         return self.password
 
     def get_class_name(self):
+        """Returns user instance subclass name"""
         return self.__class__.__name__
 
     def set_name(self, new_name):
+        """Sets user name"""
         self.name = new_name
 
     def set_mail(self, new_mail):
+        """Sets users mail"""
         self.mail = new_mail
 
     def set_password(self, new_password):
+        """Sets users password"""
         self.password = new_password
 
 
 class Student(User):
-
-    student_list = []
+    """Class that represent students"""
+    student_list = []  # collects all student instances
 
     def __init__(self, name, mail, password):
+        """Student has additional attributes - grade list, attendance list, submission list"""
         User.__init__(self, name, mail, password)
         self.grade_list = []
-        self.attendance_list = []
-        self.submission_list = []
+        self.attendance_list = []  # collect all attendance instances
+        self.submission_list = []  # collect all submissions sending by student
 
     @classmethod
     def add_student(cls, name, mail, password):
         cls.student_list.append(Student(name, mail, password))
-
-    def edit_student(self, name, mail, password):
-        self.name = name
-        self.mail = mail
-        self.password = password
-
-    def edit_student_name(self, name):
-        self.name = name
-
-    def edit_student_mail(self, mail):
-        self.mail = mail
-
-    def edit_student_password(self, password):
-        self.password = password
-
-    def edit_student_attendance_list(self, attendance_list):
-        self.attendance_list = attendance_list
 
     @classmethod
     def remove_student(cls, name):
@@ -73,6 +66,7 @@ class Student(User):
 
     @classmethod
     def get_student_list(cls):
+        """Returns list with students"""
         return cls.student_list
 
     @classmethod
@@ -110,6 +104,7 @@ class Mentor(Employee):
         cls.mentor_list.append(Mentor(name, mail, password))
 
     def edit_mentor(self, name, mail, password):
+        """Function to change mentor data"""
         self.name = name
         self.mail = mail
         self.password = password
