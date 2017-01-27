@@ -37,18 +37,22 @@ class UserInterface:
         return UserInterface.user_choice(options)
 
     @staticmethod
-    def get_submit_data(user):
+    def get_submit_data(user, assignment_list):
         assignment_title = input("Please provide title of assignment: ")
         unique = True
-        for item in user.submission_list:
-            if item.assignment.title == assignment_title:
-                unique = False
-                print('This assignment has already been submitted!')
-        if unique is True:
-            content = input("Please provide link to your assignment: ")
-            date = time.strftime("%Y-%m-%-d %H:%M")
-            owner_name = user.name
-            return content, date, assignment_title, owner_name
+        for item in assignment_list:
+            if item.title == assignment_title:
+                for sub in user.submission_list:
+                    if sub.assignment.title == assignment_title:
+                        unique = False
+                        print('This assignment has already been submitted!')
+                if unique is True:
+                    content = input("Please provide link to your assignment: ")
+                    date = time.strftime("%Y-%m-%-d %H:%M")
+                    owner_name = user.name
+                    return content, date, assignment_title, owner_name
+
+        print('There\'s no assignment with given title!')
 
     @staticmethod
     def view_grade(student):
