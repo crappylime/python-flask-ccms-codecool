@@ -128,7 +128,13 @@ class MentorMenu:
 
 
 class BossMenu:
-
+    """Class that represents boss menu.
+       Functions:
+       Add a mentor
+       Remove a mentor
+       Show mentors list
+       Show students list
+        """
     @staticmethod
     def edit_user_data():
         while True:
@@ -169,6 +175,8 @@ class BossMenu:
 
 
 class StaffMenu:
+    """Class that represents staff menu.
+       Functions "Show students list", "Log out" """
     def __init__(self, user):
         while True:
             user_choice = UserInterface.staff_menu()
