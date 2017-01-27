@@ -32,7 +32,7 @@ class User:
         return self.__class__.__name__
 
     def set_name(self, new_name):
-        """Sets user name"""
+        """Sets users name"""
         self.name = new_name
 
     def set_mail(self, new_mail):
@@ -57,7 +57,7 @@ class Student(User):
 
     @classmethod
     def add_student(cls, name, mail, password):
-        """Adds news student instance"""
+        """Adds news student instance and appends its to student list"""
         cls.student_list.append(Student(name, mail, password))
 
     @classmethod
@@ -74,12 +74,14 @@ class Student(User):
 
     @classmethod
     def get_student(cls, name):
+        """Searching in student list and returns student instance with given name"""
         for student in cls.student_list:
             if student.name == name:
                 return student
 
     @classmethod
     def get_grade(cls, name, assignment_title):
+        """Returns grade from assignment with title 'assignment_title' submit by student with name 'name'"""
         for student in cls.student_list:
             if student.name == name:
                 for submission in student.submission_list:
@@ -92,88 +94,104 @@ class Student(User):
 
 
 class Employee(User):
+    """Class that represent employees"""
     pass
 
 
 class Mentor(Employee):
-
-    mentor_list = []
+    """Class that represent mentors"""
+    mentor_list = []  # collects all mentors instances
 
     def __init__(self, name, mail, password):
+        """init from user class"""
         super().__init__(name, mail, password)
 
     @classmethod
     def add_mentor(cls, name, mail, password):
+        """Adds news mentor instance and appends its to mentors list"""
         cls.mentor_list.append(Mentor(name, mail, password))
 
     @classmethod
     def remove_mentor(cls, name):
+        """Removes mentor instance from mentor list"""
         for mentor in cls.mentor_list:
             if mentor.name == name:
                 cls.mentor_list.remove(mentor)
 
     @classmethod
     def get_list_mentor(cls):
+        """Returns list with mentors"""
         return cls.mentor_list
 
     @classmethod
     def get_mentor(cls, name):
+        """Searching in mentor list and returns mentor instance with given name"""
         for mentor in cls.mentor_list:
             if mentor.name == name:
                 return mentor
 
 
 class Boss(Employee):
-
-    boss_list = []
+    """Class that represent boss"""
+    boss_list = []  # collects all boss instances
 
     def __init__(self, name, mail, password):
+        """init from user class"""
         super().__init__(name, mail, password)
 
     @classmethod
     def add_boss(cls, name, mail, password):
+        """Adds news boss instance and appends its to boss list"""
         cls.boss_list.append(Boss(name, mail, password))
 
     @classmethod
     def remove_boss(cls, name):
+        """Removes boss instance from boss list"""
         for boss in cls.boss_list:
             if boss.name == name:
                 cls.boss_list.remove(boss)
 
     @classmethod
     def get_boss_list(cls):
+        """Returns list with boss instances"""
         return cls.boss_list
 
     @classmethod
     def get_boss(cls, name):
+        """Searching in boss list and returns boss instance with given name"""
         for boss in cls.boss_list:
             if boss.name == name:
                 return boss
 
 
 class Staff(Employee):
-
-    staff_list = []
+    """Class that represent staff employees"""
+    staff_list = []  # collects all staff instances
 
     def __init__(self, name, mail, password):
+        """init from user class"""
         super().__init__(name, mail, password)
 
     @classmethod
     def add_staff(cls, name, mail, password):
+        """Adds news staff instance and appends its to staff list"""
         cls.staff_list.append(Staff(name, mail, password))
 
     @classmethod
     def remove_staff(cls, name):
+        """Removes staff instance from staff list"""
         for staff in cls.staff_list:
             if staff.name == name:
                 cls.staff_list.remove(staff)
 
     @classmethod
     def get_staff_list(cls):
+        """Returns list with staff instances"""
         return cls.staff_list
 
     @classmethod
     def get_staff(cls, name):
+        """Searching in staff list and returns staff instance with given name"""
         for staff in cls.staff_list:
             if staff.name == name:
                 return staff
