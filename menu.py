@@ -134,11 +134,11 @@ class BossMenu:
             mentor_to_edit_name = UserInterface.user_name_from_list(Mentor.get_list_mentor())
             mentor_to_edit = Mentor.get_mentor(mentor_to_edit_name)
             if option_choice == "Edit mentor name":
-                mentor_to_edit.edit_user_name(UserInterface.edit_user_name(mentor_to_edit))
+                mentor_to_edit.set_name(UserInterface.edit_user_name(mentor_to_edit))
             elif option_choice == "Edit mentor mail":
-                mentor_to_edit.edit_user_mail(UserInterface.edit_user_mail(mentor_to_edit))
+                mentor_to_edit.set_mail(UserInterface.edit_user_mail(mentor_to_edit))
             elif option_choice == "Edit mentor password":
-                mentor_to_edit.edit_user_password(UserInterface.edit_user_password(mentor_to_edit))
+                mentor_to_edit.set_password(UserInterface.edit_user_password(mentor_to_edit))
 
     def __init__(self, user):
         while True:

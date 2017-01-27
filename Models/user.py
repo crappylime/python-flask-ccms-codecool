@@ -4,6 +4,7 @@ class User:
     user_list = []  # collects all user instances - needed for login and csv export
 
     def __init__(self, name, mail, password):
+        """Attributes for all users - name, e-mail, password"""
         self.name = name
         self.mail = mail
         self.password = password
@@ -42,15 +43,6 @@ class User:
         """Sets users password"""
         self.password = new_password
 
-    def edit_user_name(self, name):
-        self.name = name
-
-    def edit_user_mail(self, mail):
-        self.mail = mail
-
-    def edit_user_password(self, password):
-        self.password = password
-
 
 class Student(User):
     """Class that represent students"""
@@ -65,10 +57,12 @@ class Student(User):
 
     @classmethod
     def add_student(cls, name, mail, password):
+        """Adds news student instance"""
         cls.student_list.append(Student(name, mail, password))
 
     @classmethod
     def remove_student(cls, name):
+        """Removes student instance from student list"""
         for student in cls.student_list:
             if student.name == name:
                 cls.student_list.remove(student)
