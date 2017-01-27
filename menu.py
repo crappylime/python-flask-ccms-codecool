@@ -37,6 +37,12 @@ class Menu:
                 break
         Program.export_all_cvs()
 
+    @staticmethod
+    def show_students():
+        UserInterface.show_users_table(Student.get_student_list())
+        student_to_show_name = UserInterface.user_name_from_list(Student.get_student_list())
+        student_to_show = Student.get_student(student_to_show_name)
+        UserInterface.show_user(student_to_show)
 
 class StudentMenu:
     def __init__(self, user):
@@ -85,7 +91,7 @@ class MentorMenu:
             user_choice = UserInterface.mentor_menu()
             os.system("clear")
             if user_choice == "Show students list":
-                UserInterface.show_students_table(Student.get_student_list())
+                Menu.show_students()
             elif user_choice == "Show assignments":
                 UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
             elif user_choice == "Add an assignment":
@@ -108,7 +114,7 @@ class MentorMenu:
             elif user_choice == "Add student":
                 Student.add_student(*UserInterface.get_user_data())
             elif user_choice == "Remove student":
-                UserInterface.show_students_table(Student.get_student_list())
+                UserInterface.show_users_table(Student.get_student_list())
                 Student.remove_student(UserInterface.get_remove_data())
             elif user_choice == "Edit student data":
                 MentorMenu.edit_user_data()
@@ -146,13 +152,12 @@ class BossMenu:
             elif user_choice == "Edit mentor data":
                 BossMenu.edit_user_data()
             elif user_choice == "Show mentors list":
+                UserInterface.show_users_table(Mentor.get_list_mentor())
                 mentor_to_show_name = UserInterface.user_name_from_list(Mentor.get_list_mentor())
                 mentor_to_show = Mentor.get_mentor(mentor_to_show_name)
                 UserInterface.show_user(mentor_to_show)
             elif user_choice == "Show students list":
-                student_to_show_name = UserInterface.user_name_from_list(Student.get_student_list())
-                student_to_show = Student.get_student(student_to_show_name)
-                UserInterface.show_user(student_to_show)
+                Menu.show_students()
             elif user_choice == "Log out":
                 break
 
@@ -163,9 +168,7 @@ class StaffMenu:
             user_choice = UserInterface.staff_menu()
             os.system("clear")
             if user_choice == "Show students list":
-                student_to_show_name = UserInterface.user_name_from_list(Student.get_student_list())
-                student_to_show = Student.get_student(student_to_show_name)
-                UserInterface.show_user(student_to_show)
+                Menu.show_students()
             elif user_choice == "Log out":
                 break
 
