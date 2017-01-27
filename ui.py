@@ -24,7 +24,7 @@ class UserInterface:
     def login():
         user_name = input('Provide your username: ')
         user_password = input('Provide your password: ')
-        return (user_name, user_password)
+        return user_name, user_password
 
     @staticmethod
     def login_error():
@@ -37,18 +37,24 @@ class UserInterface:
         return UserInterface.user_choice(options)
 
     @staticmethod
-    def get_submit_data(user):
+    def get_submit_data(user, assignment_list):
         assignment_title = input("Please provide title of assignment: ")
         unique = True
-        for item in user.submission_list:
-            if item.assignment.title == assignment_title:
-                unique = False
-                print('This assignment has already been submitted!')
+        for item in assignment_list:
+            if item.title == assignment_title:
+                for sub in user.submission_list:
+                    if sub.assignment.title == assignment_title:
+                        unique = False
+                        print('\nThis assignment has already been submitted!\n')
+                if unique is True:
+                    content = input("Please provide link to your assignment: ")
+                    date = time.strftime("%Y-%m-%-d %H:%M")
+                    owner_name = user.name
+                    print('\nAssignment submitted successfully!\n')
+                    return content, date, assignment_title, owner_name
+
         if unique is True:
-            content = input("Please provide link to your assignment: ")
-            date = time.strftime("%Y-%m-%-d %H:%M")
-            owner_name = user.name
-            return content, date, assignment_title, owner_name
+            print('\nThere\'s no assignment with given title!\n')
 
     @staticmethod
     def view_grade(student):
@@ -83,10 +89,23 @@ class UserInterface:
                 print("Points must be a number! ")
 
     @staticmethod
-    def get_grade_assignment_data():
-        points = int(input("How much points do you want to add? "))
+    def get_grade_assignment_data(submission_list, assigment_to_grade):
+        points = None
+
+        while points is None or points > assigment_to_grade.max_points:
+            provided_value = input("How much points do you want to add? ")
+            if provided_value.isdigit() is True:
+                points = int(provided_value)
+                if int(points) > assigment_to_grade.max_points:
+                    print('You exceed max points level for this assignment!')
+            else:
+                print('Please provide whole number!')
+
         owner_name = input("Whose assignment is it? ")
-        return points, owner_name
+        for item in submission_list:
+            if item.owner.name == owner_name:
+                return points, owner_name
+        print("\nThere's no submission with given student name!\n")
 
     @staticmethod
     def get_user_data():
@@ -104,8 +123,12 @@ class UserInterface:
     def get_attendance_data(student):
         date = time.strftime("%Y-%m-%-d")
         print(student.get_name())
-        status = input("Is the student present?(0/1/L): ")
-        return student, date, status
+        while True:
+            status = input("Is the student present?(0/1/L): ")
+            if status not in ["0", "1", "L"]:
+                print("Wrong input")
+            else:
+                return student, date, status
 
     @staticmethod
     def staff_menu():
@@ -123,8 +146,8 @@ class UserInterface:
     @staticmethod
     def new_mentor():
         mentor_name = input('Please provide new mentor\'s name: ')
-        mentor_mail = input('Please provide new mentor\'s mail')
-        mentor_password = input('Please provide new mentor\'s password')
+        mentor_mail = input('Please provide new mentor\'s mail: ')
+        mentor_password = input('Please provide new mentor\'s password: ')
         return mentor_name, mentor_mail, mentor_password
 
 
@@ -151,7 +174,6 @@ class UserInterface:
 
     @staticmethod
     def user_name_from_list(user_list):
-        UserInterface.show_list_with_index(user_list)
         while True:
             user_choice = input('Please choose person by index: ')
             for index, user in enumerate(user_list):
@@ -167,9 +189,19 @@ class UserInterface:
         return UserInterface.user_choice(options)
 
     @staticmethod
+    def edit_mentor_menu():
+        options = ['Edit mentor name', 'Edit mentor mail', 'Edit mentor password', 'Back']
+        UserInterface.print_options_list(options)
+        return UserInterface.user_choice(options)
+
+    @staticmethod
     def edit_user_status(student_attendances_to_edit_one):
-        new_status = input('Please provide new status: ')
-        return new_status
+        while True:
+            new_status = input("Is the student present?(0/1/L): ")
+            if new_status not in ["0", "1", "L"]:
+                print("Wrong input")
+            else:
+                return new_status
 
     @staticmethod
     def edit_user_name(user_to_edit):
@@ -196,14 +228,8 @@ class UserInterface:
             print('  (' + (str(index + 1)) + ') ' + str(option))
 
     @staticmethod
-    def show_list(user_list):
-        for user in user_list:
-            print(user.get_name())
-
-    @staticmethod
-    def show_list_with_index(user_list):
-        for index, user in enumerate(user_list):
-            print('  (' + (str(index + 1)) + ') ' + user.get_name())
+    def show_user(user):
+        print("\n{}\n{}\n".format(user.get_name(), user.get_mail()))
 
     @staticmethod
     def show_table(headers, data):
@@ -211,7 +237,7 @@ class UserInterface:
         print(table)
 
     @staticmethod
-    def show_students_table(users):
+    def show_users_table(users):
         headers = ['idx', 'name']
         list_for_table = []
         for index, user in enumerate(users):
@@ -219,7 +245,7 @@ class UserInterface:
 
         UserInterface.show_table(headers, list_for_table)
 
-    staticmethod
+    @staticmethod
     def show_attendance_table(attendance_list):
 
         headers = ['idx', 'student', 'date', 'status']
@@ -243,9 +269,12 @@ class UserInterface:
         UserInterface.show_table(headers, list_for_table)
 
     @staticmethod
-    def assignment_title_provide():
+    def assignment_title_provide(assignments_list):
         title = input('Provide assignment title: ')
-        return title
+        for item in assignments_list:
+            if item.title == title:
+                return title
+        print("There's no assignment with given title!")
 
     @staticmethod
     def show_submissions_table(submission_list, option='all'):

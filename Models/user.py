@@ -42,6 +42,15 @@ class User:
         """Sets users password"""
         self.password = new_password
 
+    def edit_user_name(self, name):
+        self.name = name
+
+    def edit_user_mail(self, mail):
+        self.mail = mail
+
+    def edit_user_password(self, password):
+        self.password = password
+
 
 class Student(User):
     """Class that represent students"""
@@ -103,12 +112,6 @@ class Mentor(Employee):
     def add_mentor(cls, name, mail, password):
         cls.mentor_list.append(Mentor(name, mail, password))
 
-    def edit_mentor(self, name, mail, password):
-        """Function to change mentor data"""
-        self.name = name
-        self.mail = mail
-        self.password = password
-
     @classmethod
     def remove_mentor(cls, name):
         for mentor in cls.mentor_list:
@@ -126,7 +129,6 @@ class Mentor(Employee):
                 return mentor
 
 
-
 class Boss(Employee):
 
     boss_list = []
@@ -137,11 +139,6 @@ class Boss(Employee):
     @classmethod
     def add_boss(cls, name, mail, password):
         cls.boss_list.append(Boss(name, mail, password))
-
-    def edit_boss(self, name, mail, password):
-        self.name = name
-        self.mail = mail
-        self.password = password
 
     @classmethod
     def remove_boss(cls, name):
@@ -170,11 +167,6 @@ class Staff(Employee):
     @classmethod
     def add_staff(cls, name, mail, password):
         cls.staff_list.append(Staff(name, mail, password))
-
-    def edit_staff(self, name, mail, password):
-        self.name = name
-        self.mail = mail
-        self.password = password
 
     @classmethod
     def remove_staff(cls, name):

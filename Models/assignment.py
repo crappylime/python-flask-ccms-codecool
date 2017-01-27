@@ -102,11 +102,10 @@ class Assignment:
             raise ValueError("Points limit has been exceeded")
 
         student = Student.get_student(owner_name)
+
         for submission in self.submission_list:
             if submission.owner == student:
                 submission.points = points
-                return submission.points
-            raise NameError("There's no submission with given student name")
 
     @classmethod
     def get_list_assignmnent(cls):
