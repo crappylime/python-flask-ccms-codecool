@@ -45,14 +45,16 @@ class UserInterface:
                 for sub in user.submission_list:
                     if sub.assignment.title == assignment_title:
                         unique = False
-                        print('This assignment has already been submitted!')
+                        print('\nThis assignment has already been submitted!\n')
                 if unique is True:
                     content = input("Please provide link to your assignment: ")
                     date = time.strftime("%Y-%m-%-d %H:%M")
                     owner_name = user.name
+                    print('\nAssignment submitted successfully!\n')
                     return content, date, assignment_title, owner_name
 
-        print('There\'s no assignment with given title!')
+        if unique is True:
+            print('\nThere\'s no assignment with given title!\n')
 
     @staticmethod
     def view_grade(student):
