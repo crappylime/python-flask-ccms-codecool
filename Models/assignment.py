@@ -103,17 +103,9 @@ class Assignment:
 
         student = Student.get_student(owner_name)
 
-        valid_submission_owner = False
-
         for submission in self.submission_list:
             if submission.owner == student:
-                valid_submission_owner = True
-
-        if valid_submission_owner is True:
-            submission.points = points
-            return submission.points
-        else:
-            raise NameError("There's no submission with given student name")
+                submission.points = points
 
     @classmethod
     def get_list_assignmnent(cls):
