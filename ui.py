@@ -210,9 +210,13 @@ class UserInterface:
             print('  (' + (str(index + 1)) + ') ' + str(option))
 
     @staticmethod
-    def show_list(user_list):
-        for user in user_list:
-            print(user.get_name())
+    def show_user(user):
+        print("\n{}\n{}\n".format(user.get_name(), user.get_mail()))
+
+    # @staticmethod
+    # def show_list(user_list):
+    #     for user in user_list:
+    #         print(user.get_name())
 
     @staticmethod
     def show_list_with_index(user_list):
