@@ -174,7 +174,6 @@ class UserInterface:
 
     @staticmethod
     def user_name_from_list(user_list):
-        UserInterface.show_list_with_index(user_list)
         while True:
             user_choice = input('Please choose person by index: ')
             for index, user in enumerate(user_list):
@@ -232,23 +231,13 @@ class UserInterface:
     def show_user(user):
         print("\n{}\n{}\n".format(user.get_name(), user.get_mail()))
 
-    # @staticmethod
-    # def show_list(user_list):
-    #     for user in user_list:
-    #         print(user.get_name())
-
-    @staticmethod
-    def show_list_with_index(user_list):
-        for index, user in enumerate(user_list):
-            print('  (' + (str(index + 1)) + ') ' + user.get_name())
-
     @staticmethod
     def show_table(headers, data):
         table = tabulate(data, headers, tablefmt='fancy_grid')
         print(table)
 
     @staticmethod
-    def show_students_table(users):
+    def show_users_table(users):
         headers = ['idx', 'name']
         list_for_table = []
         for index, user in enumerate(users):
