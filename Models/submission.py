@@ -44,16 +44,36 @@ class Submission:
             raise NameError('This assignment has already been submitted!')
 
     def get_owner(self):
+        """
+        :return:
+            obj: submission owner's object
+        """
         return self.owner
 
     def get_assignment(self):
+        """
+        :return:
+            obj: assignment object
+        """
         return self.assignment
 
     def get_date(self):
+        """
+        :return:
+            str: date of submission
+        """
         return self.date
 
     def get_content(self):
+        """
+        :return:
+            str: content of submission
+        """
         return self.content
 
     def get_points(self):
+        """
+        :return:
+            int: point assigned to submission
+        """
         return self.points

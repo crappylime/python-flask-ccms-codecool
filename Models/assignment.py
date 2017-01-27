@@ -46,20 +46,37 @@ class Assignment:
         raise NameError("There's no assignment with given title")
 
     def get_title(self):
+        """
+        :return:
+            str: title of assignment
+        """
         return self.title
 
     def get_content(self):
+        """
+        :return:
+            str: content of assignment
+        """
         return self.content
 
     def get_due_date(self):
+        """
+        :return:
+            str: due date of assignment
+        """
         return self.due_date
 
     def get_max_points(self):
+        """
+        :return:
+            int: max points for given assignment
+        """
         return self.max_points
 
     def get_submission(self, owner_name):
         """
-        Returns submission object.
+        :return:
+            obj: submission object
 
         Raises:
             NameError: If submission's title was NOT found.
@@ -72,7 +89,7 @@ class Assignment:
 
     def edit_assignment(self, title, due_date, max_points):
         """
-        Returns edited assignment.
+        Edits assignments parameters
         """
         self.title = title
         self.due_date = due_date
@@ -110,12 +127,14 @@ class Assignment:
     @classmethod
     def get_list_assignmnent(cls):
         """
-        Returns assignments list.
+        :return:
+            list: list of assignments
         """
         return cls.assignment_list
 
     def get_list_submission(self):
         """
-        Returns submissions list.
+        :return:
+            list: list of submissions
         """
         return self.submission_list
