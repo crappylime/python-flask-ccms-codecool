@@ -43,7 +43,6 @@ class Submission:
         else:
             raise NameError('This assignment has already been submitted!')
 
-
     def get_owner(self):
         return self.owner
 
