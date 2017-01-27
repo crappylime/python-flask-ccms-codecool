@@ -6,6 +6,7 @@ import re
 class UserInterface:
     @staticmethod
     def user_choice(options):
+        """Returns chosen option or prints error if it appears"""
         while True:
             user_choice = input('Choose action: ')
             for index, option in enumerate(options):
@@ -16,28 +17,33 @@ class UserInterface:
 
     @staticmethod
     def main_menu():
+        """Prints options list and returns user_choice()"""
         options = ['Log in', 'Exit']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
     @staticmethod
     def login():
+        """Asks user for input and returns it"""
         user_name = input('Provide your username: ')
         user_password = input('Provide your password: ')
         return user_name, user_password
 
     @staticmethod
     def login_error():
+        """Prints login error"""
         print("Username or password is incorrect!")
 
     @staticmethod
     def student_menu():
+        """Prints options list and returns user_choice()"""
         options = ['View assignments', 'Submit an assignment', 'View my grades', 'View my submissions', 'Log out']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
     @staticmethod
     def get_submit_data(user, assignment_list):
+        """Returns user input about submission"""
         assignment_title = input("Please provide title of assignment: ")
         unique = True
         for item in assignment_list:
@@ -58,6 +64,7 @@ class UserInterface:
 
     @staticmethod
     def view_grade(student):
+        """Chooses submission and prints information about grade"""
         submission_title = input("What submission are you interested in? ")
         grade = student.get_grade(student.name, submission_title)
         if grade:
@@ -67,6 +74,7 @@ class UserInterface:
 
     @staticmethod
     def mentor_menu():
+        """Prints options list and returns user_choice()"""
         options = ['Show students list', 'Show assignments', 'Add an assignment', 'Grade an assignment',
                    'Check attendance', 'Show attendance', 'Add student', 'Remove student', 'Edit student data', 'Log out']
         UserInterface.print_options_list(options)
@@ -74,6 +82,7 @@ class UserInterface:
 
     @staticmethod
     def get_assignment_data():
+        """Returns user input about new assignment"""
         title = input("Please provide assignment title: ")
         content = input("Please provide assignment content: ")
 
@@ -90,6 +99,7 @@ class UserInterface:
 
     @staticmethod
     def get_grade_assignment_data(submission_list, assigment_to_grade):
+        """Returns data about grading submission"""
         points = None
 
         while points is None or points > assigment_to_grade.max_points:
@@ -109,6 +119,7 @@ class UserInterface:
 
     @staticmethod
     def get_user_data():
+        """Returns user input about its data"""
         name = input("Please provide user name: ")
         mail = input("Please provide user e-mail: ")
         password = input("Please set user password: ")
@@ -116,11 +127,13 @@ class UserInterface:
 
     @staticmethod
     def get_remove_data():
+        """Returns user name"""
         name = input("Please provide name of the person you would like to remove: ")
         return name
 
     @staticmethod
     def get_attendance_data(student):
+        """Returns user input about student presence"""
         date = time.strftime("%Y-%m-%-d")
         print(student.get_name())
         while True:
@@ -132,12 +145,14 @@ class UserInterface:
 
     @staticmethod
     def staff_menu():
+        """Prints options list and returns user_choice()"""
         options = ['Show students list', 'Log out']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
     @staticmethod
     def boss_menu():
+        """Prints options list and returns user_choice()"""
         options = ['Add a mentor', 'Remove a mentor', 'Edit mentor data', 'Show mentors list', 'Show students list',
                    'Log out']
         UserInterface.print_options_list(options)
@@ -145,6 +160,7 @@ class UserInterface:
 
     @staticmethod
     def new_mentor():
+        """Returns user input about new mentor"""
         mentor_name = input('Please provide new mentor\'s name: ')
         mentor_mail = input('Please provide new mentor\'s mail: ')
         mentor_password = input('Please provide new mentor\'s password: ')
@@ -214,6 +230,7 @@ class UserInterface:
         """
         Calls user choice depending on options
         """
+
         options = ['Edit mentor name', 'Edit mentor mail', 'Edit mentor password', 'Back']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
