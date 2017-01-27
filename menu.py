@@ -7,7 +7,9 @@ import os
 
 
 class Menu:
-    def log_in(self):
+
+    @staticmethod
+    def log_in():
         (user_name, user_password) = UserInterface.login()
         for user in User.get_user_list():
             if user_name == user.get_name():
@@ -22,7 +24,6 @@ class Menu:
                         StudentMenu(user)
         else:
             UserInterface.login_error()
-
 
     def __init__(self):
         os.system("clear")
@@ -43,6 +44,7 @@ class Menu:
         student_to_show_name = UserInterface.user_name_from_list(Student.get_student_list())
         student_to_show = Student.get_student(student_to_show_name)
         UserInterface.show_user(student_to_show)
+
 
 class StudentMenu:
     def __init__(self, user):
@@ -73,6 +75,7 @@ class MentorMenu:
             os.system("clear")
             if option_choice == "Back":
                 break
+            UserInterface.show_users_table(Student.get_student_list())
             student_to_edit_name = UserInterface.user_name_from_list(Student.get_student_list())
             student_to_edit = Student.get_student(student_to_edit_name)
             if option_choice == "Edit student attendance status":
@@ -131,6 +134,7 @@ class BossMenu:
             os.system("clear")
             if option_choice == "Back":
                 break
+            UserInterface.show_users_table(Mentor.get_list_mentor())    
             mentor_to_edit_name = UserInterface.user_name_from_list(Mentor.get_list_mentor())
             mentor_to_edit = Mentor.get_mentor(mentor_to_edit_name)
             if option_choice == "Edit mentor name":
