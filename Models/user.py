@@ -73,7 +73,12 @@ class Student(User):
     @classmethod
     def get_student_list(cls):
         """Returns list with students"""
-        return cls.student_list
+        student_list = []
+        con = sqlite3.connect('Data/ccms.db')
+        table = con.execute("SELECT * FROM `users`;")
+        for row in table:
+            student_list.append(cls(*row[1:]))
+        return student_list
 
     @classmethod
     def get_student(cls, name):

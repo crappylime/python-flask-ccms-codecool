@@ -142,7 +142,7 @@ class BossMenu:
             os.system("clear")
             if option_choice == "Back":
                 break
-            UserInterface.show_users_table(Mentor.get_list_mentor())    
+            UserInterface.show_users_table(Mentor.get_list_mentor())
             mentor_to_edit_name = UserInterface.user_name_from_list(Mentor.get_list_mentor())
             mentor_to_edit = Mentor.get_mentor(mentor_to_edit_name)
             if option_choice == "Edit mentor name":
