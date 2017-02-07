@@ -1,3 +1,6 @@
+import sqlite3
+
+
 class User:
     """Parent class for all user instances - represents all users"""
 
