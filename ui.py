@@ -169,6 +169,11 @@ class UserInterface:
 
     @staticmethod
     def show_attendance_with_index(attendance_list, student_to_edit):
+        """
+        Prints attendance
+        :param attendance_list:
+        :param student_to_edit: 
+        """
         person_attendance_list = []
         for attendance in attendance_list:
             if attendance.get_student().get_name() == student_to_edit.get_name():
@@ -179,6 +184,13 @@ class UserInterface:
 
     @staticmethod
     def attendance_id_from_list(attendance_list, student_to_edit):
+        """
+        Returns attendance object
+        :param attendance_list:
+        :param student_to_edit:
+        :return:
+            obj: attendance
+        """
         UserInterface.show_attendance_with_index(attendance_list, student_to_edit)
         while True:
             user_choice = input('Please choose specific attendance by index: ')
@@ -190,6 +202,12 @@ class UserInterface:
 
     @staticmethod
     def user_name_from_list(user_list):
+        """
+        Returns user name
+        :param user_list:
+        :return:
+            str: user name
+        """
         while True:
             user_choice = input('Please choose person by index: ')
             for index, user in enumerate(user_list):
@@ -200,20 +218,31 @@ class UserInterface:
 
     @staticmethod
     def edit_user_menu():
-        """Prints options list and returns user_choice()"""
+        """
+        Calls user choice depending on options
+        """
         options = ['Edit student attendance status', 'Edit student name', 'Edit student mail', 'Edit student password', 'Back']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
     @staticmethod
     def edit_mentor_menu():
-        """Prints options list and returns user_choice()"""
+        """
+        Calls user choice depending on options
+        """
+
         options = ['Edit mentor name', 'Edit mentor mail', 'Edit mentor password', 'Back']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
     @staticmethod
     def edit_user_status(student_attendances_to_edit_one):
+        """
+        Returns new attendance status
+        :param student_attendances_to_edit_one:
+        :return:
+            str: new attendance status
+        """
         while True:
             new_status = input("Is the student present?(0/1/L): ")
             if new_status not in ["0", "1", "L"]:
@@ -223,18 +252,36 @@ class UserInterface:
 
     @staticmethod
     def edit_user_name(user_to_edit):
+        """
+        Returns new user name
+        :param user_to_edit:
+        :return:
+            str: new user name
+        """
         print(user_to_edit.get_name())
         new_name = input('Please provide new name: ')
         return new_name
 
     @staticmethod
     def edit_user_mail(user_to_edit):
+        """
+        Returns new user mail
+        :param user_to_edit:
+        :return:
+            str: new user password
+        """
         print(user_to_edit.get_mail())
         new_mail = input('Please provide new mail: ')
         return new_mail
 
     @staticmethod
     def edit_user_password(user_to_edit):
+        """
+        Returns new user password
+        :param user_to_edit:
+        :return:
+            str: new user password
+        """
         print(user_to_edit.get_password())
         new_password = input('Please provide new password: ')
         return new_password
@@ -247,15 +294,28 @@ class UserInterface:
 
     @staticmethod
     def show_user(user):
+        """
+        Prints details of user
+        :param user:
+        """
         print("\n{}\n{}\n".format(user.get_name(), user.get_mail()))
 
     @staticmethod
     def show_table(headers, data):
+        """
+        Prints formatted table
+        :param headers:
+        :param data:
+        """
         table = tabulate(data, headers, tablefmt='fancy_grid')
         print(table)
 
     @staticmethod
     def show_users_table(users):
+        """
+        Creates formatted table of users
+        :param users:
+        """
         headers = ['idx', 'name']
         list_for_table = []
         for index, user in enumerate(users):
@@ -265,7 +325,10 @@ class UserInterface:
 
     @staticmethod
     def show_attendance_table(attendance_list):
-
+        """
+        Creates formatted attendance table
+        :param attendance_list:
+        """
         headers = ['idx', 'student', 'date', 'status']
         list_for_table = []
 
@@ -276,7 +339,10 @@ class UserInterface:
 
     @staticmethod
     def show_assignments_table(assignments_list):
-
+        """
+        Creates formatted table of assignments
+        :param assignments_list:
+        """
         headers = ['idx', 'title', 'content', 'due_date', 'max_points']
         list_for_table = []
 
@@ -288,6 +354,11 @@ class UserInterface:
 
     @staticmethod
     def assignment_title_provide(assignments_list):
+        """
+        :param assignments_list:
+        :return:
+            str: title of assignment
+        """
         title = input('Provide assignment title: ')
         for item in assignments_list:
             if item.title == title:
@@ -296,7 +367,11 @@ class UserInterface:
 
     @staticmethod
     def show_submissions_table(submission_list, option='all'):
-
+        """
+        Creates formatted table of submissions
+        :param submission_list:
+        :param option:
+        """
         headers = ['idx', 'assignment title', 'owner', 'content', 'date', 'points']
         list_for_table = []
 

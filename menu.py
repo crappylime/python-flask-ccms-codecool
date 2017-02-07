@@ -7,6 +7,7 @@ import os
 
 
 class Menu:
+    """log in menu with import/export csv"""
 
     @staticmethod
     def log_in():
@@ -47,6 +48,7 @@ class Menu:
 
 
 class StudentMenu:
+    """Student menu options"""
     def __init__(self, user):
         while True:
             user_choice = UserInterface.student_menu()
@@ -67,7 +69,7 @@ class StudentMenu:
 
 
 class MentorMenu:
-
+    """Mentor menu options"""
     @staticmethod
     def edit_user_data():
         while True:
