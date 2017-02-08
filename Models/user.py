@@ -6,8 +6,9 @@ class User:
 
     user_list = []  # collects all user instances - needed for login and csv export
 
-    def __init__(self, name, mail, password):
+    def __init__(self, user_id, name, mail, password):
         """Attributes for all users - name, e-mail, password"""
+        self.user_id = user_id
         self.name = name
         self.mail = mail
         self.password = password
@@ -53,7 +54,7 @@ class Student(User):
 
     def __init__(self, name, mail, password):
         """Student has additional attributes - grade list, attendance list, submission list"""
-        User.__init__(self, name, mail, password)
+        super().__init__(self, name, mail, password)
         self.grade_list = []
         self.attendance_list = []  # collect all attendance instances
         self.submission_list = []  # collect all submissions sending by student
