@@ -7,7 +7,7 @@ import os
 
 
 class Menu:
-    """log in menu with import/export csv"""
+    """log in menu"""
 
     @staticmethod
     def log_in():
@@ -28,7 +28,6 @@ class Menu:
 
     def __init__(self):
         os.system("clear")
-        Program.import_all_csv()
 
         while True:
             user_choice = UserInterface.main_menu()
@@ -37,7 +36,6 @@ class Menu:
                 self.log_in()
             else:
                 break
-        Program.export_all_cvs()
 
     @staticmethod
     def show_students():

@@ -229,7 +229,6 @@ class UserInterface:
             else:
                 print("Wrong input :-(")
 
-
     @staticmethod
     def edit_user_menu():
         """
