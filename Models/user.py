@@ -21,6 +21,15 @@ class User:
         return cls.create_user(user_id)
 
     @classmethod
+    def get_user_list(cls):
+        """
+        Returns list with user objects
+        :return:
+            user_list: list
+        """
+        return cls.create_user_list()
+
+    @classmethod
     def get_user_list_by_role(cls, role):
         """
         Returns list with user objects
@@ -49,14 +58,34 @@ class User:
         return User(*args[0])
 
     @classmethod
+    def create_user_list(cls):
+        """
+        Creates list of user instances
+        :return:
+            user_list: list
+        """
+        user_list = []
+        users_data = DB.read_user_record_list()
+        pairs = {"student": Student, "mentor": Mentor, "staff": Staff, "boss": Boss}
+        for user in users_data:
+            user_list.append(pairs[user[-1]](*user[:-1]))
+
+        return user_list
+
+    @classmethod
     def create_user_list_by_role(cls, role):
         """
         Creates list of user instances
         :return:
             user_list: list
         """
+        user_list = []
         users_data = DB.read_user_record_list_by_role(role)
-        return [User(*user) for user in users_data]
+        pairs = {"student": Student, "mentor": Mentor, "staff": Staff, "boss": Boss}
+        for user in users_data:
+            user_list.append(pairs[user[-1]](*user[:-1]))
+
+        return user_list
 
     @classmethod
     def create_user_list_by_id_list(cls, id_list):
@@ -65,8 +94,13 @@ class User:
         :return:
             user_list: list
         """
+        user_list = []
         users_data = DB.read_user_record_list_by_id(id_list)
-        return [User(*user) for user in users_data]
+        pairs = {"student": Student, "mentor": Mentor, "staff": Staff, "boss": Boss}
+        for user in users_data:
+            user_list.append(pairs[user[-1]](*user[:-1]))
+
+        return user_list
 
     @classmethod
     def add_user(cls, name, mail, password):
@@ -96,7 +130,7 @@ class User:
         """Returns user instance password"""
         return self.password
 
-    def get_class_name(self):
+    def get_user_class_name(self):
         """Returns user instance subclass name"""
         return self.__class__.__name__
 
@@ -125,19 +159,19 @@ class User:
 
 class Student(User):
     """Class that represent students"""
-
-    @classmethod
-    def get_grade(cls, name, assignment_title):
-        """Returns grade from assignment with title 'assignment_title' submit by student with name 'name'"""
-        for student in cls.student_list:
-            if student.name == name:
-                for submission in student.submission_list:
-                    if assignment_title:
-                        return submission.points
-                    else:
-                        print('there is no such submission added by {}'.format(student.name))
-            else:
-                print('there is no such student in students list')
+    #
+    # @classmethod
+    # def get_grade(cls, name, assignment_title):
+    #     """Returns grade from assignment with title 'assignment_title' submit by student with name 'name'"""
+    #     for student in cls.student_list:
+    #         if student.name == name:
+    #             for submission in student.submission_list:
+    #                 if assignment_title:
+    #                     return submission.points
+    #                 else:
+    #                     print('there is no such submission added by {}'.format(student.name))
+    #         else:
+    #             print('there is no such student in students list')
 
 
 class Employee(User):
