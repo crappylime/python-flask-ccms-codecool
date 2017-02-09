@@ -40,7 +40,6 @@ class Menu:
                 break
 
 
-
     @staticmethod
     def show_users_with_details(role):
         user_list = User.get_user_list_by_role(role)
@@ -162,11 +161,11 @@ class BossMenu:
             user_id = UserInterface.item_id_from_list(user_list, 'person')
             user_to_edit = User.get_user_by_id(user_id)
             if option_choice == "Edit mentor name":
-                mentor_to_edit.set_name(UserInterface.edit_user_name(mentor_to_edit))
+                user_to_edit.set_name(UserInterface.edit_user_name(user_to_edit))
             elif option_choice == "Edit mentor mail":
-                mentor_to_edit.set_mail(UserInterface.edit_user_mail(mentor_to_edit))
+                user_to_edit.set_mail(UserInterface.edit_user_mail(user_to_edit))
             elif option_choice == "Edit mentor password":
-                mentor_to_edit.set_password(UserInterface.edit_user_password(mentor_to_edit))
+                user_to_edit.set_password(UserInterface.edit_user_password(user_to_edit))
 
     def __init__(self, user):
         while True:

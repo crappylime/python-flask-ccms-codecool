@@ -44,23 +44,23 @@ class UserInterface:
     @staticmethod
     def get_submit_data(user, assignment_list):
         """Returns user input about submission"""
-        assignment_title = input("Please provide title of assignment: ")
+        assignment_id = item_id_from_list(assignment_list, "assignment")
         unique = True
         for item in assignment_list:
-            if item.title == assignment_title:
-                for sub in user.submission_list:
-                    if sub.assignment.title == assignment_title:
+            if item.get_id() == assignment_id:
+                for sub in user.get_submission_list():
+                    if sub.assignment.get_id() == assignment_id:
                         unique = False
                         print('\nThis assignment has already been submitted!\n')
-                if unique is True:
+                if unique:
                     content = input("Please provide link to your assignment: ")
                     date = time.strftime("%Y-%m-%-d %H:%M")
-                    owner_name = user.name
+                    owner_id = user.get_id()
                     print('\nAssignment submitted successfully!\n')
-                    return content, date, assignment_title, owner_name
+                    return assignment_id, owner_id, content, date
 
         if unique is True:
-            print('\nThere\'s no assignment with given title!\n')
+            print('\nThere\'s no assignment with given ID!\n')
 
     @staticmethod
     def view_grade(student):
@@ -346,7 +346,7 @@ class UserInterface:
         Creates formatted table of users
         :param users:
         """
-        headers = ['id', 'name']
+        headers = ['id', 'name', 'mail']
         list_for_table = []
         for user in users:
             list_for_table.append([user.get_id(), user.get_name(), user.get_mail()])

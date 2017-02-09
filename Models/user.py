@@ -1,4 +1,5 @@
 from db import DB
+from Models.submission import  Submission
 
 
 class User:
@@ -57,6 +58,21 @@ class User:
         pairs = {"student": Student, "mentor": Mentor, "staff": Staff, "boss": Boss}
         args = DB.read_user_record_by_user_id(user_id)
         return pairs[args[0][-1]](*args[0][:-1])
+
+    @classmethod
+    def create_user_list(cls):
+        """
+        Creates list of user instances
+        :return:
+            user_list: list
+        """
+        user_list = []
+        users_data = DB.read_user_record_list()
+        pairs = {"student": Student, "mentor": Mentor, "staff": Staff, "boss": Boss}
+        for user in users_data:
+            user_list.append(pairs[user[-1]](*user[:-1]))
+
+        return user_list
 
     @classmethod
     def create_user_list(cls):
@@ -160,6 +176,14 @@ class User:
 
 class Student(User):
     """Class that represent students"""
+
+    @property
+    def submission_list(self):
+        return Submission.get_submission_list_by_user_id(self.id)
+
+    def get_submission_list(self):
+        return self.submission_list
+
     #
     # @classmethod
     # def get_grade(cls, name, assignment_title):

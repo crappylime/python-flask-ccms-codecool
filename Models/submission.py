@@ -1,4 +1,5 @@
 from db import DB
+from Models.assignment import Assignment
 
 
 class Submission:
@@ -6,7 +7,7 @@ class Submission:
 
     def __init__(self, submission_id, assignment_id, user_id, content, date, points=None):
         self.id = submission_id
-        self.assignment_id = assignment_id
+        self.assignment = Assignment.get_assignment_by_id(assignment_id)
         self.user_id = user_id
         self.content = content
         self.date = date
@@ -96,12 +97,38 @@ class Submission:
         :return:
             user_list: list
         """
-        assignment_data = DB.read_assignment_record_list()
-        return [Assignment(*assignment) for assignment in assignment_data]
+        submission_data = DB.read_submission_record_list()
+        return [Submission(*submission) for submission in submission_data]
 
-    def get_id(self):
-        """Returns submission instance id"""
-        return self.id
+
+    @classmethod
+    def add_submission(cls, student_id, assignment_id, content, date):
+        values = (assignment_id, student_id, content, date)
+        new_submission_id = DB.create_submission_record(values)
+        #new_attendance = cls.get_attendance_by_id(new_attendance_id)
+        #return new_attendance
+    # @classmethod
+    # def add_submission(cls, content, date, assignment_title, owner_name, points=None):
+    #     """
+    #     Adds submission to Assignment and Student submissions list.
+    #     """
+    #     student = Student.get_student(owner_name)
+    #
+    #     assignment = Assignment.get_assignment(assignment_title)
+    #
+    #     unique = True
+    #
+    #     for item in student.submission_list:
+    #         if item.assignment == assignment:
+    #             unique = False
+    #
+    #     if unique is True:
+    #         submission = Submission(assignment, student, content, date,
+    #                                 int(points) if type(points) == str and len(points) > 0 else None)
+    #         assignment.submission_list.append(submission)
+    #         student.submission_list.append(submission)
+    #     else:
+    #         raise NameError('This assignment has already been submitted!')
 
     def get_date(self):
         """
