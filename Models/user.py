@@ -3,6 +3,7 @@ from Models.submission import *
 from Models.attendance import *
 
 
+
 class User:
     """Parent class for all user instances - represents all users"""
 

@@ -106,19 +106,19 @@ class MentorMenu:
                 UserInterface.show_assignments_table(Assignment.get_assignment_list())
                 assignment_id = UserInterface.assignment_id_from_list(Assignment.get_assignment_list())
                 if assignment_id is not None:
-                    assignment = Assignment.get_assignment(assignment_id)
+                    assignment = Assignment.get_assignment_by_id(assignment_id)
                     submission_list = Submission.create_submission_list_by_assignment_id(assignment_id)
                     UserInterface.show_submissions_table(submission_list)
                     grade_data = UserInterface.get_grade_assignment_data(submission_list, assignment)
                     if grade_data is not None:
-                        Submission.set_grade_submission(grade_data)
+                        Submission.set_grade_submission(*grade_data)
             elif user_choice == "Check attendance":
-                for student in Student.get_student_list():
+                for student in Student.get_user_list():
                     Attendance.add_attendance(*UserInterface.get_attendance_data(student))
             elif user_choice == "Show attendance":
                 UserInterface.show_attendance_table(Attendance.get_attendance_list())
             elif user_choice == "Add student":
-                Student.add_student(*UserInterface.get_user_data())
+                Student.add_user(*UserInterface.get_user_data())
             elif user_choice == "Remove student":
                 user_list = User.get_user_list_by_role('student')
                 UserInterface.show_users_table(user_list)
@@ -127,14 +127,14 @@ class MentorMenu:
                 MentorMenu.edit_user_data()
             elif user_choice == "Create team":  # TODO
                 name = UserInterface.get_team_name()
-                Team(name)
+                Team.add_team(name)
             elif user_choice == "Add student to team":  # TODO
                 team_list = Team.get_list_teams()
                 UserInterface.show_teams_table(team_list)
                 team_id_from_user = UserInterface.item_id_from_list(Team.get_list_teams(), 'team')
                 UserInterface.show_users_table(User.get_user_list_by_role('student'))
-                student_id_from_user = UserInterface.item_id_from_list(User.get_user_list_by_role('student'))
-                DB.add_member(team_id_from_user, student_id_from_user)
+                student_id_from_user = UserInterface.item_id_from_list(User.get_user_list_by_role('student'), 'student')
+                DB.create_member_record(team_id_from_user, student_id_from_user)
             elif user_choice == "Show teams":  # TODO
                 UserInterface.show_teams_table(Team.get_list_teams())
             elif user_choice == "Log out":

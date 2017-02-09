@@ -27,7 +27,7 @@ class Assignment:
        :return:
             assignment: object
         """
-        return cls.create_assignment(assignment_id)
+        return cls.create_assignment_by_id(assignment_id)
 
     @classmethod
     def get_assignment_list(cls):
