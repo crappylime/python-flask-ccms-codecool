@@ -21,16 +21,13 @@ class Assignment:
 
         return info
 
+
     @classmethod
     def add_assignment(cls, title, content, due_date, max_points):
-        """
-        Adds assignment to assignments list.
-        """
-        try:
-            max_points = int(max_points)
-        except TypeError:
-            raise TypeError("Points must be a number")
-        cls.assignment_list.append(Assignment(title, content, due_date, max_points))
+        values = (title, content, due_date, max_points)
+        new_assignment_id = DB.create_assignment_record(values)
+        new_assignment = cls.get_assignment_by_id(new_assignment_id)
+        return new_assignment
 
     @classmethod
     def get_assignment(cls, title):

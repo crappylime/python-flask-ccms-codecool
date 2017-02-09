@@ -1,7 +1,6 @@
 from Models.submission import *
 from Models.assignment import *
 from Models.attendance import *
-from program import *
 from ui import *
 import os
 
