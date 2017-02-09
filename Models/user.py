@@ -99,14 +99,10 @@ class User:
 
 class Student(User):
     """Class that represent students"""
-    student_list = []  # collects all student instances
 
     def __init__(self, user_id, name, mail, password):
         """Student has additional attributes - grade list, attendance list, submission list"""
         super().__init__(self, user_id, name, mail, password)
-        self.grade_list = []
-        self.attendance_list = []  # collect all attendance instances
-        self.submission_list = []  # collect all submissions sending by student
 
     @classmethod
     def add_student(cls, name, mail, password):
@@ -119,23 +115,6 @@ class Student(User):
         for student in cls.student_list:
             if student.name == name:
                 cls.student_list.remove(student)
-
-    @classmethod
-    def get_student_list(cls):
-        """Returns list with students"""
-        student_list = []
-        con = sqlite3.connect('Data/ccms.db')
-        table = con.execute("SELECT * FROM `users`;")
-        for row in table:
-            student_list.append(cls(*row[1:]))
-        return student_list
-
-    @classmethod
-    def get_student(cls, name):
-        """Searching in student list and returns student instance with given name"""
-        for student in cls.student_list:
-            if student.name == name:
-                return student
 
     @classmethod
     def get_grade(cls, name, assignment_title):
@@ -153,12 +132,13 @@ class Student(User):
 
 class Employee(User):
     """Class that represent employees"""
-    pass
+    def __init__(self, user_id, name, mail, password):
+        """init from user class"""
+        super().__init__(user_id, name, mail, password)
 
 
 class Mentor(Employee):
     """Class that represent mentors"""
-    mentor_list = []  # collects all mentors instances
 
     def __init__(self, user_id, name, mail, password):
         """init from user class"""
@@ -176,22 +156,8 @@ class Mentor(Employee):
             if mentor.name == name:
                 cls.mentor_list.remove(mentor)
 
-    @classmethod
-    def get_list_mentor(cls):
-        """Returns list with mentors"""
-        return cls.mentor_list
-
-    @classmethod
-    def get_mentor(cls, name):
-        """Searching in mentor list and returns mentor instance with given name"""
-        for mentor in cls.mentor_list:
-            if mentor.name == name:
-                return mentor
-
-
 class Boss(Employee):
     """Class that represent boss"""
-    boss_list = []  # collects all boss instances
 
     def __init__(self, user_id, name, mail, password):
         """init from user class"""
@@ -209,22 +175,8 @@ class Boss(Employee):
             if boss.name == name:
                 cls.boss_list.remove(boss)
 
-    @classmethod
-    def get_boss_list(cls):
-        """Returns list with boss instances"""
-        return cls.boss_list
-
-    @classmethod
-    def get_boss(cls, name):
-        """Searching in boss list and returns boss instance with given name"""
-        for boss in cls.boss_list:
-            if boss.name == name:
-                return boss
-
-
 class Staff(Employee):
     """Class that represent staff employees"""
-    staff_list = []  # collects all staff instances
 
     def __init__(self, user_id, name, mail, password):
         """init from user class"""
@@ -241,15 +193,3 @@ class Staff(Employee):
         for staff in cls.staff_list:
             if staff.name == name:
                 cls.staff_list.remove(staff)
-
-    @classmethod
-    def get_staff_list(cls):
-        """Returns list with staff instances"""
-        return cls.staff_list
-
-    @classmethod
-    def get_staff(cls, name):
-        """Searching in staff list and returns staff instance with given name"""
-        for staff in cls.staff_list:
-            if staff.name == name:
-                return staff
