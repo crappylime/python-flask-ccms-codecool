@@ -87,6 +87,11 @@ class Submission:
         assignment_data = DB.read_assignment_record_list()
         return [Assignment(*assignment) for assignment in assignment_data]
 
+    @classmethod
+    def create_submission_list_by_assignment_id(cls, assignment_id):
+
+
+
     def get_id(self):
         """Returns submission instance id"""
         return self.id

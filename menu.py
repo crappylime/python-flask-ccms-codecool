@@ -54,8 +54,8 @@ class StudentMenu:
             user_choice = UserInterface.student_menu()
             os.system("clear")
             if user_choice == "Submit an assignment":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
-                data_for_submission = UserInterface.get_submit_data(user, Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
+                data_for_submission = UserInterface.get_submit_data(user, Assignment.get_assignment_list())
                 if data_for_submission is not None:
                     Submission.add_submission(*data_for_submission)
             elif user_choice == "View my grades":
@@ -63,7 +63,7 @@ class StudentMenu:
             elif user_choice == "View my submissions":
                 UserInterface.show_submissions_table(user.submission_list)
             elif user_choice == "View assignments":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
             elif user_choice == "Log out":
                 break
 
@@ -98,16 +98,17 @@ class MentorMenu:
             if user_choice == "Show students list":
                 Menu.show_students()
             elif user_choice == "Show assignments":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
             elif user_choice == "Add an assignment":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
                 Assignment.add_assignment(*UserInterface.get_assignment_data())
             elif user_choice == "Grade an assignment":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
-                assignment_title = UserInterface.assignment_title_provide(Assignment.get_list_assignmnent())
-                if assignment_title is not None:
-                    assignment = Assignment.get_assignment(assignment_title)
-                    UserInterface.show_submissions_table(assignment.get_list_submission())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
+                assignment_id = UserInterface.assignment_id_from_list(Assignment.get_assignment_list())
+                if assignment_id is not None:
+                    assignment = Assignment.get_assignment(assignment_id)
+                    #UserInterface.show_submissions_table(assignment.get_list_submission())
+                    UserInterface.show_submissions_table()
                     grade_data = UserInterface.get_grade_assignment_data(assignment.get_list_submission(), assignment)
                     if grade_data is not None:
                         assignment.set_grade_submission(*grade_data)

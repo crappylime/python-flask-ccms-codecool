@@ -17,6 +17,7 @@ class Team:
         pass
 
     def get_team_by_name(self):
+        pass
 
     @staticmethod
     def get_list_teams():

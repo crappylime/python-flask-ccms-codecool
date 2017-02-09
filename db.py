@@ -84,7 +84,7 @@ class DB:
         cls.execute_query(query, args)
 
     @classmethod
-    def add_member(cls, team_id, student_id):
+    def create_member_record(cls, team_id, student_id):
         pass
 
     @classmethod

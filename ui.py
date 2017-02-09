@@ -213,21 +213,22 @@ class UserInterface:
                 print("Wrong input :-(")
 
     @staticmethod
-    def user_id_from_list(user_list):
+    def assignment_id_from_list(assignment_list):
         """
-        Returns user id
+        Returns assignment id
         :param user_list:
         :return:
             int: user id
         """
         while True:
-            user_choice = input('Please choose person by index: ')
-            for user in user_list:
-                if user_choice == str(user.get_id()):
+            user_choice = input('Please choose assignment by index: ')
+            for ass in assignment_list:
+                if user_choice == str(ass.get_id()):
                     user_choice = int(user_choice)
                     return user_choice
             else:
                 print("Wrong input :-(")
+
 
     @staticmethod
     def edit_user_menu():
