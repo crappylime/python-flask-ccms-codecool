@@ -56,7 +56,6 @@ class DB:
     @classmethod
     def create_member_record(cls, team_id, student_id):
         query = 'INSERT INTO `members` VALUES (?, ?);'
-        print(team_id, student_id)
         args = (team_id, student_id)
         return cls.execute_insert_query(query, args)
 
@@ -212,7 +211,6 @@ class DB:
                 "WHERE `user_id`=?;"
         cursor.execute(query, (student_id,))
         overall_grade = cursor.fetchall()[0][0]
-        print(overall_grade, student_id)
         conn.close()
         return overall_grade
 
@@ -223,7 +221,6 @@ class DB:
         query = "SELECT round(avg(100.0*status), 2) from attendances WHERE `user_id`=?;"
         cursor.execute(query, (student_id,))
         overall_attendance = cursor.fetchall()[0][0]
-        print(overall_attendance, student_id)
         conn.close()
         return overall_attendance
 

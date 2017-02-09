@@ -1,9 +1,6 @@
-from Models.submission import *
-from Models.assignment import *
-from Models.attendance import *
+from Models.assignment import Assignment
 from Models.user import *
-from Models.teams import *
-from Models.user import *
+from Models.teams import Team
 from ui import *
 import os
 
@@ -59,6 +56,8 @@ class StudentMenu:
                     Submission.add_submission(*data_for_submission)
             elif user_choice == "View my grades":
                 UserInterface.show_submissions_table(user.submission_list, 'graded')
+            elif user_choice == "View my overall grade":
+                UserInterface.print_line(Student.get_overall_grade(user))
             elif user_choice == "View my submissions":
                 UserInterface.show_submissions_table(user.submission_list)
             elif user_choice == "View assignments":

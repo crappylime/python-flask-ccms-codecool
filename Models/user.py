@@ -1,6 +1,8 @@
 from db import DB
-from Models.submission import *
-from Models.attendance import *
+from Models.submission import Submission
+from Models.attendance import Attendance
+
+
 
 
 

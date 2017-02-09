@@ -1,4 +1,4 @@
-from db import *
+from db import DB
 
 
 class Team:

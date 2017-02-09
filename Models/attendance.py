@@ -1,5 +1,5 @@
 from db import DB
-from Models.user import *
+import Models.user
 
 
 class Attendance:
@@ -8,7 +8,7 @@ class Attendance:
     def __init__(self, attendance_id, student_id, date, status):
         """Attendance attributes - student instance and its status, date of attendance checking"""
         self.id = attendance_id
-        self.student = User.get_user_by_id(student_id)
+        self.student = Models.user.User.get_user_by_id(student_id)
         self.date = date
         self.status = status
 
@@ -113,4 +113,4 @@ class Attendance:
     def set_status(self, new_status):
         """Sets new status of students attendance"""
         self.status = new_status
-        DB.update_attendance(student.get_id(), self.get_date(), new_status)
+        DB.update_attendance(self.student.get_id(), self.get_date(), new_status)
