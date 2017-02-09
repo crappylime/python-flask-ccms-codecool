@@ -112,11 +112,13 @@ class UserInterface:
             else:
                 print('Please provide whole number!')
 
-        owner_name = input("Whose assignment is it? ")
+        sub_id = input("Provide submission id: ")
+
         for item in submission_list:
-            if item.owner.name == owner_name:
-                return points, owner_name
-        print("\nThere's no submission with given student name!\n")
+            if item.get_id() == sub_id:
+                return points, item.get_user().get_id()
+
+        print("\nThere's no submission with given id!\n")
 
     @staticmethod
     def get_user_data():

@@ -89,26 +89,25 @@ class Submission:
 
     @classmethod
     def create_submission_list_by_assignment_id(cls, assignment_id):
-
-
+        """
+        Creates list of submissions by assignment_id
+        :return:
+        submission_list
+        """
+        submission_list = DB.read_submission_record_list_by_assignment_id(assignment_id)
+        return submission_list
 
     def get_id(self):
         """Returns submission instance id"""
         return self.id
 
-    def get_user_id(self):
-        """
-        :return:
-            obj: submission owner's object
-        """
-        return self.user_id
+    def get_user(self):
+        """Returns submission instance user"""
+        return self.user
 
-    def get_assignment_id(self):
-        """
-        :return:
-            obj: assignment object
-        """
-        return self.assignment_id
+    def get_assignment(self):
+        """Returns submission assignment id"""
+        return self.assignment
 
     def get_date(self):
         """
@@ -130,3 +129,9 @@ class Submission:
             int: point assigned to submission
         """
         return self.points
+
+    def set_grade_submission(self, points, user_id):
+        """
+        Sets grade to submission.
+        """
+        DB.update_grade(user_id, self.get_assignment().get_id(), points)
