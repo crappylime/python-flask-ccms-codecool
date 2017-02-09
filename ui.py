@@ -437,3 +437,5 @@ class UserInterface:
             list_for_table.append([team.get_id(), team.get_name()])
 
         UserInterface.show_table(headers, list_for_table)
+
+

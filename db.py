@@ -61,7 +61,7 @@ class DB:
         return cls.execute_insert_query(query, args)
 
     @classmethod
-    def read_user_record_by_user_id(cls, user_id):
+    def read_user_record_list_by_user_id(cls, user_id):
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `users` WHERE `user_id` = ?;"
@@ -99,6 +99,18 @@ class DB:
         query = 'SELECT * FROM `users` WHERE `user_id` IN (%s);' % placeholders
         cursor.execute(query, id_list)
         user_list = cursor.fetchall()
+        conn.close()
+        return user_list
+
+    @classmethod
+    def read_user_id_list_by_team_id(cls, team_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT `student_id` FROM `members` WHERE `team_id` = ?;"
+        cursor.execute(query, (team_id,))
+        temp_list = cursor.fetchall()
+        user_list = [int(elem[0]) for elem in temp_list]
+        print('user lisr:', user_list)
         conn.close()
         return user_list
 
@@ -203,7 +215,6 @@ class DB:
         return attendance_list
 
     @classmethod
-<<<<<<< HEAD
     def read_team_list(cls):
         conn = cls.connect()
         cursor = conn.cursor()
@@ -212,7 +223,7 @@ class DB:
         team_list = cursor.fetchall()
         conn.close()
         return team_list
-=======
+
     def update_name(cls, user_id, name):
         query = "UPDATE `users` SET `name` = ? WHERE `user_id` = ?;"
         args = (name, user_id)
@@ -283,4 +294,3 @@ class DB:
         query = "DELETE FROM submissions WHERE assignment_id = ?"
         args = assignment_id
         cls.execute_query(query, (args,))
->>>>>>> 9506e270c22599f17d8c08cd291196012822fde9
