@@ -1,5 +1,6 @@
 from db import DB
 from Models.assignment import Assignment
+from Models.user import User
 
 
 class Submission:
@@ -8,7 +9,7 @@ class Submission:
     def __init__(self, submission_id, assignment_id, user_id, content, date, points=None):
         self.id = submission_id
         self.assignment = Assignment.get_assignment_by_id(assignment_id)
-        self.user_id = user_id
+        self.student = User.get_user_by_id(user_id)
         self.content = content
         self.date = date
         self.points = points
@@ -144,6 +145,10 @@ class Submission:
         """
         return self.content
 
+    def get_id(self):
+        """return submission id"""
+        return self.id
+
     def get_points(self):
         """
         :return:
@@ -151,8 +156,16 @@ class Submission:
         """
         return self.points
 
-    def set_grade_submission(self, points, user_id):
+    @classmethod
+    def set_grade_submission(cls, user_id, assignment_id, points):
         """
         Sets grade to submission.
         """
-        DB.update_grade(user_id, self.assignment.get_id(), points)
+        DB.update_grade(user_id, assignment_id, points)
+
+    def get_assignment(self):
+        """ Return assignment object"""
+        return self.assignment
+
+    def get_student(self):
+        return self.student

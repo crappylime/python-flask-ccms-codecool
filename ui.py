@@ -112,11 +112,11 @@ class UserInterface:
             else:
                 print('Please provide whole number!')
 
-        sub_id = input("Provide submission id: ")
+        sub_id = UserInterface.item_id_from_list(submission_list, 'submission')
 
         for item in submission_list:
             if item.get_id() == sub_id:
-                return points, item.get_user().get_id()
+                return item.get_student().get_id(), item.get_assignment().get_id(), points
 
         print("\nThere's no submission with given id!\n")
 
@@ -406,14 +406,14 @@ class UserInterface:
         list_for_table = []
 
         if option == 'all':
-            for assignment in submission_list:
-                list_for_table.append([assignment.get_id(), assignment.get_assignment().get_title(), assignment.get_owner().get_name(),
-                                       assignment.get_content(), assignment.get_date(), assignment.get_points()])
+            for submission in submission_list:
+                list_for_table.append([submission.get_id(), submission.get_assignment().get_title(), submission.get_student().get_name(),
+                                       submission.get_content(), submission.get_date(), submission.get_points()])
         else:
-            for assignment in submission_list:
-                if assignment.points is not None:
-                    list_for_table.append([assignment.get_id(), assignment.get_assignment().get_title(), assignment.get_owner().get_name(),
-                                           assignment.get_content(), assignment.get_date(), assignment.get_points()])
+            for submission in submission_list:
+                if submission.points is not None:
+                    list_for_table.append([submission.get_id(), submission.get_assignment().get_title(), submission.get_owner().get_name(),
+                                           submission.get_content(), submission.get_date(), submission.get_points()])
 
         UserInterface.show_table(headers, list_for_table)
 
@@ -433,7 +433,7 @@ class UserInterface:
         headers = ['team id', 'team name']
         list_for_table = []
 
-        for index, team in enumerate(teams_list):
+        for team in teams_list:
             list_for_table.append([team.get_id(), team.get_name()])
 
         UserInterface.show_table(headers, list_for_table)

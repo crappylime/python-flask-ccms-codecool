@@ -51,7 +51,7 @@ class DB:
     def create_team(cls, name):
         query = "INSERT INTO `teams` (`name`) VALUES (?)"
         args = name
-        return cls.execute_query(query, (args,))
+        return cls.execute_insert_query(query, (args,))
 
     @classmethod
     def update_name(cls, user_id, name):
@@ -85,7 +85,10 @@ class DB:
 
     @classmethod
     def create_member_record(cls, team_id, student_id):
-        pass
+        query = 'INSERT INTO `members` VALUES (?, ?);'
+        print(team_id, student_id)
+        args = (team_id, student_id)
+        return cls.execute_insert_query(query, args)
 
     @classmethod
     def delete_assignment_record(cls, assignment_id):
@@ -212,6 +215,16 @@ class DB:
         return user_submission_list
 
     @classmethod
+    def read_team_record_by_id(cls, team_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `teams` WHERE `id` = ?;"
+        cursor.execute(query, (team_id,))
+        team_list = cursor.fetchall()
+        conn.close()
+        return team_list
+
+    @classmethod
     def read_submission_record_list_by_assignment_id(cls, assignment_id):
         conn = cls.connect()
         cursor = conn.cursor()
@@ -260,3 +273,13 @@ class DB:
         attendance_list = cursor.fetchall()
         conn.close()
         return attendance_list
+
+    @classmethod
+    def read_team_list(cls):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `teams`;"
+        cursor.execute(query)
+        team_list = cursor.fetchall()
+        conn.close()
+        return team_list

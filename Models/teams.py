@@ -13,12 +13,27 @@ class Team:
     def get_name(self):
         return self.name
 
-    def get_team_by_id(self):
-        pass
+    @classmethod
+    def get_team_by_id(cls, team_id):
+        return cls.create_team_by_id(team_id)
+
+    @classmethod
+    def create_team_by_id(cls, team_id):
+        args = DB.read_team_record_by_id(team_id)
+        return cls(*args[0])
 
     def get_team_by_name(self):
         pass
 
+    @classmethod
+    def add_team(cls, name):
+
+        new_team_id = DB.create_team(name)
+        new_team = cls.get_team_by_id(new_team_id)
+
+        return new_team
+
     @staticmethod
     def get_list_teams():
-        pass
+        team_list = DB.read_team_list()
+        return [Team(*team) for team in team_list]
