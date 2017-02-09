@@ -60,6 +60,16 @@ class DB:
         return cls.execute_insert_query(query, args)
 
     @classmethod
+    def read_user_record_by_user_id(cls, user_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `users` WHERE `user_id` = ?;"
+        cursor.execute(query, (user_id,))
+        user = cursor.fetchall()
+        conn.close()
+        return user
+
+    @classmethod
     def read_user_record_list_by_user_id(cls, user_id):
         conn = cls.connect()
         cursor = conn.cursor()
