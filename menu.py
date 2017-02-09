@@ -128,15 +128,14 @@ class MentorMenu:
                 name = UserInterface.get_team_name()
                 Team(name)
             elif user_choice == "Add student to team":  # TODO
-                UserInterface.show_teams_table()
-                team_name = UserInterface.get_team_name()
-                team_id =
-                UserInterface.show_users_table(Student.get_student_list())
-                student = Student.get_student(UserInterface.get_student_name())
-                student_id = student.get_id()
-                # TODO odniesienie do metody DB.update_student_team(team_id, student_id)
+                team_list = Team.get_list_teams()
+                UserInterface.show_teams_table(team_list)
+                team_id_from_user = UserInterface.user_id_from_list(Team.get_list_teams())
+                UserInterface.show_users_table(User.get_user_list_by_role('student'))
+                student_id_from_user = UserInterface.user_id_from_list(User.get_user_list_by_role('student'))
+                DB.add_member(team_id_from_user, student_id_from_user)
             elif user_choice == "Show teams":  # TODO
-                UserInterface.show_teams_table()
+                UserInterface.show_teams_table(Team.get_list_teams())
             elif user_choice == "Log out":
                 break
 

@@ -60,6 +60,11 @@ class DB:
         args = (points, assignment_id, user_id)
         cls.execute_query(query, args)
 
+    @classmethod
+    def add_member(cls, team_id, student_id):
+        pass
+
+
 
 
 

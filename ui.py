@@ -218,6 +218,23 @@ class UserInterface:
                 print("Wrong input :-(")
 
     @staticmethod
+    def user_id_from_list(user_list):
+        """
+        Returns user id
+        :param user_list:
+        :return:
+            int: user id
+        """
+        while True:
+            user_choice = input('Please choose person by index: ')
+            for user in user_list:
+                if user_choice == str(user.get_id()):
+                    user_choice = int(user_choice)
+                    return user_choice
+            else:
+                print("Wrong input :-(")
+
+    @staticmethod
     def edit_user_menu():
         """
         Calls user choice depending on options
@@ -390,22 +407,21 @@ class UserInterface:
 
     @staticmethod
     def get_team_name():
-        """Creates new team"""
-        name = input("Provide name of team: ")
+        """Provide team name"""
+        name = input("Provide team name: ")
         return name
+
 
     @staticmethod
     def show_teams_table(teams_list):
-         """
+        """
         Creates formatted table of teams
         :param teams_list:
         """
-        headers = ['team name']
-        # TODO list_for_table , UserInterface.show_table(headers, list_for_table)
-        pass
+        headers = ['team id', 'team name']
+        list_for_table = []
 
-    @staticmethod
-    def get_student_name():
-        """Return students name"""
-        name = input("Provide name of student")
-        return name
+        for index, team in enumerate(teams_list):
+            list_for_table.append([team.get_id(), team.get_name()])
+
+        UserInterface.show_table(headers, list_for_table)
