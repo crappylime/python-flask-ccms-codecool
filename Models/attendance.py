@@ -13,13 +13,11 @@ class Attendance:
         Attendance.attendance_list.append(self)
 
     @classmethod
-    def add_attendance(cls, student, date, status):
-        """
-         Create new attendance instance and adds its to Student submissions list.
-         """
-
-        attendance = Attendance(student, date, status)
-        student.attendance_list.append(attendance)
+    def add_attendance(cls, student_id, date, status):
+        values = (student_id, date, status)
+        new_attendance_id = DB.create_attendance_record(values)
+        new_attendance = cls.get_attendance_by_id(new_attendance_id)
+        return new_attendance
 
     @classmethod
     def get_attendance_list(cls):

@@ -19,9 +19,10 @@ class User:
 
     @classmethod
     def add_user(cls, name, mail, password):
-        """Adds news mentor instance and appends its to mentors list"""
         values = (name, mail, password, cls.get_class_name().lower())
-        DB.create_user_record(values)
+        new_user_id = DB.create_user_record(values)
+        new_user = cls.get_user_by_id(new_user_id)
+        return new_user
 
     @classmethod
     def get_class_name(cls):

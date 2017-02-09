@@ -187,8 +187,8 @@ class StaffMenu:
 
 
 def main():
-    Menu()
-
+    # Menu()
+    print(Student.add_user('a', 'asdf@asdf.pl', 'b'))
 
 if __name__ == "__main__":
     main()
