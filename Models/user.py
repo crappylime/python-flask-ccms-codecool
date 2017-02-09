@@ -1,5 +1,6 @@
 from db import DB
-from Models.submission import  Submission
+from Models.submission import Submission
+from Models.attendance import Attendance
 
 
 class User:
@@ -186,17 +187,24 @@ class Student(User):
         pass
 
     @property
-    def attendance(self):
-        pass
+    def attendance_list(self):
+        return Attendance.get_attendance_list_by_student_id(self.id)
 
+    @property
+    def overall_attendance(self):
+        pass
+    
     def get_submission_list(self):
         return self.submission_list
 
     def get_grade(self):
         return self.grade
 
-    def get_attendance(self):
-        return self.attendance
+    def get_attendance_list(self):
+        return self.attendance_list
+
+    def get_overall_attendance(self):
+        return self.overall_attendance
 
 
 class Employee(User):
