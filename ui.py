@@ -127,12 +127,6 @@ class UserInterface:
         return name, mail, password
 
     @staticmethod
-    def get_remove_data():
-        """Returns user name"""
-        name = input("Please provide name of the person you would like to remove: ")
-        return name
-
-    @staticmethod
     def get_attendance_data(student):
         """Returns user input about student presence"""
         date = time.strftime("%Y-%m-%-d")
@@ -173,7 +167,7 @@ class UserInterface:
         """
         Prints attendance
         :param attendance_list:
-        :param student_to_edit: 
+        :param student_to_edit:
         """
         person_attendance_list = []
         for attendance in attendance_list:
@@ -202,18 +196,19 @@ class UserInterface:
                 print("Wrong input :-(")
 
     @staticmethod
-    def user_name_from_list(user_list):
+    def user_id_from_list(user_list):
         """
-        Returns user name
+        Returns user id
         :param user_list:
         :return:
-            str: user name
+            int: user id
         """
         while True:
             user_choice = input('Please choose person by index: ')
-            for index, user in enumerate(user_list):
-                if user_choice == str(index + 1):
-                    return user.get_name()
+            for user in user_list:
+                if user_choice == str(user.get_id()):
+                    user_choice = int(user_choice)
+                    return user_choice
             else:
                 print("Wrong input :-(")
 
@@ -334,10 +329,10 @@ class UserInterface:
         Creates formatted table of users
         :param users:
         """
-        headers = ['idx', 'name']
+        headers = ['id', 'name']
         list_for_table = []
-        for index, user in enumerate(users):
-            list_for_table.append([index + 1, user.get_name()])
+        for user in users:
+            list_for_table.append([user.get_id(), user.get_name()])
 
         UserInterface.show_table(headers, list_for_table)
 
@@ -347,11 +342,11 @@ class UserInterface:
         Creates formatted attendance table
         :param attendance_list:
         """
-        headers = ['idx', 'student', 'date', 'status']
+        headers = ['id', 'student', 'date', 'status']
         list_for_table = []
 
-        for index, row in enumerate(attendance_list):
-            list_for_table.append([index + 1, row.get_student().get_name(), row.get_date(), row.get_status()])
+        for attendance in attendance_list:
+            list_for_table.append([attendance.get_id(), attendance.get_student().get_name(), attendance.get_date(), attendance.get_status()])
 
         UserInterface.show_table(headers, list_for_table)
 
@@ -361,12 +356,12 @@ class UserInterface:
         Creates formatted table of assignments
         :param assignments_list:
         """
-        headers = ['idx', 'title', 'content', 'due_date', 'max_points']
+        headers = ['id', 'title', 'content', 'due_date', 'max_points']
         list_for_table = []
 
-        for index, ass in enumerate(assignments_list):
-            list_for_table.append([index + 1, ass.get_title(), ass.get_content(),
-                                   ass.get_due_date(), ass.get_max_points()])
+        for assignment in assignments_list:
+            list_for_table.append([assignment.get_id(), assignment.get_title(), assignment.get_content(),
+                                   assignment.get_due_date(), assignment.get_max_points()])
 
         UserInterface.show_table(headers, list_for_table)
 
@@ -390,18 +385,18 @@ class UserInterface:
         :param submission_list:
         :param option:
         """
-        headers = ['idx', 'assignment title', 'owner', 'content', 'date', 'points']
+        headers = ['id', 'assignment title', 'owner', 'content', 'date', 'points']
         list_for_table = []
 
         if option == 'all':
-            for index, ass in enumerate(submission_list):
-                list_for_table.append([index + 1, ass.get_assignment().get_title(), ass.get_owner().get_name(),
-                                       ass.get_content(), ass.get_date(), ass.get_points()])
+            for assignment in submission_list:
+                list_for_table.append([assignment.get_id(), assignment.get_assignment().get_title(), assignment.get_owner().get_name(),
+                                       assignment.get_content(), assignment.get_date(), assignment.get_points()])
         else:
-            for index, ass in enumerate(submission_list):
-                if ass.points is not None:
-                    list_for_table.append([index + 1, ass.get_assignment().get_title(), ass.get_owner().get_name(),
-                                           ass.get_content(), ass.get_date(), ass.get_points()])
+            for assignment in submission_list:
+                if assignment.points is not None:
+                    list_for_table.append([assignment.get_id(), assignment.get_assignment().get_title(), assignment.get_owner().get_name(),
+                                           assignment.get_content(), assignment.get_date(), assignment.get_points()])
 
         UserInterface.show_table(headers, list_for_table)
 

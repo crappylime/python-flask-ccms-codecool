@@ -119,8 +119,9 @@ class MentorMenu:
             elif user_choice == "Add student":
                 Student.add_student(*UserInterface.get_user_data())
             elif user_choice == "Remove student":
-                UserInterface.show_users_table(Student.get_student_list())
-                Student.remove_student(UserInterface.get_remove_data())
+                user_list = User.get_user_list_by_role('student')
+                UserInterface.show_users_table(user_list)
+                Student.remove_user(UserInterface.user_id_from_list(user_list))
             elif user_choice == "Edit student data":
                 MentorMenu.edit_user_data()
             elif user_choice == "Create team":  # TODO
@@ -171,8 +172,9 @@ class BossMenu:
             if user_choice == "Add a mentor":
                 Mentor.add_mentor(*UserInterface.new_mentor())
             elif user_choice == "Remove a mentor":
-                mentor_to_remove_name = UserInterface.user_name_from_list(Mentor.get_list_mentor())
-                Mentor.remove_mentor(mentor_to_remove_name)
+                user_list = User.get_user_list_by_role('mentor')
+                UserInterface.show_users_table(user_list)
+                Mentor.remove_user(UserInterface.user_id_from_list(user_list))
             elif user_choice == "Edit mentor data":
                 BossMenu.edit_user_data()
             elif user_choice == "Show mentors list":
