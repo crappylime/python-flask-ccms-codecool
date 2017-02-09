@@ -3,8 +3,8 @@ from db import DB
 class Assignment:
     """This is class representing Assignment given by Mentor."""
 
-    def __init__(self, id, title, content, due_date, max_points):
-        self.id = id
+    def __init__(self, assignment_id, title, content, due_date, max_points):
+        self.id = assignment_id
         self.title = title
         self.content = content
         self.due_date = due_date
@@ -19,14 +19,14 @@ class Assignment:
         return info
 
     @classmethod
-    def get_assignment(cls, id):
+    def get_assignment(cls, assignment_id):
         """
         Returns assignment object.
 
        :return:
             assignment: object
         """
-        return cls.create_assignment(id)
+        return cls.create_assignment(assignment_id)
 
     @classmethod
     def get_assignment_list(cls):
@@ -38,21 +38,21 @@ class Assignment:
         return cls.create_assignment_list()
 
     @classmethod
-    def create_assignment(cls, id):
+    def create_assignment(cls, assignment_id):
         """
-        Creates instance of user
+        Creates instance of assignment
         :return:
-            user: object
+            assignment: object
         """
-        args = DB.read_assignment_record_by_id(id)
+        args = DB.read_assignment_record_by_id(assignment_id)
         return Assignment(*args[0])
 
     @classmethod
     def create_assignment_list(cls):
         """
-        Creates list of user instances
+        Creates list of assignments instances
         :return:
-            user_list: list
+            assignment_list: list
         """
         assignment_data = DB.read_assignment_record_list()
         return [Assignment(*assignment) for assignment in assignment_data]

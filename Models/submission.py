@@ -1,13 +1,13 @@
-from Models.assignment import *
-from Models.user import *
+from db import DB
 
 
 class Submission:
     """This is class representing student submission for Assignment graded by Mentor."""
 
-    def __init__(self, assignment, owner, content, date, points=None):
-        self.assignment = assignment
-        self.owner = owner
+    def __init__(self, submission_id, assignment_id, user_id, content, date, points=None):
+        self.id = submission_id
+        self.assignment_id = assignment_id
+        self.user_id = user_id
         self.content = content
         self.date = date
         self.points = points
@@ -19,6 +19,63 @@ class Submission:
             info += ", {}: {}".format(key, value)
 
         return info
+
+    @classmethod
+    def get_submission_by_user_id(cls, user_id):
+        """
+        Returns submission object.
+
+       :return:
+            submission: object
+        """
+        return cls.create_submission_by_user_id(user_id)
+
+    def get_submission_by_assignment_id(cls, assignment_id):
+        """
+        Returns submission object.
+
+       :return:
+            submission: object
+        """
+        return cls.create_submission_by_assignment_id(assignment_id)
+
+    @classmethod
+    def get_submission_list(cls):
+        """
+        Returns list of submissions instances
+        :return:
+            list: list of submissions instances
+        """
+        return cls.create_submission_list()
+
+    @classmethod
+    def create_submission_by_user_id(cls, user_id):
+        """
+        Creates instance of user
+        :return:
+            user: object
+        """
+        args = DB.read_assignment_record_by_id(user_id)
+        return Assignment(*args[0])
+
+    def create_submission_by_assignment_id(cls, assignment_id):
+        """
+        Creates instance of user
+        :return:
+            user: object
+        """
+        args = DB.read_assignment_record_by_id(assignment_id)
+        return Assignment(*args[0])
+
+    @classmethod
+    def create_submission_list(cls):
+        """
+        Creates list of user instances
+        :return:
+            user_list: list
+        """
+        assignment_data = DB.read_assignment_record_list()
+        return [Assignment(*assignment) for assignment in assignment_data]
 
     @classmethod
     def add_submission(cls, content, date, assignment_title, owner_name, points=None):
@@ -43,19 +100,19 @@ class Submission:
         else:
             raise NameError('This assignment has already been submitted!')
 
-    def get_owner(self):
+    def get_user_id(self):
         """
         :return:
             obj: submission owner's object
         """
-        return self.owner
+        return self.user_id
 
-    def get_assignment(self):
+    def get_assignment_id(self):
         """
         :return:
             obj: assignment object
         """
-        return self.assignment
+        return self.assignment_id
 
     def get_date(self):
         """

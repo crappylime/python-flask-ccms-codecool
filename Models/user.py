@@ -12,13 +12,13 @@ class User:
         self.password = password
 
     @classmethod
-    def get_user_by_id(cls, id):
+    def get_user_by_id(cls, user_id):
         """
         Returns user object.
         :return:
             user: object
         """
-        return cls.create_user(id)
+        return cls.create_user(user_id)
 
     @classmethod
     def get_user_list_by_role(cls, role):
@@ -39,13 +39,13 @@ class User:
         return cls.create_user_list_by_id_list(id_list)
 
     @classmethod
-    def create_user(cls, id):
+    def create_user(cls, user_id):
         """
         Creates instance of user
         :return:
             user: object
         """
-        args = DB.read_user_record_by_user_id(id)
+        args = DB.read_user_record_by_user_id(user_id)
         return User(*args[0])
 
     @classmethod
