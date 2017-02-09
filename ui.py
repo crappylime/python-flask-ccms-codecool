@@ -112,11 +112,13 @@ class UserInterface:
             else:
                 print('Please provide whole number!')
 
-        owner_name = input("Whose assignment is it? ")
+        sub_id = input("Provide submission id: ")
+
         for item in submission_list:
-            if item.owner.name == owner_name:
-                return points, owner_name
-        print("\nThere's no submission with given student name!\n")
+            if item.get_id() == sub_id:
+                return points, item.get_user().get_id()
+
+        print("\nThere's no submission with given id!\n")
 
     @staticmethod
     def get_user_data():
@@ -196,7 +198,7 @@ class UserInterface:
                 print("Wrong input :-(")
 
     @staticmethod
-    def user_id_from_list(user_list):
+    def item_id_from_list(item_list, item_name):
         """
         Returns user id
         :param user_list:
@@ -204,9 +206,28 @@ class UserInterface:
             int: user id
         """
         while True:
-            user_choice = input('Please choose person by index: ')
-            for user in user_list:
-                if user_choice == str(user.get_id()):
+            user_choice = input('Please choose {} by index (Press x to go back): '.format(item_name))
+            for item in item_list:
+                if user_choice == str(item.get_id()):
+                    user_choice = int(user_choice)
+                    return user_choice
+                elif user_choice == 'x':
+                    return user_choice
+            else:
+                print("Wrong input :-(")
+
+    @staticmethod
+    def assignment_id_from_list(assignment_list):
+        """
+        Returns assignment id
+        :param user_list:
+        :return:
+            int: user id
+        """
+        while True:
+            user_choice = input('Please choose assignment by index: ')
+            for ass in assignment_list:
+                if user_choice == str(ass.get_id()):
                     user_choice = int(user_choice)
                     return user_choice
             else:
@@ -316,6 +337,19 @@ class UserInterface:
         list_for_table = []
         for user in users:
             list_for_table.append([user.get_id(), user.get_name()])
+
+        UserInterface.show_table(headers, list_for_table)
+
+    @staticmethod
+    def show_users_with_details_table(users):
+        """
+        Creates formatted table of users
+        :param users:
+        """
+        headers = ['id', 'name']
+        list_for_table = []
+        for user in users:
+            list_for_table.append([user.get_id(), user.get_name(), user.get_mail()])
 
         UserInterface.show_table(headers, list_for_table)
 

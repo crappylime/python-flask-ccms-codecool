@@ -20,7 +20,7 @@ class Assignment:
         return info
 
     @classmethod
-    def get_assignment(cls, assignment_id):
+    def get_assignment_by_id(cls, assignment_id):
         """
         Returns assignment object.
 
@@ -39,7 +39,7 @@ class Assignment:
         return cls.create_assignment_list()
 
     @classmethod
-    def create_assignment(cls, assignment_id):
+    def create_assignment_by_id(cls, assignment_id):
         """
         Creates instance of assignment
         :return:
@@ -104,26 +104,3 @@ class Assignment:
         self.title = title
         self.due_date = due_date
         self.max_points = max_points
-
-    # def set_grade_submission(self, points, owner_name):
-    #     """
-    #     Sets grade to submission.
-    #
-    #     Raises:
-    #         TypeError: If points limit has been exceeded.
-    #         NameError: There's no submission with given student name.
-    #     """
-    #     try:
-    #         points = int(points)
-    #     except TypeError:
-    #         raise TypeError('An argument must be integer type')
-    #
-    #     if points not in range(0, self.max_points):
-    #         raise ValueError("Points limit has been exceeded")
-    #
-    #     student = Student.get_student(owner_name)
-    #
-    #     for submission in self.submission_list:
-    #         if submission.owner == student:
-    #             submission.points = points
-    #             DB.update_grade(student.get_id(), self.get_id(), points)

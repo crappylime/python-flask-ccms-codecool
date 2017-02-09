@@ -1,6 +1,7 @@
 from Models.submission import *
 from Models.assignment import *
 from Models.attendance import *
+from Models.user import *
 from Models.teams import *
 from Models.user import *
 from ui import *
@@ -41,11 +42,9 @@ class Menu:
 
 
     @staticmethod
-    def show_students():
-        UserInterface.show_users_table(Student.get_student_list())
-        student_to_show_name = UserInterface.user_name_from_list(Student.get_student_list())
-        student_to_show = Student.get_student(student_to_show_name)
-        UserInterface.show_user(student_to_show)
+    def show_users_with_details(role):
+        user_list = User.get_user_list_by_role(role)
+        UserInterface.show_users_with_details_table(user_list)
 
 
 class StudentMenu:
@@ -55,8 +54,8 @@ class StudentMenu:
             user_choice = UserInterface.student_menu()
             os.system("clear")
             if user_choice == "Submit an assignment":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
-                data_for_submission = UserInterface.get_submit_data(user, Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
+                data_for_submission = UserInterface.get_submit_data(user, Assignment.get_assignment_list())
                 if data_for_submission is not None:
                     Submission.add_submission(*data_for_submission)
             elif user_choice == "View my grades":
@@ -64,7 +63,7 @@ class StudentMenu:
             elif user_choice == "View my submissions":
                 UserInterface.show_submissions_table(user.submission_list)
             elif user_choice == "View assignments":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
             elif user_choice == "Log out":
                 break
 
@@ -78,40 +77,42 @@ class MentorMenu:
             os.system("clear")
             if option_choice == "Back":
                 break
-            UserInterface.show_users_table(Student.get_student_list())
-            student_to_edit_name = UserInterface.user_name_from_list(Student.get_student_list())
-            student_to_edit = Student.get_student(student_to_edit_name)
+            user_list = User.get_user_list_by_role('student')
+            UserInterface.show_users_with_details_table(user_list)
+            user_id = UserInterface.item_id_from_list(user_list, 'person')
+            user_to_edit = User.get_user_by_id(user_id)
             if option_choice == "Edit student attendance status":
-                student_attendances_to_edit_one = UserInterface.attendance_id_from_list(student_to_edit.attendance_list, student_to_edit)
+                student_attendances_to_edit_one = UserInterface.attendance_id_from_list(user_to_edit.attendance_list, user_to_edit)
                 student_attendance_to_edit = UserInterface.edit_user_status(student_attendances_to_edit_one)
                 student_attendances_to_edit_one.set_status(student_attendance_to_edit)
             elif option_choice == "Edit student name":
-                student_to_edit.set_name(UserInterface.edit_user_name(student_to_edit))
+                user_to_edit.set_name(UserInterface.edit_user_name(user_to_edit))
             elif option_choice == "Edit student mail":
-                student_to_edit.set_mail(UserInterface.edit_user_mail(student_to_edit))
+                user_to_edit.set_mail(UserInterface.edit_user_mail(user_to_edit))
             elif option_choice == "Edit student password":
-                student_to_edit.set_password(UserInterface.edit_user_password(student_to_edit))
+                user_to_edit.set_password(UserInterface.edit_user_password(user_to_edit))
 
     def __init__(self, user):
         while True:
             user_choice = UserInterface.mentor_menu()
             os.system("clear")
             if user_choice == "Show students list":
-                Menu.show_students()
+                Menu.show_users_with_details('student')
             elif user_choice == "Show assignments":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
             elif user_choice == "Add an assignment":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
                 Assignment.add_assignment(*UserInterface.get_assignment_data())
             elif user_choice == "Grade an assignment":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
-                assignment_title = UserInterface.assignment_title_provide(Assignment.get_list_assignmnent())
-                if assignment_title is not None:
-                    assignment = Assignment.get_assignment(assignment_title)
-                    UserInterface.show_submissions_table(assignment.get_list_submission())
-                    grade_data = UserInterface.get_grade_assignment_data(assignment.get_list_submission(), assignment)
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
+                assignment_id = UserInterface.assignment_id_from_list(Assignment.get_assignment_list())
+                if assignment_id is not None:
+                    assignment = Assignment.get_assignment(assignment_id)
+                    submission_list = Submission.create_submission_list_by_assignment_id(assignment_id)
+                    UserInterface.show_submissions_table(submission_list)
+                    grade_data = UserInterface.get_grade_assignment_data(submission_list, assignment)
                     if grade_data is not None:
-                        assignment.set_grade_submission(*grade_data)
+                        Submission.set_grade_submission(grade_data)
             elif user_choice == "Check attendance":
                 for student in Student.get_student_list():
                     Attendance.add_attendance(*UserInterface.get_attendance_data(student))
@@ -122,7 +123,7 @@ class MentorMenu:
             elif user_choice == "Remove student":
                 user_list = User.get_user_list_by_role('student')
                 UserInterface.show_users_table(user_list)
-                Student.remove_user(UserInterface.user_id_from_list(user_list))
+                Student.remove_user(UserInterface.item_id_from_list(user_list, 'person'))
             elif user_choice == "Edit student data":
                 MentorMenu.edit_user_data()
             elif user_choice == "Create team":  # TODO
@@ -131,9 +132,9 @@ class MentorMenu:
             elif user_choice == "Add student to team":  # TODO
                 team_list = Team.get_list_teams()
                 UserInterface.show_teams_table(team_list)
-                team_id_from_user = UserInterface.user_id_from_list(Team.get_list_teams())
+                team_id_from_user = UserInterface.item_id_from_list(Team.get_list_teams(), 'team')
                 UserInterface.show_users_table(User.get_user_list_by_role('student'))
-                student_id_from_user = UserInterface.user_id_from_list(User.get_user_list_by_role('student'))
+                student_id_from_user = UserInterface.item_id_from_list(User.get_user_list_by_role('student'))
                 DB.add_member(team_id_from_user, student_id_from_user)
             elif user_choice == "Show teams":  # TODO
                 UserInterface.show_teams_table(Team.get_list_teams())
@@ -156,9 +157,10 @@ class BossMenu:
             os.system("clear")
             if option_choice == "Back":
                 break
-            UserInterface.show_users_table(Mentor.get_list_mentor())
-            mentor_to_edit_name = UserInterface.user_name_from_list(Mentor.get_list_mentor())
-            mentor_to_edit = Mentor.get_mentor(mentor_to_edit_name)
+            user_list = User.get_user_list_by_role('mentor')
+            UserInterface.show_users_with_details_table(user_list)
+            user_id = UserInterface.item_id_from_list(user_list, 'person')
+            user_to_edit = User.get_user_by_id(user_id)
             if option_choice == "Edit mentor name":
                 mentor_to_edit.set_name(UserInterface.edit_user_name(mentor_to_edit))
             elif option_choice == "Edit mentor mail":
@@ -175,16 +177,13 @@ class BossMenu:
             elif user_choice == "Remove a mentor":
                 user_list = User.get_user_list_by_role('mentor')
                 UserInterface.show_users_table(user_list)
-                Mentor.remove_user(UserInterface.user_id_from_list(user_list))
+                Mentor.remove_user(UserInterface.item_id_from_list(user_list, 'person'))
             elif user_choice == "Edit mentor data":
                 BossMenu.edit_user_data()
             elif user_choice == "Show mentors list":
-                UserInterface.show_users_table(Mentor.get_list_mentor())
-                mentor_to_show_name = UserInterface.user_name_from_list(Mentor.get_list_mentor())
-                mentor_to_show = Mentor.get_mentor(mentor_to_show_name)
-                UserInterface.show_user(mentor_to_show)
+                Menu.show_users_with_details('mentor')
             elif user_choice == "Show students list":
-                Menu.show_students()
+                Menu.show_users_with_details('student')
             elif user_choice == "Log out":
                 break
 
@@ -197,7 +196,7 @@ class StaffMenu:
             user_choice = UserInterface.staff_menu()
             os.system("clear")
             if user_choice == "Show students list":
-                Menu.show_students()
+                Menu.show_users_with_details('student')
             elif user_choice == "Log out":
                 break
 

@@ -54,8 +54,9 @@ class User:
         :return:
             user: object
         """
+        pairs = {"student": Student, "mentor": Mentor, "staff": Staff, "boss": Boss}
         args = DB.read_user_record_by_user_id(user_id)
-        return User(*args[0])
+        return pairs[args[0][-1]](*args[0][:-1])
 
     @classmethod
     def create_user_list(cls):

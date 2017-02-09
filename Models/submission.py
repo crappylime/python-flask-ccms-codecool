@@ -96,45 +96,12 @@ class Submission:
         :return:
             user_list: list
         """
-        submission_data = DB.read_submission_record_list()
-        return [Submission(*submission) for submission in submission_data]
+        assignment_data = DB.read_assignment_record_list()
+        return [Assignment(*assignment) for assignment in assignment_data]
 
-    # @classmethod
-    # def add_submission(cls, content, date, assignment_title, owner_name, points=None):
-    #     """
-    #     Adds submission to Assignment and Student submissions list.
-    #     """
-    #     student = Student.get_student(owner_name)
-    #
-    #     assignment = Assignment.get_assignment(assignment_title)
-    #
-    #     unique = True
-    #
-    #     for item in student.submission_list:
-    #         if item.assignment == assignment:
-    #             unique = False
-    #
-    #     if unique is True:
-    #         submission = Submission(assignment, student, content, date,
-    #                                 int(points) if type(points) == str and len(points) > 0 else None)
-    #         assignment.submission_list.append(submission)
-    #         student.submission_list.append(submission)
-    #     else:
-    #         raise NameError('This assignment has already been submitted!')
-
-    def get_user_id(self):
-        """
-        :return:
-            obj: submission owner's object
-        """
-        return self.user_id
-
-    def get_assignment_id(self):
-        """
-        :return:
-            obj: assignment object
-        """
-        return self.assignment_id
+    def get_id(self):
+        """Returns submission instance id"""
+        return self.id
 
     def get_date(self):
         """
@@ -156,3 +123,9 @@ class Submission:
             int: point assigned to submission
         """
         return self.points
+
+    def set_grade_submission(self, points, user_id):
+        """
+        Sets grade to submission.
+        """
+        DB.update_grade(user_id, self.assignment.get_id(), points)
