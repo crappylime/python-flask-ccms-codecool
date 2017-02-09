@@ -1,4 +1,5 @@
 import sqlite3
+from db import *
 
 
 class User:
@@ -6,9 +7,9 @@ class User:
 
     user_list = []  # collects all user instances - needed for login and csv export
 
-    def __init__(self, user_id, name, mail, password):
+    def __init__(self, id, name, mail, password):
         """Attributes for all users - name, e-mail, password"""
-        self.user_id = user_id
+        self.id = id
         self.name = name
         self.mail = mail
         self.password = password
@@ -18,6 +19,10 @@ class User:
     def get_user_list(cls):
         """Returns list with all users instances"""
         return cls.user_list
+
+    def get_id(self):
+        """Returns user id"""
+        return self.id
 
     def get_name(self):
         """Returns user instance name"""
@@ -38,14 +43,17 @@ class User:
     def set_name(self, new_name):
         """Sets users name"""
         self.name = new_name
+        DB.update_name(self.get_id(), new_name)
 
     def set_mail(self, new_mail):
         """Sets users mail"""
         self.mail = new_mail
+        DB.update_mail(self.get_id(), new_mail)
 
     def set_password(self, new_password):
         """Sets users password"""
         self.password = new_password
+        DB.update_password(self.get_id(), new_password)
 
 
 class Student(User):

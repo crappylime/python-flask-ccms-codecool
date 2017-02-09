@@ -76,7 +76,8 @@ class UserInterface:
     def mentor_menu():
         """Prints options list and returns user_choice()"""
         options = ['Show students list', 'Show assignments', 'Add an assignment', 'Grade an assignment',
-                   'Check attendance', 'Show attendance', 'Add student', 'Remove student', 'Edit student data', 'Log out']
+                   'Check attendance', 'Show attendance', 'Add student', 'Remove student', 'Edit student data',
+                   'Create team', 'Add student to team', 'Show teams', 'Log out']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
@@ -386,3 +387,25 @@ class UserInterface:
                                            ass.get_content(), ass.get_date(), ass.get_points()])
 
         UserInterface.show_table(headers, list_for_table)
+
+    @staticmethod
+    def get_team_name():
+        """Creates new team"""
+        name = input("Provide name of team: ")
+        return name
+
+    @staticmethod
+    def show_teams_table(teams_list):
+         """
+        Creates formatted table of teams
+        :param teams_list:
+        """
+        headers = ['team name']
+        # TODO list_for_table , UserInterface.show_table(headers, list_for_table)
+        pass
+
+    @staticmethod
+    def get_student_name():
+        """Return students name"""
+        name = input("Provide name of student")
+        return name
