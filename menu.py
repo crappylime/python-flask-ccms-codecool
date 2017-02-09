@@ -56,6 +56,8 @@ class StudentMenu:
                     Submission.add_submission(*data_for_submission)
             elif user_choice == "View my grades":
                 UserInterface.show_submissions_table(user.submission_list, 'graded')
+            elif user_choice == "View my overall grade":
+                UserInterface.print_line(Student.get_overall_grade(user))
             elif user_choice == "View my submissions":
                 UserInterface.show_submissions_table(user.submission_list)
             elif user_choice == "View assignments":
@@ -134,6 +136,11 @@ class MentorMenu:
                 DB.create_member_record(team_id_from_user, student_id_from_user)
             elif user_choice == "Show teams":  # TODO
                 UserInterface.show_teams_table(Team.get_list_teams())
+                team_id_from_user = UserInterface.item_id_from_list(Team.get_list_teams(), 'team')
+                members_id = DB.read_user_id_list_by_team_id(team_id_from_user)
+                print('s:', members_id)
+                user_list = User.get_user_list_by_id_list(members_id)
+                UserInterface.show_users_table(user_list)
             elif user_choice == "Log out":
                 break
 

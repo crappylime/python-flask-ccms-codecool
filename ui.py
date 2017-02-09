@@ -37,7 +37,7 @@ class UserInterface:
     @staticmethod
     def student_menu():
         """Prints options list and returns user_choice()"""
-        options = ['View assignments', 'Submit an assignment', 'View my grades', 'View my submissions', 'Log out']
+        options = ['View assignments', 'Submit an assignment', 'View my grades', 'View my overall grade', 'View my submissions', 'Log out']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
@@ -437,3 +437,10 @@ class UserInterface:
             list_for_table.append([team.get_id(), team.get_name()])
 
         UserInterface.show_table(headers, list_for_table)
+
+    @staticmethod
+    def print_line(line):
+        """
+        Prints line into console
+        """
+        print(str(line) + "%")
