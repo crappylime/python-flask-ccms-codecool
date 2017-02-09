@@ -1,5 +1,6 @@
 from db import DB
 from Models.assignment import Assignment
+from Models.user import User
 
 
 class Submission:
@@ -8,7 +9,7 @@ class Submission:
     def __init__(self, submission_id, assignment_id, user_id, content, date, points=None):
         self.id = submission_id
         self.assignment = Assignment.get_assignment_by_id(assignment_id)
-        self.user_id = user_id
+        self.student = User.get_user_by_id(user_id)
         self.content = content
         self.date = date
         self.points = points
@@ -61,6 +62,15 @@ class Submission:
         return cls.create_submission_list()
 
     @classmethod
+    def get_overall_grade(cls, student_id):
+        """
+        Returns overall grade
+        :return:
+           str: overall grade
+        """
+        return cls.create_overall_grade(student_id)
+
+    @classmethod
     def create_submission_by_id(cls, submission_id):
         """
         Creates instance of user
@@ -101,6 +111,15 @@ class Submission:
         return [Submission(*submission) for submission in submission_data]
 
     @classmethod
+    def create_overall_grade(cls, student_id):
+        """
+        Create overall_grade
+        :return:
+            overall grade: str
+        """
+        return DB.read_overall_grade(student_id)
+
+    @classmethod
     def add_submission(cls, student_id, assignment_id, content, date):
         values = (assignment_id, student_id, content, date)
         new_submission_id = DB.create_submission_record(values)
@@ -121,6 +140,10 @@ class Submission:
         """
         return self.content
 
+    def get_id(self):
+        """return submission id"""
+        return self.id
+
     def get_points(self):
         """
         :return:
@@ -128,8 +151,16 @@ class Submission:
         """
         return self.points
 
-    def set_grade_submission(self, points, user_id):
+    @classmethod
+    def set_grade_submission(cls, user_id, assignment_id, points):
         """
         Sets grade to submission.
         """
-        DB.update_grade(user_id, self.assignment.get_id(), points)
+        DB.update_grade(user_id, assignment_id, points)
+
+    def get_assignment(self):
+        """ Return assignment object"""
+        return self.assignment
+
+    def get_student(self):
+        return self.student

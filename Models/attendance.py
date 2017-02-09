@@ -40,6 +40,15 @@ class Attendance:
         return cls.create_attendance_list()
 
     @classmethod
+    def get_overall_attendance(cls, student_id):
+        """
+        Returns overall attendance
+        :return:
+            overall attendance: str
+        """
+        return cls.create_overall_attendance(student_id)
+
+    @classmethod
     def create_attendance_by_id(cls, attendance_id):
         """
         Creates Attendance instance
@@ -68,6 +77,15 @@ class Attendance:
         """
         attendance_data = DB.read_attendance_record_list()
         return [Attendance(*attendance) for attendance in attendance_data]
+
+    @classmethod
+    def create_overall_attendance(cls, student_id):
+        """
+        Creates overall_attendance
+        :return:
+            overall attendance: str
+        """
+        return DB.read_overall_attendance(student_id)
 
     @classmethod
     def add_attendance(cls, student_id, date, status):
