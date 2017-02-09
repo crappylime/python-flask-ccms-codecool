@@ -86,3 +86,13 @@ class DB:
         attendance = cursor.fetchall()
         conn.close()
         return attendance
+
+    @classmethod
+    def read_attendance_record_list(cls):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `attendances`;"
+        cursor.execute(query)
+        attendance_list = cursor.fetchall()
+        conn.close()
+        return attendance_list
