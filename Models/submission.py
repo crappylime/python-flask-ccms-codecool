@@ -105,8 +105,8 @@ class Submission:
     def add_submission(cls, student_id, assignment_id, content, date):
         values = (assignment_id, student_id, content, date)
         new_submission_id = DB.create_submission_record(values)
-        #new_attendance = cls.get_attendance_by_id(new_attendance_id)
-        #return new_attendance
+        new_submission = cls.get_submission_by_id(new_submission_id)
+        return new_submission
     # @classmethod
     # def add_submission(cls, content, date, assignment_title, owner_name, points=None):
     #     """

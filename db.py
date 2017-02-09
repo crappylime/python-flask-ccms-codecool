@@ -54,80 +54,8 @@ class DB:
         return cls.execute_query(query, (args,))
 
     @classmethod
-    def update_name(cls, user_id, name):
-        query = "UPDATE `users` SET `name` = ? WHERE `user_id` = ?;"
-        args = (name, user_id)
-        cls.execute_query(query, args)
-
-    @classmethod
-    def update_mail(cls, user_id, new_mail):
-        query = "UPDATE `users` SET `mail` = ? WHERE `user_id` = ?;"
-        args = (new_mail, user_id)
-        cls.execute_query(query, args)
-
-    @classmethod
-    def update_password(cls, user_id, new_password):
-        query = "UPDATE `users` SET `password` = ? WHERE `user_id` = ?;"
-        args = (new_password, user_id)
-        cls.execute_query(query, args)
-
-    @classmethod
-    def update_attendance(cls, user_id, date, status):
-        query = "UPDATE `attendances` SET `status` = ? WHERE `user_id` = ? AND `date` = ?;"
-        args = (status, user_id, date)
-        cls.execute_query(query, args)
-
-    @classmethod
-    def update_grade(cls, user_id, assignment_id, points):
-        query = "UPDATE `submissions` SET `points` = ? WHERE `assignment_id` = ? AND `user_id` = ?;"
-        args = (points, assignment_id, user_id)
-        cls.execute_query(query, args)
-
-    @classmethod
     def create_member_record(cls, team_id, student_id):
         pass
-
-    @classmethod
-    def delete_assignment_record(cls, assignment_id):
-        query = "DELETE FROM assignments WHERE assignment_id = ?"
-        args = assignment_id
-        cls.execute_query(query, (args,))
-
-    @classmethod
-    def delete_attendance_record(cls, attendance_id):
-        query = "DELETE FROM attendances WHERE attendance_id = ?"
-        args = attendance_id
-        cls.execute_query(query, (args,))
-
-    @classmethod
-    def delete_submission_record(cls, submission_id):
-        query = "DELETE FROM submissions WHERE submission_id = ?"
-        args = submission_id
-        cls.execute_query(query, (args,))
-
-    @classmethod
-    def delete_user_record(cls, user_id):
-        query = "DELETE FROM users WHERE user_id = ?"
-        args = user_id
-        cls.execute_query(query, (args,))
-
-    @classmethod
-    def delete_user_attendance_record(cls, user_id):
-        query = "DELETE FROM attendances WHERE user_id = ?"
-        args = user_id
-        cls.execute_query(query, (args,))
-
-    @classmethod
-    def delete_user_submission_record(cls, user_id):
-        query = "DELETE FROM submissions WHERE user_id = ?"
-        args = user_id
-        cls.execute_query(query, (args,))
-
-    @classmethod
-    def delete_assignment_submission_record(cls, assignment_id):
-        query = "DELETE FROM submissions WHERE assignment_id = ?"
-        args = assignment_id
-        cls.execute_query(query, (args,))
 
     @classmethod
     def read_user_record_by_user_id(cls, user_id):
@@ -260,3 +188,75 @@ class DB:
         attendance_list = cursor.fetchall()
         conn.close()
         return attendance_list
+
+    @classmethod
+    def update_name(cls, user_id, name):
+        query = "UPDATE `users` SET `name` = ? WHERE `user_id` = ?;"
+        args = (name, user_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_mail(cls, user_id, new_mail):
+        query = "UPDATE `users` SET `mail` = ? WHERE `user_id` = ?;"
+        args = (new_mail, user_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_password(cls, user_id, new_password):
+        query = "UPDATE `users` SET `password` = ? WHERE `user_id` = ?;"
+        args = (new_password, user_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_attendance(cls, user_id, date, status):
+        query = "UPDATE `attendances` SET `status` = ? WHERE `user_id` = ? AND `date` = ?;"
+        args = (status, user_id, date)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_grade(cls, user_id, assignment_id, points):
+        query = "UPDATE `submissions` SET `points` = ? WHERE `assignment_id` = ? AND `user_id` = ?;"
+        args = (points, assignment_id, user_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def delete_assignment_record(cls, assignment_id):
+        query = "DELETE FROM assignments WHERE assignment_id = ?"
+        args = assignment_id
+        cls.execute_query(query, (args,))
+
+    @classmethod
+    def delete_attendance_record(cls, attendance_id):
+        query = "DELETE FROM attendances WHERE attendance_id = ?"
+        args = attendance_id
+        cls.execute_query(query, (args,))
+
+    @classmethod
+    def delete_submission_record(cls, submission_id):
+        query = "DELETE FROM submissions WHERE submission_id = ?"
+        args = submission_id
+        cls.execute_query(query, (args,))
+
+    @classmethod
+    def delete_user_record(cls, user_id):
+        query = "DELETE FROM users WHERE user_id = ?"
+        args = user_id
+        cls.execute_query(query, (args,))
+
+    @classmethod
+    def delete_user_attendance_record(cls, user_id):
+        query = "DELETE FROM attendances WHERE user_id = ?"
+        args = user_id
+        cls.execute_query(query, (args,))
+
+    @classmethod
+    def delete_user_submission_record(cls, user_id):
+        query = "DELETE FROM submissions WHERE user_id = ?"
+        args = user_id
+        cls.execute_query(query, (args,))
+
+    @classmethod
+    def delete_assignment_submission_record(cls, assignment_id):
+        query = "DELETE FROM submissions WHERE assignment_id = ?"
+        args = assignment_id
+        cls.execute_query(query, (args,))
