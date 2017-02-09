@@ -1,6 +1,7 @@
 from Models.submission import *
 from Models.assignment import *
 from Models.attendance import *
+from Models.user import *
 from Models.teams import *
 from ui import *
 import os
