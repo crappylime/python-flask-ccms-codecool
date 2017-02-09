@@ -53,8 +53,8 @@ class StudentMenu:
             user_choice = UserInterface.student_menu()
             os.system("clear")
             if user_choice == "Submit an assignment":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
-                data_for_submission = UserInterface.get_submit_data(user, Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
+                data_for_submission = UserInterface.get_submit_data(user, Assignment.get_assignment_list())
                 if data_for_submission is not None:
                     Submission.add_submission(*data_for_submission)
             elif user_choice == "View my grades":
@@ -62,7 +62,7 @@ class StudentMenu:
             elif user_choice == "View my submissions":
                 UserInterface.show_submissions_table(user.submission_list)
             elif user_choice == "View assignments":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
             elif user_choice == "Log out":
                 break
 

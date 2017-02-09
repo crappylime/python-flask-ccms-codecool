@@ -1,4 +1,5 @@
 from db import DB
+from Models.submission import  Submission
 
 
 class User:
@@ -159,6 +160,10 @@ class User:
 
 class Student(User):
     """Class that represent students"""
+
+    @property
+    def submission_list(self):
+        return Submission.get_submission_by_user_id(self.id)
     #
     # @classmethod
     # def get_grade(cls, name, assignment_title):

@@ -140,6 +140,16 @@ class DB:
         return user
 
     @classmethod
+    def read_user_record_list(cls):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `users`;"
+        cursor.execute(query)
+        user_list = cursor.fetchall()
+        conn.close()
+        return user_list
+
+    @classmethod
     def read_user_record_list_by_role(cls, role):
         conn = cls.connect()
         cursor = conn.cursor()
@@ -192,11 +202,21 @@ class DB:
         return submission
 
     @classmethod
-    def read_submission_record_by_user_id(cls, user_id):
+    def read_submission_record_list_by_user_id(cls, user_id):
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `submissions` WHERE `user_id` = ?;"
         cursor.execute(query, (user_id,))
+        user_submission_list = cursor.fetchall()
+        conn.close()
+        return user_submission_list
+
+    @classmethod
+    def read_submission_record_list_by_assignment_id(cls, assignment_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `submissions` WHERE `assignment_id` = ?;"
+        cursor.execute(query, (assignment_id,))
         user_submission_list = cursor.fetchall()
         conn.close()
         return user_submission_list

@@ -31,6 +31,7 @@ class Submission:
     def get_submission_by_id(cls, submission_id):
         pass
 
+    @classmethod
     def get_submission_by_user_id(cls, user_id):
         """
         Returns submission object.
