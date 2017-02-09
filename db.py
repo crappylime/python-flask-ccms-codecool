@@ -26,3 +26,15 @@ class DB:
         user_list = cursor.fetchall()
         conn.close()
         return user_list
+
+    @classmethod
+    def read_assignment_record_by_id(cls, assignment_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `assignments` WHERE `assignment_id` = ?;"
+        cursor.execute(query, (assignment_id,))
+        assignment = cursor.fetchall()
+        conn.close()
+        return assignment
+
+  
