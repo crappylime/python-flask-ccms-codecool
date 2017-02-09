@@ -44,6 +44,10 @@ class Submission:
         else:
             raise NameError('This assignment has already been submitted!')
 
+    def get_id(self):
+        """Returns submission instance id"""
+        return self.id
+
     def get_owner(self):
         """
         :return:

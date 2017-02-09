@@ -46,6 +46,10 @@ class Assignment:
                 return item
         raise NameError("There's no assignment with given title")
 
+    def get_id(self):
+        """Returns assignment instance id"""
+        return self.id
+
     def get_title(self):
         """
         :return:

@@ -21,6 +21,10 @@ class User:
         """Returns user instance name"""
         return self.name
 
+    def get_id(self):
+        """Returns user instance id"""
+        return self.id
+
     def get_mail(self):
         """Returns user instance mail"""
         return self.mail

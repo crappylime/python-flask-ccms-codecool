@@ -27,6 +27,10 @@ class Attendance:
         """"Returns list with attendance instances"""
         return cls.attendance_list
 
+    def get_id(self):
+        """Returns attendance instance id"""
+        return self.id
+
     def get_student(self):
         """Returns student instance is subject to the attendance object"""
         return self.student
