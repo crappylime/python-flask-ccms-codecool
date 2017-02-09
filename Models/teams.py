@@ -22,6 +22,3 @@ class Team:
     @staticmethod
     def get_list_teams():
         pass
-
-
-

@@ -7,7 +7,7 @@ import os
 
 
 class Menu:
-    """log in menu with import/export csv"""
+    """log in menu"""
 
     @staticmethod
     def log_in():
@@ -36,6 +36,7 @@ class Menu:
                 self.log_in()
             else:
                 break
+
 
 
     @staticmethod
