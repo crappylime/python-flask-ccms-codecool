@@ -37,4 +37,12 @@ class DB:
         conn.close()
         return assignment
 
-  
+    @classmethod
+    def read_assignment_record_list(cls):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `assignments`;"
+        cursor.execute(query)
+        assignment_list = cursor.fetchall()
+        conn.close()
+        return assignment_list
