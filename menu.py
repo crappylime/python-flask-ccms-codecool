@@ -2,6 +2,7 @@ from Models.submission import *
 from Models.assignment import *
 from Models.attendance import *
 from Models.teams import *
+from Models.user import *
 from ui import *
 import os
 
