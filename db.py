@@ -16,3 +16,13 @@ class DB:
         user = cursor.fetchall()
         conn.close()
         return user
+
+    @classmethod
+    def read_user_record_list_by_role(cls, role):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `users` WHERE `role` = ?;"
+        cursor.execute(query, (role,))
+        user_list = cursor.fetchall()
+        conn.close()
+        return user_list
