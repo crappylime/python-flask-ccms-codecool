@@ -76,3 +76,13 @@ class DB:
         submission_list = cursor.fetchall()
         conn.close()
         return submission_list
+
+    @classmethod
+    def read_attendance_record_list_by_user_id(cls, user_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `attendances` WHERE `user_id` = ?;"
+        cursor.execute(query, (user_id,))
+        attendance = cursor.fetchall()
+        conn.close()
+        return attendance
