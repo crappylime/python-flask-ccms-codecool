@@ -1,10 +1,8 @@
-import sqlite3
+from db import DB
 
 
 class User:
     """Parent class for all user instances - represents all users"""
-
-    user_list = []  # collects all user instances - needed for login and csv export
 
     def __init__(self, user_id, name, mail, password):
         """Attributes for all users - name, e-mail, password"""
@@ -12,12 +10,63 @@ class User:
         self.name = name
         self.mail = mail
         self.password = password
-        User.user_list.append(self)
 
     @classmethod
-    def get_user_list(cls):
-        """Returns list with all users instances"""
-        return cls.user_list
+    def get_user_by_id(cls, id):
+        """
+        Returns user object.
+        :return:
+            user: object
+        """
+        return cls.create_user(id)
+
+    @classmethod
+    def get_user_list_by_role(cls, role):
+        """
+        Returns list with user objects
+        :return:
+            user_list: list
+        """
+        return cls.create_user_list_by_role(role)
+
+    @classmethod
+    def get_user_list_by_id_list(cls, id_list):
+        """
+        Returns list with user objects
+        :return:
+            user_list: list
+        """
+        return cls.create_user_list_by_id_list(id_list)
+
+    @classmethod
+    def create_user(cls, id):
+        """
+        Creates instance of user
+        :return:
+            user: object
+        """
+        args = DB.read_user_record_by_user_id(id)
+        return User(*args[0])
+
+    @classmethod
+    def create_user_list_by_role(cls, role):
+        """
+        Creates list of user instances
+        :return:
+            user_list: list
+        """
+        users_data = DB.read_user_record_list_by_role(role)
+        return [User(*user) for user in users_data]
+
+    @classmethod
+    def create_user_list_by_id_list(cls, id_list):
+        """
+        Creates list of user instances
+        :return:
+            user_list: list
+        """
+        users_data = DB.read_user_record_list_by_id(id_list)
+        return [User(*user) for user in users_data]
 
     def get_name(self):
         """Returns user instance name"""
