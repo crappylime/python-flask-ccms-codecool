@@ -20,7 +20,7 @@ class Assignment:
         return info
 
     @classmethod
-    def get_assignment(cls, assignment_id):
+    def get_assignment_by_id(cls, assignment_id):
         """
         Returns assignment object.
 
@@ -39,7 +39,7 @@ class Assignment:
         return cls.create_assignment_list()
 
     @classmethod
-    def create_assignment(cls, assignment_id):
+    def create_assignment_by_id(cls, assignment_id):
         """
         Creates instance of assignment
         :return:
