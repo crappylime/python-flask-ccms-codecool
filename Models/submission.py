@@ -6,8 +6,8 @@ class Submission:
 
     def __init__(self, submission_id, assignment_id, user_id, content, date, points=None):
         self.id = submission_id
-        self.assignment = Assignment.get_assigment_by_id(assignment_id)
-        self.user = User.get_user_by_id(user_id)
+        self.assignment_id = assignment_id
+        self.user_id = user_id
         self.content = content
         self.date = date
         self.points = points
@@ -21,33 +21,34 @@ class Submission:
         return info
 
     @classmethod
-    def add_submission(cls, content, date, assignment_id, student_id):
-        values = (assignment_id, student_id, content, date)
-        new_submission_id = DB.create_submission_record(values)
-        new_submission = cls.get_submission_by_id(new_submission_id)
-        return new_submission
+    def get_submission_by_id(cls, submission_id):
+        """
+        Returns submission object.
+
+       :return:
+            submission: object
+        """
+        return cls.create_submission_by_id(submission_id)
 
     @classmethod
-    def get_submission_by_id(cls, submission_id):
-        pass
-
-    def get_submission_by_user_id(cls, user_id):
+    def get_submission_list_by_user_id(cls, user_id):
         """
-        Returns submission object.
+        Returns submission list of instances.
 
        :return:
-            submission: object
+            submission_list: list
         """
-        return cls.create_submission_by_user_id(user_id)
+        return cls.create_submission_list_by_user_id(user_id)
 
-    def get_submission_by_assignment_id(cls, assignment_id):
+    @classmethod
+    def get_submission_list_by_assignment_id(cls, assignment_id):
         """
-        Returns submission object.
+        Returns submission list of instances.
 
        :return:
-            submission: object
+            submission_list: list
         """
-        return cls.create_submission_by_assignment_id(assignment_id)
+        return cls.create_submission_list_by_assignment_id(assignment_id)
 
     @classmethod
     def get_submission_list(cls):
@@ -59,23 +60,34 @@ class Submission:
         return cls.create_submission_list()
 
     @classmethod
-    def create_submission_by_user_id(cls, user_id):
+    def create_submission_by_id(cls, submission_id):
         """
         Creates instance of user
         :return:
             user: object
         """
-        args = DB.read_assignment_record_by_id(user_id)
-        return Assignment(*args[0])
+        args = DB.read_submission_record_by_id(submission_id)
+        return Submission(*args[0])
 
-    def create_submission_by_assignment_id(cls, assignment_id):
+    @classmethod
+    def create_submission_list_by_user_id(cls, user_id):
         """
         Creates instance of user
         :return:
             user: object
         """
-        args = DB.read_assignment_record_by_id(assignment_id)
-        return Assignment(*args[0])
+        submission_data = DB.read_submission_record_list_by_user_id(user_id)
+        return [Submission(*submission) for submission in submission_data]
+
+    @classmethod
+    def create_submission_list_by_assignment_id(cls, assignment_id):
+        """
+        Creates instance of user
+        :return:
+            user: object
+        """
+        submission_data = DB.read_submission_record_list_by_assignment_id(assignment_id)
+        return [Submission(*submission) for submission in submission_data]
 
     @classmethod
     def create_submission_list(cls):
@@ -87,27 +99,9 @@ class Submission:
         assignment_data = DB.read_assignment_record_list()
         return [Assignment(*assignment) for assignment in assignment_data]
 
-    @classmethod
-    def create_submission_list_by_assignment_id(cls, assignment_id):
-        """
-        Creates list of submissions by assignment_id
-        :return:
-        submission_list
-        """
-        submission_list = DB.read_submission_record_list_by_assignment_id(assignment_id)
-        return submission_list
-
     def get_id(self):
         """Returns submission instance id"""
         return self.id
-
-    def get_user(self):
-        """Returns submission instance user"""
-        return self.user
-
-    def get_assignment(self):
-        """Returns submission assignment id"""
-        return self.assignment
 
     def get_date(self):
         """
@@ -134,4 +128,4 @@ class Submission:
         """
         Sets grade to submission.
         """
-        DB.update_grade(user_id, self.get_assignment().get_id(), points)
+        DB.update_grade(user_id, self.assignment.get_id(), points)
