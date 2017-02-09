@@ -46,3 +46,13 @@ class DB:
         assignment_list = cursor.fetchall()
         conn.close()
         return assignment_list
+
+    @classmethod
+    def read_submission_record_by_id(cls, submission_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `submissions` WHERE `submission_id` = ?;"
+        cursor.execute(query, (submission_id,))
+        submission = cursor.fetchall()
+        conn.close()
+        return submission
