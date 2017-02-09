@@ -322,6 +322,19 @@ class UserInterface:
         UserInterface.show_table(headers, list_for_table)
 
     @staticmethod
+    def show_users_with_details_table(users):
+        """
+        Creates formatted table of users
+        :param users:
+        """
+        headers = ['id', 'name']
+        list_for_table = []
+        for user in users:
+            list_for_table.append([user.get_id(), user.get_name(), user.get_mail()])
+
+        UserInterface.show_table(headers, list_for_table)
+
+    @staticmethod
     def show_attendance_table(attendance_list):
         """
         Creates formatted attendance table
