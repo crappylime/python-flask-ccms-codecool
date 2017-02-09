@@ -28,7 +28,6 @@ class Menu:
 
     def __init__(self):
         os.system("clear")
-        Program.import_all_csv()
 
         while True:
             user_choice = UserInterface.main_menu()
@@ -37,7 +36,7 @@ class Menu:
                 self.log_in()
             else:
                 break
-        Program.export_all_cvs()
+
 
     @staticmethod
     def show_students():
@@ -98,13 +97,13 @@ class MentorMenu:
             if user_choice == "Show students list":
                 Menu.show_students()
             elif user_choice == "Show assignments":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
             elif user_choice == "Add an assignment":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
                 Assignment.add_assignment(*UserInterface.get_assignment_data())
             elif user_choice == "Grade an assignment":
-                UserInterface.show_assignments_table(Assignment.get_list_assignmnent())
-                assignment_title = UserInterface.assignment_title_provide(Assignment.get_list_assignmnent())
+                UserInterface.show_assignments_table(Assignment.get_assignment_list())
+                assignment_title = UserInterface.assignment_title_provide(Assignment.get_assignment_list())
                 if assignment_title is not None:
                     assignment = Assignment.get_assignment(assignment_title)
                     UserInterface.show_submissions_table(assignment.get_list_submission())

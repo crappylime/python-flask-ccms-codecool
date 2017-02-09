@@ -96,7 +96,7 @@ class User:
         """Returns user instance password"""
         return self.password
 
-    def get_user_class_name(self):
+    def get_class_name(self):
         """Returns user instance subclass name"""
         return self.__class__.__name__
 
