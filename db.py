@@ -190,6 +190,18 @@ class DB:
         return attendance_list
 
     @classmethod
+    def read_overall_grade(cls, student_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT round(avg(100.0*submissions.points/assignments.max_points),2) FROM submissions " \
+                "INNER JOIN assignments ON submissions.assignment_id=assignments.assignment_id " \
+                "WHERE `user_id`=?;"
+        cursor.execute(query, (student_id,))
+        overall_grade = cursor.fetchall()[0][0]
+        conn.close()
+        return overall_grade
+
+    @classmethod
     def update_name(cls, user_id, name):
         query = "UPDATE `users` SET `name` = ? WHERE `user_id` = ?;"
         args = (name, user_id)

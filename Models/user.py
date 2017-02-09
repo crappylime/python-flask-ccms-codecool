@@ -183,8 +183,8 @@ class Student(User):
         return Submission.get_submission_list_by_user_id(self.id)
 
     @property
-    def grade(self):
-        pass
+    def overall_grade(self):
+        Submission.get_overall_grade(self.id)
 
     @property
     def attendance_list(self):
@@ -193,11 +193,11 @@ class Student(User):
     @property
     def overall_attendance(self):
         pass
-    
+
     def get_submission_list(self):
         return self.submission_list
 
-    def get_grade(self):
+    def get_overall_grade(self):
         return self.grade
 
     def get_attendance_list(self):
