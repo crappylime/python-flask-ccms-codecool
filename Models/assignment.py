@@ -7,8 +7,8 @@ class Assignment:
 
     assignment_list = []
 
-    def __init__(self, user_id, title, content, due_date, max_points):
-        self.id = user_id
+    def __init__(self, assignment_id, title, content, due_date, max_points):
+        self.id = assignment_id
         self.title = title
         self.content = content
         self.due_date = due_date
@@ -22,7 +22,6 @@ class Assignment:
             info += ", {}: {}".format(key, value)
 
         return info
-
 
     @classmethod
     def add_assignment(cls, title, content, due_date, max_points):
@@ -45,7 +44,7 @@ class Assignment:
         raise NameError("There's no assignment with given title")
 
     def get_id(self):
-        """Return assignment id"""
+        """Returns assignment instance id"""
         return self.id
 
     def get_title(self):
@@ -127,7 +126,6 @@ class Assignment:
             if submission.owner == student:
                 submission.points = points
                 DB.update_grade(student.get_id(), self.get_id(), points)
-
 
     @classmethod
     def get_list_assignmnent(cls):

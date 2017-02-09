@@ -5,7 +5,8 @@ from Models.user import *
 class Submission:
     """This is class representing student submission for Assignment graded by Mentor."""
 
-    def __init__(self, assignment, owner, content, date, points=None):
+    def __init__(self, submission_id, assignment, owner, content, date, points=None):
+        self.id = submission_id
         self.assignment = assignment
         self.owner = owner
         self.content = content
@@ -27,6 +28,10 @@ class Submission:
         new_submission = cls.get_submission_by_id(new_submission_id)
         return new_submission
 
+
+    def get_id(self):
+        """Returns submission instance id"""
+        return self.id
 
     def get_owner(self):
         """

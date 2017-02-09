@@ -6,9 +6,9 @@ class Attendance:
     """Class that represents attendance"""
     attendance_list = []
 
-    def __init__(self, id, student, date, status):
+    def __init__(self, attendance_id, student, date, status):
         """Attendance attributes - student instance and its status, date of attendance checking"""
-        self.id = id
+        self.id = attendance_id
         self.student = student
         self.date = date
         self.status = status
@@ -27,7 +27,7 @@ class Attendance:
         return cls.attendance_list
 
     def get_id(self):
-        """Returns attendance id"""
+        """Returns attendance instance id"""
         return self.id
 
     def get_student(self):
@@ -46,4 +46,3 @@ class Attendance:
         """Sets new status of students attendance"""
         self.status = new_status
         DB.update_attendance(student.get_id(), self.get_date(), new_status)
-
