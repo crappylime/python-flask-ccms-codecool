@@ -1,23 +1,32 @@
-import sqlite3
+from db import DB
 
 
 class User:
     """Parent class for all user instances - represents all users"""
 
-    user_list = []  # collects all user instances - needed for login and csv export
-
     def __init__(self, user_id, name, mail, password):
         """Attributes for all users - name, e-mail, password"""
-        self.user_id = user_id
+        self.id = user_id
         self.name = name
         self.mail = mail
         self.password = password
-        User.user_list.append(self)
+
 
     @classmethod
     def get_user_list(cls):
         """Returns list with all users instances"""
         return cls.user_list
+
+    @classmethod
+    def add_user(cls, name, mail, password):
+        """Adds news mentor instance and appends its to mentors list"""
+        values = (name, mail, password, cls.get_class_name().lower())
+        DB.create_user_record(values)
+
+    @classmethod
+    def get_class_name(cls):
+        """Returns user instance subclass name"""
+        return cls.__name__
 
     def get_name(self):
         """Returns user instance name"""
@@ -31,7 +40,7 @@ class User:
         """Returns user instance password"""
         return self.password
 
-    def get_class_name(self):
+    def get_user_class_name(self):
         """Returns user instance subclass name"""
         return self.__class__.__name__
 
@@ -59,10 +68,7 @@ class Student(User):
         self.attendance_list = []  # collect all attendance instances
         self.submission_list = []  # collect all submissions sending by student
 
-    @classmethod
-    def add_student(cls, name, mail, password):
-        """Adds news student instance and appends its to student list"""
-        cls.student_list.append(Student(name, mail, password))
+
 
     @classmethod
     def remove_student(cls, name):
@@ -115,10 +121,7 @@ class Mentor(Employee):
         """init from user class"""
         super().__init__(name, mail, password)
 
-    @classmethod
-    def add_mentor(cls, name, mail, password):
-        """Adds news mentor instance and appends its to mentors list"""
-        cls.mentor_list.append(Mentor(name, mail, password))
+
 
     @classmethod
     def remove_mentor(cls, name):
@@ -204,3 +207,5 @@ class Staff(Employee):
         for staff in cls.staff_list:
             if staff.name == name:
                 return staff
+
+

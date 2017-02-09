@@ -1,7 +1,6 @@
 from Models.submission import *
 from Models.assignment import *
 from Models.attendance import *
-from program import *
 from ui import *
 import os
 
@@ -189,6 +188,7 @@ class StaffMenu:
 
 def main():
     Menu()
+
 
 if __name__ == "__main__":
     main()
