@@ -30,28 +30,28 @@ class DB:
     @classmethod
     def create_user_record(cls, values):
         query = 'INSERT INTO users (`name`, `mail`, `password`, `role`) VALUES (?, ?, ?, ?);'
-        cls.execute_insert_query(query, values)
+        return cls.execute_insert_query(query, values)
 
     @classmethod
     def create_assignment_record(cls, values):
         query = 'INSERT INTO assignments (`title`, `content`, `due_date`, `max_points`) VALUES (?, ?, ?, ?);'
-        cls.execute_insert_query(query, values)
+        return cls.execute_insert_query(query, values)
 
     @classmethod
     def create_submission_record(cls, values):
         query = 'INSERT INTO submissions (`assignment_id`, `user_id`, `content`, `date`) VALUES (?, ?, ?, ?);'
-        cls.execute_insert_query(query, values)
+        return cls.execute_insert_query(query, values)
 
     @classmethod
     def create_attendance_record(cls, values):
         query = 'INSERT INTO attendances (`user_id`, `date`, `status`) VALUES (?, ?, ?);'
-        cls.execute_insert_query(query, values)
+        return cls.execute_insert_query(query, values)
 
     @classmethod
     def create_team(cls, name):
         query = "INSERT INTO `teams` (`name`) VALUES (?)"
         args = name
-        cls.execute_query(query, (args,))
+        return cls.execute_query(query, (args,))
 
     @classmethod
     def update_name(cls, user_id, name):

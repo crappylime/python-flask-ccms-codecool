@@ -163,7 +163,10 @@ class Student(User):
 
     @property
     def submission_list(self):
-        return Submission.get_submission_by_user_id(self.id)
+        return Submission.get_submission_list_by_user_id(self.id)
+
+    def get_submission_list(self):
+        return self.submission_list
     #
     # @classmethod
     # def get_grade(cls, name, assignment_title):

@@ -20,7 +20,7 @@ class Assignment:
         return info
 
     @classmethod
-    def get_assignment(cls, assignment_id):
+    def get_assignment_by_id(cls, assignment_id):
         """
         Returns assignment object.
 
