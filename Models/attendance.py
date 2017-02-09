@@ -1,10 +1,8 @@
-from Models.user import *
 from db import *
 
 
 class Attendance:
     """Class that represents attendance"""
-    attendance_list = []
 
     def __init__(self, attendance_id, student, date, status):
         """Attendance attributes - student instance and its status, date of attendance checking"""
