@@ -66,3 +66,13 @@ class DB:
         user_submission_list = cursor.fetchall()
         conn.close()
         return user_submission_list
+
+    @classmethod
+    def read_submission_record_list(cls):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `submissions`;"
+        cursor.execute(query)
+        submission_list = cursor.fetchall()
+        conn.close()
+        return submission_list
