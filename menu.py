@@ -1,7 +1,7 @@
-from Models.assignment import Assignment
-from Models.user import *
-from Models.teams import Team
 from ui import *
+from Models.user import *
+from Models.assignment import Assignment
+from Models.teams import Team
 import os
 
 

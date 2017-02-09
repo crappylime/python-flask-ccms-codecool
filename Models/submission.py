@@ -1,6 +1,7 @@
 from db import DB
-import Models.assignment
 import Models.user
+import Models.assignment
+
 
 
 class Submission:
