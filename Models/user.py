@@ -181,22 +181,22 @@ class Student(User):
     def submission_list(self):
         return Submission.get_submission_list_by_user_id(self.id)
 
+    @property
+    def grade(self):
+        pass
+
+    @property
+    def attendance(self):
+        pass
+
     def get_submission_list(self):
         return self.submission_list
 
-    #
-    # @classmethod
-    # def get_grade(cls, name, assignment_title):
-    #     """Returns grade from assignment with title 'assignment_title' submit by student with name 'name'"""
-    #     for student in cls.student_list:
-    #         if student.name == name:
-    #             for submission in student.submission_list:
-    #                 if assignment_title:
-    #                     return submission.points
-    #                 else:
-    #                     print('there is no such submission added by {}'.format(student.name))
-    #         else:
-    #             print('there is no such student in students list')
+    def get_grade(self):
+        return self.grade
+
+    def get_attendance(self):
+        return self.attendance
 
 
 class Employee(User):

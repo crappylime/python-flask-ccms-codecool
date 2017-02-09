@@ -113,12 +113,12 @@ class MentorMenu:
                     if grade_data is not None:
                         Submission.set_grade_submission(*grade_data)
             elif user_choice == "Check attendance":
-                for student in Student.get_student_list():
+                for student in Student.get_user_list():
                     Attendance.add_attendance(*UserInterface.get_attendance_data(student))
             elif user_choice == "Show attendance":
                 UserInterface.show_attendance_table(Attendance.get_attendance_list())
             elif user_choice == "Add student":
-                Student.add_student(*UserInterface.get_user_data())
+                Student.add_user(*UserInterface.get_user_data())
             elif user_choice == "Remove student":
                 user_list = User.get_user_list_by_role('student')
                 UserInterface.show_users_table(user_list)
