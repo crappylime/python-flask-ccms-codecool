@@ -1,4 +1,5 @@
 from Models.user import *
+from db import *
 
 
 class Assignment:
@@ -6,7 +7,8 @@ class Assignment:
 
     assignment_list = []
 
-    def __init__(self, title, content, due_date, max_points):
+    def __init__(self, user_id, title, content, due_date, max_points):
+        self.id = user_id
         self.title = title
         self.content = content
         self.due_date = due_date
@@ -41,6 +43,10 @@ class Assignment:
             if item.title == title:
                 return item
         raise NameError("There's no assignment with given title")
+
+    def get_id(self):
+        """Return assignment id"""
+        return self.id
 
     def get_title(self):
         """
@@ -120,6 +126,8 @@ class Assignment:
         for submission in self.submission_list:
             if submission.owner == student:
                 submission.points = points
+                DB.update_grade(student.get_id(), self.get_id(), points)
+
 
     @classmethod
     def get_list_assignmnent(cls):

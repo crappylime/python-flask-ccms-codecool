@@ -1,6 +1,5 @@
 from db import DB
 
-
 class User:
     """Parent class for all user instances - represents all users"""
 
@@ -29,6 +28,10 @@ class User:
         """Returns user instance subclass name"""
         return cls.__name__
 
+    def get_id(self):
+        """Returns user id"""
+        return self.id
+
     def get_name(self):
         """Returns user instance name"""
         return self.name
@@ -48,23 +51,26 @@ class User:
     def set_name(self, new_name):
         """Sets users name"""
         self.name = new_name
+        DB.update_name(self.get_id(), new_name)
 
     def set_mail(self, new_mail):
         """Sets users mail"""
         self.mail = new_mail
+        DB.update_mail(self.get_id(), new_mail)
 
     def set_password(self, new_password):
         """Sets users password"""
         self.password = new_password
+        DB.update_password(self.get_id(), new_password)
 
 
 class Student(User):
     """Class that represent students"""
     student_list = []  # collects all student instances
 
-    def __init__(self, name, mail, password):
+    def __init__(self, user_id, name, mail, password):
         """Student has additional attributes - grade list, attendance list, submission list"""
-        super().__init__(self, name, mail, password)
+        super().__init__(user_id, name, mail, password)
         self.grade_list = []
         self.attendance_list = []  # collect all attendance instances
         self.submission_list = []  # collect all submissions sending by student
@@ -118,9 +124,9 @@ class Mentor(Employee):
     """Class that represent mentors"""
     mentor_list = []  # collects all mentors instances
 
-    def __init__(self, name, mail, password):
+    def __init__(self, user_id, name, mail, password):
         """init from user class"""
-        super().__init__(name, mail, password)
+        super().__init__(user_id, name, mail, password)
 
 
 
@@ -148,9 +154,9 @@ class Boss(Employee):
     """Class that represent boss"""
     boss_list = []  # collects all boss instances
 
-    def __init__(self, name, mail, password):
+    def __init__(self, user_id, name, mail, password):
         """init from user class"""
-        super().__init__(name, mail, password)
+        super().__init__(user_id, name, mail, password)
 
     @classmethod
     def add_boss(cls, name, mail, password):
@@ -181,9 +187,9 @@ class Staff(Employee):
     """Class that represent staff employees"""
     staff_list = []  # collects all staff instances
 
-    def __init__(self, name, mail, password):
+    def __init__(self, user_id, name, mail, password):
         """init from user class"""
-        super().__init__(name, mail, password)
+        super().__init__(user_id, name, mail, password)
 
     @classmethod
     def add_staff(cls, name, mail, password):

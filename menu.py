@@ -1,6 +1,7 @@
 from Models.submission import *
 from Models.assignment import *
 from Models.attendance import *
+from Models.teams import *
 from ui import *
 import os
 
@@ -122,6 +123,18 @@ class MentorMenu:
                 Student.remove_student(UserInterface.get_remove_data())
             elif user_choice == "Edit student data":
                 MentorMenu.edit_user_data()
+            elif user_choice == "Create team":  # TODO
+                name = UserInterface.get_team_name()
+                Team(name)
+            elif user_choice == "Add student to team":  # TODO
+                team_list = Team.get_list_teams()
+                UserInterface.show_teams_table(team_list)
+                team_id_from_user = UserInterface.user_id_from_list(Team.get_list_teams())
+                UserInterface.show_users_table(User.get_user_list_by_role('student'))
+                student_id_from_user = UserInterface.user_id_from_list(User.get_user_list_by_role('student'))
+                DB.add_member(team_id_from_user, student_id_from_user)
+            elif user_choice == "Show teams":  # TODO
+                UserInterface.show_teams_table(Team.get_list_teams())
             elif user_choice == "Log out":
                 break
 

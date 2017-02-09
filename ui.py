@@ -76,7 +76,8 @@ class UserInterface:
     def mentor_menu():
         """Prints options list and returns user_choice()"""
         options = ['Show students list', 'Show assignments', 'Add an assignment', 'Grade an assignment',
-                   'Check attendance', 'Show attendance', 'Add student', 'Remove student', 'Edit student data', 'Log out']
+                   'Check attendance', 'Show attendance', 'Add student', 'Remove student', 'Edit student data',
+                   'Create team', 'Add student to team', 'Show teams', 'Log out']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
@@ -213,6 +214,23 @@ class UserInterface:
             for index, user in enumerate(user_list):
                 if user_choice == str(index + 1):
                     return user.get_name()
+            else:
+                print("Wrong input :-(")
+
+    @staticmethod
+    def user_id_from_list(user_list):
+        """
+        Returns user id
+        :param user_list:
+        :return:
+            int: user id
+        """
+        while True:
+            user_choice = input('Please choose person by index: ')
+            for user in user_list:
+                if user_choice == str(user.get_id()):
+                    user_choice = int(user_choice)
+                    return user_choice
             else:
                 print("Wrong input :-(")
 
@@ -384,5 +402,26 @@ class UserInterface:
                 if ass.points is not None:
                     list_for_table.append([index + 1, ass.get_assignment().get_title(), ass.get_owner().get_name(),
                                            ass.get_content(), ass.get_date(), ass.get_points()])
+
+        UserInterface.show_table(headers, list_for_table)
+
+    @staticmethod
+    def get_team_name():
+        """Provide team name"""
+        name = input("Provide team name: ")
+        return name
+
+
+    @staticmethod
+    def show_teams_table(teams_list):
+        """
+        Creates formatted table of teams
+        :param teams_list:
+        """
+        headers = ['team id', 'team name']
+        list_for_table = []
+
+        for index, team in enumerate(teams_list):
+            list_for_table.append([team.get_id(), team.get_name()])
 
         UserInterface.show_table(headers, list_for_table)
