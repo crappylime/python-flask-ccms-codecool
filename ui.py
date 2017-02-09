@@ -44,7 +44,7 @@ class UserInterface:
     @staticmethod
     def get_submit_data(user, assignment_list):
         """Returns user input about submission"""
-        assignment_id = item_id_from_list(assignment_list, "assignment")
+        assignment_id = UserInterface.item_id_from_list(assignment_list, "assignment")
         unique = True
         for item in assignment_list:
             if item.get_id() == assignment_id:
@@ -412,7 +412,7 @@ class UserInterface:
         else:
             for submission in submission_list:
                 if submission.points is not None:
-                    list_for_table.append([submission.get_id(), submission.get_assignment().get_title(), submission.get_owner().get_name(),
+                    list_for_table.append([submission.get_id(), submission.get_assignment().get_title(), submission.get_student().get_name(),
                                            submission.get_content(), submission.get_date(), submission.get_points()])
 
         UserInterface.show_table(headers, list_for_table)

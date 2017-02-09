@@ -1,6 +1,7 @@
 from db import DB
-from Models.assignment import Assignment
-from Models.user import User
+import Models.user
+import Models.assignment
+
 
 
 class Submission:
@@ -8,8 +9,8 @@ class Submission:
 
     def __init__(self, submission_id, assignment_id, user_id, content, date, points=None):
         self.id = submission_id
-        self.assignment = Assignment.get_assignment_by_id(assignment_id)
-        self.student = User.get_user_by_id(user_id)
+        self.assignment = Models.assignment.Assignment.get_assignment_by_id(assignment_id)
+        self.student = Models.user.User.get_user_by_id(user_id)
         self.content = content
         self.date = date
         self.points = points
