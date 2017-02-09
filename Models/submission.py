@@ -5,7 +5,8 @@ from Models.user import *
 class Submission:
     """This is class representing student submission for Assignment graded by Mentor."""
 
-    def __init__(self, assignment, owner, content, date, points=None):
+    def __init__(self, submission_id, assignment, owner, content, date, points=None):
+        self.id = submission_id
         self.assignment = assignment
         self.owner = owner
         self.content = content

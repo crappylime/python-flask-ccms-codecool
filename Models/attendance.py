@@ -5,8 +5,9 @@ class Attendance:
     """Class that represents attendance"""
     attendance_list = []
 
-    def __init__(self, student, date, status):
+    def __init__(self, attendance_id, student, date, status):
         """Attendance attributes - student instance and its status, date of attendance checking"""
+        self.id = attendance_id
         self.student = student
         self.date = date
         self.status = status

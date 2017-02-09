@@ -6,7 +6,8 @@ class Assignment:
 
     assignment_list = []
 
-    def __init__(self, title, content, due_date, max_points):
+    def __init__(self, assignment_id, title, content, due_date, max_points):
+        self.id = assignment_id
         self.title = title
         self.content = content
         self.due_date = due_date

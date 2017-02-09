@@ -4,11 +4,9 @@ import sqlite3
 class User:
     """Parent class for all user instances - represents all users"""
 
-    user_list = []  # collects all user instances - needed for login and csv export
-
     def __init__(self, user_id, name, mail, password):
-        """Attributes for all users - name, e-mail, password"""
-        self.user_id = user_id
+        """Attributes for all users - id, name, e-mail, password"""
+        self.id = user_id
         self.name = name
         self.mail = mail
         self.password = password
@@ -47,14 +45,20 @@ class User:
         """Sets users password"""
         self.password = new_password
 
+    @classmethod
+    def remove_user(cls, user_id):
+        """Removes user instance from user list"""
+        DB.delete_user_record(user_id)
+        DB.delete_user_attendance_record(user_id)
+        DB.delete_user_submission_record(user_id)
+
 
 class Student(User):
     """Class that represent students"""
-    student_list = []  # collects all student instances
 
     def __init__(self, name, mail, password):
         """Student has additional attributes - grade list, attendance list, submission list"""
-        super().__init__(self, name, mail, password)
+        super().__init__(user_id, self, name, mail, password)
         self.grade_list = []
         self.attendance_list = []  # collect all attendance instances
         self.submission_list = []  # collect all submissions sending by student
@@ -63,13 +67,6 @@ class Student(User):
     def add_student(cls, name, mail, password):
         """Adds news student instance and appends its to student list"""
         cls.student_list.append(Student(name, mail, password))
-
-    @classmethod
-    def remove_student(cls, name):
-        """Removes student instance from student list"""
-        for student in cls.student_list:
-            if student.name == name:
-                cls.student_list.remove(student)
 
     @classmethod
     def get_student_list(cls):
@@ -109,23 +106,15 @@ class Employee(User):
 
 class Mentor(Employee):
     """Class that represent mentors"""
-    mentor_list = []  # collects all mentors instances
 
     def __init__(self, name, mail, password):
         """init from user class"""
-        super().__init__(name, mail, password)
+        super().__init__(user_id, name, mail, password)
 
     @classmethod
     def add_mentor(cls, name, mail, password):
         """Adds news mentor instance and appends its to mentors list"""
         cls.mentor_list.append(Mentor(name, mail, password))
-
-    @classmethod
-    def remove_mentor(cls, name):
-        """Removes mentor instance from mentor list"""
-        for mentor in cls.mentor_list:
-            if mentor.name == name:
-                cls.mentor_list.remove(mentor)
 
     @classmethod
     def get_list_mentor(cls):
@@ -142,11 +131,10 @@ class Mentor(Employee):
 
 class Boss(Employee):
     """Class that represent boss"""
-    boss_list = []  # collects all boss instances
 
     def __init__(self, name, mail, password):
         """init from user class"""
-        super().__init__(name, mail, password)
+        super().__init__(user_id, name, mail, password)
 
     @classmethod
     def add_boss(cls, name, mail, password):
@@ -175,23 +163,15 @@ class Boss(Employee):
 
 class Staff(Employee):
     """Class that represent staff employees"""
-    staff_list = []  # collects all staff instances
 
     def __init__(self, name, mail, password):
         """init from user class"""
-        super().__init__(name, mail, password)
+        super().__init__(user_id, name, mail, password)
 
     @classmethod
     def add_staff(cls, name, mail, password):
         """Adds news staff instance and appends its to staff list"""
         cls.staff_list.append(Staff(name, mail, password))
-
-    @classmethod
-    def remove_staff(cls, name):
-        """Removes staff instance from staff list"""
-        for staff in cls.staff_list:
-            if staff.name == name:
-                cls.staff_list.remove(staff)
 
     @classmethod
     def get_staff_list(cls):
