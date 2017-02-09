@@ -232,11 +232,21 @@ class DB:
         return submission_list
 
     @classmethod
-    def read_attendance_record_list_by_user_id(cls, user_id):
+    def read_attendance_record_by_id(cls, attendance_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `attendances` WHERE `attendance_id` = ?;"
+        cursor.execute(query, (attendance_id,))
+        attendance = cursor.fetchall()
+        conn.close()
+        return attendance
+
+    @classmethod
+    def read_attendance_record_list_by_student_id(cls, student_id):
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `attendances` WHERE `user_id` = ?;"
-        cursor.execute(query, (user_id,))
+        cursor.execute(query, (student_id,))
         attendance = cursor.fetchall()
         conn.close()
         return attendance
