@@ -4,7 +4,7 @@ class Team:
 
     def __init__(self, name):
         self.name = name
-        DB.create_team(name)
+        # DB.create_team(name)
 
 
     def get_id(self):
