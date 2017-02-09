@@ -126,12 +126,6 @@ class UserInterface:
         return name, mail, password
 
     @staticmethod
-    def get_remove_data():
-        """Returns user name"""
-        name = input("Please provide name of the person you would like to remove: ")
-        return name
-
-    @staticmethod
     def get_attendance_data(student):
         """Returns user input about student presence"""
         date = time.strftime("%Y-%m-%-d")
@@ -172,7 +166,7 @@ class UserInterface:
         """
         Prints attendance
         :param attendance_list:
-        :param student_to_edit: 
+        :param student_to_edit:
         """
         person_attendance_list = []
         for attendance in attendance_list:
@@ -201,18 +195,19 @@ class UserInterface:
                 print("Wrong input :-(")
 
     @staticmethod
-    def user_name_from_list(user_list):
+    def user_id_from_list(user_list):
         """
-        Returns user name
+        Returns user id
         :param user_list:
         :return:
-            str: user name
+            int: user id
         """
         while True:
             user_choice = input('Please choose person by index: ')
-            for index, user in enumerate(user_list):
-                if user_choice == str(index + 1):
-                    return user.get_name()
+            for user in user_list:
+                if user_choice == str(user.get_id()):
+                    user_choice = int(user_choice)
+                    return user_choice
             else:
                 print("Wrong input :-(")
 
