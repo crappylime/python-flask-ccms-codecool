@@ -28,6 +28,18 @@ class DB:
         return user_list
 
     @classmethod
+    def read_user_record_list_by_id(cls, id_list):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        placeholder = '?'
+        placeholders = ', '.join(placeholder for unused in id_list)
+        query = 'SELECT * FROM `users` WHERE `user_id` IN (%s);' % placeholders
+        cursor.execute(query, id_list)
+        user_list = cursor.fetchall()
+        conn.close()
+        return user_list
+
+    @classmethod
     def read_assignment_record_by_id(cls, assignment_id):
         conn = cls.connect()
         cursor = conn.cursor()
