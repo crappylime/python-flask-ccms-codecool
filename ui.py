@@ -138,7 +138,7 @@ class UserInterface:
             if status not in ["0", "1", "L"]:
                 print("Wrong input")
             else:
-                return student, date, status
+                return student.get_id(), date, status
 
     @staticmethod
     def staff_menu():
