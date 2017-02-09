@@ -6,8 +6,8 @@ class Submission:
 
     def __init__(self, submission_id, assignment_id, user_id, content, date, points=None):
         self.id = submission_id
-        self.assignment_id = assignment_id
-        self.user_id = user_id
+        self.assignment = Assignment.get_assigment_by_id(assignment_id)
+        self.user = User.get_user_by_id(user_id)
         self.content = content
         self.date = date
         self.points = points

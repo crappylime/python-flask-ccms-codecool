@@ -4,15 +4,13 @@ from db import *
 
 class Attendance:
     """Class that represents attendance"""
-    attendance_list = []
 
-    def __init__(self, attendance_id, student, date, status):
+    def __init__(self, attendance_id, student_id, date, status):
         """Attendance attributes - student instance and its status, date of attendance checking"""
         self.id = attendance_id
-        self.student = student
+        self.student = User.get_user_by_id(student_id)
         self.date = date
         self.status = status
-        Attendance.attendance_list.append(self)
 
     @classmethod
     def add_attendance(cls, student_id, date, status):
