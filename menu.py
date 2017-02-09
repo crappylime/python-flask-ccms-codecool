@@ -177,7 +177,7 @@ class BossMenu:
             user_choice = UserInterface.boss_menu()
             os.system("clear")
             if user_choice == "Add a mentor":
-                Mentor.add_mentor(*UserInterface.new_mentor())
+                Mentor.add_user(*UserInterface.new_mentor())
             elif user_choice == "Remove a mentor":
                 user_list = User.get_user_list_by_role('mentor')
                 UserInterface.show_users_table(user_list)

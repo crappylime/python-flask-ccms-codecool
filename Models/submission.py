@@ -62,6 +62,15 @@ class Submission:
         return cls.create_submission_list()
 
     @classmethod
+    def get_overall_grade(cls, student_id):
+        """
+        Returns overall grade
+        :return:
+           str: overall grade
+        """
+        return cls.create_overall_grade(student_id)
+
+    @classmethod
     def create_submission_by_id(cls, submission_id):
         """
         Creates instance of user
@@ -100,6 +109,15 @@ class Submission:
         """
         submission_data = DB.read_submission_record_list()
         return [Submission(*submission) for submission in submission_data]
+
+    @classmethod
+    def create_overall_grade(cls, student_id):
+        """
+        Create overall_grade
+        :return:
+            overall grade: str
+        """
+        return DB.read_overall_grade(student_id)
 
     @classmethod
     def add_submission(cls, student_id, assignment_id, content, date):

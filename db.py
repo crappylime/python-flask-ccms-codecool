@@ -215,6 +215,30 @@ class DB:
         return attendance_list
 
     @classmethod
+    def read_overall_grade(cls, student_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT round(avg(100.0*submissions.points/assignments.max_points),2) FROM submissions " \
+                "INNER JOIN assignments ON submissions.assignment_id=assignments.assignment_id " \
+                "WHERE `user_id`=?;"
+        cursor.execute(query, (student_id,))
+        overall_grade = cursor.fetchall()[0][0]
+        print(overall_grade, student_id)
+        conn.close()
+        return overall_grade
+
+    @classmethod
+    def read_overall_attendance(cls, student_id):
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT round(avg(100.0*status), 2) from attendances WHERE `user_id`=?;"
+        cursor.execute(query, (student_id,))
+        overall_attendance = cursor.fetchall()[0][0]
+        print(overall_attendance, student_id)
+        conn.close()
+        return overall_attendance
+
+    @classmethod
     def read_team_list(cls):
         conn = cls.connect()
         cursor = conn.cursor()
