@@ -119,7 +119,6 @@ class DB:
         cursor.execute(query, (team_id,))
         temp_list = cursor.fetchall()
         user_list = [int(elem[0]) for elem in temp_list]
-        print('user lisr:', user_list)
         conn.close()
         return user_list
 
