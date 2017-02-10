@@ -185,6 +185,8 @@ class MenuMethods:
             user_list = User.get_user_list_by_role('student')
             UserInterface.show_users_with_details_table(user_list)
             user_id = UserInterface.item_id_from_list(user_list, 'person')
+            if user_id is None:
+                break
             user_to_edit = User.get_user_by_id(user_id)
             if option_choice == "Edit student attendance status":
                 student_attendances_to_edit_one = UserInterface.attendance_id_from_list(user_to_edit.attendance_list, user_to_edit)
@@ -213,13 +215,13 @@ class MenuMethods:
     @staticmethod
     def grade_an_assignment():
         UserInterface.show_assignments_table(Assignment.get_assignment_list())
-        assignment_id = UserInterface.assignment_id_from_list(Assignment.get_assignment_list())
-        if assignment_id is not None:
+        assignment_id = UserInterface.item_id_from_list(Assignment.get_assignment_list(), 'assignment')
+        if assignment_id:
             assignment = Assignment.get_assignment_by_id(assignment_id)
             submission_list = Submission.create_submission_list_by_assignment_id(assignment_id)
             UserInterface.show_submissions_table(submission_list)
             grade_data = UserInterface.get_grade_assignment_data(submission_list, assignment)
-            if grade_data is not None:
+            if grade_data:
                 Submission.set_grade_submission(*grade_data)
 
     @staticmethod
@@ -275,6 +277,8 @@ class MenuMethods:
             user_list = User.get_user_list_by_role('mentor')
             UserInterface.show_users_with_details_table(user_list)
             user_id = UserInterface.item_id_from_list(user_list, 'person')
+            if user_id is None:
+                break
             user_to_edit = User.get_user_by_id(user_id)
             if option_choice == "Edit mentor name":
                 user_to_edit.set_name(UserInterface.edit_user_name(user_to_edit))
