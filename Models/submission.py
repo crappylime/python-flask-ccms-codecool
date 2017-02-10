@@ -125,7 +125,7 @@ class Submission:
         values = (assignment_id, student_id, content, date)
         new_submission_id = DB.create_submission_record(values)
         new_submission = cls.get_submission_by_id(new_submission_id)
-        return new_submission
+        # return new_submission
 
     def get_date(self):
         """
