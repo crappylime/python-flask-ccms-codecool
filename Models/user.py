@@ -4,8 +4,6 @@ from Models.attendance import Attendance
 from Models.teams import Team
 
 
-
-
 class User:
     """Parent class for all user instances - represents all users"""
 

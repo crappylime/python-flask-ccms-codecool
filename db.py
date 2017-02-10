@@ -5,10 +5,12 @@ class DB:
 
     @classmethod
     def connect(cls):
+        """Connect with database"""
         return sqlite3.connect('Data/ccms.db')
 
     @classmethod
     def execute_query(cls, query, args):
+        """Execute query based on provided parameters"""
         conn = cls.connect()
         cur = conn.cursor()
         if type(args) is tuple:
@@ -19,6 +21,7 @@ class DB:
 
     @classmethod
     def execute_insert_query(cls, query, args):
+        """Execute query and return new record id"""
         conn = cls.connect()
         cur = conn.cursor()
         cur.execute(query, args)
@@ -29,38 +32,45 @@ class DB:
 
     @classmethod
     def create_user_record(cls, values):
+        """Add new user record to database"""
         query = 'INSERT INTO users (`name`, `mail`, `password`, `role`) VALUES (?, ?, ?, ?);'
         return cls.execute_insert_query(query, values)
 
     @classmethod
     def create_assignment_record(cls, values):
+        """Add new assignment record to database"""
         query = 'INSERT INTO assignments (`title`, `content`, `due_date`, `max_points`) VALUES (?, ?, ?, ?);'
         return cls.execute_insert_query(query, values)
 
     @classmethod
     def create_submission_record(cls, values):
+        """Add new submission record to database"""
         query = 'INSERT INTO submissions (`assignment_id`, `user_id`, `content`, `date`) VALUES (?, ?, ?, ?);'
         return cls.execute_insert_query(query, values)
 
     @classmethod
     def create_attendance_record(cls, values):
+        """Add attendance record to database"""
         query = 'INSERT INTO attendances (`user_id`, `date`, `status`) VALUES (?, ?, ?);'
         return cls.execute_insert_query(query, values)
 
     @classmethod
     def create_team(cls, name):
+        """Add new team to database"""
         query = "INSERT INTO `teams` (`name`) VALUES (?)"
         args = name
         return cls.execute_insert_query(query, (args,))
 
     @classmethod
     def create_member_record(cls, team_id, student_id):
+        """Add new member record to database"""
         query = 'INSERT INTO `members` VALUES (?, ?);'
         args = (team_id, student_id)
         return cls.execute_insert_query(query, args)
 
     @classmethod
     def read_user_record_by_user_id(cls, user_id):
+        """Read user record by provided id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `users` WHERE `user_id` = ?;"
@@ -71,6 +81,7 @@ class DB:
 
     @classmethod
     def read_user_record_list_by_user_id(cls, user_id):
+        """Read user record list by provided id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `users` WHERE `user_id` = ?;"
@@ -81,6 +92,7 @@ class DB:
 
     @classmethod
     def read_user_record_list(cls):
+        """Read all user records list"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `users`;"
@@ -91,6 +103,7 @@ class DB:
 
     @classmethod
     def read_user_record_list_by_role(cls, role):
+        """Read user record list by provided role"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `users` WHERE `role` = ?;"
@@ -101,6 +114,7 @@ class DB:
 
     @classmethod
     def read_user_record_list_by_id(cls, id_list):
+        """Read user record list by provided id"""
         conn = cls.connect()
         cursor = conn.cursor()
         placeholder = '?'
@@ -113,6 +127,7 @@ class DB:
 
     @classmethod
     def read_user_id_list_by_team_id(cls, team_id):
+        """Read user id list by provided team id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT `student_id` FROM `members` WHERE `team_id` = ?;"
@@ -124,6 +139,7 @@ class DB:
 
     @classmethod
     def read_assignment_record_by_id(cls, assignment_id):
+        """Read assignment record by provided assignment id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `assignments` WHERE `assignment_id` = ?;"
@@ -134,6 +150,7 @@ class DB:
 
     @classmethod
     def read_assignment_record_list(cls):
+        """Read assignment record list"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `assignments`;"
@@ -144,6 +161,7 @@ class DB:
 
     @classmethod
     def read_submission_record_by_id(cls, submission_id):
+        """Read submission reacord by provided submission id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `submissions` WHERE `submission_id` = ?;"
@@ -154,6 +172,7 @@ class DB:
 
     @classmethod
     def read_submission_record_list_by_user_id(cls, user_id):
+        """Read submission record list by provided user id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `submissions` WHERE `user_id` = ?;"
@@ -164,6 +183,7 @@ class DB:
 
     @classmethod
     def read_team_record_by_id(cls, team_id):
+        """Read team record by provided team id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `teams` WHERE `id` = ?;"
@@ -174,6 +194,7 @@ class DB:
 
     @classmethod
     def read_submission_record_list_by_assignment_id(cls, assignment_id):
+        """Read submission record list by provided assignment id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `submissions` WHERE `assignment_id` = ?;"
@@ -184,6 +205,7 @@ class DB:
 
     @classmethod
     def read_submission_record_list(cls):
+        """Read submission record list"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `submissions`;"
@@ -194,6 +216,7 @@ class DB:
 
     @classmethod
     def read_attendance_record_by_id(cls, attendance_id):
+        """Read attendance record by provided attendance id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `attendances` WHERE `attendance_id` = ?;"
@@ -204,6 +227,7 @@ class DB:
 
     @classmethod
     def read_attendance_record_list_by_student_id(cls, student_id):
+        """Read attendance record list by provided studen id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `attendances` WHERE `user_id` = ?;"
@@ -214,6 +238,7 @@ class DB:
 
     @classmethod
     def read_attendance_record_list(cls):
+        """Read attendance record list"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `attendances`;"
@@ -224,6 +249,7 @@ class DB:
 
     @classmethod
     def read_overall_grade(cls, student_id):
+        """Read overall grade by provided student id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT round(avg(100.0*submissions.points/assignments.max_points),2) FROM submissions " \
@@ -236,6 +262,7 @@ class DB:
 
     @classmethod
     def read_overall_attendance(cls, student_id):
+        """Read overall attendance by provided student id"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT round(avg(100.0*status), 2) from attendances WHERE `user_id`=?;"
@@ -246,6 +273,7 @@ class DB:
 
     @classmethod
     def read_team_list(cls):
+        """Read team record list"""
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `teams`;"

@@ -348,7 +348,7 @@ class UserInterface:
         headers = ['id', 'name', 'grade']
         list_for_table = []
         for user in users:
-            list_for_table.append([user.get_id(), user.get_name(), user.get_overall_grade()])
+            list_for_table.append([user.get_id(), user.get_name(), "{}%".format(user.get_overall_grade())])
 
         UserInterface.show_table(headers, list_for_table)
 
