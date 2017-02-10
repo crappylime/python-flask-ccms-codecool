@@ -37,17 +37,6 @@ class Menu:
                 break
 
 
-    @staticmethod
-    def show_users_with_details(role):
-        user_list = User.get_user_list_by_role(role)
-        UserInterface.show_users_with_details_table(user_list)
-
-
-    @staticmethod
-    def show_students_with_grades():
-        user_list = User.get_user_list_by_role('student')
-        UserInterface.show_students_with_grades_table(user_list)
-
 class StudentMenu:
     """Student menu options"""
     def __init__(self, user):
@@ -59,11 +48,15 @@ class StudentMenu:
             elif user_choice == "View my grades":
                 MenuMethods.view_my_grades(user)
             elif user_choice == "View my overall grade":
-                MenuMethods.view_my_grades(user)
+                 MenuMethods.view_my_overall_grade(user)
             elif user_choice == "View my submissions":
                 MenuMethods.view_my_submissions(user)
             elif user_choice == "View assignments":
                 MenuMethods.view_assignments()
+            elif user_choice == "View my attendance list":
+                MenuMethods.view_my_attendance_list(user)
+            elif user_choice == "View my overall attendance":
+                MenuMethods.view_my_overall_attendance(user)
             elif user_choice == "Log out":
                 break
 
@@ -76,7 +69,7 @@ class MentorMenu:
             user_choice = UserInterface.mentor_menu()
             os.system("clear")
             if user_choice == "Show students list":
-                MenuMethods.show_student_list()
+                MenuMethods.show_users_with_details('student')
             elif user_choice == "Show assignments":
                 MenuMethods.show_assignments()
             elif user_choice == "Add an assignment":
@@ -123,11 +116,11 @@ class BossMenu:
             elif user_choice == "Edit mentor data":
                 MenuMethods.edit_mentor_data()
             elif user_choice == "Show mentors list":
-                MenuMethods.show_mentor_list()
+                MenuMethods.show_users_with_details('mentor')
             elif user_choice == "Show students list":
-                MenuMethods.show_student_list()
+                MenuMethods.show_users_with_details('student')
             elif user_choice == "Show students average grade":
-                MenuMethods.show_student_average_grade()
+                MenuMethods.show_students_with_grades()
             elif user_choice == "Log out":
                 break
 
@@ -140,7 +133,7 @@ class StaffMenu:
             user_choice = UserInterface.staff_menu()
             os.system("clear")
             if user_choice == "Show students list":
-                MenuMethods.show_student_list()
+                MenuMethods.show_users_with_details('student')
             elif user_choice == "Log out":
                 break
 
@@ -161,9 +154,10 @@ class MenuMethods:
     def view_my_grades(user):
         UserInterface.show_submissions_table(user.submission_list, 'graded')
 
+
     @staticmethod
     def view_my_overall_grade(user):
-        UserInterface.print_line(Student.get_overall_grade(user))
+        UserInterface.print_line(user.get_overall_grade())
 
     @staticmethod
     def view_my_submissions(user):
@@ -173,6 +167,13 @@ class MenuMethods:
     def view_assignments():
         UserInterface.show_assignments_table(Assignment.get_assignment_list())
 
+    @staticmethod
+    def view_my_attendance_list(user):
+        UserInterface.show_attendance_table(Attendance.get_attendance_list_by_student_id(user.get_id()))
+
+    @staticmethod
+    def view_my_overall_attendance(user):
+        UserInterface.print_line(Attendance.get_overall_attendance(user.get_id()))
     # MentorMenu:
 
     @staticmethod
@@ -199,9 +200,11 @@ class MenuMethods:
             elif option_choice == "Edit student password":
                 user_to_edit.set_password(UserInterface.edit_user_password(user_to_edit))
 
+
     @staticmethod
-    def show_student_list():
-        Menu.show_users_with_details('student')
+    def show_users_with_details(role):
+        user_list = User.get_user_list_by_role(role)
+        UserInterface.show_users_with_details_table(user_list)
 
     @staticmethod
     def show_assignments():
@@ -226,7 +229,7 @@ class MenuMethods:
 
     @staticmethod
     def check_attendance():
-        for student in Student.get_user_list():
+        for student in Student.get_user_list_by_role('student'):
             Attendance.add_attendance(*UserInterface.get_attendance_data(student))
 
     @staticmethod
@@ -302,12 +305,9 @@ class MenuMethods:
         MenuMethods.edit_user_mentor_data()
 
     @staticmethod
-    def show_mentor_list():
-        Menu.show_users_with_details('mentor')
-
-    @staticmethod
-    def show_student_average_grade():
-        Menu.show_students_with_grades()
+    def show_students_with_grades():
+        user_list = User.get_user_list_by_role('student')
+        UserInterface.show_students_with_grades_table(user_list)
 
 
 def main():
