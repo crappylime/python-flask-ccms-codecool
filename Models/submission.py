@@ -121,11 +121,11 @@ class Submission:
         return DB.read_overall_grade(student_id)
 
     @classmethod
-    def add_submission(cls, student_id, assignment_id, content, date):
+    def add_submission(cls, assignment_id, student_id,  content, date):
         values = (assignment_id, student_id, content, date)
         new_submission_id = DB.create_submission_record(values)
         new_submission = cls.get_submission_by_id(new_submission_id)
-        # return new_submission
+        return new_submission
 
     def get_date(self):
         """

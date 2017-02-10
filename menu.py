@@ -48,7 +48,7 @@ class StudentMenu:
             elif user_choice == "View my grades":
                 MenuMethods.view_my_grades(user)
             elif user_choice == "View my overall grade":
-                 MenuMethods.view_my_overall_grade(user)
+                MenuMethods.view_my_overall_grade(user)
             elif user_choice == "View my submissions":
                 MenuMethods.view_my_submissions(user)
             elif user_choice == "View assignments":

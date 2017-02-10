@@ -61,7 +61,7 @@ class UserInterface:
                     print('\nAssignment submitted successfully!\n')
                     return assignment_id, owner_id, content, date
 
-        if unique is True:
+        if unique:
             print('\nThere\'s no assignment with given ID!\n')
 
     @staticmethod
