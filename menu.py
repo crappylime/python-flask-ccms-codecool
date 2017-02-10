@@ -227,7 +227,7 @@ class MenuMethods:
 
     @staticmethod
     def check_attendance():
-        for student in Student.get_user_list():
+        for student in Student.get_user_list_by_role('student'):
             Attendance.add_attendance(*UserInterface.get_attendance_data(student))
 
     @staticmethod
