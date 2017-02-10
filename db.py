@@ -255,6 +255,7 @@ class DB:
         conn.close()
         return team_list
 
+    @classmethod
     def update_name(cls, user_id, name):
         query = "UPDATE `users` SET `name` = ? WHERE `user_id` = ?;"
         args = (name, user_id)

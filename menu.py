@@ -43,6 +43,11 @@ class Menu:
         UserInterface.show_users_with_details_table(user_list)
 
 
+    @staticmethod
+    def show_students_with_grades():
+        user_list = User.get_user_list_by_role('student')
+        UserInterface.show_students_with_grades_table(user_list)
+
 class StudentMenu:
     """Student menu options"""
     def __init__(self, user):
@@ -187,6 +192,9 @@ class BossMenu:
                 Menu.show_users_with_details('mentor')
             elif user_choice == "Show students list":
                 Menu.show_users_with_details('student')
+            elif user_choice == "Show students average grade":
+                Menu.show_students_with_grades()
+
             elif user_choice == "Log out":
                 break
 
