@@ -422,7 +422,6 @@ class UserInterface:
         name = input("Provide team name: ")
         return name
 
-
     @staticmethod
     def show_teams_table(teams_list):
         """
