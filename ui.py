@@ -329,7 +329,7 @@ class UserInterface:
     @staticmethod
     def show_users_with_details_table(users):
         """
-        Creates formatted table of users
+        Creates formatted table of users with details
         :param users:
         """
         headers = ['id', 'name', 'mail']
@@ -342,7 +342,7 @@ class UserInterface:
     @staticmethod
     def show_students_with_grades_table(users):
         """
-        Creates formatted table of users
+        Creates formatted table of users with overall grade for each one
         :param users:
         """
         headers = ['id', 'name', 'grade']
