@@ -61,7 +61,7 @@ class UserInterface:
                     print('\nAssignment submitted successfully!\n')
                     return assignment_id, owner_id, content, date
 
-        if unique is True:
+        if unique:
             print('\nThere\'s no assignment with given ID!\n')
 
     @staticmethod
@@ -348,7 +348,7 @@ class UserInterface:
         headers = ['id', 'name', 'grade']
         list_for_table = []
         for user in users:
-            list_for_table.append([user.get_id(), user.get_name(), user.get_overall_grade()])
+            list_for_table.append([user.get_id(), user.get_name(), "{}%".format(user.get_overall_grade())])
 
         UserInterface.show_table(headers, list_for_table)
 
