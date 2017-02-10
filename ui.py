@@ -45,6 +45,8 @@ class UserInterface:
     def get_submit_data(user, assignment_list):
         """Returns user input about submission"""
         assignment_id = UserInterface.item_id_from_list(assignment_list, "assignment")
+        if assignment_id == 'x':
+            return None
         unique = True
         for item in assignment_list:
             if item.get_id() == assignment_id:
@@ -203,6 +205,7 @@ class UserInterface:
         Returns user id
         :param user_list:
         :return:
+            None: if exit
             int: user id
         """
         while True:
@@ -212,24 +215,7 @@ class UserInterface:
                     user_choice = int(user_choice)
                     return user_choice
                 elif user_choice == 'x':
-                    return user_choice
-            else:
-                print("Wrong input :-(")
-
-    @staticmethod
-    def assignment_id_from_list(assignment_list):
-        """
-        Returns assignment id
-        :param user_list:
-        :return:
-            int: user id
-        """
-        while True:
-            user_choice = input('Please choose assignment by index: ')
-            for ass in assignment_list:
-                if user_choice == str(ass.get_id()):
-                    user_choice = int(user_choice)
-                    return user_choice
+                    return None
             else:
                 print("Wrong input :-(")
 

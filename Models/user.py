@@ -78,20 +78,6 @@ class User:
 
         return user_list
 
-    @classmethod
-    def create_user_list(cls):
-        """
-        Creates list of user instances
-        :return:
-            user_list: list
-        """
-        user_list = []
-        users_data = DB.read_user_record_list()
-        pairs = {"student": Student, "mentor": Mentor, "staff": Staff, "boss": Boss}
-        for user in users_data:
-            user_list.append(pairs[user[-1]](*user[:-1]))
-
-        return user_list
 
     @classmethod
     def create_user_list_by_role(cls, role):
