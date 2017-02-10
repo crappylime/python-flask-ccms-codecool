@@ -37,10 +37,7 @@ class Menu:
                 break
 
 
-    @staticmethod
-    def show_users_with_details(role):
-        user_list = User.get_user_list_by_role(role)
-        UserInterface.show_users_with_details_table(user_list)
+
 
 
     @staticmethod
@@ -76,7 +73,7 @@ class MentorMenu:
             user_choice = UserInterface.mentor_menu()
             os.system("clear")
             if user_choice == "Show students list":
-                MenuMethods.show_student_list()
+                MenuMethods.show_users_with_details('student')
             elif user_choice == "Show assignments":
                 MenuMethods.show_assignments()
             elif user_choice == "Add an assignment":
@@ -123,9 +120,9 @@ class BossMenu:
             elif user_choice == "Edit mentor data":
                 MenuMethods.edit_mentor_data()
             elif user_choice == "Show mentors list":
-                MenuMethods.show_mentor_list()
+                MenuMethods.show_users_with_details('mentor')
             elif user_choice == "Show students list":
-                MenuMethods.show_student_list()
+                MenuMethods.show_users_with_details('student')
             elif user_choice == "Show students average grade":
                 MenuMethods.show_student_average_grade()
             elif user_choice == "Log out":
@@ -140,7 +137,7 @@ class StaffMenu:
             user_choice = UserInterface.staff_menu()
             os.system("clear")
             if user_choice == "Show students list":
-                MenuMethods.show_student_list()
+                MenuMethods.show_users_with_details('student')
             elif user_choice == "Log out":
                 break
 
@@ -197,9 +194,11 @@ class MenuMethods:
             elif option_choice == "Edit student password":
                 user_to_edit.set_password(UserInterface.edit_user_password(user_to_edit))
 
+
     @staticmethod
-    def show_student_list():
-        Menu.show_users_with_details('student')
+    def show_users_with_details(role):
+        user_list = User.get_user_list_by_role(role)
+        UserInterface.show_users_with_details_table(user_list)
 
     @staticmethod
     def show_assignments():
@@ -296,10 +295,6 @@ class MenuMethods:
     @staticmethod
     def edit_mentor_data():
         MenuMethods.edit_user_mentor_data()
-
-    @staticmethod
-    def show_mentor_list():
-        Menu.show_users_with_details('mentor')
 
     @staticmethod
     def show_student_average_grade():
