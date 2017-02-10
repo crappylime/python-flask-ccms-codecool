@@ -37,7 +37,7 @@ class UserInterface:
     @staticmethod
     def student_menu():
         """Prints options list and returns user_choice()"""
-        options = ['View assignments', 'Submit an assignment', 'View my grades', 'View my overall grade', 'View my submissions', 'View my overall attendance', 'Log out']
+        options = ['View assignments', 'Submit an assignment', 'View my grades', 'View my overall grade', 'View my submissions', "View my attendance list",'View my overall attendance', 'Log out']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 

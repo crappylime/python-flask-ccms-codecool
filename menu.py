@@ -57,13 +57,13 @@ class StudentMenu:
             elif user_choice == "View my grades":
                 UserInterface.show_submissions_table(user.submission_list, 'graded')
             elif user_choice == "View my overall grade":
-                UserInterface.print_line(Student.get_overall_grade())
+                UserInterface.print_line(user.get_overall_grade())
             elif user_choice == "View my submissions":
                 UserInterface.show_submissions_table(user.submission_list)
             elif user_choice == "View assignments":
                 UserInterface.show_assignments_table(Assignment.get_assignment_list())
             elif user_choice == "View my attendance list":
-                UserInterface
+                UserInterface.show_attendance_table(Attendance.get_attendance_list_by_student_id(user.get_id()))
             elif user_choice == "View my overall attendance":
                 UserInterface.print_line(Attendance.get_overall_attendance(user.get_id()))
             elif user_choice == "Log out":
