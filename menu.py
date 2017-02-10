@@ -39,6 +39,7 @@ class Menu:
 
 class StudentMenu:
     """Student menu options"""
+
     def __init__(self, user):
         while True:
             user_choice = UserInterface.student_menu()
@@ -48,7 +49,7 @@ class StudentMenu:
             elif user_choice == "View my grades":
                 MenuMethods.view_my_grades(user)
             elif user_choice == "View my overall grade":
-                 MenuMethods.view_my_overall_grade(user)
+                MenuMethods.view_my_overall_grade(user)
             elif user_choice == "View my submissions":
                 MenuMethods.view_my_submissions(user)
             elif user_choice == "View assignments":
@@ -141,19 +142,18 @@ class StaffMenu:
 class MenuMethods:
     """Gather methods from menus"""
 
-    # StudentMenu:
+    # ------------------StudentMenu: ---------------------->
 
     @staticmethod
     def submit_an_assignment(user):
         UserInterface.show_assignments_table(Assignment.get_assignment_list())
         data_for_submission = UserInterface.get_submit_data(user, Assignment.get_assignment_list())
-        if data_for_submission is not None:
+        if data_for_submission:
             Submission.add_submission(*data_for_submission)
 
     @staticmethod
     def view_my_grades(user):
         UserInterface.show_submissions_table(user.submission_list, 'graded')
-
 
     @staticmethod
     def view_my_overall_grade(user):
@@ -174,7 +174,8 @@ class MenuMethods:
     @staticmethod
     def view_my_overall_attendance(user):
         UserInterface.print_line(Attendance.get_overall_attendance(user.get_id()))
-    # MentorMenu:
+
+    # ------------------MentorMenu: ---------------------->
 
     @staticmethod
     def edit_user_student_data():
@@ -199,7 +200,6 @@ class MenuMethods:
                 user_to_edit.set_mail(UserInterface.edit_user_mail(user_to_edit))
             elif option_choice == "Edit student password":
                 user_to_edit.set_password(UserInterface.edit_user_password(user_to_edit))
-
 
     @staticmethod
     def show_users_with_details(role):
@@ -268,7 +268,7 @@ class MenuMethods:
         user_list = User.get_user_list_by_id_list(members_id)
         UserInterface.show_users_table(user_list)
 
-    # BossMenu:
+    # ------------------BossMenu: ---------------------->
 
     @staticmethod
     def edit_user_mentor_data():
