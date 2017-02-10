@@ -151,7 +151,7 @@ class UserInterface:
     def boss_menu():
         """Prints options list and returns user_choice()"""
         options = ['Add a mentor', 'Remove a mentor', 'Edit mentor data', 'Show mentors list', 'Show students list',
-                   'Log out']
+                   'Show students average grade', 'Log out']
         UserInterface.print_options_list(options)
         return UserInterface.user_choice(options)
 
@@ -350,6 +350,19 @@ class UserInterface:
         list_for_table = []
         for user in users:
             list_for_table.append([user.get_id(), user.get_name(), user.get_mail()])
+
+        UserInterface.show_table(headers, list_for_table)
+
+    @staticmethod
+    def show_students_with_grades_table(users):
+        """
+        Creates formatted table of users
+        :param users:
+        """
+        headers = ['id', 'name', 'grade']
+        list_for_table = []
+        for user in users:
+            list_for_table.append([user.get_id(), user.get_name(), user.get_overall_grade()])
 
         UserInterface.show_table(headers, list_for_table)
 
