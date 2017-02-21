@@ -1,5 +1,4 @@
   /* basic elements */
-
 body {
   font: 100% "Nunito Sans", sans-serif;
   line-height: 1.7;
@@ -92,7 +91,52 @@ nav ul li a:hover, nav ul li a:focus {
   font-size: 10px;
 }
 
+/* Login styles */
+
+#login h4 {
+  font-family: Helvetica, serif;
+  font-weight: 300;
+  color: rgba(4,4,6,0.6);
+}
+
+#login {
+  text-align: center;
+  line-height: 40px;
+  margin-top: 15%;
+  margin-left: 35%;
+  margin-right: 35%;
+  border: solid 1px darkgrey;
+  border-radius: 20px;
+  padding-bottom: 20px;
+}
+
+#login input {
+  width: 70%;
+  font-size: 17px;
+}
+
+#login button {
+  width: 70%;
+  background-color: rgba(4,4,6,0.6);
+  color: white;
+  border-radius: 20px;
+  border:none
+}
+
+/* Attendance styles */
+
+#attendance-content th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(4,4,6,0.6);
+  width: 150px;
+  border-bottom: solid;
+  border-width: 1px;
+}
+
 /* forms */
+
 label, input, textarea {
   float: left;
   clear: left;

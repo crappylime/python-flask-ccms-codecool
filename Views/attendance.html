@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Beloved Codecool CCMS</title>
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.w3schools.com/lib/w3data.js"></script>
+  </head>
+  <body>
+    <div w3-include-html="sidebar.html"></div>
+    <div class="wrap">
+      <h1>Attendance</h1>
+      <div class="content">
+        <!-- Table
+        ================================================== -->
+        <div id="attendance-content">
+            <div><label>Date </label><input type="date" placeholder="Date"/></div>
+            <br>
+            <table id="attend_table">
+                <tr>
+                    <th>Jan Nowak</th>
+                    <th><input type="radio" name="attendance" value="Present" />Present</th>
+                    <th><input type="radio" name="attendance" value="Late" />Late</th>
+                    <th><input type="radio" name="attendance" value="Absent" />Absent</th>
+                </tr>
+                <tr>
+                    <th>Artur Biegły</th>
+                    <th><input type="radio" name="attendance" value="Present" />Present</th>
+                    <th><input type="radio" name="attendance" value="Late" />Late</th>
+                    <th><input type="radio" name="attendance" value="Absent" />Absent</th>
+                </tr>
+                <tr>
+                    <th>Mariusz Kot</th>
+                    <th><input type="radio" name="attendance" value="Present" />Present</th>
+                    <th><input type="radio" name="attendance" value="Late" />Late</th>
+                    <th><input type="radio" name="attendance" value="Absent" />Absent</th>
+                </tr>
+            </table>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript -->
+    <script>
+      w3IncludeHTML();
+    </script>
+  </body>
+</html>
