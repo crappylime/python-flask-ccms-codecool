@@ -32,9 +32,15 @@ header {
   border-radius: 50%;
   float: left;
   padding-right: 10px;
+  width: 70px;
 }
 a:link {
   font-weight: bold;
+}
+.add_button {
+  position:absolute;
+  top:7%;
+  right:8%;
 }
 
 /* layout */
@@ -51,7 +57,7 @@ sidebar {
   background-color: rgba(155, 193, 188, 0.7);
 }
 .content {
-  padding: 0 20%;
+  padding: 0 10% 0 4%;
 }
 
 /* navigation bar */
@@ -84,56 +90,30 @@ nav ul li a:hover, nav ul li a:focus {
 }
 .submenu li a {
   font-size: 10px;
+}
 
-/* add edit person form*/
-.add_edit_person_form {
-  font-family: Helvetica, serif;
-  margin-right: 100px;
-  width: 500px;
-  float: right;
+/* forms */
+label, input, textarea {
+  float: left;
+  clear: left;
+  width: 15em;
+  padding-left: 100px;
 }
-.add_edit_person_form fieldset {
-  text-align: right;
-  line-height: 50px;
+input, textarea {
+  width: 50%;
+  padding: 4px 10px;
+  margin: 8px 80px;
+  box-sizing: border-box;
 }
-.add_edit_person_form input {
-  width: 300px;
+.save_button {
+  position: absolute;
+  bottom: 29%;
+  right: 11%;
 }
-/*.add_edit_assignment_form */
-.add_edit_assignment_form {
-  font-family: Helvetica, serif;
-  margin-right: 100px;
-  width: 500px;
-  float: right;
-}
-.add_edit_assignment_form fieldset {
-  text-align: right;
-  line-height: 50px;
-}
-.add_edit_assignment_form input {
-  width: 300px;
-}
-.add_edit_assignment_form textarea {
-  width: 300px;
-  height: 185px;
-}
-/*add_submission*/
-.add_submission_form {
-  font-family: Helvetica, serif;
-  margin-right: 100px;
-  width: 500px;
-  float: right;
-}
-.add_submission_form fieldset {
-  text-align: right;
-  line-height: 50px;
-}
-.add_submission_form input {
-  width: 300px;
-}
+
 /*main table*/
 .main_table {
-  width: 80%;
+  width: 100%;
 }
 .main_table, .main_table td, .main_table th {
   border-style: solid;

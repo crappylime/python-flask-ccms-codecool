@@ -1,41 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="style.css" type="text/css" rel="stylesheet">
-
-</head>
-<body>
-
-    <h1>Add/edit person</h1>
-
-    <form class="add_edit_person_form">
-
-        <fieldset>
-            <legend>Person</legend>
-            <p>
-                <label for="email">E-mail </label>
-                <input type="email" name="email" id="email" />
-            </p>
-            <p>
-                <label for="firstname">First name </label>
-                <input type="text" name="firstname" id="firstname" />
-            </p>
-            <p>
-                <label for="lastname">Last name </label>
-                <input type="text" name="lastname" id="lastname" />
-            </p>
-            <p>
-                <label for="password">Password </label>
-                <input type="password" name="password" id="password" />
-            </p>
-            <p>
-                <button type="submit" disabled>Save</button>
-            </p>
-        </fieldset>
-
-    </form>
-
-</body>
+  <head>
+    <meta charset="utf-8">
+    <title>Beloved Codecool CCMS</title>
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.w3schools.com/lib/w3data.js"></script>
+  </head>
+  <body>
+    <div w3-include-html="sidebar.html"></div>
+    <div class="wrap">
+      <h1>Add/edit person</h1>
+      <div class="content">
+        <!-- Form
+        ================================================== -->
+        <form>
+            <fieldset>
+                <legend>Person</legend>
+                  <label for="email">E-mail </label>
+                  <input type="email" name="email" id="email" />
+                  <label for="firstname">First name </label>
+                  <input type="text" name="firstname" id="firstname" />
+                  <label for="lastname">Last name </label>
+                  <input type="text" name="lastname" id="lastname" />
+                  <label for="password">Password </label>
+                  <input type="password" name="password" id="password" />
+                  <button type="submit" class="save_button" disabled>Save</button>
+            </fieldset>
+        </form>
+      </div>
+    </div>
+    <!-- JavaScript -->
+    <script>
+      w3IncludeHTML();
+    </script>
+  </body>
 </html>
