@@ -2,40 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Marta Sajdak | not only developer</title>
+    <title>Beloved Codecool CCMS</title>
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <script src="https://www.w3schools.com/lib/w3data.js"></script>
   </head>
   <body>
-    <sidebar>
-      <!-- Sidebar Header
-      ================================================== -->
-      <header>
-        <p>You're logged in as:</p>
-        <img id="logo" src="images/logo.png" alt="Your profile">
-        <h2>Przemek</h2>
-        <a href="index.html">Logout</a>
-      </header>
-      <!-- Navigation
-      ================================================== -->
-      <nav>
-        <ul>
-          <li><a href="students.html">Students</a></li>
-            <ul class="submenu">
-              <li><a href="students.html">List of students</a></li>
-              <li><a href="teams.html">Teams</a></li>
-              <li><a href="attendance.html">Attendance</a></li>
-            </ul>
-          <li><a href="assignments.html">Assignments</a></li>
-          <li><a href="mentors.html">Mentors</a></li>
-          <li><a href="staff.html">Staff</a></li>
-        </ul>
-      </nav>
-    </sidebar>
+    <div w3-include-html="sidebar.html"></div>
     <div class="wrap">
       <h1>List of students</h1>
+      <a href="add_edit_person_form.html"><button type="button" name="button" class="add_button">Add new student</button></a>
       <div class="content">
         <!-- Table
         ================================================== -->
@@ -68,7 +46,7 @@
                         jan.nowak@email.com
                     </td>
                     <td>
-                        <a href="edit.html">Edit</a> | <a href="">Remove</a> | <a href="">Add to team</a>
+                        <a href="add_edit_person_form.html">Edit</a> | <a href="#">Remove</a> | <a href="add_edit_person_form.html">Add to team</a>
                     </td>
                 </tr>
                 <tr>
@@ -82,7 +60,7 @@
                         jakis@mail.pl
                     </td>
                     <td>
-                        <a href="">Edit</a> | <a href="">Remove</a> | <a href="">Add to team</a>
+                        <a href="add_edit_person_form.html">Edit</a> | <a href="#">Remove</a> | <a href="add_edit_person_form.html">Add to team</a>
                     </td>
                 </tr>
                 <tr>
@@ -96,7 +74,7 @@
                         kowalski@mail.pl
                     </td>
                     <td>
-                        <a href="">Edit</a> | <a href="">Remove</a> |  <a href="">Add to team</a>
+                        <a href="add_edit_person_form.html">Edit</a> | <a href="#">Remove</a> |  <a href="add_edit_person_form.html">Add to team</a>
                     </td>
                 </tr>
             </tbody>
@@ -104,5 +82,8 @@
       </div>
     </div>
     <!-- JavaScript -->
+    <script>
+      w3IncludeHTML();
+    </script>
   </body>
 </html>
