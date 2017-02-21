@@ -1,4 +1,4 @@
-/* basic elements */
+  /* basic elements */
 
 body {
   font: 100% "Nunito Sans", sans-serif;
@@ -84,4 +84,72 @@ nav ul li a:hover, nav ul li a:focus {
 }
 .submenu li a {
   font-size: 10px;
+
+/* add edit person form*/
+.add_edit_person_form {
+  font-family: Helvetica, serif;
+  margin-right: 100px;
+  width: 500px;
+  float: right;
+}
+.add_edit_person_form fieldset {
+  text-align: right;
+  line-height: 50px;
+}
+.add_edit_person_form input {
+  width: 300px;
+}
+/*.add_edit_assignment_form */
+.add_edit_assignment_form {
+  font-family: Helvetica, serif;
+  margin-right: 100px;
+  width: 500px;
+  float: right;
+}
+.add_edit_assignment_form fieldset {
+  text-align: right;
+  line-height: 50px;
+}
+.add_edit_assignment_form input {
+  width: 300px;
+}
+.add_edit_assignment_form textarea {
+  width: 300px;
+  height: 185px;
+}
+/*add_submission*/
+.add_submission_form {
+  font-family: Helvetica, serif;
+  margin-right: 100px;
+  width: 500px;
+  float: right;
+}
+.add_submission_form fieldset {
+  text-align: right;
+  line-height: 50px;
+}
+.add_submission_form input {
+  width: 300px;
+}
+/*main table*/
+.main_table {
+  width: 80%;
+}
+.main_table, .main_table td, .main_table th {
+  border-style: solid;
+  border-color: black;
+  border-collapse: collapse;
+  border-width: 3px;
+}
+.main_table td, .main_table th {
+  padding: 10px;
+}
+.main_table td {
+  border-width: 1px;
+}
+.main_table thead th {
+  border-width: 1px 1px 3px 1px;
+}
+.main_table tbody td:first-child, .main_table thead th:first-child {
+  border-right-width: 3px;
 }
