@@ -33,7 +33,7 @@ header {
   padding-right: 10px;
   width: 70px;
 }
-a:link {
+a:link, .blocked {
   font-weight: bold;
 }
 .add_button, .save_button, .login_button, .sub_button {
@@ -81,7 +81,7 @@ nav ul {
   list-style-type: none;
   overflow: hidden;
 }
-nav ul li a {
+nav ul li a, .blocked {
   display: block;
   font-size: 14px;
   font-family: Sansita, sans-serif;
