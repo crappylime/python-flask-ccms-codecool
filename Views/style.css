@@ -36,12 +36,23 @@ header {
 a:link {
   font-weight: bold;
 }
-.add_button {
-  position:absolute;
-  top:7%;
-  right:8%;
+.add_button, .save_button, .login_button {
+
+  background-color: rgba(4,4,6,0.6);
+  color: white;
+  font-weight: 100;
+  border-radius: 20px;
+  border:none;
 }
 
+.add_button, .save_button {
+  position: absolute;
+  width: 7%;
+  height: 3%;
+  top: 7%;
+  right: 8%;
+  font-size: 14px;
+}
 /* layout */
 
 sidebar {
@@ -127,15 +138,10 @@ nav ul li a:hover, nav ul li a:focus {
   padding: 10;
 }
 
-#login button {
+.login_button {
   margin-top: 10%;
   width: 70%;
-  background-color: rgba(4,4,6,0.6);
-  color: white;
   font-size: 20px;
-  font-weight: 100;
-  border-radius: 20px;
-  border:none;
   letter-spacing: 2px;
 }
 
@@ -217,11 +223,6 @@ textarea {
   height: 15em;
 }
 
-.save_button {
-  position: absolute;
-  top: 7%;
-  right: 8%;
-}
 
 /*main table*/
 .main_table {
