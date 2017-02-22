@@ -47,11 +47,11 @@ a:link {
 
 .add_button, .save_button {
   position: absolute;
-  width: 7%;
-  height: 3%;
+  width: 130px;
+  height: 40px;
   top: 7%;
   right: 8%;
-  font-size: 14px;
+  font-size: 12px;
 }
 /* layout */
 
@@ -223,6 +223,18 @@ textarea {
   height: 15em;
 }
 
+fieldset {
+  border: solid 1px black;
+  border-radius: 20px;
+}
+
+legend {
+  border: solid 1px black;
+  border-radius: 10px;
+  font-size: 20px;
+  text-align: right;
+  padding: 0.2em 0.5em;
+}
 
 /*main table*/
 .main_table {
