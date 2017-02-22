@@ -212,6 +212,10 @@ input, textarea {
   margin: 8px 80px;
   box-sizing: border-box;
 }
+textarea {
+  height: 15em;
+}
+
 .save_button {
   position: absolute;
   bottom: 29%;
