@@ -36,23 +36,34 @@ header {
 a:link, .blocked {
   font-weight: bold;
 }
-.add_button, .save_button, .login_button, .sub_button {
 
-  background-color: rgba(4,4,6,0.6);
-  color: white;
-  font-weight: 100;
+/* button */
+
+button, .button {
+  background-color: #F4F1BB;
+  color: #C3423F;
+  font-size: 12px;
+  text-align: center;
+  width: 150px;
+  text-decoration: none;
   border-radius: 20px;
   border:none;
 }
-
-.add_button, .save_button {
+button:hover, .button:hover, button:focus, .button:focus {
+  background-color: #C3423F;
+  color: #F4F1BB;
+}
+.submit_button {
   position: absolute;
-  width: 130px;
-  height: 40px;
+  padding: 5px 10px;
   top: 7%;
   right: 8%;
-  font-size: 12px;
 }
+.main_table a.button {
+  display: inline-block;
+  width: 125px;
+}
+
 /* layout */
 
 sidebar {
@@ -104,15 +115,11 @@ nav ul li a:hover, nav ul li a:focus {
 
 /* Login styles */
 
-
-
-
 #login-content h4 {
   font-family: Helvetica, serif;
   font-weight: 300;
   color: rgba(4,4,6,0.6);
 }
-
 #login-content {
   text-align: center;
   line-height: 40px;
@@ -123,12 +130,10 @@ nav ul li a:hover, nav ul li a:focus {
   border-radius: 20px;
   padding-bottom: 20px;
 }
-
 #login div {
   margin-left: 10%;
   margin-right: 10%;
 }
-
 #login input {
   width: 100%;
   margin-left: 0;
@@ -137,7 +142,6 @@ nav ul li a:hover, nav ul li a:focus {
   font-weight: 300;
   padding: 10;
 }
-
 .login_button {
   margin-top: 10%;
   width: 70%;
@@ -158,7 +162,6 @@ nav ul li a:hover, nav ul li a:focus {
   font-family: Helvetica, serif;
   width: 100px;
 }
-
 #attendance-content h1 {
   font-family: Helvetica, serif;
   font-weight: 100;
@@ -168,24 +171,17 @@ nav ul li a:hover, nav ul li a:focus {
   margin-top: 5%;
   margin-bottom: 3%;
 }
-
-#attend_table th {
-
-}
-
 #attend_table input{
   width: 33px;
   display: inline;
   margin: 0;
   border: 0;
 }
-
 #label-input{
   padding: 0;
   display: inline-flex;
   margin-bottom: 3%;
 }
-
 #label-input label{
   width: 50px;
   padding: 0;
@@ -193,15 +189,18 @@ nav ul li a:hover, nav ul li a:focus {
   font-size: 14px;
   font-weight: 100;
 }
-
 #label-input input{
   width: 150px;
   margin: 0;
   border-radius: 25px;
   border-width: 0;
 }
+
 /* forms */
 
+table {
+  width: 100%;
+}
 label, input, textarea {
   float: left;
   clear: left;
@@ -217,12 +216,10 @@ input, textarea {
 textarea {
   height: 15em;
 }
-
 fieldset {
   border: solid 1px black;
   border-radius: 20px;
 }
-
 legend {
   border: solid 1px black;
   border-radius: 10px;
@@ -232,14 +229,10 @@ legend {
 }
 
 /*main table*/
-.main_table {
-  width: 80%;
-}
+
 .main_table, .main_table td, .main_table th {
-  border-style: solid;
-  border-color: black;
+  border: 1px solid black;
   border-collapse: collapse;
-  border-width: 1px;
 }
 .main_table td, .main_table th {
   padding: 7px;
@@ -252,15 +245,4 @@ legend {
 }
 .main_table tbody td:first-child, .main_table thead th:first-child {
   border-right-width: 2px;
-}
-.main_table form {
-  display: inline;
-}
-.main_table .sub_button {
-  width: 90px;
-
-}
-
-#list_of_assignments button {
-  width: 100px;
 }
