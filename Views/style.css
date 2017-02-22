@@ -147,11 +147,6 @@ nav ul li a:hover, nav ul li a:focus {
 
 /* Attendance styles */
 
-#attendance-content {
-  margin-top: 10%;
-  margin-left: 10%;
-}
-
 #attendance-content th {
   text-align: left;
   font-size: 15px;
@@ -264,4 +259,8 @@ legend {
 .main_table .sub_button {
   width: 90px;
 
+}
+
+#list_of_assignments button {
+  width: 100px;
 }
