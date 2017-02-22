@@ -93,16 +93,19 @@ nav ul li a:hover, nav ul li a:focus {
 
 /* Login styles */
 
-#login h4 {
+
+
+
+#login-content h4 {
   font-family: Helvetica, serif;
   font-weight: 300;
   color: rgba(4,4,6,0.6);
 }
 
-#login {
+#login-content {
   text-align: center;
   line-height: 40px;
-  margin-top: 15%;
+  margin-top: 10%;
   margin-left: 35%;
   margin-right: 35%;
   border: solid 1px darkgrey;
@@ -110,31 +113,91 @@ nav ul li a:hover, nav ul li a:focus {
   padding-bottom: 20px;
 }
 
+#login div {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 #login input {
-  width: 70%;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
   font-size: 17px;
+  font-weight: 300;
+  padding: 10;
 }
 
 #login button {
+  margin-top: 10%;
   width: 70%;
   background-color: rgba(4,4,6,0.6);
   color: white;
+  font-size: 12px;
+  font-weight: 100;
   border-radius: 20px;
   border:none
 }
 
 /* Attendance styles */
 
-#attendance-content th {
-  text-align: left;
-  font-size: 12px;
-  font-weight: 300;
-  color: rgba(4,4,6,0.6);
-  width: 150px;
-  border-bottom: solid;
-  border-width: 1px;
+#attendance-content {
+  margin-top: 10%;
+  margin-left: 10%;
 }
 
+#attendance-content th {
+  text-align: left;
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(4, 4, 6, 0.6);
+  border-bottom: solid;
+  border-width: 1px;
+  padding: 15px 20px 0 20px;
+  font-family: Helvetica, serif;
+  width: 100px;
+}
+
+#attendance-content h1 {
+  font-family: Helvetica, serif;
+  font-weight: 100;
+  font-size: 20px;
+  padding: 0;
+  margin-left: 0;
+  margin-top: 5%;
+  margin-bottom: 3%;
+}
+
+#attend_table th {
+
+}
+
+#attend_table input{
+  width: 33px;
+  display: inline;
+  margin: 0;
+  border: 0;
+}
+
+#label-input{
+  padding: 0;
+  display: inline-flex;
+  margin-bottom: 3%;
+}
+
+#label-input label{
+  width: 50px;
+  padding: 0;
+  font-family: Helvetica, serif;
+  font-size: 14px;
+  font-weight: 100;
+}
+
+#label-input input{
+  width: 150px;
+  margin: 0;
+  border-radius: 25px;
+  border-width: 0;
+}
 /* forms */
 
 label, input, textarea {

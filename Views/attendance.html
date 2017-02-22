@@ -12,33 +12,35 @@
   <body>
     <div w3-include-html="sidebar.html"></div>
     <div class="wrap">
-      <h1>Attendance</h1>
       <div class="content">
         <!-- Table
         ================================================== -->
         <div id="attendance-content">
-            <div><label>Date </label><input type="date" placeholder="Date"/></div>
-            <br>
-            <table id="attend_table">
-                <tr>
-                    <th>Jan Nowak</th>
-                    <th><input type="radio" name="attendance" value="Present" />Present</th>
-                    <th><input type="radio" name="attendance" value="Late" />Late</th>
-                    <th><input type="radio" name="attendance" value="Absent" />Absent</th>
-                </tr>
-                <tr>
-                    <th>Artur Biegły</th>
-                    <th><input type="radio" name="attendance" value="Present" />Present</th>
-                    <th><input type="radio" name="attendance" value="Late" />Late</th>
-                    <th><input type="radio" name="attendance" value="Absent" />Absent</th>
-                </tr>
-                <tr>
-                    <th>Mariusz Kot</th>
-                    <th><input type="radio" name="attendance" value="Present" />Present</th>
-                    <th><input type="radio" name="attendance" value="Late" />Late</th>
-                    <th><input type="radio" name="attendance" value="Absent" />Absent</th>
-                </tr>
-            </table>
+            <h1>Attendance</h1>
+            <div id="label-input"><label>Date </label><input type="date" placeholder="Date"/></div>
+            <div id="table">
+                <table id="attend_table">
+                    <tr>
+                        <th>Jan Nowak</th>
+                        <th><input type="radio" name="attendance" value="Present"/>Present</th>
+                        <th><input type="radio" name="attendance" value="Late" />Late</th>
+                        <th><input type="radio" name="attendance" value="Absent" />Absent</th>
+
+                    </tr>
+                    <tr>
+                        <th>Artur Biegły</th>
+                        <th><input type="radio" name="attendance" value="Present" />Present</th>
+                        <th><input type="radio" name="attendance" value="Late" />Late</th>
+                        <th><input type="radio" name="attendance" value="Absent" />Absent</th>
+                    </tr>
+                    <tr>
+                        <th>Mariusz Kot</th>
+                        <th><input type="radio" name="attendance" value="Present" />Present</th>
+                        <th><input type="radio" name="attendance" value="Late" />Late</th>
+                        <th><input type="radio" name="attendance" value="Absent" />Absent</th>
+                    </tr>
+                </table>
+            </div>
         </div>
       </div>
     </div>
