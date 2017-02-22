@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="style.css" type="text/css" rel="stylesheet">
+    <head>
+        <meta charset="utf-8">
+        <title>Add submission</title>
+        <!-- Custom Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="style.css">
+        <script src="https://www.w3schools.com/lib/w3data.js"></script>
+    </head>
+    <body>
+        <div w3-include-html="sidebar.html"></div>
+        <div class="wrap">
+            <h1>Add submission</h1>
+            <div class="content">
 
-</head>
-<body>
-
-    <h1>Add submission</h1>
-
-    <form class="add_submission_form">
+                <form class="add_submission_form">
 
 
-        <fieldset>
-            <legend>Submission</legend>
-            <p>
-                <label for="submission_link">Submission link </label>
-                <input type="text" name="submission_link" id="submission_link" />
-            </p>
-            <p>
-                <button type="submit" disabled>Save</button>
-            </p>
-        </fieldset>
+                    <fieldset>
+                        <legend>Submission</legend>
+                        <label for="submission_link">Submission link </label>
+                        <input type="text" name="submission_link" id="submission_link" />
+                        <button type="submit" class="save_button" disabled>Save</button>
+                    </fieldset>
 
-    </form>
-
-</body>
+                </form>
+            </div>
+        </div>
+        <!-- JavaScript -->
+        <script>
+            w3IncludeHTML();
+        </script>
+    </body>
 </html>
