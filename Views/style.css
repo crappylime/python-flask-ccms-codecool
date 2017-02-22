@@ -36,7 +36,7 @@ header {
 a:link, .blocked {
   font-weight: bold;
 }
-.add_button, .save_button, .login_button {
+.add_button, .save_button, .login_button, .sub_button {
 
   background-color: rgba(4,4,6,0.6);
   color: white;
@@ -47,8 +47,8 @@ a:link, .blocked {
 
 .add_button, .save_button {
   position: absolute;
-  width: 7%;
-  height: 3%;
+  width: 130px;
+  height: 40px;
   top: 7%;
   right: 8%;
   font-size: 12px;
@@ -238,23 +238,30 @@ legend {
 
 /*main table*/
 .main_table {
-  width: 100%;
+  width: 80%;
 }
 .main_table, .main_table td, .main_table th {
   border-style: solid;
   border-color: black;
   border-collapse: collapse;
-  border-width: 3px;
+  border-width: 1px;
 }
 .main_table td, .main_table th {
-  padding: 10px;
+  padding: 7px;
 }
 .main_table td {
   border-width: 1px;
 }
 .main_table thead th {
-  border-width: 1px 1px 3px 1px;
+  border-width: 1px 1px 2px 1px;
 }
 .main_table tbody td:first-child, .main_table thead th:first-child {
-  border-right-width: 3px;
+  border-right-width: 2px;
+}
+.main_table form {
+  display: inline;
+}
+.main_table .sub_button {
+  width: 90px;
+
 }
