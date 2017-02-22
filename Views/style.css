@@ -213,7 +213,7 @@ nav ul li a:hover, nav ul li a:focus {
 /* Attendance_list styles */
 #date-style {
   display: flex;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
 }
 #date-style label {
   padding-left:0;
@@ -230,6 +230,14 @@ nav ul li a:hover, nav ul li a:focus {
   border-width: 0;
 
 }
+#select_student label, select{
+  padding-left: 0px;
+  width: 90px;
+  font-weight: 100;
+  font-family: Helvetica, serif;
+  margin-bottom: 50px;
+}
+
 
 /* forms */
 
