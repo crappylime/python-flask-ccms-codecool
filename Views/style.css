@@ -261,14 +261,7 @@ legend {
 .main_table form {
   display: inline;
 }
-/*.main_table button {*/
-  /*background-color: rgba(4,4,6,0.6);*/
-  /*color: white;*/
-  /*font-family: Helvetica, serif;*/
-  /*font-weight: 100;*/
-  /*font-size: 10px;*/
-  /*border-radius: 10px;*/
-  /*border:none;*/
-  /*padding: 5px;*/
-  /*width: ;*/
-/*}*/
+.main_table .sub_button {
+  width: 90px;
+
+}
