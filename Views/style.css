@@ -246,3 +246,6 @@ legend {
 .main_table tbody td:first-child, .main_table thead th:first-child {
   border-right-width: 2px;
 }
+.submission header {
+  border: none;
+}

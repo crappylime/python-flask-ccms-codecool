@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>List of Teams</title>
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.w3schools.com/lib/w3data.js"></script>
+</head>
+<body>
+<div w3-include-html="sidebar.html"></div>
+<div class="wrap">
+    <h1>List of Teams</h1>
+    <a href="add_edit_team_form.html"><button type="button" name="button" class="add_button">Add new team</button></a>
+    <div class="content">
+        <!-- Table
+        ================================================== -->
+        <table class="main_table">
+            <thead>
+            <tr>
+                <th>id</th><th>Name</th><th>Students</th><th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1.</td><td>t1</td><td><ol><li>da da</li><li>dada da</li><li>Bruce Li</li></ol></td>
+                <td>
+                    <form action="team_details.html"><button class="sub_button" type="submit">Details</button></form>
+                    <form action="add_edit_team_form.html"><button class="sub_button" type="submit">Edit</button></form>
+                    <form action="#"><button class="sub_button" type="submit">Remove</button></form>
+                </td>
+            </tr>
+            <tr>
+                <td>1.</td><td>t2</td><td><ol><li>da da</li><li>dada da</li><li>Bruce Li</li></ol></td>
+                <td>
+                    <form action="team_details.html"><button class="sub_button" type="submit">Details</button></form>
+                    <form action="add_edit_team_form.html"><button class="sub_button" type="submit">Edit</button></form>
+                    <form action="#"><button class="sub_button" type="submit">Remove</button></form>
+                </td>
+            </tr>
+            <tr>
+                <td>1.</td><td>t3</td><td><ol><li>da da</li><li>dada da</li><li>Bruce Li</li></ol></td>
+                <td>
+                    <form action="team_details.html"><button class="sub_button" type="submit">Details</button></form>
+                    <form action="add_edit_team_form.html"><button class="sub_button" type="submit">Edit</button></form>
+                    <form action="#"><button class="sub_button" type="submit">Remove</button></form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- JavaScript -->
+<script>
+    w3IncludeHTML();
+</script>
+</body>
+</html>
