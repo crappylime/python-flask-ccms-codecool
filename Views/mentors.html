@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Beloved Codecool CCMS</title>
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.w3schools.com/lib/w3data.js"></script>
+  </head>
+  <body>
+    <div w3-include-html="sidebar.html"></div>
+    <div class="wrap">
+      <h1>List of students</h1>
+      <a href="add_edit_person_form.html"><button type="button" name="button" class="add_button">Add new student</button></a>
+      <div class="content">
+        <!-- Table
+        ================================================== -->
+        <table class="main_table">
+            <thead>
+                <tr>
+                    <th>id</th><th>Name</th><th>E-mail</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.</td><td>Jan Nowak</td><td>jan.nowak@email.com</td>
+                    <td>
+                        <a href="add_edit_person_form.html">Edit</a> | <a href="#">Remove</a> </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2.</td><td>Krzysztof Jakiś</td><td>jakis@mail.pl</td>
+                    <td>
+                        <a href="add_edit_person_form.html">Edit</a> | <a href="#">Remove</a> | <a href="add_edit_person_form.html">Add to team</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3.</td><td>Adam Kowalski</td><td>kowalski@mail.pl
+                    </td>
+                    <td>
+                        <a href="add_edit_person_form.html">Edit</a> | <a href="#">Remove</a> |  <a href="add_edit_person_form.html">Add to team</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- JavaScript -->
+    <script>
+      w3IncludeHTML();
+    </script>
+  </body>
+</html>
