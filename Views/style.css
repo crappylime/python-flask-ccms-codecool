@@ -47,8 +47,8 @@ a:link {
 
 .add_button, .save_button {
   position: absolute;
-  width: 7%;
-  height: 3%;
+  width: 130px;
+  height: 40px;
   top: 7%;
   right: 8%;
   font-size: 12px;
