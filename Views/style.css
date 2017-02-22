@@ -264,3 +264,7 @@ legend {
 #list_of_assignments button {
   width: 100px;
 }
+
+.submission header {
+  border: none;
+}

@@ -12,9 +12,8 @@
   <body>
     <div w3-include-html="sidebar.html"></div>
     <div class="wrap">
-      <h1>List of assignments</h1>
-      <a href="add_edit_assignment.html"><button type="button" name="button" class="add_button">Add new assignment</button></a>
-      <div class="content">
+      <h1>Assignment 1 - List of submissions</h1>
+         <div class="content">
         <!-- Table
         ================================================== -->
         <table class="main_table">
@@ -24,10 +23,13 @@
                         id
                     </th>
                     <th>
-                        Title
+                        Student name
                     </th>
                     <th>
-                        Content
+                        Status
+                    </th>
+                    <th>
+                        Points
                     </th>
                     <th>
                         Actions
@@ -36,46 +38,48 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>
-                        1.
+                    <td>1.
                     </td>
                     <td>
-                        100 doors
+                        Jan Kowalski
                     </td>
                     <td>
-                        content content content content
+                        Not graded
                     </td>
+                    <td>-/50 pt</td>
                     <td>
-                        <a href="add_edit_assignment.html">Edit</a> | <a href="#">Remove</a> | <a href="add_submission.html">Submit assignment</a> | <a href="#">List submissions</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        2.
-                    </td>
-                    <td>
-                        hangman
-                    </td>
-                    <td>
-                        content content content content
-                    </td>
-                    <td>
-                        <a href="add_edit_assignment.html">Edit</a> | <a href="#">Remove</a> | <a href="add_submission.html">Submit assignment</a> | <a href="#">List submissions</a>
+                        <a href="submission_details.html">Details</a> | <a href="#">Grade</a>
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        3.
+                    <td>2.
                     </td>
                     <td>
-                        ccms
+                        Marcin Nowak
                     </td>
                     <td>
-                        content content content content
+                        Graded
+                    </td>
+                    <td>22/50 pt</td>
+                    <td>
+                        <a href="submission_details.html">Details</a> | <a href="#">Grade</a>
+                    </td>
+                </tr>
+                <tr>
+                <tr>
+                    <td>3.
                     </td>
                     <td>
-                        <a href="add_edit_assignment.html">Edit</a> | <a href="#">Remove</a> |  <a href="add_submission.html">Submit assignment</a> | <a href="#">List submissions</a>
+                        Janina Małek
                     </td>
+                    <td>
+                        Graded
+                    </td>
+                    <td>33/50 pt</td>
+                    <td>
+                        <a href="submission_details.html">Details</a> | <a href="#">Grade</a>
+                    </td>
+                </tr>
                 </tr>
             </tbody>
         </table>
