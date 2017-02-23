@@ -63,14 +63,15 @@ button:hover, .button:hover, button:focus, .button:focus {
   display: inline-block;
   width: 125px;
 }
-.team_buttons {
+.assignment_buttons, .team_buttons {
   margin-left: 10px;
+}
+.team_buttons {
   padding: 6px 10px;
 }
 .team_buttons:first-of-type{
   margin-left: 60px;
 }
-
 /* layout */
 
 sidebar {
