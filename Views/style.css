@@ -1,10 +1,30 @@
-  /* basic elements */
+/* basic elements */
+html, body {
+  height: 100%;
+}
 body {
   font: 100% "Nunito Sans", sans-serif;
   line-height: 1.7;
   margin: 0;
   padding: 0;
-  background-color: #F4F1BB;
+  min-width: 1024px;
+  min-height: 100%;
+  height: 100vh;
+  height: 0;
+  width: 100%;
+}
+body::after {
+  content: "";
+  background-image: url("images/background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
 }
 p {
   color: #3C3744;
@@ -31,7 +51,7 @@ header {
   border-radius: 50%;
   float: left;
   padding-right: 10px;
-  width: 70px;
+  width: 60px;
 }
 a:link, .blocked {
   font-weight: bold;
@@ -40,7 +60,7 @@ a:link, .blocked {
 /* button */
 
 button, .button {
-  background-color: #F4F1BB;
+  background-color: white;
   color: #C3423F;
   font-size: 12px;
   text-align: center;
@@ -50,7 +70,7 @@ button, .button {
   border:none;
 }
 button:hover, .button:hover, button:focus, .button:focus {
-  background-color: #C3423F;
+  background-color: rgb(175, 68, 68);
   color: #F4F1BB;
 }
 .submit_button {
@@ -77,13 +97,17 @@ button:hover, .button:hover, button:focus, .button:focus {
 sidebar {
   float: left;
   width: 20%;
+  background-color:rgba(138, 169, 181, 0.69);
+  border-right: 1px solid black;
 }
 .wrap {
   margin: 0 auto;
-  height: 100vh;
+  height: 100%;
   float: right;
-  width: 80%;
-  background-color: rgba(155, 193, 188, 0.7);
+  width: 79.9%;
+  background-color: rgba(228, 163, 148, 0.52);
+  /*background-color: rgba(230, 224, 196, 0.9);*/
+  background-size: cover;
 }
 .content {
   padding: 0 10% 0 4%;
@@ -92,7 +116,7 @@ sidebar {
 /* navigation bar */
 
 nav {
-  padding-top: 10%;
+  padding-top: 4%;
 }
 nav ul {
   margin: 0;
@@ -102,23 +126,30 @@ nav ul {
 }
 nav ul li a, .blocked {
   display: block;
-  font-size: 14px;
+  font-size: 10px;
   font-family: Sansita, sans-serif;
-  color: #C3423F;
+  color: black;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 4px 24px 4px 25px;
+  padding: 0 20px 4px 25px;
+}
+nav ul li a:first-of-type {
+  border-top: 1px solid black;
 }
 nav ul li a:hover, nav ul li a:focus {
-  background-color: #C3423F;
+  background-color:rgb(59, 104, 121);
   color: #F4F1BB;
 }
 .submenu {
-  margin-left: 30px;
-  padding-bottom: 10px;
+  margin-left: 40px;
+  padding-bottom: 9px;
 }
 .submenu li a {
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 100;
+}
+.submenu li a:first-of-type {
+  border-top: none;
 }
 
 /* Login styles */
@@ -263,6 +294,7 @@ textarea {
 fieldset {
   border: solid 1px black;
   border-radius: 20px;
+  background-color: rgba(228, 163, 148, 0.62);
 }
 legend {
   border: solid 1px black;
@@ -270,13 +302,17 @@ legend {
   font-size: 20px;
   text-align: right;
   padding: 0.2em 0.5em;
+  background-color: rgba(228, 163, 148, 0.62);
 }
 
 /*main table*/
-
-.main_table, .main_table td, .main_table th {
+.main_table {
+  background-color: rgba(228, 163, 148, 0.62);
   border: 1px solid black;
-  border-collapse: collapse;
+  border-radius: 20px;
+}
+.main_table th {
+  border-bottom: 1px dotted black;
 }
 .main_table td, .main_table th {
   padding: 7px;
