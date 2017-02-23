@@ -123,6 +123,18 @@ nav ul li a:hover, nav ul li a:focus {
 
 /* Login styles */
 
+#email_format_error{
+  display: none;
+  color: red;
+  font-family: Helvetica, serif
+  font-size: 8px
+}
+#password_error{
+  display: none;
+  color: red;
+  font-family: Helvetica, serif
+  font-size: 8px;
+}
 #login-content h4 {
   font-family: Helvetica, serif;
   font-weight: 300;
@@ -156,13 +168,14 @@ nav ul li a:hover, nav ul li a:focus {
   font-size: 20px;
   letter-spacing: 2px;
 }
-
-#login a{
+#login button{
   font-size: 17px;
   border: 1px solid grey;
-
   padding: 4px;
 }
+/*#login button a {*/
+  /*text-decoration: none;*/
+/*}*/
 
 /* Attendance styles */
 
