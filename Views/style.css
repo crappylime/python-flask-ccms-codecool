@@ -166,26 +166,52 @@ nav ul li a:hover, nav ul li a:focus {
 
 /* Attendance styles */
 
-#attendance-content th {
-  text-align: left;
-  font-size: 15px;
-  font-weight: 300;
-  color: rgba(4, 4, 6, 0.6);
-  border-bottom: solid;
-  border-width: 1px;
-  padding: 15px 20px 0 20px;
-  font-family: Helvetica, serif;
-  width: 100px;
-}
-#attendance-content h1 {
-  font-family: Helvetica, serif;
-  font-weight: 100;
-  font-size: 20px;
-  padding: 0;
+/*#attendance-content th {*/
+  /*text-align: left;*/
+  /*font-size: 15px;*/
+  /*font-weight: 300;*/
+  /*color: rgba(4, 4, 6, 0.6);*/
+  /*border-bottom: solid;*/
+  /*border-width: 1px;*/
+  /*padding: 15px 20px 0 20px;*/
+  /*font-family: Helvetica, serif;*/
+  /*width: 100px;*/
+/*}*/
+/*#attendance-content h1 {*/
+  /*font-family: Helvetica, serif;*/
+  /*font-weight: 100;*/
+  /*font-size: 50px;*/
+  /*padding: 0;*/
+  /*margin-left: 0;*/
+  /*margin-top: 5%;*/
+  /*margin-bottom: 3%;*/
+/*}*/
+
+.content h1 {
   margin-left: 0;
-  margin-top: 5%;
-  margin-bottom: 3%;
+  padding-left: 0;
 }
+
+.content #attendance_table {
+  width: 50%;
+}
+
+.content #attendance_check_table input {
+  margin-left: 0;
+  margin-right: 5px;
+  width: 15px;
+}
+
+.content #attendance_check_table td {
+  padding: 6px;
+  width: 200px;
+
+}
+
+
+
+
+
 #attend_table input{
   width: 33px;
   display: inline;
