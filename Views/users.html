@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>List of students</title>
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.w3schools.com/lib/w3data.js"></script>
+  </head>
+  <body>
+    <div w3-include-html="sidebar.html"></div>
+    <div class="wrap">
+      <h1>List of users</h1>
+      <a href="add_edit_person_form.html" class="button submit_button">Add new user</a>
+      <div class="content">
+        <!-- Table
+        ================================================== -->
+        <table class="main_table">
+            <thead>
+                <tr>
+                    <th>id</th><th>Name</th><th>E-mail</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1.</td><td><a href="user_details.html">Jan Nowak</a></td>
+                    <td><a href="mailto://jan.nowak@email.com">jan.nowak@email.com</a> </td>
+                    <td>
+                        <a href="user_details.html" class="button">Details</a>
+                      <a href="add_edit_person_form.html" class="button">Edit</a>
+                      <a href="#" class="button">Remove</a>
+                        <a href="add_edit_person_form.html" class="button">Add to team</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2.</td><td><a href="user_details.html">Rod Stju</a></td>
+                    <td><a href="mailto://rod@email.com">rod@email.com</a></td>
+                    <td>
+                        <a href="user_details.html" class="button">Details</a>
+                        <a href="add_edit_person_form.html" class="button">Edit</a>
+                        <a href="#" class="button">Remove</a>
+                        <a href="add_edit_person_form.html" class="button">Add to team</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3.</td><td><a href="user_details.html">Bogumiła Zła</a></td>
+                    <td><a href="mailto://arnie@email.comm">arnie@email.com</a></td>
+                    <td>
+                        <a href="user_details.html" class="button">Details</a>
+                        <a href="add_edit_person_form.html" class="button">Edit</a>
+                        <a href="#" class="button">Remove</a>
+                        <a href="add_edit_person_form.html" class="button">Add to team</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4.</td><td><a href="user_details.html">Przemysław Ciąćka</a></td>
+                    <td><a href="mailto://przemek@codecool.pl">przemek@codecool.pl</a></td>
+                    <td>
+                        <a href="user_details.html" class="button">Details</a>
+                        <a href="add_edit_person_form.html" class="button">Edit</a>
+                        <a href="#" class="button">Remove</a>
+                        <a href="add_edit_person_form.html" class="button">Add to team</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5.</td><td><a href="user_details.html">Marcin Izworski</a></td>
+                    <td><a href="mailto://marcin@codecool.pl">marcin@codecool.pl</a></td>
+                    <td>
+                        <a href="user_details.html" class="button">Details</a>
+                        <a href="add_edit_person_form.html" class="button">Edit</a>
+                        <a href="#" class="button">Remove</a>
+                        <a href="add_edit_person_form.html" class="button">Add to team</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6.</td><td><a href="user_details.html">Kati Płachecka</a></td>
+                    <td><a href="mailto://kati@codecool.pl">kati@codecool.pl</a></td>
+                    <td>
+                        <a href="user_details.html" class="button">Details</a>
+                        <a href="add_edit_person_form.html" class="button">Edit</a>
+                        <a href="#" class="button">Remove</a>
+                        <a href="add_edit_person_form.html" class="button">Add to team</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- JavaScript -->
+    <script>
+      w3IncludeHTML();
+    </script>
+  </body>
+</html>
