@@ -21,9 +21,11 @@ h1 {
   padding: 2%;
 }
 
+
 h2 {
   margin-top: 36px;
 }
+
 header h2 {
   padding-bottom: 6%;
 }
@@ -172,29 +174,6 @@ nav ul li a:hover, nav ul li a:focus {
   padding: 4px;
 }
 
-/* Attendance styles */
-
-/*#attendance-content th {*/
-  /*text-align: left;*/
-  /*font-size: 15px;*/
-  /*font-weight: 300;*/
-  /*color: rgba(4, 4, 6, 0.6);*/
-  /*border-bottom: solid;*/
-  /*border-width: 1px;*/
-  /*padding: 15px 20px 0 20px;*/
-  /*font-family: Helvetica, serif;*/
-  /*width: 100px;*/
-/*}*/
-/*#attendance-content h1 {*/
-  /*font-family: Helvetica, serif;*/
-  /*font-weight: 100;*/
-  /*font-size: 50px;*/
-  /*padding: 0;*/
-  /*margin-left: 0;*/
-  /*margin-top: 5%;*/
-  /*margin-bottom: 3%;*/
-/*}*/
-
 .content h1 {
   margin-left: 0;
   padding-left: 0;
@@ -213,12 +192,7 @@ nav ul li a:hover, nav ul li a:focus {
 .content #attendance_check_table td {
   padding: 6px;
   width: 200px;
-
 }
-
-
-
-
 
 #attend_table input{
   width: 33px;
@@ -334,14 +308,12 @@ legend {
   font-size: 14px;
   margin-left: 0%;
   padding-left: 0;
-
 }
 
 .submission header {
   border: none;
   margin: 0;
   padding: 0;
-
 }
 
 #submission_content_table {
@@ -355,6 +327,25 @@ legend {
   text-align: center;
   margin-bottom: 60px;
 }
+
 .submission_details {
   margin-left: 5%;
+}
+
+/* User details styles */
+
+.info_box span {
+  font-size: 40px;
+}
+
+.info_box {
+  border: solid 1px;
+  width: 200px;
+  height: 100px;
+  margin-right: 80px;
+  margin-bottom: 50px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
 }
