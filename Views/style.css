@@ -7,24 +7,21 @@ body {
   line-height: 1.7;
   margin: 0;
   padding: 0;
-  min-width: 1024px;
-  min-height: 100%;
-  height: 100vh;
-  height: 0;
+  min-width: 470px;
   width: 100%;
 }
 body::after {
   content: "";
   background-image: url("images/background.png");
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-size: 100%;
+  position: fixed;
   z-index: -1;
   opacity: 0.3;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  position: absolute;
+  height: 100%;
 }
 p {
   color: #3C3744;
@@ -40,18 +37,12 @@ h1 {
   font-size: 1.5em;
   padding: 2%;
 }
-
-
 h2 {
-  margin-top: 36px;
-}
-
-header h2 {
-  padding-bottom: 6%;
+  margin: 0;
+  padding: 10px 0;
 }
 header {
-  border-bottom: 1px solid black;
-  padding: 0 20px 20px 20px;
+  padding: 0 20px 5px 20px;
 }
 #logo {
   border-radius: 50%;
@@ -70,10 +61,13 @@ button, .button {
   color: #C3423F;
   font-size: 12px;
   text-align: center;
-  width: 150px;
+  margin: 0 0 0 10px;
+  padding: 3px 0;
   text-decoration: none;
   border-radius: 20px;
   border:none;
+  display: inline-block;
+  width: 125px;
 }
 button:hover, .button:hover, button:focus, .button:focus {
   background-color: rgb(175, 68, 68);
@@ -81,21 +75,18 @@ button:hover, .button:hover, button:focus, .button:focus {
 }
 .submit_button {
   position: absolute;
+  width: 150px;
   padding: 5px 10px;
   top: 7%;
   right: 8%;
 }
-.main_table a.button {
-  display: inline-block;
-  width: 125px;
+.user_button {
+  width: 100px;
 }
-.assignment_buttons, .team_buttons {
-  margin-left: 10px;
-}
-.team_buttons {
+.team_button {
   padding: 6px 10px;
 }
-.team_buttons:first-of-type{
+.team_button:first-of-type{
   margin-left: 60px;
 }
 /* layout */
@@ -105,20 +96,29 @@ sidebar {
   width: 20%;
   background-color:rgba(138, 169, 181, 0.69);
   border-right: 1px solid black;
+  position: fixed;
 }
 .wrap {
   margin: 0 auto;
   height: 100%;
   float: right;
   width: 79.9%;
+}
+.wrap::after {
   background-color: rgba(228, 163, 148, 0.52);
-  /*background-color: rgba(230, 224, 196, 0.9);*/
-  background-size: cover;
+  content: "";
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
 }
 .content {
   padding: 0 10% 0 4%;
+  margin-bottom: 10%;
 }
-
 .content header {
   border: none;
 }
@@ -182,6 +182,7 @@ nav ul li a:hover, nav ul li a:focus {
   color: rgba(4,4,6,0.6);
 }
 #login-content {
+  background-color: rgba(228, 163, 148, 0.62);
   text-align: center;
   line-height: 40px;
   margin-top: 10%;
@@ -214,35 +215,20 @@ nav ul li a:hover, nav ul li a:focus {
   border: 1px solid grey;
   padding: 4px;
 }
-/*#login button a {*/
-  /*text-decoration: none;*/
-/*}*/
-
-.content h1 {
-  margin-left: 0;
-  padding-left: 0;
-}
-
-.content #attendance_table {
+#attendance_table {
   width: 50%;
+  background-color: rgba(228, 163, 148, 0.62);
+  border-radius: 20px;
 }
-
-.content #attendance_check_table input {
+#attendance_table input {
   margin-left: 0;
   margin-right: 5px;
   width: 15px;
 }
-
-.content #attendance_check_table td {
+#attendance_table td {
   padding: 6px;
   width: 200px;
-}
-
-#attend_table input{
-  width: 33px;
-  display: inline;
-  margin: 0;
-  border: 0;
+  font-weight: 200;
 }
 #label-input{
   padding: 0;
@@ -281,7 +267,6 @@ nav ul li a:hover, nav ul li a:focus {
   width: 140px;
   border-radius: 25px;
   border-width: 0;
-
 }
 #select_student label, select{
   padding-left: 0px;
@@ -291,12 +276,8 @@ nav ul li a:hover, nav ul li a:focus {
   margin-bottom: 50px;
 }
 
-
 /* forms */
 
-table {
-  width: 100%;
-}
 label, input, textarea {
   float: left;
   clear: left;
@@ -326,39 +307,49 @@ legend {
   background-color: rgba(228, 163, 148, 0.62);
 }
 
-/*main table*/
-.main_table {
+/* table */
+table {
   background-color: rgba(228, 163, 148, 0.62);
+  width: 100%;
   border: 1px solid black;
   border-radius: 20px;
+  margin-bottom: 10%;
 }
-.main_table th {
+table th {
   border-bottom: 1px dotted black;
 }
-.main_table td, .main_table th {
+table th:first-of-type {
+  border-bottom-left-radius: 2em;
+}
+table th:last-of-type {
+  border-bottom-right-radius: 2em;
+}
+.details_table th{
+  border: none;
+}
+table td, table th {
   padding: 7px;
 }
-.main_table td {
+table td {
   border-width: 1px;
 }
-.main_table thead th {
+table thead th {
   border-width: 1px 1px 2px 1px;
 }
-.main_table tbody td:first-child, .main_table thead th:first-child {
+table tbody td:first-child, table thead th:first-child {
   border-right-width: 2px;
 }
+
 /* Submission details styles */
 
 .submission a {
   font-size: 14px;
 }
-
 .submission h1 {
   font-size: 14px;
   margin-left: 0%;
   padding-left: 0;
 }
-
 .submission header {
   border: none;
   margin: 0;
@@ -369,14 +360,12 @@ legend {
   width: 70%;
   margin-left: 5%;
 }
-
 #submission_time {
   border: solid 2px green;
   width: 350px;
   text-align: center;
   margin-bottom: 60px;
 }
-
 .submission_details {
   margin-left: 5%;
 }
@@ -386,7 +375,6 @@ legend {
 .info_box span {
   font-size: 40px;
 }
-
 .info_box {
   border: solid 1px;
   width: 200px;
