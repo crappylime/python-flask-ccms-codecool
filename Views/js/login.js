@@ -7,7 +7,7 @@ function validate(event) {
         document.getElementById("email_format_error").style.display = 'block';
         return false;
     } else {
-        document.getElementById("email_length_error").style.display = 'none';
+        document.getElementById("email_format_error").style.display = 'none';
     }
     if (password.length < 5) {
         document.getElementById("password_error").style.display = 'block';
@@ -15,7 +15,6 @@ function validate(event) {
     }
     else {
         window.location = "user_details.html";
-        console.log("after");
         return true;
     }
 }
