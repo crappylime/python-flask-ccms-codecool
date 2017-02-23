@@ -8,17 +8,19 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
     <script src="https://www.w3schools.com/lib/w3data.js"></script>
+    <script src="js/login.js"></script>
   </head>
 
   <body>
 
     <div id="login-content">
-    <form id="login">
+    <form id="login" name="login" method="post">
         <h4>Login to your account.</h4>
-        <div><input type="email" placeholder="E-mail address" name="email"/></div><br>
-        <div><input type="password" placeholder="Password"/></div><br>
-        <!-- link and type button instead of submit for easier navigation before framework implementation -->
-        <div><a href="students.html" class="button">Login</a></div>
+        <div id="email_format_error">E-mail should look like this: name@domain.xx(x)</div>
+        <div id="password_error">Password is to short!</div>
+        <div><input id="email" type="email" placeholder="E-mail address" name="email"/><br></div>
+        <div><input id="password" type="password" placeholder="Password" name="password" /><br></div>
+        <button type="submit" value="Login" class="button" onclick="validate(event)">Login</button>
     </form>
     </div>
     <!-- JavaScript -->
@@ -28,4 +30,3 @@
 
 
 
-<!--<a href="students.html"><button class="login_button" type="submit" name="button">Login</button></a>-->
