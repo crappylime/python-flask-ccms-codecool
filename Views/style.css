@@ -89,17 +89,26 @@ button:hover, .button:hover, button:focus, .button:focus {
 .team_button:first-of-type{
   margin-left: 60px;
 }
+
 /* layout */
 
+body > div:first-child {
+  height: 100%;
+  z-index: -1;
+  width: 20%;
+  float: left;
+}
 sidebar {
   float: left;
   width: 20%;
+  height: 100%;
   background-color:rgba(138, 169, 181, 0.69);
   border-right: 1px solid black;
   position: fixed;
 }
 .wrap {
   margin: 0 auto;
+  top: 0;
   height: 100%;
   float: right;
   width: 79.9%;
