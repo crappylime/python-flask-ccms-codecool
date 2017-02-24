@@ -289,9 +289,10 @@ nav ul li a:hover, nav ul li a:focus {
   width: 90px;
   font-weight: 100;
   font-family: Helvetica, serif;
-  margin-bottom: 50px;
 }
-
+#edit_team {
+  margin-left: 20px;
+}
 /* forms */
 
 label, input, textarea {
@@ -329,7 +330,7 @@ table {
   width: 100%;
   border: 1px solid black;
   border-radius: 20px;
-  margin-bottom: 10%;
+  margin: 3% 0 10% 0;
 }
 table th {
   border-bottom: 1px dotted black;
@@ -355,7 +356,6 @@ table thead th {
 table tbody td:first-child, table thead th:first-child {
   border-right-width: 2px;
 }
-
 /* Submission details styles */
 
 .submission a {
@@ -390,10 +390,11 @@ table tbody td:first-child, table thead th:first-child {
 
 .info_box span {
   font-size: 40px;
+  color: #C3423F;
 }
 .info_box {
   background-color: rgba(228, 163, 148, 0.62);
-  border: solid 1px;
+  border: solid 1px #C3423F;
   width: 200px;
   height: 100px;
   margin-right: 80px;
@@ -402,4 +403,7 @@ table tbody td:first-child, table thead th:first-child {
   text-decoration: none;
   text-align: center;
   display: inline-block;
+}
+a.info_box:hover {
+x  border: solid 1px #F4F1BB;
 }
