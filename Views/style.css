@@ -181,13 +181,13 @@ nav ul li a:hover, nav ul li a:focus {
 #email_format_error{
   display: none;
   color: red;
-  font-family: Helvetica, serif
+  font-family: Helvetica, serif;
   font-size: 8px
 }
 #password_error{
   display: none;
   color: red;
-  font-family: Helvetica, serif
+  font-family: Helvetica, serif;
   font-size: 8px;
 }
 #login-content h4 {
@@ -218,7 +218,7 @@ nav ul li a:hover, nav ul li a:focus {
   margin-right: 0;
   font-size: 17px;
   font-weight: 300;
-  padding: 10;
+  padding: 10px;
 }
 .login_button {
   margin-top: 10%;
