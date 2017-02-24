@@ -50,7 +50,7 @@ header {
   padding-right: 10px;
   width: 60px;
 }
-a:link, a:visited, a:active, .blocked, a:hover {
+a:link, a:visited, a:active, a:hover {
   font-weight: bold;
   text-decoration: none;
   color: #C3423F;
@@ -148,7 +148,7 @@ nav ul {
   list-style-type: none;
   overflow: hidden;
 }
-nav ul li a, .blocked {
+nav ul li a {
   display: block;
   font-size: 10px;
   font-family: Sansita, sans-serif;
@@ -219,12 +219,6 @@ nav ul li a:hover, nav ul li a:focus {
   font-size: 17px;
   font-weight: 300;
   padding: 10px;
-}
-.login_button {
-  margin-top: 10%;
-  width: 70%;
-  font-size: 20px;
-  letter-spacing: 2px;
 }
 #login button{
   font-size: 17px;
@@ -356,6 +350,7 @@ table thead th {
 table tbody td:first-child, table thead th:first-child {
   border-right-width: 2px;
 }
+
 /* Submission details styles */
 
 .submission a {
@@ -370,20 +365,6 @@ table tbody td:first-child, table thead th:first-child {
   border: none;
   margin: 0;
   padding: 0;
-}
-
-#submission_content_table {
-  width: 70%;
-  margin-left: 5%;
-}
-#submission_time {
-  border: solid 2px green;
-  width: 350px;
-  text-align: center;
-  margin-bottom: 60px;
-}
-.submission_details {
-  margin-left: 5%;
 }
 
 /* User details styles */
