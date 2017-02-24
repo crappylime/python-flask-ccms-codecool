@@ -20,14 +20,14 @@
             <fieldset>
                 <legend>Person</legend>
                   <label for="email">E-mail </label>
-                  <input type="email" name="email" id="email" />
+                  <input type="email" name="email" id="email" required/>
                   <label for="firstname">First name </label>
-                  <input type="text" name="firstname" id="firstname" />
+                  <input type="text" name="firstname" id="firstname" required/>
                   <label for="lastname">Last name </label>
-                  <input type="text" name="lastname" id="lastname" />
+                  <input type="text" name="lastname" id="lastname" required/>
                   <label for="password">Password </label>
-                  <input type="password" name="password" id="password" />
-                  <button type="submit" class="submit_button" disabled>Save</button>
+                  <input type="password" name="password" id="password" required pattern=".{6,}" title="Six or more characters"/>
+                  <button type="submit" class="submit_button">Save</button>
             </fieldset>
         </form>
       </div>
