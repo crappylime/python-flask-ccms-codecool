@@ -405,5 +405,5 @@ table tbody td:first-child, table thead th:first-child {
   display: inline-block;
 }
 a.info_box:hover {
-x  border: solid 1px #F4F1BB;
+  border: solid 1px #F4F1BB;
 }
