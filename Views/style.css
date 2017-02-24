@@ -50,8 +50,13 @@ header {
   padding-right: 10px;
   width: 60px;
 }
-a:link, .blocked {
+a:link, a:visited, a:active, .blocked, a:hover {
   font-weight: bold;
+  text-decoration: none;
+  color: #C3423F;
+}
+a:hover {
+  color: #f5ef8d;
 }
 
 /* button */
@@ -147,7 +152,7 @@ nav ul li a, .blocked {
   display: block;
   font-size: 10px;
   font-family: Sansita, sans-serif;
-  color: black;
+  color: black !important;
   text-transform: uppercase;
   text-decoration: none;
   padding: 0 20px 4px 25px;
@@ -157,7 +162,7 @@ nav ul li a:first-of-type {
 }
 nav ul li a:hover, nav ul li a:focus {
   background-color:rgb(59, 104, 121);
-  color: #F4F1BB;
+  color: #F4F1BB !important;
 }
 .submenu {
   margin-left: 40px;
@@ -192,6 +197,8 @@ nav ul li a:hover, nav ul li a:focus {
 }
 #login-content {
   background-color: rgba(228, 163, 148, 0.62);
+  height: 250px;
+  width: 400px;
   text-align: center;
   line-height: 40px;
   margin-top: 10%;
@@ -385,6 +392,7 @@ table tbody td:first-child, table thead th:first-child {
   font-size: 40px;
 }
 .info_box {
+  background-color: rgba(228, 163, 148, 0.62);
   border: solid 1px;
   width: 200px;
   height: 100px;
