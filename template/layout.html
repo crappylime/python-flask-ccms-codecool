@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Beloved Codecool CCMS{% endblock %}</title>
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- JavaScript -->
+    <script src="/static/js/login.js"></script>
+  </head>
+  <body>
+    <sidebar>
+      <!-- Sidebar Header
+      ================================================== -->
+      <header class="sideheader">
+        <p>You're logged in as:</p>
+        <img id="logo" src="images/logo.png" alt="logo">
+        <h2>Przemek</h2>
+        <a href="index.html">Logout</a>
+      </header>
+      <!-- Navigation
+      ================================================== -->
+      <nav>
+         <ul>
+             <li><a href="user_details.html">User menu</a></li>
+            <ul class="submenu">
+                <li><a href="assignments.html">My assignments</a></li>
+                <li><a href="submissions.html">My submissions</a></li>
+                <li><a href="grades_view.html">My grades</a></li>
+                <li><a href="team_details.html">My team</a></li>
+                <li><a href="attendance_student_view.html">My attendance</a></li>
+            </ul>
+                <li><a href="users.html">Students</a></li>
+                <ul class="submenu">
+                    <li><a href="users.html">List of students</a></li>
+                    <li><a href="add_edit_person_form.html">Add student</a></li>
+                    <li><a href="teams.html">Teams</a></li>
+                    <li><a href="attendance_check.html">Attendance check</a></li>
+                    <li><a href="attendance_list.html">Attendance list</a></li>
+                </ul>
+                <li><a href="assignments.html">Assignments</a></li>
+                    <ul class="submenu">
+                    <li><a href="assignments.html">List of assigments</a></li>
+                    <li><a href="add_edit_assignment.html">Add an assigments</a></li>
+                    <li><a href="submissions.html">List of submissions</a></li>
+                  </ul>
+              <li><a href="users.html">Mentors</a></li>
+                <ul class="submenu">
+                  <li><a href="users.html">List of mentors</a></li>
+                  <li><a href="add_edit_person_form.html">Add mentor</a></li>
+                </ul>
+              <li><a href="users.html">Staff</a></li>
+                <ul class="submenu">
+                  <li><a href="users.html">List of staff</a></li>
+                  <li><a href="add_edit_person_form.html">Add staff</a></li>
+                </ul>
+            </ul>
+          </nav>
+    </sidebar>
+    <div class="wrap">
+      {% block page_name_h1 %}{% endblock %}
+      <div class="content">
+      {% block content %}{% endblock %}
+      </div>
+    </div>
+  </body>
+</html>
