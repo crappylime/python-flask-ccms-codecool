@@ -101,6 +101,8 @@ ENV/
 
 
 Data/ccms.db
+.idea/
+.idea
 
 ## File-based project format:
 *.iws
@@ -160,3 +162,5 @@ Temporary Items
 Controllers/
 Data/
 !/Data/
+.idea
+.idea/
