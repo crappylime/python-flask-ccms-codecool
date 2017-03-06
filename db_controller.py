@@ -6,7 +6,7 @@ class DB:
     @classmethod
     def connect(cls):
         """Connect with database"""
-        return sqlite3.connect('Data/ccms.db')
+        return sqlite3.connect('data/ccms.db')
 
     @classmethod
     def execute_query(cls, query, args):

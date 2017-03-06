@@ -1,4 +1,4 @@
-from db import DB
+from db_controller import DB
 
 
 class Assignment:

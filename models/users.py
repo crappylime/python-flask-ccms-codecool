@@ -1,7 +1,7 @@
-from db import DB
-from Models.submission import Submission
-from Models.attendance import Attendance
-from Models.teams import Team
+from db_controller import DB
+from models.submissions import Submission
+from models.attendances import Attendance
+from models.teams import Team
 
 
 class User:
