@@ -101,6 +101,8 @@ ENV/
 
 
 Data/ccms.db
+.idea/
+.idea
 
 ## File-based project format:
 *.iws
@@ -156,7 +158,9 @@ Temporary Items
 .apdisk
 
 # End of https://www.gitignore.io/api/python,pycharm,osx
-.idea/
+
 Controllers/
 Data/
 !/Data/
+.idea
+.idea/
