@@ -10,19 +10,20 @@
     ================================================== -->
       <div id="label-input">
         <label>Date </label><input type="date" placeholder="Date"/>
-        <button class="submit_button" type="submit" name="button">Save</button>
+{#        <button class="submit_button" type="submit" name="button">Save</button>#}
       </div>
       <table id="attendance_table">
           {% for student in students_list %}
           <tr>
               <td> {{ student.get_name() }}</td>
-              <form>
-              <td><input type="radio" name="attendance" value="Present"/>Present</td>
-              <td><input type="radio" name="attendance" value="Late" />Late</td>
-              <td><input type="radio" name="attendance" value="Absent" />Absent</td>
-              </form>
+              <form action method="POST">
+              <td><input type="radio" name="{{ student.get_id() }}" value=1 />Present</td>
+              <td><input type="radio" name="{{ student.get_id() }}" value='L' />Late</td>
+              <td><input type="radio" name="{{ student.get_id() }}" value=0 />Absent</td>
           </tr>
           {% endfor %}
+      <button class="submit_button" type="submit" name="button">Save</button>
       </table>
+    </div>
   </div>
 {% endblock %}
