@@ -46,6 +46,7 @@ class Assignment:
             assignment: object
         """
         args = DB.read_assignment_record_by_id(assignment_id)
+        print(*args[0])
         return Assignment(*args[0])
 
     @classmethod
@@ -97,10 +98,12 @@ class Assignment:
         """
         return self.max_points
 
-    def edit_assignment(self, title, due_date, max_points):
+    def edit_assignment(self, title, content, due_date, max_points):
         """
         Edits assignments parameters
         """
         self.title = title
+        self.content = content
         self.due_date = due_date
         self.max_points = max_points
+        DB.update_assignment(self.id, self.title, self.content, self.due_date, self.max_points)

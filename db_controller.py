@@ -318,6 +318,40 @@ class DB:
         cls.execute_query(query, args)
 
     @classmethod
+    def update_title(cls, assignment_id, title):
+        """Update title of assignment by provided assignment id"""
+        query = "UPDATE `assignments` SET `title` = ? WHERE `assignment_id` = ?;"
+        args = (title, assignment_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_content(cls, assignment_id, content):
+        """Update content of assignment by provided assignment id"""
+        query = "UPDATE `assignments` SET `content` = ? WHERE `assignment_id` = ?;"
+        args = (content, assignment_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_due_date(cls, assignment_id, due_date):
+        """Update due date of assignment by provided assignment id"""
+        query = "UPDATE `assignments` SET `due_date` = ? WHERE `assignment_id` = ?;"
+        args = (due_date, assignment_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_max_points(cls, assignment_id, max_points):
+        """Update max points of assignment by provided assignment id"""
+        query = "UPDATE `assignments` SET `max_points` = ? WHERE `assignment_id` = ?;"
+        args = (max_points, assignment_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_assignment(cls, assignment_id, title, content, due_date, max_points):
+        query = "UPDATE `assignments` SET `title` = ?, `content` = ?, `due_date` = ?, `max_points` = ? WHERE `assignment_id` = ?;"
+        args = (title, content, due_date, max_points, assignment_id)
+        cls.execute_query(query, args)
+
+    @classmethod
     def delete_assignment_record(cls, assignment_id):
         """Delete assignment record by provided assignment id"""
         query = "DELETE FROM assignments WHERE assignment_id = ?"

@@ -27,6 +27,13 @@ def assignment_new():
     return render_template("add_edit_assignment.html", title="Add an assignment")
 
 
-# @assignments_ctrl.route("/assignments/new")
-# def assignment_new():
-#     return render_template("add_edit_assignment.html", title="Add an assignment")
+@assignments_ctrl.route("/assignments/<assignment_id>/edit", methods=["GET", "POST"])
+def assignment_edit(assignment_id):
+    if request.method == "POST":
+        assignment_title = request.form['assignment_title']
+        content = request.form['content']
+        due_date = request.form['due_date']
+        max_points = request.form['max_points']
+        Assignment.get_assignment_by_id(assignment_id).edit_assignment(assignment_title, content, due_date, max_points)
+        return redirect('/assignments/%s' % assignment_id)
+    return render_template("add_edit_assignment.html", title="Edit an assignment")
