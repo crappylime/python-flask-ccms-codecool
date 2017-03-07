@@ -107,8 +107,15 @@ class Attendance:
         return DB.read_overall_attendance(student_id)
 
     @classmethod
+    def update_attendance(cls, student_id, date, status):
+        """
+        Updates attendance
+        """
+        return DB.update_attendance(student_id, date, status)
+
+    @classmethod
     def add_attendance(cls, student_id, date, status):
-        status_dict = {'0': 0, '1': 1, 'L': 0.8}
+        status_dict = {'0': 0, '1': 1, '0.8': 0.8}
         values = (student_id, date, status_dict[status])
         new_attendance_id = DB.create_attendance_record(values)
         new_attendance = cls.get_attendance_by_id(new_attendance_id)

@@ -24,7 +24,9 @@
                 <tbody>
                 {% for item in attendances_list %}
                 <tr>
-                    <td>1.</td><td>{{ item.get_student().get_name() }}</td><td>{{ item.get_date()}}</td><td>{{ item.get_status()}}</td>
+                    <td>1.</td><td>{{ item.get_student().get_name() }}</td><td>{{ item.get_date()}}</td>
+                    <td>{{ "Present" if item.get_status() == 1 }} {{ "Late" if item.get_status() == 0.8 }}
+                    {{ "Absent" if item.get_status() == 0 }} </td>
                 </tr>
                 {% endfor %}
                 </tbody>

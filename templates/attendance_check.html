@@ -12,7 +12,7 @@
     <div id="label-input">
         <label>Date </label><input type="date" name="date" placeholder="Date"
                                    onchange="this.form.submit()"
-           {{ "value={}".format(chosen_date) if chosen_date != 'unspecified' }} >
+           {{ "value={}".format(chosen_date) if chosen_date }} >
       </div>
     </form>
     <form action method="POST">
@@ -21,9 +21,12 @@
           <tr>
               <td> {{ student.get_name() }}</td>
 
-              <td><input type="radio" name="{{ student.get_id() }}" value=1 />Present</td>
-              <td><input type="radio" name="{{ student.get_id() }}" value='L' />Late</td>
-              <td><input type="radio" name="{{ student.get_id() }}" value=0 />Absent</td>
+              <td><input type="radio" name="{{ student.get_id() }}" value=1
+                      {{ "checked=checked" if student_status_dict[student.get_id()] == 1}}/>Present</td>
+              <td><input type="radio" name="{{ student.get_id() }}" value=0.8
+                      {{ "checked=checked" if student_status_dict[student.get_id()] == 0.8}}/>Late</td>
+              <td><input type="radio" name="{{ student.get_id() }}" value=0
+                      {{ "checked=checked" if student_status_dict[student.get_id()] == 0}}/>Absent</td>
           </tr>
           {% endfor %}
       <button class="submit_button" type="submit" name="button">Save</button>

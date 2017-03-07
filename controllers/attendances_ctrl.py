@@ -13,43 +13,46 @@ def attendances():
 
     attendances_list = Attendance.get_attendance_list()
 
+    name_dict = {1: 'Present', 0: 'Absent', 0.8: 'Late' }
+
     return render_template('attendance_list.html', attendances_list=attendances_list)
 
 
-# @attendances_ctrl.route("/attendances/check/", methods=['GET'])
 @attendances_ctrl.route("/attendances/check/", methods=['GET', 'POST'])
 def check_attendance():
-    students_list = User.get_user_list_by_role('student')
 
+    students_list = User.get_user_list_by_role('student')
     chosen_date = request.args.get('date', None)
-    print(chosen_date)
+    by_date_list = Attendance.get_attendance_list_by_date(chosen_date)
+    student_status_dict = {}
+
+    for attendance in by_date_list:
+        student_status_dict[attendance.get_student().get_id()] = attendance.get_status()
 
     if request.method == 'GET':
-        if chosen_date is None:
-            print('dfdf')
-            return render_template('attendance_check.html', students_list=students_list)
+        if chosen_date is None or len(by_date_list) == 0:
+            return render_template('attendance_check.html', students_list=students_list,
+                                   chosen_date=chosen_date, student_status_dict={})
+        else:
+            return render_template('attendance_check.html', students_list=students_list,
+                                   chosen_date=chosen_date, student_status_dict=student_status_dict)
 
     if request.method == 'POST':
-        print('poost')
-        # date = request.form["date"]
-
         attendances_list = []
-        by_date_list = Attendance.get_attendance_list_by_date(chosen_date)
         if len(by_date_list) == 0:
             for student in students_list:
                 attendances_list.append((student.get_id(), chosen_date, request.form[str(student.get_id())]))
-            for atten in attendances_list:
-                Attendance.add_attendance(atten[0], atten[1], atten[2])
+            for attendance in attendances_list:
+                Attendance.add_attendance(attendance[0], attendance[1], attendance[2])
+            return render_template('attendance_check.html', students_list=students_list,
+                                   student_status_dict={})
+        else:
+            for student in students_list:
+                attendances_list.append((student.get_id(), chosen_date, request.form[str(student.get_id())]))
+            for attendance in attendances_list:
+                Attendance.update_attendance(attendance[0], attendance[1], attendance[2])
+            return render_template('attendance_check.html', students_list=students_list,
+                                   student_status_dict={})
 
-        return render_template('attendance_check.html', students_list=students_list)
-
-    return render_template('attendance_check.html', students_list=students_list, chosen_date=chosen_date)
-        #     print(attendances_list)
-        #     print('nie podano daty')
-        # print(date)
-
-
-    # if len(by_date_list) == 0:
-
-
-
+    # return render_template('attendance_check.html', students_list=students_list,
+    #                        chosen_date=chosen_date, student_status_dict={})
