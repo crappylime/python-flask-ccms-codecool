@@ -1,5 +1,5 @@
 from db_controller import DB
-from models.submissions import Submission
+# from models.submissions import Submission
 from models.attendances import Attendance
 from models.teams import Team
 

@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, session, redirect, g, url_for, Blueprint
 from db_controller import DB
+from controllers.submissions_ctrl import submissions_ctrl
 
 DATABASE = 'data/ccms.db'
 
 app = Flask(__name__)
 
+app.register_blueprint(submissions_ctrl)
 
 def get_db():
     db = getattr(g, '_database', None)
@@ -26,7 +28,5 @@ def index():
 
 
 if __name__ == "__main__":
-    DB.create_database()
+    # DB.create_database()
     app.run(debug=True)
-
-
