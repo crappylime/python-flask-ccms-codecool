@@ -1,55 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Assigment details</title>
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    <script src="https://www.w3schools.com/lib/w3data.js"></script>
-</head>
-<body>
-<div w3-include-html="sidebar.html"></div>
-<div class="wrap">   <a href="add_edit_assignment.html" class="button submit_button">Edit assignment</a>
-<h1>Assignment Hangman</h1>
+{% extends "layout.html" %}
 
+{% block title %}{{ assignment.get_title() }} | {{ super() }}{% endblock %}
 
+{% block page_name_h1 %}{{ assignment.get_title() }}{% endblock %}
 
-        <div class="content">
-            <table class="details_table">
-                <tr>
-                    <th>Max points</th>
-                    <td>50 pt</td>
-                </tr>
-                <th>Due date</th>
-                <td>2 march 2017 23:59:59</td>
+{% block content %}
+    <table class="details_table">
+        <tr>
+            <th>Max points</th>
+            <td>{{ assignment.get_max_points() }}</td>
+        </tr>
+        <th>Due date</th>
+        <td>{{ assignment.get_due_date() }}</td>
 
-                <tr>
+        <tr>
 
-                </tr>
+        </tr>
 
-                <tr>
-                    <th>Assignment content</th>
-                    <td>The answer for this assignment is NO. The answer for this assignment is NO.
-                        The answer for this assignment is NO. The answer for this assignment is NO.
-                        The answer for this assignment is NO. The answer for this assignment is NO.
-                        The answer for this assignment is NO. The answer for this assignment is NO.
-                        The answer for this assignment is NO. The answer for this assignment is NO.
-                        The answer for this assignment is NO. The answer for this assignment is NO.</td>
-                </tr>
+        <tr>
+            <th>Assignment content</th>
+            <td>{{ assignment.get_content() }}</td>
+        </tr>
 
-            </table>
-
-        </div>
-
-
-
-</div>
-
-<!-- JavaScript -->
-<script>
-    w3IncludeHTML();
-</script>
-</body>
-</html>
+    </table>
+{% endblock %}

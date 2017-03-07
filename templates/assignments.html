@@ -1,23 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>List of assignments</title>
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    <script src="https://www.w3schools.com/lib/w3data.js"></script>
-  </head>
-  <body>
-    <div w3-include-html="sidebar.html"></div>
-    <div class="wrap">
-      <h1>List of assignments</h1>
-      <a href="add_edit_assignment.html" class="button submit_button">Add new assignment</a>
-      <div class="content">
-        <!-- Table
-        ================================================== -->
-        <table>
+{% extends "layout.html" %}
+
+{% block title %}Assignments {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}List of assignments{% endblock %}
+
+{% block content %}
+    <table>
             <thead>
                 <tr>
                     <th>
@@ -35,64 +23,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        1.
-                    </td>
-                    <td>
-                        100 doors
-                    </td>
-                    <td>
-                        <a href="assignment_details.html" class="button assignment_buttons">Details</a>
-                    </td>
-                    <td>
-                        <a href="add_edit_assignment.html" class="button assignment_buttons">Edit</a>
-                        <a href="#" class="button assignment_buttons">Remove</a>
-                        <a href="add_submission.html" class="button assignment_buttons">Submit assignment</a>
-                        <a href="submissions.html" class="button assignment_buttons">Submissions list</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        2.
-                    </td>
-                    <td>
-                        hangman
-                    </td>
-                    <td>
-                        <a href="assignment_details.html" class="button assignment_buttons">Details</a>
-                    </td>
-                    <td>
-                        <a href="add_edit_assignment.html" class="button assignment_buttons">Edit</a>
-                        <a href="#" class="button assignment_buttons">Remove</a>
-                        <a href="add_submission.html" class="button assignment_buttons">Submit assignment</a>
-                        <a href="submissions.html" class="button assignment_buttons">Submissions list</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        3.
-                    </td>
-                    <td>
-                        ccms
-                    </td>
-                    <td>
-                        <a href="assignment_details.html" class="button assignment_buttons">Details</a>
-                    </td>
-                    <td>
-                        <a href="add_edit_assignment.html" class="button assignment_buttons">Edit</a>
-                        <a href="#" class="button assignment_buttons">Remove</a>
-                        <a href="add_submission.html" class="button assignment_buttons">Submit assignment</a>
-                        <a href="submissions.html" class="button assignment_buttons">Submissions list</a>
-                    </td>
-                </tr>
+                {% for assignment in assignment_list %}
+                    <tr>
+                        <td>
+                            {{ assignment.get_id() }}
+                        </td>
+                        <td>
+                            {{ assignment.get_title() }}
+                        </td>
+                        <td>
+                            <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Details</a>
+                        </td>
+                        <td>
+                            <a href="add_edit_assignment.html" class="button assignment_buttons">Edit</a>
+                            <a href="#" class="button assignment_buttons">Remove</a>
+                            <a href="add_submission.html" class="button assignment_buttons">Submit assignment</a>
+                            <a href="{{ url_for('submissions_ctrl.list_assignment_submissions', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Submissions list</a>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
-      </div>
-    </div>
-    <!-- JavaScript -->
-    <script>
-      w3IncludeHTML();
-    </script>
-  </body>
-</html>
+{% endblock %}
