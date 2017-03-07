@@ -1,38 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Add/edit assignment</title>
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    <script src="https://www.w3schools.com/lib/w3data.js"></script>
-  </head>
-  <body>
-    <div w3-include-html="sidebar.html"></div>
-    <div class="wrap">
-      <h1>Add/edit assignment</h1>
-      <div class="content">
-        <!-- Form
-        ================================================== -->
-        <form>
-            <fieldset>
-                <legend>Assignment</legend>
-                <label for="assignment_title">Assignment title </label>
-                <input type="text" name="assignment_title" id="assignment_title" required/>
-                <label for="max_points">Max points </label>
-                <input type="number" name="max_points" id="max_points" min="1" max="100" step="1" required/>
-                <label for="content">Content</label>
-                <textarea name="content" id="content" required></textarea>
-                <button type="submit" class="submit_button" >Save</button>
-            </fieldset>
-        </form>
-      </div>
-    </div>
-    <!-- JavaScript -->
-    <script>
-      w3IncludeHTML();
-    </script>
-  </body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}{{title}} {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}{{title}}{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        <fieldset>
+            <legend>Assignment</legend>
+            <label for="assignment_title">Assignment title </label>
+            <input type="text" name="assignment_title" id="assignment_title" required/>
+            <label for="due_date">Due date </label>
+            <input type="date" id=due_date name="due_date"/>
+            <label for="max_points">Max points </label>
+            <input type="number" name="max_points" id="max_points" min="1" max="100" step="1" required/>
+            <label for="content">Content</label>
+            <textarea name="content" id="content" required></textarea>
+            <button type="submit" class="submit_button" >Save</button>
+        </fieldset>
+    </form>
+{% endblock %}
