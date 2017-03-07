@@ -12,3 +12,11 @@ def list_assignment_submissions(assignment_id):
     assignment = Assignment.get_assignment_by_id(assignment_id)
     assignment_id = assignment.get_id()
     return render_template('submissions.html', assignment=assignment,  list_assignment_submissions=Submission.get_submission_list_by_assignment_id(assignment_id))
+
+
+@submissions_ctrl.route("/submissions/<submission_id>")
+def submission_details(submission_id):
+    """ Shows details of submission stored in the database.
+    """
+    submission = Submission.get_submission_by_id(submission_id)
+    return render_template('submission_details.html', submission=submission, assignment=submission.get_assignment())

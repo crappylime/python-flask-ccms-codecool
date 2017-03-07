@@ -1,54 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-      <meta charset="utf-8">
-          <title>Submission details</title>
-        <!-- Custom Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="style.css">
-        <script src="https://www.w3schools.com/lib/w3data.js"></script>
-  </head>
-  <body>
-    <div w3-include-html="sidebar.html"></div>
-    <div class="wrap">
+{% extends "layout.html" %}
 
-            <h1><a href="assignment_details.html">Assignment 1</a> -
-                <a href="student_details">Jan Nowak</a> submission</h1>
-        <div class="content">
-            <table class="details_table">
-                <tr>
-                    <th>Grade</th>
-                    <td>– –/50 pt <a href="#" class="button">Grade</a></td>
-                </tr>
-                <th>Due date</th>
-                <td>2 march 2017 23:59:59</td>
-                <tr>
-                    <th>Time of submission</th>
-                    <td>1 march 2017 15:55:52</td>
-                </tr>
-                <tr>
+{% block title %}
+{{ assignment.get_title() }} - {{ submission.get_student().get_name() }} submission | {{ super() }}
+{% endblock %}
 
-                </tr>
+{% block page_name_h1 %}
+    <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{ assignment.get_title() }}</a> -
+    <a href="student_details">{{ submission.get_student().get_name() }}</a> submission
+{% endblock %}
 
-                <tr>
-                    <th>Submission content</th>
-                    <td>The answer for this assignment is NO.
-                        <a href="http://github.com">www.github.com</a></td>
-                </tr>
-
-            </table>
-
-
-            </div>
-
-
-
-      </div>
-
-    <!-- JavaScript -->
-    <script>
-      w3IncludeHTML();
-    </script>
-  </body>
-</html>
+{% block content %}
+    <table class="details_table">
+        <tr>
+            <th>Grade</th>
+            <td>{% if submission.get_points() %}
+                {{ submission.get_points() }}
+            {% else %}
+                – –
+            {% endif %}
+            /{{ assignment.get_max_points() }} <a href="#" class="button">Grade</a></td>
+        </tr>
+            <th>Due date</th>
+            <td>{{ assignment.get_due_date() }}</td>
+        <tr>
+            <th>Time of submission</th>
+            <td>{{ submission.get_date() }}</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <th>Submission content</th>
+            <td><a href="{{ submission.get_content() }}" target="_blank">{{ submission.get_content() }}</a></td>
+        </tr>
+    </table>
+{% endblock %}
