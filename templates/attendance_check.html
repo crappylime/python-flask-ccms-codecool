@@ -8,15 +8,19 @@
     <div class="content">
     <!-- Table
     ================================================== -->
-      <div id="label-input">
-        <label>Date </label><input type="date" placeholder="Date"/>
-{#        <button class="submit_button" type="submit" name="button">Save</button>#}
+    <form action method="GET">
+    <div id="label-input">
+        <label>Date </label><input type="date" name="date" placeholder="Date"
+                                   onchange="this.form.submit()"
+           {{ "value={}".format(chosen_date) if chosen_date != 'unspecified' }} >
       </div>
+    </form>
+    <form action method="POST">
       <table id="attendance_table">
           {% for student in students_list %}
           <tr>
               <td> {{ student.get_name() }}</td>
-              <form action method="POST">
+
               <td><input type="radio" name="{{ student.get_id() }}" value=1 />Present</td>
               <td><input type="radio" name="{{ student.get_id() }}" value='L' />Late</td>
               <td><input type="radio" name="{{ student.get_id() }}" value=0 />Absent</td>
@@ -24,6 +28,13 @@
           {% endfor %}
       <button class="submit_button" type="submit" name="button">Save</button>
       </table>
+    </form>
     </div>
   </div>
 {% endblock %}
+
+{#onchange="this.form.submit()"/>#}
+
+{#{{ "value={}".format(chosen_date) if chosen_date != 'unspecified' }}#}
+
+{# value="2017-03-17"  #}

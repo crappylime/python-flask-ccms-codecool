@@ -237,6 +237,17 @@ class DB:
         return attendance
 
     @classmethod
+    def read_attendance_record_list_by_date(cls, date):
+        """Read attendance record list by provided date"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `attendances` WHERE `date` = ?;"
+        cursor.execute(query, (date,))
+        attendance = cursor.fetchall()
+        conn.close()
+        return attendance
+
+    @classmethod
     def read_attendance_record_list(cls):
         """Read attendance record list"""
         conn = cls.connect()

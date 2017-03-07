@@ -31,6 +31,15 @@ class Attendance:
         return cls.create_attendance_list_by_student_id(student_id)
 
     @classmethod
+    def get_attendance_list_by_date(cls, date):
+        """
+        Returns list of Attendance instances
+        :return:
+            attendance_list: list
+        """
+        return cls.create_attendance_list_by_date(date)
+
+    @classmethod
     def get_attendance_list(cls):
         """
         Returns list of Attendance instances
@@ -57,6 +66,16 @@ class Attendance:
         """
         args = DB.read_attendance_record_by_id(attendance_id)
         return Attendance(*args[0])
+
+    @classmethod
+    def create_attendance_list_by_date(cls, date):
+        """
+        Creates list of Attendance instances
+        :return:
+            attendance_list: list
+        """
+        attendance_data = DB.read_attendance_record_list_by_date(date)
+        return [Attendance(*attendance) for attendance in attendance_data]
 
     @classmethod
     def create_attendance_list_by_student_id(cls, student_id):
