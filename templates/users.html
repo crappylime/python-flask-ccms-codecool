@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{ role.capitalize() + 'list' if role  else 'Users list' }}
+{% endblock %}
+
+{% block page_name_h1 %}
+    {{ role.capitalize() + 's list' if role in ['student', 'mentor', 'staff']  else 'Users list' }}
+{% endblock %}
+
+{% block content %}
+      <div class="content">
+        <table>
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>E-mail</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for index, user in users %}
+                <tr>
+                    <td>{{ index+1 }}.</td>
+                    <td><a href={{ url_for('users_ctrl.user_details', user_id = user.get_id()) }}>{{ user.get_name() }}</a></td>
+                    <td><a href="mailto://{{ user.get_mail() }}">{{ user.get_mail() }}</a> </td>
+                    <td>
+                        <a href={{ url_for('users_ctrl.user_details', user_id = user.get_id()) }} class="button user_button">Details</a>
+                        <a href={{ url_for('users_ctrl.user_edit', user_id = user.get_id()) }} class="button user_button">Edit</a>
+                        <a href={{ url_for('users_ctrl.user_remove', user_id = user.get_id()) }} class="button user_button">Remove</a>
+                        {% if user.get_user_class_name() == 'Student' %}
+                        <a href='#'  class="button user_button">Add to team</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+      </div>
+{% endblock %}

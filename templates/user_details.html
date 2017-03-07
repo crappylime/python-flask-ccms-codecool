@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-      <meta charset="utf-8">
-          <title>Submission details</title>
-        <!-- Custom Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="style.css">
-        <script src="https://www.w3schools.com/lib/w3data.js"></script>
-  </head>
-  <body>
-    <div w3-include-html="sidebar.html"></div>
-    <div class="wrap">
-
+{% extends 'layout.html' %}
+{% block page_name_h1 %}
+User details <a href="add_edit_person_form.html" class="button">Edit</a>
+{% endblock %}
+{% block content %}
         <div class="content">
-            <h1>User details <a href="add_edit_person_form.html" class="button">Edit</a></h1>
+
                 <h3>Name: Antoni Niewesoły</h3>
                 <p>mail: 123antoni@hmail.com</p>
                 <p><a href="add_edit_person_form.html">change password</a></p>
@@ -68,14 +58,4 @@
 
         </div>
 
-
-
-
-      </div>
-
-    <!-- JavaScript -->
-    <script>
-      w3IncludeHTML();
-    </script>
-  </body>
-</html>
+{% endblock %}

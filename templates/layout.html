@@ -16,7 +16,7 @@
       ================================================== -->
       <header class="sideheader">
         <p>You're logged in as:</p>
-        <img id="logo" src="images/logo.png" alt="logo">
+        <img id="logo" src="/static/images/logo.png" alt="logo">
         <h2>Przemek</h2>
         <a href="index.html">Logout</a>
       </header>
@@ -59,8 +59,8 @@
             </ul>
           </nav>
     </sidebar>
-    <div class="wrap">
-      {% block page_name_h1 %}{% endblock %}
+    <div class="wrap"><h1>
+      {% block page_name_h1 %}{% endblock %}</h1>
       <div class="content">
       {% block content %}{% endblock %}
       </div>
