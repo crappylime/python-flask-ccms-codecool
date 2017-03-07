@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, session, redirect, g, url_for, Blueprint
 from db_controller import DB
-from controllers.assignments_ctrl import assignments_list
+from controllers.assignments_ctrl import assignments_ctrl
 
 DATABASE = 'data/ccms.db'
 
 app = Flask(__name__)
-app.register_blueprint(assignments_list)
+app.register_blueprint(assignments_ctrl)
 
 
 def get_db():

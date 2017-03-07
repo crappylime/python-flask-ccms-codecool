@@ -32,7 +32,7 @@
                             {{ assignment.get_title() }}
                         </td>
                         <td>
-                            {{ assignment.get_content() }}
+                            <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Details</a>
                         </td>
                         <td>
                             <a href="add_edit_assignment.html" class="button assignment_buttons">Edit</a>
