@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}Attendance | {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}Students attendance{% endblock %}
+
+{% block content %}
+        <div class="content">
+        <span id="date-style"><label>date</label><input type="date" placeholder="Date"/></span>
+        <span id="select_student"><label>student</label><select>
+                                    <option>wszyscy</option>
+                                    <option>ktoś</option>
+                                    <option>ktoś</option>
+                                    <option>ktoś</option>
+                                </select></span>
+        <!-- Table
+        ================================================== -->
+            <table>
+                <thead>
+                    <tr>
+                    <th>id</th><th>Name</th><th>Date</th><th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in attendances_list %}
+                <tr>
+                    <td>1.</td><td>{{ item.get_student().get_name() }}</td><td>{{ item.get_date()}}</td><td>{{ item.get_status()}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        <br>
+        <span id="overall_attendance">Overall attendance: TODO</span>
+    </div>
+{% endblock %}

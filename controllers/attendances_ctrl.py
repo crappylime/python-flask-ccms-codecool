@@ -1,0 +1,26 @@
+from flask import Flask, render_template, request, redirect, url_for, session
+from models.attendances import Attendance
+from models.users import User
+from flask import Blueprint
+
+
+
+attendances_ctrl = Blueprint('attendances_ctrl', __name__)
+
+
+@attendances_ctrl.route("/attendances")
+def attendances():
+
+    attendances_list = Attendance.get_attendance_list()
+
+    return render_template('attendance_list.html', attendances_list=attendances_list)
+
+
+@attendances_ctrl.route("/attendances/check/", methods=['GET', 'POST'])
+def check_attendamce():
+
+    students_list = User.get_user_list_by_role('student')
+
+    return render_template('attendance_check.html', students_list=students_list)
+
+

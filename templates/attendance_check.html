@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}Attendance check | {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}Students attendance check{% endblock %}
+
+{% block content %}
+    <div class="content">
+    <!-- Table
+    ================================================== -->
+      <div id="label-input">
+        <label>Date </label><input type="date" placeholder="Date"/>
+        <button class="submit_button" type="submit" name="button">Save</button>
+      </div>
+      <table id="attendance_table">
+          {% for student in students_list %}
+          <tr>
+              <td> {{ student.get_name() }}</td>
+              <form>
+              <td><input type="radio" name="attendance" value="Present"/>Present</td>
+              <td><input type="radio" name="attendance" value="Late" />Late</td>
+              <td><input type="radio" name="attendance" value="Absent" />Absent</td>
+              </form>
+          </tr>
+          {% endfor %}
+      </table>
+  </div>
+{% endblock %}
