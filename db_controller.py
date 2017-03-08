@@ -318,6 +318,14 @@ class DB:
         cls.execute_query(query, args)
 
     @classmethod
+    def update_user(cls, user_id, name, mail, password):
+        query = "UPDATE `users` SET `name` = ?, `mail` = ?, `password` = ? WHERE `user_id` = ?;"
+        args = (name, mail, password, user_id)
+        cls.execute_query(query, args)
+
+
+
+    @classmethod
     def delete_assignment_record(cls, assignment_id):
         """Delete assignment record by provided assignment id"""
         query = "DELETE FROM assignments WHERE assignment_id = ?"

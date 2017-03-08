@@ -3,6 +3,7 @@ from db_controller import DB
 from models.users import User
 from controllers.users_ctrl import users_ctrl
 from controllers.teams_ctrl import teams_ctrl
+from functools import wraps
 import os
 
 
@@ -72,6 +73,7 @@ def close_connection(exception):
 
 
 @app.route("/")
+@login_required
 def index():
     return render_template('user_details.html', user=User.get_user_by_id(session['user']))
 

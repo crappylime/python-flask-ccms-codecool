@@ -9,6 +9,12 @@
 {% endblock %}
 
 {% block content %}
+    {%  if role %}
+    <a href="{{ url_for('users_ctrl.user_add', role=role) }}" class="button submit_button">Add new {{ role }}</a>
+    {% endif %}
+      {% for message in get_flashed_messages() %}
+    {{ message }}
+    {% endfor %}
       <div class="content">
         <table>
             <thead>

@@ -1,11 +1,11 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    Add {{ role.capitalize() }}
+     {{ 'Add ' + role.capitalize() if role else 'Edit ' + user.name }}
 {% endblock %}
 
 {% block page_name_h1 %}
-   Add {{ role.capitalize() }}
+   {{ 'Add ' + role.capitalize() if role else 'Edit ' + user.name }}
 {% endblock %}
 
 {% block content %}
@@ -19,16 +19,18 @@
                 {%  for message in get_flashed_messages() %}
                 {{ message }}
                 {% endfor %}
-                <legend>{{ fieldset_title }} {{ role }} </legend>
+                <legend>{{ fieldset_title }} {{ role if role else user.get_user_class_name().lower() }} </legend>
                   <label for="firstname">First name </label>
-                  <input type="text" name="firstname" id="firstname" required/>
-                  <label for="lastname">Last name </label>
-                  <input type="text" name="lastname" id="lastname" required/>
-                  <label for="email">E-mail </label>
-                  <input type="email" name="email" id="email" required/>
+                  <input type="text" name="firstname" id="firstname" required value="{{ user.name.split()[0] if user }}"/>
+                  <label for="lastname" ">Last name </label>
+                  <input type="text" name="lastname" id="lastname" required value="{{ user.name.split()[1] if user }}"/>
+                  <label for="email" ">E-mail </label>
+                  <input type="email" name="email" id="email" required value="{{ user.mail if user }}"/>
                   <label for="password">Password </label>
-                  <input type="password" name="password" id="password" required pattern=".{6,}" title="Six or more characters"/>
+                  <input type="password" name="password" id="password" pattern=".{6,}" title="Six or more characters"
+                         {% if role %} required {% endif %}/>
                   <button type="submit" class="submit_button">Save</button>
+
             </fieldset>
         </form>
       </div>

@@ -3,6 +3,9 @@
 User details <a href="add_edit_person_form.html" class="button">Edit</a>
 {% endblock %}
 {% block content %}
+       {% for message in get_flashed_messages() %}
+    {{ message }}
+    {%  endfor %}
         <div class="content">
 
                 <h3>Name: {{ user.name }}</h3>
