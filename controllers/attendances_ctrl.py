@@ -14,14 +14,11 @@ def attendances():
     chosen_date = request.args.get('date', None)
     chosen_student = request.args.get('student', None)
     student_list = User.get_user_list_by_role('student')
-    
+
     # ------------------ retrieve data helpers section --------------------------------
-    name_id_dict = {}  # create dict with pairs: student name - student id to retrieve student it from select form
+    name_id_dict = {}  # create dict with pairs: student name - student id to retrieve student id from selected name
     for stu in student_list:
-        if stu.get_name not in name_id_dict.keys():
             name_id_dict[stu.get_name()] = stu.get_id()
-        else:
-            name_id_dict[stu.get_name()] += stu.get_id()
 
     names_list = []  # create names list to view sorted names list in select form
     for name in name_id_dict.keys():
@@ -38,6 +35,7 @@ def attendances():
     else:  # show all
         attendances_list = Attendance.get_attendance_list()
 
+    attendances_list = sorted(attendances_list, key=lambda att: att.get_date(), reverse=True)  # sort by date (DESC)
     return render_template('attendance_list.html', attendances_list=attendances_list,
                            chosen_date=chosen_date, names=sorted_name_list)
 

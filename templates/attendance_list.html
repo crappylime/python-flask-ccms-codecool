@@ -20,35 +20,33 @@
                         {% endfor %}
                                 </select></span>
         </form>
-        <!-- Table
-        ================================================== -->
             <table>
                 <thead>
                     <tr>
-                    <th>id</th><th>Name</th><th>Date</th><th>Status</th><th>Options</th>
+                    <th>id</th><th>Name</th><th>Date</th><th>Status</th><th>option</th><th>option</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% if not attendances_list[1] %}
+                    <tr><td>No attendance data</td></tr>
+                    {% endif %}
                 {% for item in attendances_list %}
                 <tr>
                     <td>{{ attendances_list.index(item) + 1 }}</td><td>{{ item.get_student().get_name() }}</td><td>{{ item.get_date()}}</td>
                     <td>{{ "Present" if item.get_status() == 1 }} {{ "Late" if item.get_status() == 0.8 }}
                     {{ "Absent" if item.get_status() == 0 }} </td>
                 <td><a href="{{ url_for('attendances_ctrl.attendance_edit', att_id=item.get_id()) }}">edit</a></td>
+                <td><a href="?student={{ item.get_student().get_name() }}" onclick="this.form.submit()">all dates</a></td>
                 </tr>
                 {% endfor %}
                 </tbody>
             </table>
-
-
         <br>
         <span id="overall_attendance">Overall attendance: TODO</span>
     </div>
 {% endblock %}
-
 <label>Date </label><input type="date" name="date" placeholder="Date"
                                    onchange="this.form.submit()"
            {{ "value={}".format(chosen_date) if chosen_date }} >
 
-
-{# <a href="{{ url_for('assignments_ctrl.assignment_edit', assignment_id=assignment.get_id()) }}"#}
+{#a href="?student=Marek+Frankowicz#"#}
