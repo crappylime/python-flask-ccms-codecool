@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Assignments {{ super() }}{% endblock %}
+{% block title %}Assignments | {{ super() }}{% endblock %}
 
 {% block page_name_h1 %}List of assignments{% endblock %}
 
@@ -37,7 +37,7 @@
                         <td>
                             <a href="add_edit_assignment.html" class="button assignment_buttons">Edit</a>
                             <a href="#" class="button assignment_buttons">Remove</a>
-                            <a href="add_submission.html" class="button assignment_buttons">Submit assignment</a>
+                            <a href="{{ url_for('submissions_ctrl.submission_add', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Submit assignment</a>
                             <a href="{{ url_for('submissions_ctrl.list_assignment_submissions', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Submissions list</a>
                         </td>
                     </tr>

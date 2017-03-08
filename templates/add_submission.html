@@ -1,36 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Add submission</title>
-        <!-- Custom Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
-        <!-- Custom CSS -->
-        <link rel="stylesheet" href="style.css">
-        <script src="https://www.w3schools.com/lib/w3data.js"></script>
-    </head>
-    <body>
-        <div w3-include-html="sidebar.html"></div>
-        <div class="wrap">
-            <h1>Add submission</h1>
-            <div class="content">
-                <h2>Assignment - <a href="assignment_details.html">Hangman</a> </h2>
-                <form class="add_submission_form">
+{% extends "layout.html" %}
 
+{% block title %}Submit assignment | {{ super() }}{% endblock %}
 
-                    <fieldset>
-                        <legend>Submission</legend>
-                        <label for="submission_link">Submission link </label>
-                        <input type="text" name="submission_link" id="submission_link" required/>
-                        <button type="submit" class="submit_button">Save</button>
-                    </fieldset>
+{% block page_name_h1 %}Submit assignment{% endblock %}
 
-                </form>
-            </div>
-        </div>
-        <!-- JavaScript -->
-        <script>
-            w3IncludeHTML();
-        </script>
-    </body>
-</html>
+{% block content %}
+    <h2>Assignment - <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{ assignment.get_title() }}</a> </h2>
+    <form class="add_submission_form" action="" method="POST">
+        <fieldset>
+            <legend>Submission</legend>
+            <label for="submission_link">Submission link </label>
+            <input type="url" name="content" id="submission_link" placeholder="Type link with http:// at the beginning :-)" autofocus required/>
+            <button type="submit" class="submit_button">Save</button>
+        </fieldset>
+    </form>
+{% endblock %}
