@@ -33,7 +33,7 @@
                 <tr>
                     <td>{{ student.get_id() }}</td>
                     <td>{{ student.get_name() }}</td>
-                    <td><form><a href="{{ url_for('teams_ctrl.team_delete_student', team_id=team.get_id(), student_id=student.get_id()) }}" methods="POST" class="button team_button">Remove</a></td>
+                    <td><form><a href="{{ url_for('teams_ctrl.team_remove_student', team_id=team.get_id(), student_id=student.get_id()) }}" methods="POST" class="button team_button">Remove</a></td>
                 </tr>
             {% endfor %}
         </tbody>

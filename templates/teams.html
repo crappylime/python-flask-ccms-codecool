@@ -29,7 +29,7 @@
                     <td>
                         <a href="{{ url_for('teams_ctrl.team_details', team_id=team.get_id()) }}"  class="button team_button">Details</a>
                         <a href="{{ url_for('teams_ctrl.team_edit', team_id=team.get_id()) }}" class="button team_button">Edit</a>
-                        <a href="#" class="button team_button">Remove</a>
+                        <a href="{{ url_for('teams_ctrl.team_remove', team_id=team.get_id()) }}" class="button team_button">Remove</a>
                     </td>
                 </tr>
             {% endfor %}

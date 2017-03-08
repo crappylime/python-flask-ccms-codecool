@@ -5,7 +5,7 @@
 {% block page_name_h1 %}{{ team.get_name() }}{% endblock %}
 
 {% block content %}
-    <h2>Team members<a href="add_edit_team_form.html" class="button add_button">Add member</a></h2>
+    <h2>Team members<a href="{{ url_for('teams_ctrl.team_edit', team_id=team.get_id()) }}" class="button add_button">Edit team</a></h2>
     <table>
         <thead>
             <tr>

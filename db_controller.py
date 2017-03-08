@@ -423,7 +423,16 @@ class DB:
         """Delete member record from database"""
         query = 'DELETE FROM `members` WHERE student_id = ?;'
         args = student_id
-        return cls.execute_query(query, (args,))
+        cls.execute_query(query, (args,))
+
+    @classmethod
+    def delete_team_record(cls, team_id):
+        """Delete team record from database"""
+        query = 'DELETE FROM `members` WHERE team_id = ?;'
+        args = team_id
+        cls.execute_query(query, (args,))
+        query = 'DELETE FROM `teams` WHERE id = ?;'
+        cls.execute_query(query, (args,))
 
     @classmethod
     def delete_user_attendance_record(cls, user_id):

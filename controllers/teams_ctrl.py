@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for
 from flask import Blueprint
 from models.teams import Team
 from models.users import User, Student
+from db_controller import DB
 
 teams_ctrl = Blueprint('teams_ctrl', __name__)
 
@@ -36,7 +37,14 @@ def team_edit(team_id):
             Team.get_team_by_id(team_id).add_member(User.get_user_by_id(student_id))
     return render_template("edit_team_form.html", team=Team.get_team_by_id(team_id), student_list=User.get_user_list_by_role('student'))
 
+
 @teams_ctrl.route("/teams/<team_id>/edit/<student_id>")
-def team_delete_student(team_id, student_id):
+def team_remove_student(team_id, student_id):
     Team.get_team_by_id(team_id).remove_member(User.get_user_by_id(student_id))
     return redirect(url_for('teams_ctrl.team_edit', team_id=team_id))
+
+
+@teams_ctrl.route("/teams/<team_id>/remove")
+def team_remove(team_id):
+    DB.delete_team_record(team_id)
+    return redirect(url_for('teams_ctrl.teams'))
