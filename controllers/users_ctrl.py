@@ -26,6 +26,11 @@ def users_list_by_role(role):
     return render_template('users.html', users=enumerate(users), role=role)
 
 
+@users_ctrl.route('/users/add')
+def add():
+    pass
+
+
 @users_ctrl.route('/users/edit/<user_id>')
 def user_edit(user_id):
     if not user_id.isnumeric():

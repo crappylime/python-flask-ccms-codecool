@@ -32,10 +32,10 @@
                 <li><a href="team_details.html">My team</a></li>
                 <li><a href="attendance_student_view.html">My attendance</a></li>
             </ul>
-                <li><a href="users.html">Students</a></li>
+                <li><a href={{ url_for('users_ctrl.users_list_by_role', role='student') }}>Students</a></li>
                 <ul class="submenu">
-                    <li><a href="users.html">List of students</a></li>
-                    <li><a href="add_edit_person_form.html">Add student</a></li>
+                    <li><a href={{ url_for('users_ctrl.users_list_by_role', role='student') }}>List of students</a></li>
+                    <li><a href={{ url_for('users_ctrl.user_add', role='student') }}>Add student</a></li>
                     <li><a href="teams.html">Teams</a></li>
                     <li><a href="attendance_check.html">Attendance check</a></li>
                     <li><a href="attendance_list.html">Attendance list</a></li>
@@ -46,15 +46,15 @@
                     <li><a href="add_edit_assignment.html">Add an assigments</a></li>
                     <li><a href="submissions.html">List of submissions</a></li>
                   </ul>
-              <li><a href="users.html">Mentors</a></li>
+              <li><a href={{ url_for('users_ctrl.users_list_by_role', role='mentor') }}>Mentors</a></li>
                 <ul class="submenu">
-                  <li><a href="users.html">List of mentors</a></li>
-                  <li><a href="add_edit_person_form.html">Add mentor</a></li>
+                  <li><a href={{ url_for('users_ctrl.users_list_by_role', role='mentor') }}>List of mentors</a></li>
+                  <li><a href={{ url_for('users_ctrl.user_add', role='mentor') }}>Add mentor</a></li>
                 </ul>
-              <li><a href="users.html">Staff</a></li>
+              <li><a href={{ url_for('users_ctrl.users_list_by_role', role='staff') }}>Staff</a></li>
                 <ul class="submenu">
-                  <li><a href="users.html">List of staff</a></li>
-                  <li><a href="add_edit_person_form.html">Add staff</a></li>
+                  <li><a href={{ url_for('users_ctrl.users_list_by_role', role='staff') }}>List of staff</a></li>
+                  <li><a href={{ url_for('users_ctrl.user_add', role='staff') }}>Add staff</a></li>
                 </ul>
             </ul>
           </nav>
