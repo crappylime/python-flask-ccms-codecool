@@ -14,7 +14,7 @@ body {
 
 body::after {
   content: "";
-  background-image: url("images/background.png");
+  background-image: url("/static/images/background.png");
   background-size: 100%;
   position: fixed;
   z-index: -1;
@@ -109,7 +109,7 @@ sidebar {
   float: left;
   width: 20%;
   height: 100%;
-  background-color:rgba(138, 169, 181, 0.69);
+  background-color:rgba(138, 169, 181, 0.88);
   border-right: 1px solid black;
   position: fixed;
 }
@@ -198,7 +198,7 @@ nav ul li a:hover, nav ul li a:focus {
   color: rgba(4,4,6,0.6);
 }
 #login-content {
-  background-color: rgba(228, 163, 148, 0.62);
+  background-color: rgba(228, 163, 148, 0.90);
   height: 250px;
   width: 400px;
   text-align: center;
@@ -229,7 +229,7 @@ nav ul li a:hover, nav ul li a:focus {
 }
 #attendance_table {
   width: 50%;
-  background-color: rgba(228, 163, 148, 0.62);
+  background-color: rgba(228, 163, 148, 0.90);
   border-radius: 20px;
 }
 #attendance_table input {
@@ -309,7 +309,7 @@ textarea {
 fieldset {
   border: solid 1px black;
   border-radius: 20px;
-  background-color: rgba(228, 163, 148, 0.62);
+  background-color: rgba(228, 163, 148, 0.90);
 }
 legend {
   border: solid 1px black;
@@ -317,12 +317,12 @@ legend {
   font-size: 20px;
   text-align: right;
   padding: 0.2em 0.5em;
-  background-color: rgba(228, 163, 148, 0.62);
+  background-color: rgba(228, 163, 148, 0.90);
 }
 
 /* table */
 table {
-  background-color: rgba(228, 163, 148, 0.62);
+  background-color: rgba(228, 163, 148, 0.90);
   width: 100%;
   border: 1px solid black;
   border-radius: 20px;
@@ -380,7 +380,7 @@ table tbody td:first-child, table thead th:first-child {
   color: #C3423F;
 }
 .info_box {
-  background-color: rgba(228, 163, 148, 0.62);
+  background-color: rgba(228, 163, 148, 0.90);
   border: solid 1px #C3423F;
   width: 200px;
   height: 100px;
