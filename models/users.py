@@ -77,6 +77,12 @@ class User:
 
         return user_list
 
+    @classmethod
+    def get_mails_list(cls):
+        mails_list = []
+        for user in cls.get_user_list():
+            mails_list.append(user.mail)
+        return mails_list
 
     @classmethod
     def create_user_list_by_role(cls, role):
@@ -109,8 +115,8 @@ class User:
         return user_list
 
     @classmethod
-    def add_user(cls, name, mail, password):
-        values = (name, mail, password, cls.get_class_name().lower())
+    def add_user(cls, name, mail, password, role=None):
+        values = (name, mail, password, role if role else cls.get_class_name().lower())
         new_user_id = DB.create_user_record(values)
         new_user = cls.get_user_by_id(new_user_id)
         return new_user
