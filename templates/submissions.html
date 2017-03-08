@@ -40,7 +40,14 @@
                     </td>
                     <td>
                         <a href="{{ url_for('submissions_ctrl.submission_details', submission_id=submission.get_id()) }}" class="button">Details</a>
-                        <a href="#" class="button">Grade</a>
+                        {% if isgrade %}
+                        <form action="" method="POST">
+                            <input type="number" name="points" min="0" max="{{ assignment.get_max_points() }}" maxlength="2">
+                            <input type="submit" value="Grade">
+                        </form>
+                        {% else %}
+                            <a href="{{ url_for('submissions_ctrl.submission_grade', submission_id=submission.get_id()) }}" class="button">Grade</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

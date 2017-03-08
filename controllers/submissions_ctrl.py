@@ -6,9 +6,11 @@ submissions_ctrl = Blueprint('submissions_ctrl', __name__)
 
 
 @submissions_ctrl.route("/assignments/<assignment_id>/submissions")
-def list_assignment_submissions(assignment_id):
+def list_assignment_submissions(assignment_id, methods=['GET', 'POST']):
     """ Shows list of submissions stored in the database.
     """
+    if request.method == 'POST':
+        return redirect(url_for('submissions_ctrl.submission_grade', submission_id=submission_id))
     assignment = Assignment.get_assignment_by_id(assignment_id)
     return render_template('submissions.html', assignment=assignment,  list_assignment_submissions=Submission.get_submission_list_by_assignment_id(assignment_id))
 
@@ -33,3 +35,19 @@ def submission_add(assignment_id):
         Submission.add_submission(assignment_id, student_id, request.form['content'])
         return redirect(url_for('assignments_ctrl.assignments'))
     return render_template('add_submission.html', assignment=assignment)
+
+
+@submissions_ctrl.route('/submissions/<submission_id>/grade', methods=['GET', 'POST'])
+def submission_grade(submission_id):
+    """ Creates new submission
+    If the method was GET it should show new submission form.
+    If the method was POST it should create, save new submission.
+    """
+    submission = Submission.get_submission_by_id(submission_id)
+    user_id = submission.get_student().get_id()
+    assignment = submission.get_assignment()
+    if request.method == 'POST':
+        points = int(request.form['points'])
+        Submission.set_grade_submission(user_id, assignment.get_id(), points)
+        return redirect(url_for('submissions_ctrl.list_assignment_submissions', assignment_id=assignment.get_id()))
+    return render_template('submissions.html', assignment=assignment, list_assignment_submissions=Submission.get_submission_list_by_assignment_id(assignment.get_id()), isgrade=True)
