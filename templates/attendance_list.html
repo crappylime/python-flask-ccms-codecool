@@ -6,10 +6,14 @@
 
 {% block content %}
         <div class="content">
-        <span id="date-style"><label>date</label><input type="date" placeholder="Date"/></span>
+        <form action method="GET">
+        <span id="date-style"><label>date</label><input type="date" name="date" placeholder="Date"
+                                   onchange="this.form.submit()" {{ "value={}".format(chosen_date) if chosen_date }} >
+        </span>
+        </form>
         <span id="select_student"><label>student</label><select>
                                     <option>wszyscy</option>
-                                    <option>ktoś</option>
+                                    <option>Michał Kaczkowski</option>
                                     <option>ktoś</option>
                                     <option>ktoś</option>
                                 </select></span>
@@ -18,7 +22,7 @@
             <table>
                 <thead>
                     <tr>
-                    <th>id</th><th>Name</th><th>Date</th><th>Status</th>
+                    <th>id</th><th>Name</th><th>Date</th><th>Status</th><th>Options</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,3 +41,7 @@
         <span id="overall_attendance">Overall attendance: TODO</span>
     </div>
 {% endblock %}
+
+<label>Date </label><input type="date" name="date" placeholder="Date"
+                                   onchange="this.form.submit()"
+           {{ "value={}".format(chosen_date) if chosen_date }} >
