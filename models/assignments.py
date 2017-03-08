@@ -46,7 +46,6 @@ class Assignment:
             assignment: object
         """
         args = DB.read_assignment_record_by_id(assignment_id)
-        print(*args[0])
         return Assignment(*args[0])
 
     @classmethod
