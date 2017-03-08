@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, url_for
 from flask import Blueprint
 from models.assignments import Assignment
 from db_controller import DB
@@ -24,7 +24,7 @@ def assignment_new():
         due_date = request.form['due_date']
         max_points = request.form['max_points']
         Assignment.add_assignment(assignment_title, content, due_date, max_points)
-        return redirect('/assignments')
+        return redirect(url_for('assignments_ctrl.assignments'))
     return render_template("add_edit_assignment.html", title="Add an assignment")
 
 
@@ -36,10 +36,11 @@ def assignment_edit(assignment_id):
         due_date = request.form['due_date']
         max_points = request.form['max_points']
         Assignment.get_assignment_by_id(assignment_id).edit_assignment(assignment_title, content, due_date, max_points)
-        return redirect('/assignments/%s' % assignment_id)
+        return redirect(url_for('assignments_ctrl.assignments'))
     return render_template("add_edit_assignment.html", title="Edit an assignment")
+
 
 @assignments_ctrl.route("/assignments/<assignment_id>/remove")
 def assignment_remove(assignment_id):
     DB.delete_assignment_record(assignment_id)
-    return redirect("/assignments")
+    return redirect(url_for('assignments_ctrl.assignments'))

@@ -6,42 +6,30 @@
 
 {% block content %}
     <table>
-            <thead>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in assignment_list %}
                 <tr>
-                    <th>
-                        id
-                    </th>
-                    <th>
-                        Title
-                    </th>
-                    <th>
-                        Content
-                    </th>
-                    <th>
-                        Actions
-                    </th>
+                    <td>{{ assignment.get_id() }}</td>
+                    <td>{{ assignment.get_title() }}</td>
+                    <td>
+                        <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Details</a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('assignments_ctrl.assignment_edit', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Edit</a>
+                        <a href="{{ url_for('assignments_ctrl.assignment_remove', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Remove</a>
+                        <a href="add_submission.html" class="button assignment_buttons">Submit assignment</a>
+                        <a href="submissions.html" class="button assignment_buttons">Submissions list</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                {% for assignment in assignment_list %}
-                    <tr>
-                        <td>
-                            {{ assignment.get_id() }}
-                        </td>
-                        <td>
-                            {{ assignment.get_title() }}
-                        </td>
-                        <td>
-                            <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Details</a>
-                        </td>
-                        <td>
-                            <a href="{{ url_for('assignments_ctrl.assignment_edit', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Edit</a>
-                            <a href="{{ url_for('assignments_ctrl.assignment_remove', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Remove</a>
-                            <a href="add_submission.html" class="button assignment_buttons">Submit assignment</a>
-                            <a href="submissions.html" class="button assignment_buttons">Submissions list</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
