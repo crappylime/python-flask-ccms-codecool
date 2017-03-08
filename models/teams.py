@@ -1,5 +1,6 @@
 from db_controller import DB
 from models.users import User
+from models.assignments import Assignment
 
 
 class Team:
@@ -12,6 +13,10 @@ class Team:
     @property
     def member_list(self):
         return User.get_user_list_by_id_list(DB.read_user_id_list_by_team_id(self.id))
+
+    @property
+    def team_assignments_list(self):
+        return Assignment.get_team_assignment_list()
 
     def get_id(self):
         """Return team instance id"""
@@ -58,3 +63,5 @@ class Team:
         team_list = DB.read_team_list()
         return [Team(*team) for team in team_list]
 
+    def get_team_assignments(self):
+        return self.team_assignments_list

@@ -4,9 +4,10 @@ from db_controller import DB
 class Assignment:
     """This is class representing Assignment given by Mentor."""
 
-    def __init__(self, assignment_id, title, content, due_date, max_points):
+    def __init__(self, assignment_id, title, is_team, content, due_date, max_points, ):
         self.id = assignment_id
         self.title = title
+        self.is_team = is_team
         self.content = content
         self.due_date = due_date
         self.max_points = max_points
@@ -39,6 +40,15 @@ class Assignment:
         return cls.create_assignment_list()
 
     @classmethod
+    def get_team_assignment_list(cls):
+        """
+        Returns list of team assignments instances
+        :return:
+            list: list of assignments instances
+        """
+        return cls.create_team_assignment_list()
+
+    @classmethod
     def create_assignment_by_id(cls, assignment_id):
         """
         Creates instance of assignment
@@ -59,8 +69,18 @@ class Assignment:
         return [Assignment(*assignment) for assignment in assignment_data]
 
     @classmethod
-    def add_assignment(cls, title, content, due_date, max_points):
-        values = (title, content, due_date, max_points)
+    def create_team_assignment_list(cls):
+        """
+        Creates list of team assignments instances
+        :return:
+            assignment_list: list
+        """
+        assignment_data = DB.read_team_assignment_record_list()
+        return [Assignment(*assignment) for assignment in assignment_data]
+
+    @classmethod
+    def add_assignment(cls, title, is_team, content, due_date, max_points):
+        values = (title, is_team, content, due_date, max_points)
         new_assignment_id = DB.create_assignment_record(values)
         new_assignment = cls.get_assignment_by_id(new_assignment_id)
         return new_assignment
@@ -97,12 +117,17 @@ class Assignment:
         """
         return self.max_points
 
-    def edit_assignment(self, title, content, due_date, max_points):
+    def edit_assignment(self, title, is_team, content, due_date, max_points):
         """
         Edits assignments parameters
         """
         self.title = title
+        self.is_team = is_team
         self.content = content
         self.due_date = due_date
         self.max_points = max_points
-        DB.update_assignment(self.id, self.title, self.content, self.due_date, self.max_points)
+        DB.update_assignment(self.id, self.title, self.is_team, self.content, self.due_date, self.max_points)
+
+    def get_assignment_type(self):
+        print(self.is_team)
+        return self.is_team

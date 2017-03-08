@@ -39,7 +39,7 @@ class DB:
     @classmethod
     def create_assignment_record(cls, values):
         """Add new assignment record to database"""
-        query = 'INSERT INTO assignments (`title`, `content`, `due_date`, `max_points`) VALUES (?, ?, ?, ?);'
+        query = 'INSERT INTO assignments (`title`, `is_team`, `content`, `due_date`, `max_points`) VALUES (?, ?, ?, ?, ?);'
         return cls.execute_insert_query(query, values)
 
     @classmethod
@@ -154,6 +154,17 @@ class DB:
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `assignments`;"
+        cursor.execute(query)
+        assignment_list = cursor.fetchall()
+        conn.close()
+        return assignment_list
+
+    @classmethod
+    def read_team_assignment_record_list(cls):
+        """Read assignment record list"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `assignments` WHERE `is_team` = 1;"
         cursor.execute(query)
         assignment_list = cursor.fetchall()
         conn.close()
@@ -346,9 +357,9 @@ class DB:
         cls.execute_query(query, args)
 
     @classmethod
-    def update_assignment(cls, assignment_id, title, content, due_date, max_points):
-        query = "UPDATE `assignments` SET `title` = ?, `content` = ?, `due_date` = ?, `max_points` = ? WHERE `assignment_id` = ?;"
-        args = (title, content, due_date, max_points, assignment_id)
+    def update_assignment(cls, assignment_id, is_team, title, content, due_date, max_points):
+        query = "UPDATE `assignments` SET `title` = ?, `is_team` = ?, `content` = ?, `due_date` = ?, `max_points` = ? WHERE `assignment_id` = ?;"
+        args = (title, is_team, content, due_date, max_points, assignment_id)
         cls.execute_query(query, args)
 
     @classmethod

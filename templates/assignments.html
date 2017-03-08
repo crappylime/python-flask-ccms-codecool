@@ -10,6 +10,7 @@
             <tr>
                 <th>id</th>
                 <th>Title</th>
+                <th>Team assignment</th>
                 <th>Content</th>
                 <th>Actions</th>
             </tr>
@@ -19,6 +20,13 @@
                 <tr>
                     <td>{{ assignment.get_id() }}</td>
                     <td>{{ assignment.get_title() }}</td>
+                    <td>
+                        {% if assignment.get_assignment_type() %}
+                             Yes
+                        {% else %}
+                             No
+                        {% endif %}
+                    </td>
                     <td>
                         <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Details</a>
                     </td>

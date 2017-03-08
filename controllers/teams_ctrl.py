@@ -11,4 +11,6 @@ def teams():
     return render_template("teams.html", teams_list=Team.get_list_teams())
 
 
-
+@teams_ctrl.route("/teams/<team_id>")
+def team_details(team_id):
+    return render_template("team_details.html", team=Team.get_team_by_id(team_id))
