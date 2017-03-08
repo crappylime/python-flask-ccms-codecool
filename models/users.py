@@ -180,6 +180,10 @@ class Student(User):
     def overall_attendance(self):
         return Attendance.get_overall_attendance(self.id)
 
+    @property
+    def team_id(self):
+        return self.get_student_team_id(self.id)
+
     def get_submission_list(self):
         return self.submission_list
 
@@ -191,6 +195,10 @@ class Student(User):
 
     def get_overall_attendance(self):
         return self.overall_attendance
+
+    @staticmethod
+    def get_student_team_id(student_id):
+        return DB.read_team_membership(student_id)
 
 
 class Employee(User):

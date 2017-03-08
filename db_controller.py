@@ -294,6 +294,22 @@ class DB:
         return team_list
 
     @classmethod
+    def read_team_membership(cls, student_id):
+        """Read student team id"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT `team_id` FROM `members` WHERE `student_id` = ?;"
+        cursor.execute(query, (student_id,))
+        try:
+            team_id = cursor.fetchall()[0][0]
+        except IndexError:
+            team_id = None
+        conn.close()
+        print(team_id)
+        return team_id
+
+
+    @classmethod
     def update_name(cls, user_id, name):
         """Update name in user record by provided user id"""
         query = "UPDATE `users` SET `name` = ? WHERE `user_id` = ?;"
@@ -363,6 +379,18 @@ class DB:
         cls.execute_query(query, args)
 
     @classmethod
+    def update_team_name(cls, team_id, new_name):
+        query = "UPDATE `teams` SET `name` = ? WHERE `id` = ?;"
+        args = (new_name, team_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_student_team_id(cls, team_id, student_id):
+        query = "UPDATE `members` SET `team_id` = ? WHERE `student_id` = ?;"
+        args = (team_id, student_id)
+        cls.execute_query(query, args)
+
+    @classmethod
     def delete_assignment_record(cls, assignment_id):
         """Delete assignment record by provided assignment id"""
         query = "DELETE FROM assignments WHERE assignment_id = ?"
@@ -389,6 +417,13 @@ class DB:
         query = "DELETE FROM users WHERE user_id = ?"
         args = user_id
         cls.execute_query(query, (args,))
+
+    @classmethod
+    def delete_member_record(cls, student_id):
+        """Delete member record from database"""
+        query = 'DELETE FROM `members` WHERE student_id = ?;'
+        args = student_id
+        return cls.execute_query(query, (args,))
 
     @classmethod
     def delete_user_attendance_record(cls, user_id):

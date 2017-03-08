@@ -129,5 +129,4 @@ class Assignment:
         DB.update_assignment(self.id, self.title, self.is_team, self.content, self.due_date, self.max_points)
 
     def get_assignment_type(self):
-        print(self.is_team)
         return self.is_team

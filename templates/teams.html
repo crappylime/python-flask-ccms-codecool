@@ -28,7 +28,7 @@
                     </td>
                     <td>
                         <a href="{{ url_for('teams_ctrl.team_details', team_id=team.get_id()) }}"  class="button team_button">Details</a>
-                        <a href="add_edit_team_form.html" class="button team_button">Edit</a>
+                        <a href="{{ url_for('teams_ctrl.team_edit', team_id=team.get_id()) }}" class="button team_button">Edit</a>
                         <a href="#" class="button team_button">Remove</a>
                     </td>
                 </tr>

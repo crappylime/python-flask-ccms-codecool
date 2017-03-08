@@ -54,6 +54,13 @@ class Team:
         self.member_list.append(member)
         DB.create_member_record(self.id, member.get_id())
 
+    def remove_member(self, member):
+        # self.member_list.pop(member)
+        DB.delete_member_record(member.get_id())
+
+    def relocate_member(self, student_id):
+        DB.update_student_team_id(self.id, student_id)
+
     def get_members(self):
         return self.member_list
 
@@ -65,3 +72,12 @@ class Team:
 
     def get_team_assignments(self):
         return self.team_assignments_list
+
+    def set_name(self, new_name):
+        """
+        Sets team name
+        """
+        self.name = new_name
+        DB.update_team_name(self.id, self.name)
+
+
