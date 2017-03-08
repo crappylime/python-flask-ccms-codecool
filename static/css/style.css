@@ -60,7 +60,15 @@ a:link, a:visited, a:active, a:hover {
 a:hover {
   color: #f5ef8d;
 }
-
+em {
+  font-size: 25px;
+  color: #C3423F;
+  border-radius: 20px;
+  width: 59%;
+  display: block;
+  background-color: white;
+  padding-left: 2%;
+}
 /* button */
 
 button, .button {
