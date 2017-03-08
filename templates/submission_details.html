@@ -18,7 +18,7 @@
             {% else %}
                 – –
             {% endif %}
-            /{{ assignment.get_max_points() }} <a href="#" class="button">Grade</a></td>
+            /{{ assignment.get_max_points() }} <a href="{{ url_for('submissions_ctrl.submission_grade', submission_id=submission.get_id()) }}" class="button">Grade</a></td>
         </tr>
             <th>Due date</th>
             <td>{{ assignment.get_due_date() }}</td>

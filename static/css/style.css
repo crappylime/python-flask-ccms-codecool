@@ -104,6 +104,10 @@ button:hover, .button:hover, button:focus, .button:focus {
 .team_button:first-of-type{
   margin-left: 60px;
 }
+.grade_button {
+  padding: 6px 10px;
+  margin: 2% 45%;
+}
 
 /* layout */
 

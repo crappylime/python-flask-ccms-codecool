@@ -9,8 +9,6 @@ submissions_ctrl = Blueprint('submissions_ctrl', __name__)
 def list_assignment_submissions(assignment_id, methods=['GET', 'POST']):
     """ Shows list of submissions stored in the database.
     """
-    if request.method == 'POST':
-        return redirect(url_for('submissions_ctrl.submission_grade', submission_id=submission_id))
     assignment = Assignment.get_assignment_by_id(assignment_id)
     return render_template('submissions.html', assignment=assignment,  list_assignment_submissions=Submission.get_submission_list_by_assignment_id(assignment_id))
 
@@ -50,4 +48,4 @@ def submission_grade(submission_id):
         points = int(request.form['points'])
         Submission.set_grade_submission(user_id, assignment.get_id(), points)
         return redirect(url_for('submissions_ctrl.list_assignment_submissions', assignment_id=assignment.get_id()))
-    return render_template('submissions.html', assignment=assignment, list_assignment_submissions=Submission.get_submission_list_by_assignment_id(assignment.get_id()), isgrade=True)
+    return render_template('submission_grade.html', assignment=assignment, submission=submission)
