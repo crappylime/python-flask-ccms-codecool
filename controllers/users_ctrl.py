@@ -53,7 +53,7 @@ def user_edit(user_id):
         new_name = request.form['firstname'] + ' ' + request.form['lastname']
         user_to_edit.set_name(new_name)
         new_mail = request.form['email']
-        if new_mail in User.get_mails_list():
+        if new_mail != user_to_edit.mail and new_mail in User.get_mails_list():
             flash("E-mail address is already in use. Please provide another e-mail address")
             return render_template("add_edit_person_form.html", user=user_to_edit, fieldset_title="Edit ", role=None)
         new_password = request.form['password']
@@ -69,6 +69,8 @@ def user_edit(user_id):
 
 @users_ctrl.route('/users/remove/<user_id>')
 def user_remove(user_id):
-    User.remove_user(user_id)
-    return redirect('/users/')
+    user_to_remove = User.get_user_by_id(user_id)
+    user_to_remove.remove()
+    flash("{} {} has been removed".format(user_to_remove.get_user_class_name(), user_to_remove.name))
+    return redirect(url_for('users_ctrl.users_list_by_role', role=user_to_remove.get_user_class_name().lower()))
 

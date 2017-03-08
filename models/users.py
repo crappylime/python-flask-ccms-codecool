@@ -176,6 +176,12 @@ class User:
         DB.delete_user_attendance_record(user_id)
         DB.delete_user_submission_record(user_id)
 
+    def remove(self):
+        """Removes user instance from user list"""
+        DB.delete_user_record(self.id)
+        DB.delete_user_attendance_record(self.id)
+        DB.delete_user_submission_record(self.id)
+
 
 class Student(User):
     """Class that represent students"""
