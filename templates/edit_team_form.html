@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}{{team.get_name()}} {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}{{team.get_name()}} {% endblock %}
+
+{% block content %}
+    <form method="POST">
+        <fieldset>
+            <legend>Team</legend>
+            <label for="name">Team name </label>
+            <input type="text" name="name" id="name" value="{{team.get_name()}}" autofocus required/>
+            <button type="submit" class="submit_button">Save</button>
+            <label for="student">Add student </label>
+            <input type="text" name="student" id="student" list="students">
+                <datalist id="students">
+                    {% for student in student_list %}
+                        <option>{{ student.get_id() }}</option>
+                    {% endfor %}
+                </datalist>
+        </fieldset>
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in team.get_members() %}
+                <tr>
+                    <td>{{ student.get_id() }}</td>
+                    <td>{{ student.get_name() }}</td>
+                    <td><form><a href="{{ url_for('teams_ctrl.team_remove_student', team_id=team.get_id(), student_id=student.get_id()) }}" methods="POST" class="button team_button">Remove</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -30,7 +30,7 @@ wheels/
 *.egg
 
 # PyInstaller
-#  Usually these files are written by a python script from a template
+#  Usually these files are written by a python script from a templates
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
@@ -154,7 +154,5 @@ Temporary Items
 
 # End of https://www.gitignore.io/api/python,pycharm,osx
 
-
 .idea/
-data/
-
+/data/ccms.db
