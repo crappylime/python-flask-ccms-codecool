@@ -204,6 +204,17 @@ class DB:
         return team_list
 
     @classmethod
+    def read_team_record_by_name(cls, team_name):
+        """Read team record by provided team name"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `teams` WHERE `name` = ?;"
+        cursor.execute(query, (team_name,))
+        team_list = cursor.fetchall()
+        conn.close()
+        return team_list
+
+    @classmethod
     def read_submission_record_list_by_assignment_id(cls, assignment_id):
         """Read submission record list by provided assignment id"""
         conn = cls.connect()
