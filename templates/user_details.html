@@ -1,64 +1,53 @@
 {% extends 'layout.html' %}
+
+{% block title %}User details | {{ super() }}{% endblock %}
+
 {% block page_name_h1 %}
-User details <a href="add_edit_person_form.html" class="button">Edit</a>
+User details
+
+{% if user.get_user_class_name() == 'Mentor' and session['user_role'] == 'Boss' %}
+<a href={{ url_for('users_ctrl.user_edit', user_id = user.get_id()) }} class="button user_button">Edit</a>
+{% endif %}
+
 {% endblock %}
+
 {% block content %}
-       {% for message in get_flashed_messages() %}
-    {{ message }}
-    {%  endfor %}
-        <div class="content">
+<h3>Name: {{ user.get_name() }}</h3>
+<p>mail: {{ user.get_mail() }}</p>
 
-                <h3>Name: {{ user.name }}</h3>
-                <p>mail: 123antoni@hmail.com</p>
-                <p><a href="add_edit_person_form.html">change password</a></p>
-                <a href="attendance_student_view.html" class="info_box"><h2>overall attendance</h2><span>87%</span></a>
-                <a href="grades_view.html" class="info_box"><h2>overall grade</h2><span>77%</span></a>
-            <div class="team_details">
-                <h2>Assigments</h2>
-                <table id="team_assigment_table">
+{% if session['user_role'] == 'Student' %}
+<p><a href={{ url_for('users_ctrl.user_edit', user_id = user.get_id()) }}>edit profile</a></p>
+{% endif %}
 
-                    <thead>
-                    <tr>
-                        <th>id</th>                 <!--TODO th elements not inline-->
-                        <th>Assignment name</th>
-                        <th>Status</th>
-                        <th>Submission</th>
-                        <th>Grade</th>
-                    </tr>
-                    </thead>
-                    <tbody>   <!-- TODO tbody added by przemek-->
-                    <tr>
-                        <td>1.</td>
-                        <td><a href="assignment_details.html">Hangman</a></td>
-                        <td>Submitted, Graded</td>
-                        <td><a href="submission_details.html" class="button">View submission</a></td>
-                        <td>50/55 pt <a href="#" class="button">Change grade</a></td>
-                    </tr>
-                    <tr>
-                        <td>2.</td>
-                        <td><a href="assignment_details.html">Assignment1</a></td>
-                        <td>Submitted, Not graded</td>
-                        <td><a href="submission_details.html" class="button">View submission</a></td>
-                        <td>– –/45 pt <a href="#" class="button">Grade</a></td>
-                    </tr>
-                    <tr>
-                        <td>3.</td>
-                        <td><a href="assignment_details.html">Assignment2</a></td>
-                        <td>Not submitted</td>
-                        <td>– – – – – – – – – – – –</td>
-                        <td>– –/55 pt </td>
-                    </tr>
-                    <tr>
-                        <td>4.</td>
-                        <td><a href="assignment_details.html">Assignment3</a></td>
-                        <td>Submitted, Graded</td>
-                        <td><a href="submission_details.html" class="button">View submission</a></td>
-                        <td>10/12 pt <a href="#" class="button">Change grade</a></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+<a href="/attendances?student={{ user.get_name() }}" class="info_box"><h2>overall attendance</h2><span>{{ user.get_overall_attendance() }}%</span></a>
+<span class="info_box"><h2>overall grade</h2><span>{{ user.get_overall_grade() }}%</span></span>
 
-        </div>
-
+<h2>Assignments</h2>
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Assignment name</th>
+            <th>Submission</th>
+            <th>Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for submission in user.get_submission_list() %}
+            <tr>
+              <td>{{loop.index}}. {{item}}</td>
+              <td><a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=submission.get_assignment().get_id()) }}">{{ submission.get_assignment().get_title() }}</a></td>
+              <td><a href="{{ url_for('submissions_ctrl.submission_details', submission_id=submission.get_id()) }}" class="button">View submission</a></td>
+              <td>
+                  {% if submission.get_points() %}
+                      {{ submission.get_points() }}
+                  {% else %}
+                        – –
+                  {% endif %}
+                  /{{ submission.get_assignment().get_max_points() }}
+              </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
