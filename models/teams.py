@@ -38,9 +38,13 @@ class Team:
         args = DB.read_team_record_by_id(team_id)
         return cls(*args[0])
 
-    def get_team_by_name(self):
-        """not increment"""
-        pass
+    @classmethod
+    def get_team_by_name(cls, team_name):
+        """Returns team object by name"""
+        args = DB.read_team_record_by_name(team_name)
+        if args:
+            return cls(*args[0])
+        return None
 
     @classmethod
     def add_team(cls, name):
@@ -54,8 +58,8 @@ class Team:
         self.member_list.append(member)
         DB.create_member_record(self.id, member.get_id())
 
-    def remove_member(self, member):
-        # self.member_list.pop(member)
+    @staticmethod
+    def remove_member(member):
         DB.delete_member_record(member.get_id())
 
     def relocate_member(self, student_id):

@@ -1,6 +1,6 @@
 from models.submissions import Submission
 from models.assignments import Assignment
-from flask import Blueprint, render_template, url_for, request, redirect
+from flask import Blueprint, render_template, url_for, request, redirect, session, flash
 
 submissions_ctrl = Blueprint('submissions_ctrl', __name__)
 
@@ -27,11 +27,15 @@ def submission_add(assignment_id):
     If the method was GET it should show new submission form.
     If the method was POST it should create, save new submission.
     """
-    student_id = 2
+    student_id = session['user_id']
     assignment = Assignment.get_assignment_by_id(assignment_id)
     if request.method == 'POST':
-        Submission.add_submission(assignment_id, student_id, request.form['content'])
-        return redirect(url_for('assignments_ctrl.assignments'))
+        if student_id in [submission.get_student().get_id() for submission in Submission.get_submission_list_by_user_id(student_id)]:
+            flash("You have already sent the submission to \"{}\" assignment".format(assignment.get_title()))
+        else:
+            submission = Submission.add_submission(assignment_id, student_id, request.form['content'])
+            flash('Submission {} has been added.'.format(submission.get_content()))
+            return redirect(url_for('assignments_ctrl.assignments'))
     return render_template('add_submission.html', assignment=assignment)
 
 
@@ -47,5 +51,6 @@ def submission_grade(submission_id):
     if request.method == 'POST':
         points = int(request.form['points'])
         Submission.set_grade_submission(user_id, assignment.get_id(), points)
+        flash("{}'s submission has been graded.".format(submission.get_student().get_name()))
         return redirect(url_for('submissions_ctrl.list_assignment_submissions', assignment_id=assignment.get_id()))
     return render_template('submission_grade.html', assignment=assignment, submission=submission)

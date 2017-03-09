@@ -70,6 +70,27 @@ em {
   background-color: white;
   padding-left: 2%;
 }
+.messages {
+    border: 0;
+    top: 0;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    background-color: #f5ef8d;
+    opacity: 0.7;
+    width: 50%;
+    line-height: 0.7;
+}
+.messages li {
+    color: #C3423F;
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 0.025em;
+    text-align: center;
+}
 /* button */
 
 button, .button {

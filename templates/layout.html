@@ -62,7 +62,18 @@
           </nav>
     </sidebar>
     <div class="wrap">
-        <h1>{% block page_name_h1 %}{% endblock %}</h1>
+      <div class="messages">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+      </div>
+      <h1>{% block page_name_h1 %}{% endblock %}</h1>
       <div class="content">
       {% block content %}{% endblock %}
       </div>
