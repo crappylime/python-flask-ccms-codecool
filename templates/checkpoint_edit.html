@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 
-{% block title %}Attendance check | {{ super() }}{% endblock %}
+{% block title %}Checkpoint check | {{ super() }}{% endblock %}
 
-{% block page_name_h1 %}Students attendance check{% endblock %}
+{% block page_name_h1 %}Students checkpoint check{% endblock %}
 
 {% block content %}
     <!-- Table
     ================================================== -->
     <div id="label-input">
-        <label>Date </label>{{ attendance.get_date() }}
+        <label>Date </label>{{ checkpoint.get_date() }}
       </div>
 
     <form action method="POST">
@@ -16,11 +16,11 @@
           <tr>
               <td> {{ student.get_name() }}</td>
               <td><input type="radio" name="{{ student.get_id() }}" value=1 required
-                      {{ "checked=checked" if attendance.get_status() == 1}}/>Present</td>
+                      {{ "checked=checked" if checkpoint.get_card() == 1}}/>Green</td>
               <td><input type="radio" name="{{ student.get_id() }}" value=0.8 required
-                      {{ "checked=checked" if attendance.get_status() == 0.8}}/>Late</td>
+                      {{ "checked=checked" if checkpoint.get_card() == 0.8}}/>Yellow</td>
               <td><input type="radio" name="{{ student.get_id() }}" value=0 required
-                      {{ "checked=checked" if attendance.get_status() == 0}}/>Absent</td>
+                      {{ "checked=checked" if checkpoint.get_card() == 0}}/>Red</td>
           </tr>
       <button class="submit_button" type="submit" name="button">Save</button>
       </table>

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from models.attendances import Attendance
 from models.users import *
 from flask import Blueprint
@@ -58,6 +58,8 @@ def attendance_edit(att_id):
         Attendance.update_attendance(student.get_id(), attendance_by_id.get_date(), updated_att)
         return redirect(url_for('attendances_ctrl.attendances'))
 
+    flash('edit done')
+
     return render_template('attendance_edit.html', attendance=attendance_by_id, student=student)
 
     # return render_template('attendance_list.html', attendances_list=attendances_list, chosen_date=chosen_date)
@@ -72,6 +74,7 @@ def check_attendance():
     chosen_date = request.args.get('date', None)
 
     by_date_list = Attendance.get_attendance_list_by_date(chosen_date)
+
     student_status_dict = {}  # make dict with student_id - attendance pairs
     for attendance in by_date_list:
         student_status_dict[attendance.get_student().get_id()] = attendance.get_status()
@@ -110,5 +113,6 @@ def check_attendance():
                 attendances_list.append((student.get_id(), chosen_date, request.form[str(student.get_id())]))
             for attendance in attendances_list:
                 Attendance.update_attendance(attendance[0], attendance[1], attendance[2])
+
         return render_template('attendance_check.html', students_list=students_list,
                                student_status_dict={})

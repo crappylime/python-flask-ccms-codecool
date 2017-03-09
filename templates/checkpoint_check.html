@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}Checkpoint check | {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}Students checkpoint check{% endblock %}
+
+{% block content %}
+    <!-- Table
+    ================================================== -->
+    <form action method="GET">
+    <div id="label-input">
+        <label>Title</label><input type="text" name="title" placeholder=" {{ chosen_title }}" required
+                                   onchange="this.form.submit()">
+{#           {{ "value={}".format(chosen_date) if chosen_date }} >#}
+      </div>
+    </form>
+    <div id="label-input">
+    <label>Date</label><input type="date" name="date" placeholder="Date" >
+    </div>
+    <form action method="POST">
+      <table id="attendance_table">
+          {% for student in students_list %}
+          <tr>
+              <td> {{ student.get_name() }}</td>
+
+              <td><input type="radio" name="{{ student.get_id() }}" value=1 required
+                      {{ "checked=checked" if student_status_dict[student.get_id()] == 1}}/>Green</td>
+              <td><input type="radio" name="{{ student.get_id() }}" value=0.8 required
+                      {{ "checked=checked" if student_status_dict[student.get_id()] == 0.8}}/>Yellow</td>
+              <td><input type="radio" name="{{ student.get_id() }}" value=0 required
+                      {{ "checked=checked" if student_status_dict[student.get_id()] == 0}}/>Red</td>
+          </tr>
+          {% endfor %}
+      <button class="submit_button" type="submit" name="button">Save</button>
+      </table>
+    </form>
+{% endblock %}

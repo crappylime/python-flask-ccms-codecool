@@ -9,6 +9,7 @@ import os
 
 from controllers.teams_ctrl import teams_ctrl
 from controllers.attendances_ctrl import attendances_ctrl
+from controllers.checkpoints_ctrl import checkpoints_ctrl
 from controllers.submissions_ctrl import submissions_ctrl
 from controllers.assignments_ctrl import assignments_ctrl
 
@@ -17,6 +18,7 @@ DATABASE = 'data/ccms.db'
 app = Flask(__name__)
 
 app.register_blueprint(attendances_ctrl)
+app.register_blueprint(checkpoints_ctrl)
 app.register_blueprint(submissions_ctrl)
 app.register_blueprint(assignments_ctrl)
 
