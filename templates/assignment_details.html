@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ assignment.get_title() }} | {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}{{ assignment.get_title() }}{% endblock %}
+
+{% block content %}
+    <table class="details_table">
+        <tr>
+            <th>Max points</th>
+            <td>{{ assignment.get_max_points() }}</td>
+        </tr>
+        <th>Due date</th>
+        <td>{{ assignment.get_due_date() }}</td>
+
+        <tr>
+
+        </tr>
+
+        <tr>
+            <th>Assignment content</th>
+            <td>{{ assignment.get_content() }}</td>
+        </tr>
+
+    </table>
+{% endblock %}

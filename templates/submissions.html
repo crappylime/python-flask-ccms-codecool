@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ assignment.get_title() }} | List of submissions | {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}{{ assignment.get_title() }} | List of submissions{% endblock %}
+
+{% block content %}
+<!-- Table
+================================================== -->
+{% if list_assignment_submissions %}
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Student name</th>
+                <th>Status</th>
+                <th>Points</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for submission in list_assignment_submissions %}
+                <tr>
+                    <td>{{ submission.get_id() }}</td>
+                    <td>{{ submission.get_student().get_name() }}</td>
+                    <td>
+                    {% if submission.get_points() %}
+                        graded
+                    {% else %}
+                        not graded
+                    {% endif %}
+                    </td>
+                    <td>
+                    {% if submission.get_points() %}
+                        {{ submission.get_points() }}
+                    {% else %}
+                          – –
+                    {% endif %}
+                    /{{ assignment.get_max_points() }}
+                    </td>
+                    <td>
+                        <a href="{{ url_for('submissions_ctrl.submission_details', submission_id=submission.get_id()) }}" class="button">Details</a>
+                        <a href="{{ url_for('submissions_ctrl.submission_grade', submission_id=submission.get_id()) }}" class="button">Grade</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p><em>Unbelievable. No submissions here so far</em></p>
+{% endif %}
+{% endblock %}
