@@ -28,13 +28,15 @@ def team_new():
 @teams_ctrl.route("/teams/<team_id>/edit", methods=["GET", "POST"])
 def team_edit(team_id):
     if request.method == "POST":
-        team_name = request.form['name']
-        Team.get_team_by_id(team_id).set_name(team_name)
-        student_id = request.form['student']
-        if Student.get_student_team_id(student_id):
-            Team.get_team_by_id(team_id).relocate_member(student_id)
-        else:
-            Team.get_team_by_id(team_id).add_member(User.get_user_by_id(student_id))
+        if request.form['name']:
+            team_name = request.form['name']
+            Team.get_team_by_id(team_id).set_name(team_name)
+        if request.form['student']:
+            student_id = request.form['student']
+            if Student.get_student_team_id(student_id):
+                Team.get_team_by_id(team_id).relocate_member(student_id)
+            else:
+                Team.get_team_by_id(team_id).add_member(User.get_user_by_id(student_id))
     return render_template("edit_team_form.html", team=Team.get_team_by_id(team_id), student_list=User.get_user_list_by_role('student'))
 
 
