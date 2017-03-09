@@ -10,7 +10,7 @@
     ================================================== -->
     <form action method="GET">
     <div id="label-input">
-        <label>Date </label><input type="date" name="date" placeholder="Date"
+        <label>Date </label><input type="date" name="date" placeholder="Date" required
                                    onchange="this.form.submit()"
            {{ "value={}".format(chosen_date) if chosen_date }} >
       </div>

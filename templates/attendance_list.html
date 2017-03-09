@@ -42,7 +42,11 @@
                 </tbody>
             </table>
         <br>
-        <span id="overall_attendance">Overall attendance: TODO</span>
+        {% if not attendances_list[1] %}
+        <span id="overall_attendance">Overall attendance: ? % </span>
+        {% else %}
+        <span id="overall_attendance">Overall attendance: {{ attendances_list[1].get_all_overall_attendance() }} % </span>
+        {% endif %}
     </div>
 {% endblock %}
 <label>Date </label><input type="date" name="date" placeholder="Date"
