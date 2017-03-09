@@ -1,7 +1,7 @@
 from db_controller import DB
 import models.users
 import models.assignments
-
+import time
 
 
 class Submission:
@@ -121,7 +121,8 @@ class Submission:
         return DB.read_overall_grade(student_id)
 
     @classmethod
-    def add_submission(cls, assignment_id, student_id,  content, date):
+    def add_submission(cls, assignment_id, student_id, content):
+        date = time.strftime("%Y-%m-%-d %H:%M")
         values = (assignment_id, student_id, content, date)
         new_submission_id = DB.create_submission_record(values)
         new_submission = cls.get_submission_by_id(new_submission_id)
