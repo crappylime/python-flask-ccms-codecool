@@ -80,13 +80,13 @@ em {
     right: 0;
     background-color: #f5ef8d;
     opacity: 0.7;
-    width: 50%;
-    line-height: 0.7;
+    width: 60%;
+    line-height: 0.5;
 }
 .messages li {
     color: #C3423F;
     display: block;
-    font-size: 1.2em;
+    font-size: 1.1em;
     font-weight: bold;
     letter-spacing: 0.025em;
     text-align: center;
@@ -129,6 +129,9 @@ button:hover, .button:hover, button:focus, .button:focus {
 .grade_button {
   padding: 6px 10px;
   margin: 2% 45%;
+}
+.assignment_buttons {
+  width: 75px;
 }
 
 /* layout */

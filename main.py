@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, g, url_for, Blueprint, flash
 from db_controller import DB
 from models.users import User
+from models.assignments import Assignment
 from controllers.users_ctrl import users_ctrl
 from controllers.teams_ctrl import teams_ctrl
 from functools import wraps
@@ -69,11 +70,23 @@ def logout():
     return redirect(url_for('login'))
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    if session['user_role'] == 'Student':
+        assignment_list = Assignment.get_assignment_list()
+    else:
+        assignment_list = []
+    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']), assignment_list=assignment_list)
+
 
 @app.route("/")
 @login_required
 def index():
-    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']))
+    if session['user_role'] == 'Student':
+        assignment_list = Assignment.get_assignment_list()
+    else:
+        assignment_list = []
+    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']), assignment_list=assignment_list)
 
 
 if __name__ == "__main__":
