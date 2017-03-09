@@ -294,6 +294,19 @@ class DB:
         return overall_attendance
 
     @classmethod
+    def read_overall_attendance_by_date(cls, date):
+        """Read overall attendance by provided student id"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT round(avg(100.0*status), 2) from attendances WHERE `date` = ?;"
+        args = (date,)
+        cursor.execute(query, args)
+        overall_attendance = cursor.fetchall()[0][0]
+        conn.close()
+        return overall_attendance
+
+
+    @classmethod
     def read_team_list(cls):
         """Read team record list"""
         conn = cls.connect()

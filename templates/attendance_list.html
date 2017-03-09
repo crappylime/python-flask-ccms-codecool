@@ -5,12 +5,12 @@
 {% block page_name_h1 %}Students attendance{% endblock %}
 
 {% block content %}
-        <div class="content">
         <form action method="GET">
         <span id="date-style"><label>date</label><input type="date" name="date" placeholder="Date"
                                    onchange="this.form.submit()" {{ "value={}".format(chosen_date) if chosen_date }} >
         </span>
         </form>
+
         <form action method="GET">
         <span id="select_student"><label>student</label><select name="student" onchange="this.form.submit()">
                         <option>--</option>
@@ -41,16 +41,5 @@
                 {% endfor %}
                 </tbody>
             </table>
-        <br>
-        {% if not attendances_list[1] %}
-        <span id="overall_attendance">Overall attendance: ? % </span>
-        {% else %}
-        <span id="overall_attendance">Overall attendance: {{ attendances_list[1].get_all_overall_attendance() }} % </span>
-        {% endif %}
-    </div>
+            <span class="info_box"><h2>Overall attendance:</h2><span>{{ overall }} %</span></span>
 {% endblock %}
-<label>Date </label><input type="date" name="date" placeholder="Date"
-                                   onchange="this.form.submit()"
-           {{ "value={}".format(chosen_date) if chosen_date }} >
-
-{#a href="?student=Marek+Frankowicz#"#}
