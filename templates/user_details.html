@@ -4,11 +4,6 @@
 
 {% block page_name_h1 %}
 User details
-
-{% if user.get_user_class_name() == 'Mentor' and session['user_role'] == 'Boss' %}
-<a href={{ url_for('users_ctrl.user_edit', user_id = user.get_id()) }} class="button user_button">Edit</a>
-{% endif %}
-
 {% endblock %}
 
 {% block content %}

@@ -2,12 +2,12 @@ from flask import Flask, render_template, request, session, redirect, g, url_for
 from db_controller import DB
 from models.users import User
 from models.assignments import Assignment
-from controllers.users_ctrl import users_ctrl
-from controllers.teams_ctrl import teams_ctrl
+from models.menus import Menu
+
 from functools import wraps
 import os
 
-
+from controllers.users_ctrl import users_ctrl
 from controllers.teams_ctrl import teams_ctrl
 from controllers.attendances_ctrl import attendances_ctrl
 from controllers.checkpoints_ctrl import checkpoints_ctrl
@@ -22,10 +22,11 @@ app.register_blueprint(attendances_ctrl)
 app.register_blueprint(checkpoints_ctrl)
 app.register_blueprint(submissions_ctrl)
 app.register_blueprint(assignments_ctrl)
-
 app.register_blueprint(users_ctrl)
 app.register_blueprint(teams_ctrl)
 app.secret_key = os.urandom(24)
+
+mainmenu = Menu.get_main_menu()
 
 
 # login required decorator
@@ -38,7 +39,6 @@ def login_required(f):
             flash('You need to login first.')
             return redirect(url_for('login'))
     return wrap
-
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -60,7 +60,6 @@ def login():
         else:
             error = "No user with such email. Try again"
     return render_template('login.html', error=error)
-
 
 
 @app.route("/logout")
@@ -86,9 +85,8 @@ def index():
         assignment_list = Assignment.get_assignment_list()
     else:
         assignment_list = []
-    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']), assignment_list=assignment_list)
+    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']), assignment_list=assignment_list, mainmenu=mainmenu)
 
 
 if __name__ == "__main__":
-
     app.run(debug=True)

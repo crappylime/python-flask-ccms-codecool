@@ -232,6 +232,31 @@ class DB:
         return user_submission_list
 
     @classmethod
+    def read_menu_record_list_by_upper_menu_id(cls, upper_menu_id):
+        """"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT id, `name`, url_for, url_for_args, `position`, upper_menu_id FROM menus WHERE upper_menu_id = ?"
+        cursor.execute(query, (upper_menu_id,))
+        submenu_list = cursor.fetchall()
+        conn.close()
+        return submenu_list
+
+    @classmethod
+    def read_menu_permission(cls, menu_id):
+        """"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT mentor_perm, student_perm, staff_perm, boss_perm FROM menus WHERE id = ?"
+        cursor.execute(query, (menu_id,))
+        perm_list = list(cursor.fetchall()[0])
+        conn.close()
+        print(perm_list)
+        return perm_list
+
+
+
+    @classmethod
     def read_submission_record_list(cls):
         """Read submission record list"""
         conn = cls.connect()
