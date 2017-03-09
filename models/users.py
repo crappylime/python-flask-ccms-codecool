@@ -1,7 +1,4 @@
 from db_controller import DB
-#from submissions import Submission
-#from attendances import Attendance
-#from teams import Team
 
 
 

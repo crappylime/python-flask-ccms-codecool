@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    {%  if role %}
+    {%  if role == 'mentor' and session['user_role'] == 'Boss'  %}
     <a href="{{ url_for('users_ctrl.user_add', role=role) }}" class="button submit_button">Add new {{ role }}</a>
     {% endif %}
       {% for message in get_flashed_messages() %}
@@ -33,8 +33,15 @@
                     <td><a href="mailto://{{ user.get_mail() }}">{{ user.get_mail() }}</a> </td>
                     <td>
                         <a href={{ url_for('users_ctrl.user_details', user_id = user.get_id()) }} class="button user_button">Details</a>
+
+                        {% if user.get_user_class_name() == 'Mentor' and session['user_role'] == 'Boss' %}
                         <a href={{ url_for('users_ctrl.user_edit', user_id = user.get_id()) }} class="button user_button">Edit</a>
+                        {% endif %}
+
+                        {% if user.get_user_class_name()== 'Mentor' and session['user_role'] == 'Boss' %}
                         <a href={{ url_for('users_ctrl.user_remove', user_id = user.get_id()) }} class="button user_button">Remove</a>
+                        {% endif %}
+
                         {% if user.get_user_class_name() == 'Student' %}
                         <a href='#'  class="button user_button">Add to team</a>
                         {% endif %}

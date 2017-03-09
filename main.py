@@ -13,8 +13,6 @@ app = Flask(__name__)
 
 app.register_blueprint(users_ctrl)
 app.register_blueprint(teams_ctrl)
-
-
 app.secret_key = os.urandom(24)
 
 
@@ -43,7 +41,9 @@ def login():
                 error = "Wrong password. Try again"
             else:
                 session['logged_in'] = True
-                session['user'] = logged_user.get_id()
+                session['user_id'] = logged_user.get_id()
+                session['user_role'] = logged_user.get_user_class_name()
+                session['user_name'] = logged_user.get_name()
                 flash("You are logged in!")
                 return redirect(url_for('index'))
         else:
@@ -58,28 +58,14 @@ def logout():
     return redirect(url_for('login'))
 
 
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = DB.connect(DATABASE)
-    return db
-
-
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
-
-
 @app.route("/")
 @login_required
 def index():
-    return render_template('user_details.html', user=User.get_user_by_id(session['user']))
+    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']))
 
 
 if __name__ == "__main__":
-    #DB.create_database()
+
     app.run(debug=True)
 
 

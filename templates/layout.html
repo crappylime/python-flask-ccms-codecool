@@ -17,14 +17,15 @@
       <header class="sideheader">
         <p>You're logged in as:</p>
         <img id="logo" src="/static/images/logo.png" alt="logo">
-        <h2>Przemek</h2>
-        <a href="login.html">Logout</a>
+        <h2>{{ session['user_role'] }}<br>{{session['user_name']}}</h2>
+        <a href={{ url_for('logout') }}>Logout</a>
       </header>
       <!-- Navigation
       ================================================== -->
       <nav>
          <ul>
-             <li><a href="user_details.html">User menu</a></li>
+             <li><a href={{ url_for('index') }}>User menu</a></li>
+             {% if session['user_role'] in ['Student'] %}
             <ul class="submenu">
                 <li><a href="assignments.html">My assignments</a></li>
                 <li><a href="submissions.html">My submissions</a></li>
@@ -32,30 +33,60 @@
                 <li><a href="team_details.html">My team</a></li>
                 <li><a href="attendance_student_view.html">My attendance</a></li>
             </ul>
+             {% endif %}
+         {% if session['user_role'] in ['Mentor', 'Staff', 'Boss'] %}
                 <li><a href={{ url_for('users_ctrl.users_list_by_role', role='student') }}>Students</a></li>
+
                 <ul class="submenu">
+
+                    {% if session['user_role'] in ['Mentor', 'Staff', 'Boss'] %}
                     <li><a href={{ url_for('users_ctrl.users_list_by_role', role='student') }}>List of students</a></li>
+                    {% endif %}
+
+                    {% if session['user_role'] in ['Mentor', 'Boss'] %}
                     <li><a href={{ url_for('users_ctrl.user_add', role='student') }}>Add student</a></li>
+                    {% endif %}
+
+                    {% if session['user_role'] in ['Mentor', 'Boss'] %}
                     <li><a href="teams.html">Teams</a></li>
+                    {% endif %}
+
+                    {% if session['user_role'] in ['Mentor', 'Boss'] %}
                     <li><a href="attendance_check.html">Attendance check</a></li>
+                    {% endif %}
+
+                    {% if session['user_role'] in ['Mentor', 'Boss'] %}
                     <li><a href="attendance_list.html">Attendance list</a></li>
+                    {% endif %}
                 </ul>
+         {% endif %}
+         {% if session['user_role'] in ['Mentor', 'Staff', 'Boss'] %}
                 <li><a href="assignments.html">Assignments</a></li>
                     <ul class="submenu">
                     <li><a href="assignments.html">List of assigments</a></li>
                     <li><a href="add_edit_assignment.html">Add an assigments</a></li>
                     <li><a href="submissions.html">List of submissions</a></li>
                   </ul>
+         {% endif %}
+         {% if session['user_role'] in ['Mentor', 'Staff', 'Boss'] %}
               <li><a href={{ url_for('users_ctrl.users_list_by_role', role='mentor') }}>Mentors</a></li>
                 <ul class="submenu">
                   <li><a href={{ url_for('users_ctrl.users_list_by_role', role='mentor') }}>List of mentors</a></li>
-                  <li><a href={{ url_for('users_ctrl.user_add', role='mentor') }}>Add mentor</a></li>
+                  {% if session['user_role'] in ['Boss']  %}
+                    <li><a href={{ url_for('users_ctrl.user_add', role='mentor') }}>Add mentor</a></li>
+                  {% endif  %}
                 </ul>
+
+              {% if session['user_role'] in ['Mentor', 'Staff', 'Boss'] %}
               <li><a href={{ url_for('users_ctrl.users_list_by_role', role='staff') }}>Staff</a></li>
+              {% endif %}
+
+             {% if session['user_role'] in ['Mentor', 'Staff', 'Boss'] %}
                 <ul class="submenu">
                   <li><a href={{ url_for('users_ctrl.users_list_by_role', role='staff') }}>List of staff</a></li>
                   <li><a href={{ url_for('users_ctrl.user_add', role='staff') }}>Add staff</a></li>
                 </ul>
+         {% endif %}
             </ul>
           </nav>
     </sidebar>

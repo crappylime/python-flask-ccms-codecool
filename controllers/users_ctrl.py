@@ -57,8 +57,6 @@ def user_edit(user_id):
             flash("E-mail address is already in use. Please provide another e-mail address")
             return render_template("add_edit_person_form.html", user=user_to_edit, fieldset_title="Edit ", role=None)
         new_password = request.form['password']
-
-
         user_to_edit.set_mail(new_mail)
         user_to_edit.set_password(new_password)
         user_to_edit.save_changes()
