@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, g, url_for, Blueprint
 from db_controller import DB
 
+from controllers.teams_ctrl import teams_ctrl
 from controllers.attendances_ctrl import attendances_ctrl
 from controllers.submissions_ctrl import submissions_ctrl
 from controllers.assignments_ctrl import assignments_ctrl
@@ -8,13 +9,15 @@ from controllers.assignments_ctrl import assignments_ctrl
 DATABASE = 'data/ccms.db'
 
 app = Flask(__name__)
+
 app.register_blueprint(attendances_ctrl)
 app.register_blueprint(submissions_ctrl)
 app.register_blueprint(assignments_ctrl)
+app.register_blueprint(teams_ctrl)
 
 def get_db():
     db = getattr(g, '_database', None)
-    if db is None:
+    if not db:
         db = g._database = DB.connect(DATABASE)
     return db
 
@@ -22,7 +25,7 @@ def get_db():
 @app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
-    if db is not None:
+    if db:
         db.close()
 
 

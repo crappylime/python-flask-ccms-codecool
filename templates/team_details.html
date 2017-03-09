@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ team.get_name() }} | {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}{{ team.get_name() }}{% endblock %}
+
+{% block content %}
+    <h2>Team members<a href="{{ url_for('teams_ctrl.team_edit', team_id=team.get_id()) }}" class="button add_button">Edit team</a></h2>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th><th>Student</th><th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in team.get_members() %}
+                <tr>
+                    <td>{{ student.get_id() }}</td>
+                    <td><a href="user_details.html">{{ student.get_name() }}</a></td>
+                    <td><a href="#" class="button">Remove</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Team assigments</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>id</th><th>Assignment name</th><th>Status</th><th>Submission</th><th>Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment in team.get_team_assignments() %}
+                <tr>
+                    <td>1.</td>
+                    <td><a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{ assignment.get_title() }}</a></td>
+                    <td>Submitted, Graded</td>
+                    <td><a href="submission_details.html" class="button">View submission</a></td>
+                    <td>50/55 pt <a href="#" class="button">Change grade</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+{% endblock %}

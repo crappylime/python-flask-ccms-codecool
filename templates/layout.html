@@ -36,14 +36,15 @@
                 <ul class="submenu">
                     <li><a href="users.html">List of students</a></li>
                     <li><a href="add_edit_person_form.html">Add student</a></li>
-                    <li><a href="teams.html">Teams</a></li>
+                    <li><a href="{{ url_for('teams_ctrl.teams') }}">Teams</a></li>
+                    <li><a href="{{ url_for('teams_ctrl.team_new') }}">Add new team</a></li>
                     <li><a href="attendance_check.html">Attendance check</a></li>
                     <li><a href="attendance_list.html">Attendance list</a></li>
                 </ul>
-                <li><a href="assignments.html">Assignments</a></li>
+                <li><a href="{{ url_for('assignments_ctrl.assignments') }}">Assignments</a></li>
                     <ul class="submenu">
-                    <li><a href="assignments.html">List of assigments</a></li>
-                    <li><a href="add_edit_assignment.html">Add an assigments</a></li>
+                    <li><a href="{{ url_for('assignments_ctrl.assignments') }}">Assignments</a></li>
+                    <li><a href="{{ url_for('assignments_ctrl.assignment_new') }}">Add an assigments</a></li>
                     <li><a href="submissions.html">List of submissions</a></li>
                   </ul>
               <li><a href="users.html">Mentors</a></li>

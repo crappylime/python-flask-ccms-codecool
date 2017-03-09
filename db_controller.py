@@ -39,7 +39,7 @@ class DB:
     @classmethod
     def create_assignment_record(cls, values):
         """Add new assignment record to database"""
-        query = 'INSERT INTO assignments (`title`, `content`, `due_date`, `max_points`) VALUES (?, ?, ?, ?);'
+        query = 'INSERT INTO assignments (`title`, `is_team`, `content`, `due_date`, `max_points`) VALUES (?, ?, ?, ?, ?);'
         return cls.execute_insert_query(query, values)
 
     @classmethod
@@ -154,6 +154,17 @@ class DB:
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT * FROM `assignments`;"
+        cursor.execute(query)
+        assignment_list = cursor.fetchall()
+        conn.close()
+        return assignment_list
+
+    @classmethod
+    def read_team_assignment_record_list(cls):
+        """Read assignment record list"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `assignments` WHERE `is_team` = 1;"
         cursor.execute(query)
         assignment_list = cursor.fetchall()
         conn.close()
@@ -305,6 +316,22 @@ class DB:
         return team_list
 
     @classmethod
+    def read_team_membership(cls, student_id):
+        """Read student team id"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT `team_id` FROM `members` WHERE `student_id` = ?;"
+        cursor.execute(query, (student_id,))
+        try:
+            team_id = cursor.fetchall()[0][0]
+        except IndexError:
+            team_id = None
+        conn.close()
+        print(team_id)
+        return team_id
+
+
+    @classmethod
     def update_name(cls, user_id, name):
         """Update name in user record by provided user id"""
         query = "UPDATE `users` SET `name` = ? WHERE `user_id` = ?;"
@@ -340,6 +367,52 @@ class DB:
         cls.execute_query(query, args)
 
     @classmethod
+    def update_title(cls, assignment_id, title):
+        """Update title of assignment by provided assignment id"""
+        query = "UPDATE `assignments` SET `title` = ? WHERE `assignment_id` = ?;"
+        args = (title, assignment_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_content(cls, assignment_id, content):
+        """Update content of assignment by provided assignment id"""
+        query = "UPDATE `assignments` SET `content` = ? WHERE `assignment_id` = ?;"
+        args = (content, assignment_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_due_date(cls, assignment_id, due_date):
+        """Update due date of assignment by provided assignment id"""
+        query = "UPDATE `assignments` SET `due_date` = ? WHERE `assignment_id` = ?;"
+        args = (due_date, assignment_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_max_points(cls, assignment_id, max_points):
+        """Update max points of assignment by provided assignment id"""
+        query = "UPDATE `assignments` SET `max_points` = ? WHERE `assignment_id` = ?;"
+        args = (max_points, assignment_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_assignment(cls, assignment_id, title, is_team, content, due_date, max_points):
+        query = "UPDATE `assignments` SET `title` = ?, `is_team` = ?, `content` = ?, `due_date` = ?, `max_points` = ? WHERE `assignment_id` = ?;"
+        args = (title, is_team, content, due_date, max_points, assignment_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_team_name(cls, team_id, new_name):
+        query = "UPDATE `teams` SET `name` = ? WHERE `id` = ?;"
+        args = (new_name, team_id)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_student_team_id(cls, team_id, student_id):
+        query = "UPDATE `members` SET `team_id` = ? WHERE `student_id` = ?;"
+        args = (team_id, student_id)
+        cls.execute_query(query, args)
+
+    @classmethod
     def delete_assignment_record(cls, assignment_id):
         """Delete assignment record by provided assignment id"""
         query = "DELETE FROM assignments WHERE assignment_id = ?"
@@ -365,6 +438,22 @@ class DB:
         """Delete user record by provided user id"""
         query = "DELETE FROM users WHERE user_id = ?"
         args = user_id
+        cls.execute_query(query, (args,))
+
+    @classmethod
+    def delete_member_record(cls, student_id):
+        """Delete member record from database"""
+        query = 'DELETE FROM `members` WHERE student_id = ?;'
+        args = student_id
+        cls.execute_query(query, (args,))
+
+    @classmethod
+    def delete_team_record(cls, team_id):
+        """Delete team record from database"""
+        query = 'DELETE FROM `members` WHERE team_id = ?;'
+        args = team_id
+        cls.execute_query(query, (args,))
+        query = 'DELETE FROM `teams` WHERE id = ?;'
         cls.execute_query(query, (args,))
 
     @classmethod

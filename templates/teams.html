@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}Teams {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}List of teams{% endblock %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Students</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for team in teams_list %}
+                <tr>
+                    <td>{{ team.get_id() }}</td>
+                    <td>{{ team.get_name() }}</td>
+                    <td>
+                        <ol>
+                            {% for student in team.get_members() %}
+                                <li>{{ student.get_name() }}</li>
+                            {% endfor %}
+                        </ol>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('teams_ctrl.team_details', team_id=team.get_id()) }}"  class="button team_button">Details</a>
+                        <a href="{{ url_for('teams_ctrl.team_edit', team_id=team.get_id()) }}" class="button team_button">Edit</a>
+                        <a href="{{ url_for('teams_ctrl.team_remove', team_id=team.get_id()) }}" class="button team_button">Remove</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

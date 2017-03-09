@@ -10,17 +10,25 @@
             <th>Max points</th>
             <td>{{ assignment.get_max_points() }}</td>
         </tr>
-        <th>Due date</th>
-        <td>{{ assignment.get_due_date() }}</td>
-
+            <th>Due date</th>
+            <td>{{ assignment.get_due_date() }}</td>
         <tr>
-
         </tr>
+            <th>Team assignment</th>
 
+            <td>
+                {% if assignment.get_assignment_type() %}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
+
+            </td>
+        <tr>
+        </tr>
         <tr>
             <th>Assignment content</th>
             <td>{{ assignment.get_content() }}</td>
         </tr>
-
     </table>
 {% endblock %}
