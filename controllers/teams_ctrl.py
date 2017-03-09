@@ -2,19 +2,21 @@ from flask import render_template, request, redirect, url_for
 from flask import Blueprint
 from models.teams import Team
 from models.users import User, Student
+from models.menus import Menu
 from db_controller import DB
 
 teams_ctrl = Blueprint('teams_ctrl', __name__)
 
+mainmenu = Menu.get_main_menu()
 
 @teams_ctrl.route("/teams")
 def teams():
-    return render_template("teams.html", teams_list=Team.get_list_teams())
+    return render_template("teams.html", teams_list=Team.get_list_teams(), mainmenu=mainmenu)
 
 
 @teams_ctrl.route("/teams/<team_id>")
 def team_details(team_id):
-    return render_template("team_details.html", team=Team.get_team_by_id(team_id))
+    return render_template("team_details.html", team=Team.get_team_by_id(team_id), mainmenu=mainmenu)
 
 @teams_ctrl.route("/teams/new", methods=["GET", "POST"])
 def team_new():
@@ -22,7 +24,7 @@ def team_new():
         team_name = request.form['name']
         Team.add_team(team_name)
         return redirect(url_for('teams_ctrl.teams'))
-    return render_template("add_team_form.html", title="Add new team")
+    return render_template("add_team_form.html", title="Add new team", mainmenu=mainmenu)
 
 
 @teams_ctrl.route("/teams/<team_id>/edit", methods=["GET", "POST"])
@@ -37,7 +39,7 @@ def team_edit(team_id):
                 Team.get_team_by_id(team_id).relocate_member(student_id)
             else:
                 Team.get_team_by_id(team_id).add_member(User.get_user_by_id(student_id))
-    return render_template("edit_team_form.html", team=Team.get_team_by_id(team_id), student_list=User.get_user_list_by_role('student'))
+    return render_template("edit_team_form.html", team=Team.get_team_by_id(team_id), student_list=User.get_user_list_by_role('student'), mainmenu=mainmenu)
 
 
 @teams_ctrl.route("/teams/<team_id>/edit/<student_id>")

@@ -1,9 +1,11 @@
 from models.submissions import Submission
 from models.assignments import Assignment
+from models.menus import Menu
 from flask import Blueprint, render_template, url_for, request, redirect
 
 submissions_ctrl = Blueprint('submissions_ctrl', __name__)
 
+mainmenu = Menu.get_main_menu()
 
 @submissions_ctrl.route("/assignments/<assignment_id>/submissions")
 def list_assignment_submissions(assignment_id, methods=['GET', 'POST']):

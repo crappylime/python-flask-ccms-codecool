@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, g, url_for, Blueprint, flash
 from db_controller import DB
 from models.users import User
+from models.menus import Menu
 from controllers.users_ctrl import users_ctrl
 from controllers.teams_ctrl import teams_ctrl
 from functools import wraps
@@ -23,6 +24,10 @@ app.register_blueprint(assignments_ctrl)
 app.register_blueprint(users_ctrl)
 app.register_blueprint(teams_ctrl)
 app.secret_key = os.urandom(24)
+
+
+
+mainmenu = Menu.get_main_menu()
 
 
 # login required decorator
@@ -71,9 +76,13 @@ def logout():
 @app.route("/")
 @login_required
 def index():
-    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']))
+    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']), mainmenu = mainmenu)
+
+
+
 
 
 if __name__ == "__main__":
 
     app.run(debug=True)
+

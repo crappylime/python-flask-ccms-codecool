@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from models.attendances import Attendance
+from models.menus import Menu
 from models.users import *
 from flask import Blueprint
 import time
@@ -7,6 +8,7 @@ import time
 
 attendances_ctrl = Blueprint('attendances_ctrl', __name__)
 
+mainmenu = Menu.get_main_menu()
 
 @attendances_ctrl.route("/attendances", methods=['GET', 'POST'])
 def attendances():
@@ -37,7 +39,7 @@ def attendances():
 
     attendances_list = sorted(attendances_list, key=lambda att: att.get_date(), reverse=True)  # sort by date (DESC)
     return render_template('attendance_list.html', attendances_list=attendances_list,
-                           chosen_date=chosen_date, names=sorted_name_list)
+                           chosen_date=chosen_date, names=sorted_name_list, mainmenu=mainmenu)
 
 
 @attendances_ctrl.route("/attendances/edit/<att_id>", methods=['GET', 'POST'])
@@ -51,7 +53,7 @@ def attendance_edit(att_id):
         Attendance.update_attendance(student.get_id(), attendance.get_date(), updated_att)
         return redirect(url_for('attendances_ctrl.attendances'))
 
-    return render_template('attendance_edit.html', attendance=attendance, student=student)
+    return render_template('attendance_edit.html', attendance=attendance, student=student, mainmenu=mainmenu)
 
     # return render_template('attendance_list.html', attendances_list=attendances_list, chosen_date=chosen_date)
 
@@ -79,10 +81,10 @@ def check_attendance():
 
         elif len(by_date_list) == 0:
             return render_template('attendance_check.html', students_list=students_list,
-                                   chosen_date=chosen_date, student_status_dict={})
+                                   chosen_date=chosen_date, student_status_dict={}, mainmenu=mainmenu)
 
         return render_template('attendance_check.html', students_list=students_list,
-                               chosen_date=chosen_date, student_status_dict=student_status_dict)
+                               chosen_date=chosen_date, student_status_dict=student_status_dict, mainmenu=mainmenu)
 
     if request.method == 'POST':
         attendances_list = []
@@ -103,4 +105,4 @@ def check_attendance():
             for attendance in attendances_list:
                 Attendance.update_attendance(attendance[0], attendance[1], attendance[2])
         return render_template('attendance_check.html', students_list=students_list,
-                               student_status_dict={})
+                               student_status_dict={}, mainmenu=mainmenu)

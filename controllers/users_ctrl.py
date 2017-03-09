@@ -1,8 +1,9 @@
 from models.users import User
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session
+from models.menus import Menu
 
 users_ctrl = Blueprint('users_ctrl', __name__)
-
+mainmenu = Menu.get_main_menu()
 
 @users_ctrl.route('/users')
 def users_list():
@@ -15,7 +16,7 @@ def user_details(user_id):
     if not user_id.isnumeric():
         flash("Site not found")
         return redirect('/')
-    return render_template(user_details, user=user_id)
+    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']), mainmenu=mainmenu)
 
 
 @users_ctrl.route('/users/role=<role>')
@@ -24,7 +25,7 @@ def users_list_by_role(role):
     if role not in roles:
         return redirect(url_for('users_ctrl.users_list'))
     users = User.get_user_list_by_role(role)
-    return render_template('users.html', users=enumerate(users), role=role)
+    return render_template('users.html', users=enumerate(users), role=role, mainmenu=mainmenu)
 
 
 @users_ctrl.route('/users/new/<role>', methods=['GET', 'POST'])
@@ -35,12 +36,12 @@ def user_add(role):
         temp_user = User.temporary_user(name, mail, role=role)
         if mail in User.get_mails_list():
             flash("E-mail address is already in use. Please provide another e-mail address")
-            return render_template("add_edit_person_form.html", role=role, user=temp_user, fieldset_title="Add ")
+            return render_template("add_edit_person_form.html", role=role, user=temp_user, fieldset_title="Add ", mainmenu=mainmenu)
         password = request.form['password']
         new_user = User.add_user(name, mail, password, role)
         flash('User {} has been added.'.format(new_user.name))
         return redirect(url_for('users_ctrl.users_list_by_role', role=role))
-    return render_template("add_edit_person_form.html", role=role, fieldset_title="Add ", user=None)
+    return render_template("add_edit_person_form.html", role=role, fieldset_title="Add ", user=None, mainmenu=mainmenu)
 
 
 @users_ctrl.route('/users/edit/<user_id>', methods=['GET', 'POST'])
@@ -55,14 +56,14 @@ def user_edit(user_id):
         new_mail = request.form['email']
         if new_mail != user_to_edit.mail and new_mail in User.get_mails_list():
             flash("E-mail address is already in use. Please provide another e-mail address")
-            return render_template("add_edit_person_form.html", user=user_to_edit, fieldset_title="Edit ", role=None)
+            return render_template("add_edit_person_form.html", user=user_to_edit, fieldset_title="Edit ", role=None, mainmenu = mainmenu)
         new_password = request.form['password']
         user_to_edit.set_mail(new_mail)
         user_to_edit.set_password(new_password)
         user_to_edit.save_changes()
         flash(user_to_edit.name + ' data has been edited')
         return redirect(url_for('users_ctrl.users_list_by_role', role=user_to_edit.get_user_class_name()))
-    return render_template('add_edit_person_form.html', user=User.get_user_by_id(user_id), fieldset_title="Edit ", role=None)
+    return render_template('add_edit_person_form.html', user=User.get_user_by_id(user_id), fieldset_title="Edit ", role=None, mainmenu = mainmenu)
 
 
 @users_ctrl.route('/users/remove/<user_id>')
@@ -71,4 +72,8 @@ def user_remove(user_id):
     user_to_remove.remove()
     flash("{} {} has been removed".format(user_to_remove.get_user_class_name(), user_to_remove.name))
     return redirect(url_for('users_ctrl.users_list_by_role', role=user_to_remove.get_user_class_name().lower()))
+
+
+# @users_ctrl.route('/users/<id>/grades'):
+# def user_grades
 

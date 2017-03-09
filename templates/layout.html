@@ -23,44 +23,19 @@
       <!-- Navigation
       ================================================== -->
       <nav>
-         <ul>
-             <li><a href={{ url_for('index') }}>User menu</a></li>
+         <ul>{% for menu in mainmenu %}
+             {% if session['user_role'] in menu.permissions %}
+             <li><a href={{ url_for(menu.url_for, role=menu.url_for_args) }}>{{ menu.name }}</a></li>
+             {% endif %}
             <ul class="submenu">
-                <li><a href="assignments.html">My assignments</a></li>
-                <li><a href="submissions.html">My submissions</a></li>
-                <li><a href="grades_view.html">My grades</a></li>
-                <li><a href="team_details.html">My team</a></li>
-                <li><a href="attendance_student_view.html">My attendance</a></li>
+                {% for submenu in menu.submenus %}
+                    {% if session['user_role'] in submenu.permissions %}
+                <li><a href={{ url_for(submenu.url_for, role=submenu.url_for_args) }}>{{ submenu.name }}</a></li>
+                {% endif %}
+                {% endfor %}
             </ul>
-                <li><a href={{ url_for('users_ctrl.users_list_by_role', role='student') }}>Students</a></li>
-                <ul class="submenu">
-
-                    <li><a href={{ url_for('users_ctrl.users_list_by_role', role='student') }}>List of students</a></li>
-                    <li><a href={{ url_for('users_ctrl.user_add', role='student') }}>Add student</a></li>
-                    <li><a href="{{ url_for('teams_ctrl.teams') }}">Teams</a></li>
-                    <li><a href="{{ url_for('teams_ctrl.team_new') }}">Add new team</a></li>
-                    <li><a href="{{ url_for('attendances_ctrl.check_attendance') }}">Attendance check</a></li>
-                    <li><a href="{{ url_for('attendances_ctrl.attendances') }}">Attendance list</a></li>
-
-                </ul>
-                <li><a href="{{ url_for('assignments_ctrl.assignments') }}">Assignments</a></li>
-                    <ul class="submenu">
-                    <li><a href="{{ url_for('assignments_ctrl.assignments') }}">Assignments</a></li>
-                    <li><a href="{{ url_for('assignments_ctrl.assignment_new') }}">Add an assigments</a></li>
-                    <li><a href="submissions.html">List of submissions</a></li>
-                  </ul>
-              <li><a href={{ url_for('users_ctrl.users_list_by_role', role='mentor') }}>Mentors</a></li>
-                <ul class="submenu">
-                  <li><a href={{ url_for('users_ctrl.users_list_by_role', role='mentor') }}>List of mentors</a></li>
-                  <li><a href={{ url_for('users_ctrl.user_add', role='mentor') }}>Add mentor</a></li>
-                </ul>
-              <li><a href={{ url_for('users_ctrl.users_list_by_role', role='staff') }}>Staff</a></li>
-                <ul class="submenu">
-                  <li><a href={{ url_for('users_ctrl.users_list_by_role', role='staff') }}>List of staff</a></li>
-                  <li><a href={{ url_for('users_ctrl.user_add', role='staff') }}>Add staff</a></li>
-                </ul>
-            </ul>
-          </nav>
+             {% endfor %}
+                         </nav>
     </sidebar>
     <div class="wrap">
         <h1>{% block page_name_h1 %}{% endblock %}</h1>
