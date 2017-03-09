@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% block page_name_h1 %}
+User details <a href="add_edit_person_form.html" class="button">Edit</a>
+{% endblock %}
+{% block content %}
+       {% for message in get_flashed_messages() %}
+    {{ message }}
+    {%  endfor %}
+        <div class="content">
+
+                <h3>Name: {{ user.name }}</h3>
+                <p>mail: 123antoni@hmail.com</p>
+                <p><a href="add_edit_person_form.html">change password</a></p>
+                <a href="attendance_student_view.html" class="info_box"><h2>overall attendance</h2><span>87%</span></a>
+                <a href="grades_view.html" class="info_box"><h2>overall grade</h2><span>77%</span></a>
+            <div class="team_details">
+                <h2>Assigments</h2>
+                <table id="team_assigment_table">
+
+                    <thead>
+                    <tr>
+                        <th>id</th>                 <!--TODO th elements not inline-->
+                        <th>Assignment name</th>
+                        <th>Status</th>
+                        <th>Submission</th>
+                        <th>Grade</th>
+                    </tr>
+                    </thead>
+                    <tbody>   <!-- TODO tbody added by przemek-->
+                    <tr>
+                        <td>1.</td>
+                        <td><a href="assignment_details.html">Hangman</a></td>
+                        <td>Submitted, Graded</td>
+                        <td><a href="submission_details.html" class="button">View submission</a></td>
+                        <td>50/55 pt <a href="#" class="button">Change grade</a></td>
+                    </tr>
+                    <tr>
+                        <td>2.</td>
+                        <td><a href="assignment_details.html">Assignment1</a></td>
+                        <td>Submitted, Not graded</td>
+                        <td><a href="submission_details.html" class="button">View submission</a></td>
+                        <td>– –/45 pt <a href="#" class="button">Grade</a></td>
+                    </tr>
+                    <tr>
+                        <td>3.</td>
+                        <td><a href="assignment_details.html">Assignment2</a></td>
+                        <td>Not submitted</td>
+                        <td>– – – – – – – – – – – –</td>
+                        <td>– –/55 pt </td>
+                    </tr>
+                    <tr>
+                        <td>4.</td>
+                        <td><a href="assignment_details.html">Assignment3</a></td>
+                        <td>Submitted, Graded</td>
+                        <td><a href="submission_details.html" class="button">View submission</a></td>
+                        <td>10/12 pt <a href="#" class="button">Change grade</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+{% endblock %}

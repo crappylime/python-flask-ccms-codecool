@@ -13,9 +13,9 @@ function validateLogin(event) {
         document.getElementById("password_error").style.display = 'block';
         return false;
     }
-    else {
-        window.location = "user_details.html";
-        return true;
-    }
+    // else {
+    //     window.location = "/login";
+    //     return true;
+    // }
 }
 
