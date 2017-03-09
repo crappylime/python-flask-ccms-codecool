@@ -7,6 +7,9 @@
 {% block content %}
     <form method="POST">
         <fieldset>
+            {% for message in get_flashed_messages() %}
+            <p>{{ message }}</p>
+            {% endfor %}
             <legend>Team</legend>
             <label for="name">Team name </label>
             <input type="text" name="name" id="name" required/>

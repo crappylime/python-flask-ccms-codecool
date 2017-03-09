@@ -16,7 +16,8 @@ def user_details(user_id):
     if not user_id.isnumeric():
         flash("Site not found")
         return redirect('/')
-    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']), mainmenu=mainmenu)
+    return render_template('user_details.html', user=User.get_user_by_id(user_id), mainmenu=mainmenu)
+
 
 
 @users_ctrl.route('/users/role=<role>')
@@ -72,6 +73,7 @@ def user_remove(user_id):
     user_to_remove.remove()
     flash("{} {} has been removed".format(user_to_remove.get_user_class_name(), user_to_remove.name))
     return redirect(url_for('users_ctrl.users_list_by_role', role=user_to_remove.get_user_class_name().lower()))
+
 
 
 # @users_ctrl.route('/users/<id>/grades'):

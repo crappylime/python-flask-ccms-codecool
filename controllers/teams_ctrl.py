@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from flask import Blueprint
 from models.teams import Team
 from models.users import User, Student
@@ -18,12 +18,15 @@ def teams():
 def team_details(team_id):
     return render_template("team_details.html", team=Team.get_team_by_id(team_id), mainmenu=mainmenu)
 
+
 @teams_ctrl.route("/teams/new", methods=["GET", "POST"])
 def team_new():
     if request.method == "POST":
         team_name = request.form['name']
-        Team.add_team(team_name)
-        return redirect(url_for('teams_ctrl.teams'))
+        if not Team.get_team_by_name(team_name):
+            Team.add_team(team_name)
+            return redirect(url_for('teams_ctrl.teams'))
+        flash('Team name already in use')
     return render_template("add_team_form.html", title="Add new team", mainmenu=mainmenu)
 
 
@@ -34,12 +37,14 @@ def team_edit(team_id):
             team_name = request.form['name']
             Team.get_team_by_id(team_id).set_name(team_name)
         if request.form['student']:
-            student_id = request.form['student']
+            student_id = int(''.join(filter(lambda x: x.isdigit(), request.form['student'])))
             if Student.get_student_team_id(student_id):
                 Team.get_team_by_id(team_id).relocate_member(student_id)
             else:
                 Team.get_team_by_id(team_id).add_member(User.get_user_by_id(student_id))
-    return render_template("edit_team_form.html", team=Team.get_team_by_id(team_id), student_list=User.get_user_list_by_role('student'), mainmenu=mainmenu)
+    return render_template("edit_team_form.html", team=Team.get_team_by_id(team_id),
+                           student_list=User.get_user_list_by_role('student'), mainmenu=mainmenu)
+
 
 
 @teams_ctrl.route("/teams/<team_id>/edit/<student_id>")

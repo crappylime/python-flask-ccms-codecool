@@ -55,6 +55,12 @@ class DB:
         return cls.execute_insert_query(query, values)
 
     @classmethod
+    def create_checkpoint_record(cls, values):
+        """Add checkpoint record to database"""
+        query = 'INSERT INTO checkpoints (`student_id`, `date`, `title`, `card`) VALUES (?, ?, ?, ?);'
+        return cls.execute_insert_query(query, values)
+
+    @classmethod
     def create_team(cls, name):
         """Add new team to database"""
         query = "INSERT INTO `teams` (`name`) VALUES (?)"
@@ -204,6 +210,17 @@ class DB:
         return team_list
 
     @classmethod
+    def read_team_record_by_name(cls, team_name):
+        """Read team record by provided team name"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `teams` WHERE `name` = ?;"
+        cursor.execute(query, (team_name,))
+        team_list = cursor.fetchall()
+        conn.close()
+        return team_list
+
+    @classmethod
     def read_submission_record_list_by_assignment_id(cls, assignment_id):
         """Read submission record list by provided assignment id"""
         conn = cls.connect()
@@ -262,6 +279,39 @@ class DB:
         return attendance
 
     @classmethod
+    def read_checkpoint_record_by_id(cls, checkpoint_id):
+        """Read checkpoint record by provided checkpoint id"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `checkpoints` WHERE `checkpoint_id` = ?;"
+        cursor.execute(query, (checkpoint_id,))
+        checkpoint = cursor.fetchall()
+        conn.close()
+        return checkpoint
+
+    @classmethod
+    def read_checkpoint_record_list_by_student_id(cls, student_id):
+        """Read checkpoint record list by provided studen id"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `checkpoints` WHERE `student_id` = ?;"
+        cursor.execute(query, (student_id,))
+        checkpoint = cursor.fetchall()
+        conn.close()
+        return checkpoint
+
+    @classmethod
+    def read_checkpoint_record_list_by_title(cls, title):
+        """Read checkpoint record list by provided title"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `checkpoints` WHERE `title` = ?;"
+        cursor.execute(query, (title,))
+        checkpoint = cursor.fetchall()
+        conn.close()
+        return checkpoint
+
+    @classmethod
     def read_attendance_record_list_by_student_id(cls, student_id):
         """Read attendance record list by provided studen id"""
         conn = cls.connect()
@@ -284,6 +334,17 @@ class DB:
         return attendance
 
     @classmethod
+    def read_checkpoint_record_list_by_date(cls, date):
+        """Read checkpoint record list by provided date"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM `checkpoints` WHERE `date` = ?;"
+        cursor.execute(query, (date,))
+        checkpoint = cursor.fetchall()
+        conn.close()
+        return checkpoint
+
+    @classmethod
     def read_attendance_record_list(cls):
         """Read attendance record list"""
         conn = cls.connect()
@@ -293,6 +354,17 @@ class DB:
         attendance_list = cursor.fetchall()
         conn.close()
         return attendance_list
+
+    @classmethod
+    def read_checkpoint_record_list(cls):
+        """Read checkpoint record list"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT * FROM checkpoints;"
+        cursor.execute(query)
+        checkpoint_list = cursor.fetchall()
+        conn.close()
+        return checkpoint_list
 
     @classmethod
     def read_overall_grade(cls, student_id):
@@ -319,6 +391,17 @@ class DB:
         return overall_attendance
 
     @classmethod
+    def read_overall_checkpoint(cls, student_id):
+        """Read overall checkpoint by provided student id"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT round(avg(100.0*card), 2) from checkpoints WHERE `student_id`=?;"
+        cursor.execute(query, (student_id,))
+        overall_checkpoint = cursor.fetchall()[0][0]
+        conn.close()
+        return overall_checkpoint
+
+    @classmethod
     def read_all_overall_attendance(cls):
         """Read overall attendance by provided student id"""
         conn = cls.connect()
@@ -328,6 +411,42 @@ class DB:
         overall_attendance = cursor.fetchall()[0][0]
         conn.close()
         return overall_attendance
+
+    @classmethod
+    def read_all_overall_checkpoint(cls):
+        """Read overall checkpoint by provided student id"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT round(avg(100.0*card), 2) from checkpoints;"
+        cursor.execute(query)
+        overall_checkpoint = cursor.fetchall()[0][0]
+        conn.close()
+        return overall_checkpoint
+
+    @classmethod
+    def read_overall_attendance_by_date(cls, date):
+        """Read overall attendance by provided student id"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT round(avg(100.0*status), 2) from attendances WHERE `date` = ?;"
+        args = (date,)
+        cursor.execute(query, args)
+        overall_attendance = cursor.fetchall()[0][0]
+        conn.close()
+        return overall_attendance
+
+    @classmethod
+    def read_overall_checkpoint_by_date(cls, date):
+        """Read overall checkpoint by provided student id"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT round(avg(100.0*card), 2) from checkpoints WHERE `date` = ?;"
+        args = (date,)
+        cursor.execute(query, args)
+        overall_checkpoint = cursor.fetchall()[0][0]
+        conn.close()
+        return overall_checkpoint
+
 
     @classmethod
     def read_team_list(cls):
@@ -382,6 +501,13 @@ class DB:
         """Update status in attendance record by provided user id and date"""
         query = "UPDATE `attendances` SET `status` = ? WHERE `user_id` = ? AND `date` = ?;"
         args = (status, user_id, date)
+        cls.execute_query(query, args)
+
+    @classmethod
+    def update_checkpoint(cls, user_id, title, status):
+        """Update status in checkpoint record by provided user id and date"""
+        query = "UPDATE `checkpoints` SET `card` = ? WHERE `student_id` = ? AND `title` = ?;"
+        args = (status, user_id, title)
         cls.execute_query(query, args)
 
     @classmethod

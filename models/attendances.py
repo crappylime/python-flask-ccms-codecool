@@ -66,6 +66,15 @@ class Attendance:
         """
         return cls.create_all_overall_attendance()
 
+    @classmethod
+    def get_overall_attendance_by_date(cls, date):
+        """
+        Return all students overall attendances by date
+        :return:
+            all students overall attendances by date
+        """
+        print('date z get:', date)
+        return cls.create_overall_attendance_by_date(date)
 
     @classmethod
     def create_attendance_by_id(cls, attendance_id):
@@ -112,7 +121,7 @@ class Attendance:
         """
         Creates overall_attendance
         :return:
-            overall attendance: str
+            overall attendance: float
         """
         return DB.read_overall_attendance(student_id)
 
@@ -120,9 +129,18 @@ class Attendance:
     def create_all_overall_attendance(cls):
         """
         Creates all students overall attendance
-        :return: overall attendance: str
+        :return: overall attendance: float
         """
         return DB.read_all_overall_attendance()
+
+    @classmethod
+    def create_overall_attendance_by_date(cls, date):
+        """
+        Creates overall attendance for all students by date
+        :param date: date
+        :return: overall attendance by date: float
+        """
+        return DB.read_overall_attendance_by_date(date)
 
     @classmethod
     def update_attendance(cls, student_id, date, status):
