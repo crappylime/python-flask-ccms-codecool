@@ -17,14 +17,14 @@
       <header class="sideheader">
         <p>You're logged in as:</p>
         <img id="logo" src="/static/images/logo.png" alt="logo">
-        <h2>Przemek</h2>
-        <a href="index.html">Logout</a>
+        <h2>{{ session['user_role'] }}<br>{{session['user_name']}}</h2>
+        <a href={{ url_for('logout') }}>Logout</a>
       </header>
       <!-- Navigation
       ================================================== -->
       <nav>
          <ul>
-             <li><a href="user_details.html">User menu</a></li>
+             <li><a href={{ url_for('index') }}>User menu</a></li>
             <ul class="submenu">
                 <li><a href="assignments.html">My assignments</a></li>
                 <li><a href="submissions.html">My submissions</a></li>
@@ -32,10 +32,11 @@
                 <li><a href="team_details.html">My team</a></li>
                 <li><a href="attendance_student_view.html">My attendance</a></li>
             </ul>
-                <li><a href="users.html">Students</a></li>
+                <li><a href={{ url_for('users_ctrl.users_list_by_role', role='student') }}>Students</a></li>
                 <ul class="submenu">
-                    <li><a href="users.html">List of students</a></li>
-                    <li><a href="add_edit_person_form.html">Add student</a></li>
+
+                    <li><a href={{ url_for('users_ctrl.users_list_by_role', role='student') }}>List of students</a></li>
+                    <li><a href={{ url_for('users_ctrl.user_add', role='student') }}>Add student</a></li>
                     <li><a href="{{ url_for('teams_ctrl.teams') }}">Teams</a></li>
                     <li><a href="{{ url_for('teams_ctrl.team_new') }}">Add new team</a></li>
                     <li><a href="{{ url_for('attendances_ctrl.check_attendance') }}">Attendance check</a></li>
@@ -47,15 +48,15 @@
                     <li><a href="{{ url_for('assignments_ctrl.assignment_new') }}">Add an assigments</a></li>
                     <li><a href="submissions.html">List of submissions</a></li>
                   </ul>
-              <li><a href="users.html">Mentors</a></li>
+              <li><a href={{ url_for('users_ctrl.users_list_by_role', role='mentor') }}>Mentors</a></li>
                 <ul class="submenu">
-                  <li><a href="users.html">List of mentors</a></li>
-                  <li><a href="add_edit_person_form.html">Add mentor</a></li>
+                  <li><a href={{ url_for('users_ctrl.users_list_by_role', role='mentor') }}>List of mentors</a></li>
+                  <li><a href={{ url_for('users_ctrl.user_add', role='mentor') }}>Add mentor</a></li>
                 </ul>
-              <li><a href="users.html">Staff</a></li>
+              <li><a href={{ url_for('users_ctrl.users_list_by_role', role='staff') }}>Staff</a></li>
                 <ul class="submenu">
-                  <li><a href="users.html">List of staff</a></li>
-                  <li><a href="add_edit_person_form.html">Add staff</a></li>
+                  <li><a href={{ url_for('users_ctrl.users_list_by_role', role='staff') }}>List of staff</a></li>
+                  <li><a href={{ url_for('users_ctrl.user_add', role='staff') }}>Add staff</a></li>
                 </ul>
             </ul>
           </nav>

@@ -76,6 +76,12 @@ class User:
 
         return user_list
 
+    @classmethod
+    def get_mails_list(cls):
+        mails_list = []
+        for user in cls.get_user_list():
+            mails_list.append(user.mail)
+        return mails_list
 
     @classmethod
     def create_user_list_by_role(cls, role):
@@ -108,11 +114,16 @@ class User:
         return user_list
 
     @classmethod
-    def add_user(cls, name, mail, password):
-        values = (name, mail, password, cls.get_class_name().lower())
+    def add_user(cls, name, mail, password, role=None):
+        values = (name, mail, password, role if role else cls.get_class_name().lower())
         new_user_id = DB.create_user_record(values)
         new_user = cls.get_user_by_id(new_user_id)
         return new_user
+
+    @classmethod
+    def temporary_user(cls, name, mail, role=None):
+        roles = {"student": Student, "mentor": Mentor, "staff": Staff, "boss": Boss}
+        return roles[role](name=name, mail=mail, password=None, user_id=None)
 
     @classmethod
     def get_class_name(cls):
@@ -142,17 +153,20 @@ class User:
     def set_name(self, new_name):
         """Sets users name"""
         self.name = new_name
-        DB.update_name(self.get_id(), new_name)
+        #DB.update_name(self.get_id(), new_name)
 
     def set_mail(self, new_mail):
         """Sets users mail"""
         self.mail = new_mail
-        DB.update_mail(self.get_id(), new_mail)
+        #DB.update_mail(self.get_id(), new_mail)
 
     def set_password(self, new_password):
         """Sets users password"""
         self.password = new_password
-        DB.update_password(self.get_id(), new_password)
+        #DB.update_password(self.get_id(), new_password)
+
+    def save_changes(self):
+        DB.update_user(self.id, self.name, self.mail, self.password)
 
     @classmethod
     def remove_user(cls, user_id):
@@ -160,6 +174,12 @@ class User:
         DB.delete_user_record(user_id)
         DB.delete_user_attendance_record(user_id)
         DB.delete_user_submission_record(user_id)
+
+    def remove(self):
+        """Removes user instance from user list"""
+        DB.delete_user_record(self.id)
+        DB.delete_user_attendance_record(self.id)
+        DB.delete_user_submission_record(self.id)
 
 
 class Student(User):
