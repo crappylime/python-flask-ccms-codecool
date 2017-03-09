@@ -14,40 +14,67 @@ User details
 {% block content %}
 <h3>Name: {{ user.get_name() }}</h3>
 <p>mail: {{ user.get_mail() }}</p>
+<p><a href={{ url_for('users_ctrl.user_edit', user_id = user.get_id()) }}>edit profile</a></p>
 
 {% if session['user_role'] == 'Student' %}
-<p><a href={{ url_for('users_ctrl.user_edit', user_id = user.get_id()) }}>edit profile</a></p>
-{% endif %}
-
 <a href="/attendances?student={{ user.get_name() }}" class="info_box"><h2>overall attendance</h2><span>{{ user.get_overall_attendance() }}%</span></a>
 <span class="info_box"><h2>overall grade</h2><span>{{ user.get_overall_grade() }}%</span></span>
+{% endif %}
 
+{% if assignment_list %}
 <h2>Assignments</h2>
 <table>
     <thead>
         <tr>
             <th>id</th>
             <th>Assignment name</th>
+            <th>Status</th>
             <th>Submission</th>
             <th>Grade</th>
         </tr>
     </thead>
     <tbody>
-        {% for submission in user.get_submission_list() %}
+        {% for assignment in assignment_list %}
             <tr>
-              <td>{{loop.index}}. {{item}}</td>
-              <td><a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=submission.get_assignment().get_id()) }}">{{ submission.get_assignment().get_title() }}</a></td>
-              <td><a href="{{ url_for('submissions_ctrl.submission_details', submission_id=submission.get_id()) }}" class="button">View submission</a></td>
-              <td>
-                  {% if submission.get_points() %}
-                      {{ submission.get_points() }}
-                  {% else %}
-                        – –
-                  {% endif %}
-                  /{{ submission.get_assignment().get_max_points() }}
-              </td>
+                <td>{{loop.index}}. {{item}}</td>
+                <td><a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{ assignment.get_title() }}</a></td>
+
+                {% for submission in user.get_submission_list() %}
+                    {% if assignment.get_id()  == submission.get_assignment().get_id() %}
+                        <td>submitted</td>
+                        <td><a href="{{ url_for('submissions_ctrl.submission_details', submission_id=submission.get_id()) }}" class="button">View submission</a></td>
+                        <td>
+                            {% if submission.get_points() %}
+                                {{ submission.get_points() }}
+                            {% else %}
+                                  – –
+                            {% endif %}
+                            /{{ submission.get_assignment().get_max_points() }}
+                            {% if session['user_role'] == 'Mentor' %}
+                                <a href="{{ url_for('submissions_ctrl.submission_grade', submission_id=submission.get_id()) }}" class="button">Grade</a>
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                {% endfor %}
             </tr>
         {% endfor %}
     </tbody>
 </table>
+{% else %}
+    {% if session['user_role'] == 'Mentor' %}
+    <p><em>Ready to mentor?<img src="https://s-media-cache-ak0.pinimg.com/originals/97/27/be/9727be75434a9982137a2584e8a9aff0.gif" alt="mentor day"></em></p>
+    {% endif %}
+
+    {% if session['user_role'] == 'Boss' %}
+    <p><em>Keep calm and do it...<img src="https://media.giphy.com/media/sGpHE1wS1PFWo/giphy.gif" alt="boss day"></em></p>
+    {% endif %}
+
+    {% if session['user_role'] == 'Staff' %}
+    <p><em>Be yourself. Haters gonna hate<img src="https://s-media-cache-ak0.pinimg.com/originals/72/f4/58/72f458d7863e5732a0684915e2ded406.gif" alt="secretary day"></em></p>
+    {% endif %}
+
+    {% if session['user_role'] == 'Student' %}
+    <p><em>Unbelievable. No assignments here so far</em></p>
+    {% endif %}
+{% endif %}
 {% endblock %}

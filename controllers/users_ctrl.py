@@ -1,4 +1,5 @@
 from models.users import User
+from models.assignments import Assignment
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 
 users_ctrl = Blueprint('users_ctrl', __name__)
@@ -15,7 +16,8 @@ def user_details(user_id):
     if not user_id.isnumeric():
         flash("Site not found")
         return redirect('/')
-    return render_template('user_details.html', user=User.get_user_by_id(user_id))
+    assignment_list = Assignment.get_assignment_list()
+    return render_template('user_details.html', assignment_list=assignment_list, user=User.get_user_by_id(user_id))
 
 
 @users_ctrl.route('/users/role=<role>')
