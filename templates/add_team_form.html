@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}{{title}} {{ super() }}{% endblock %}
+
+{% block page_name_h1 %}{{title}}{% endblock %}
+
+{% block content %}
+    <form method="POST">
+        <fieldset>
+            <legend>Team</legend>
+            <label for="name">Team name </label>
+            <input type="text" name="name" id="name" required/>
+            <button type="submit" class="submit_button">Save</button>
+        </fieldset>
+    </form>
+{% endblock %}

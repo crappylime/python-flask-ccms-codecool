@@ -34,12 +34,14 @@
             </ul>
                 <li><a href={{ url_for('users_ctrl.users_list_by_role', role='student') }}>Students</a></li>
                 <ul class="submenu">
+
                     <li><a href={{ url_for('users_ctrl.users_list_by_role', role='student') }}>List of students</a></li>
                     <li><a href={{ url_for('users_ctrl.user_add', role='student') }}>Add student</a></li>
                     <li><a href="{{ url_for('teams_ctrl.teams') }}">Teams</a></li>
                     <li><a href="{{ url_for('teams_ctrl.team_new') }}">Add new team</a></li>
                     <li><a href="{{ url_for('attendances_ctrl.check_attendance') }}">Attendance check</a></li>
                     <li><a href="{{ url_for('attendances_ctrl.attendances') }}">Attendance list</a></li>
+
                 </ul>
                 <li><a href="{{ url_for('assignments_ctrl.assignments') }}">Assignments</a></li>
                     <ul class="submenu">

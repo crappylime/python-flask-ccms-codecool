@@ -7,6 +7,7 @@ from functools import wraps
 import os
 
 
+from controllers.teams_ctrl import teams_ctrl
 from controllers.attendances_ctrl import attendances_ctrl
 from controllers.submissions_ctrl import submissions_ctrl
 from controllers.assignments_ctrl import assignments_ctrl
@@ -18,6 +19,7 @@ app = Flask(__name__)
 app.register_blueprint(attendances_ctrl)
 app.register_blueprint(submissions_ctrl)
 app.register_blueprint(assignments_ctrl)
+
 app.register_blueprint(users_ctrl)
 app.register_blueprint(teams_ctrl)
 app.secret_key = os.urandom(24)
@@ -35,6 +37,7 @@ def login_required(f):
     return wrap
 
 
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     error = None
@@ -42,8 +45,6 @@ def login():
         user_mail = request.form['email']
         if user_mail in User.get_mails_list():
             logged_user = list(filter(lambda x: x.get_mail() == user_mail, User.get_user_list()))[0]
-
-            print(logged_user.get_user_class_name())
             if request.form['password'] != logged_user.get_password():
                 error = "Wrong password. Try again"
             else:
@@ -64,6 +65,7 @@ def logout():
     session.pop('logged_in', None)
     flash("You are logged out!")
     return redirect(url_for('login'))
+
 
 
 @app.route("/")

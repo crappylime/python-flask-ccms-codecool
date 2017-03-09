@@ -154,7 +154,5 @@ Temporary Items
 
 # End of https://www.gitignore.io/api/python,pycharm,osx
 
-
 .idea/
-data/
-
+/data/ccms.db
