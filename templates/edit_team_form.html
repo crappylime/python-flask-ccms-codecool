@@ -15,7 +15,7 @@
             <input type="text" name="student" id="student" list="students">
                 <datalist id="students">
                     {% for student in student_list %}
-                        <option>{{ student.get_id() }}</option>
+                        <option>{{ student.get_id() }}, {{ student.get_name() }}</option>
                     {% endfor %}
                 </datalist>
         </fieldset>

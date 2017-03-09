@@ -32,7 +32,7 @@ def team_edit(team_id):
             team_name = request.form['name']
             Team.get_team_by_id(team_id).set_name(team_name)
         if request.form['student']:
-            student_id = request.form['student']
+            student_id = int(''.join(filter(lambda x: x.isdigit(), request.form['student'])))
             if Student.get_student_team_id(student_id):
                 Team.get_team_by_id(team_id).relocate_member(student_id)
             else:
