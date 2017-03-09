@@ -38,8 +38,8 @@
                     <li><a href="add_edit_person_form.html">Add student</a></li>
                     <li><a href="{{ url_for('teams_ctrl.teams') }}">Teams</a></li>
                     <li><a href="{{ url_for('teams_ctrl.team_new') }}">Add new team</a></li>
-                    <li><a href="attendance_check.html">Attendance check</a></li>
-                    <li><a href="attendance_list.html">Attendance list</a></li>
+                    <li><a href="{{ url_for('attendances_ctrl.check_attendance') }}">Attendance check</a></li>
+                    <li><a href="{{ url_for('attendances_ctrl.attendances') }}">Attendance list</a></li>
                 </ul>
                 <li><a href="{{ url_for('assignments_ctrl.assignments') }}">Assignments</a></li>
                     <ul class="submenu">
