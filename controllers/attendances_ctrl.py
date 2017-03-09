@@ -72,7 +72,6 @@ def check_attendance():
             chosen_date = time.strftime("%Y-%m-%d")
             by_date_list = Attendance.get_attendance_list_by_date(chosen_date)
             student_status_dict = {}
-            print(by_date_list)
             if len(by_date_list) != 0:
                 for attendance in by_date_list:
                     student_status_dict[attendance.get_student().get_id()] = attendance.get_status()

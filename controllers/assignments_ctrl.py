@@ -29,7 +29,7 @@ def assignment_new():
         max_points = request.form['max_points']
         Assignment.add_assignment(assignment_title, is_team, content, due_date, max_points)
         return redirect(url_for('assignments_ctrl.assignments'))
-    return render_template("add_assignment.html", title="Add an assignment")
+    return render_template("add_edit_assignment.html", title="Add an assignment")
 
 
 @assignments_ctrl.route("/assignments/<assignment_id>/edit", methods=["GET", "POST"])
@@ -45,7 +45,7 @@ def assignment_edit(assignment_id):
         max_points = request.form['max_points']
         Assignment.get_assignment_by_id(assignment_id).edit_assignment(assignment_title, is_team, content, due_date, max_points)
         return redirect(url_for('assignments_ctrl.assignments'))
-    return render_template("edit_assignment.html", title="Edit an assignment", assignment=Assignment.get_assignment_by_id(assignment_id))
+    return render_template("add_edit_assignment.html", title="Edit an assignment", assignment=Assignment.get_assignment_by_id(assignment_id))
 
 
 @assignments_ctrl.route("/assignments/<assignment_id>/remove")
