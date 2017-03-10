@@ -42,9 +42,6 @@
                         <a href={{ url_for('users_ctrl.user_remove', user_id = user.get_id()) }} class="button user_button">Remove</a>
                         {% endif %}
 
-                        {% if user.get_user_class_name() == 'Student' %}
-                        <a href='#'  class="button user_button">Add to team</a>
-                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
