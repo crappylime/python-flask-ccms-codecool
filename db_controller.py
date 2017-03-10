@@ -243,6 +243,19 @@ class DB:
         return submenu_list
 
     @classmethod
+    def read_menu_by_name(cls, menu_name):
+        """"""
+        print(menu_name)
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT id, `name`, url_for, url_for_args, `position`, upper_menu_id FROM menus WHERE url_for = ?"
+        cursor.execute(query, (menu_name,))
+        menu_data = cursor.fetchall()[0]
+        print(menu_data)
+        conn.close()
+        return menu_data
+
+    @classmethod
     def read_menu_permission(cls, menu_id):
         """"""
         conn = cls.connect()

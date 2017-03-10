@@ -1,17 +1,33 @@
 from models.users import User
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
 from models.menus import Menu
+from functools import wraps
 
 users_ctrl = Blueprint('users_ctrl', __name__)
 mainmenu = Menu.get_main_menu()
 
+def permission_check(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        function_name = __name__.split('.')[-1]+'.'+f.__name__
+        if session['user_role'] in Menu.get_menu_by_name(function_name).permissions:
+            return f(*args, **kwargs)
+        else:
+            flash('Access denied.')
+            return redirect(url_for('index'))
+    return wrap
+
+
+
 @users_ctrl.route('/users')
+@permission_check
 def users_list():
     users = User.get_user_list()
     return render_template('users.html', users=enumerate(users), role=None)
 
 
 @users_ctrl.route('/users/<user_id>')
+@permission_check
 def user_details(user_id):
     if not user_id.isnumeric():
         flash("Site not found")
@@ -21,6 +37,7 @@ def user_details(user_id):
 
 
 @users_ctrl.route('/users/role=<role>')
+@permission_check
 def users_list_by_role(role):
     roles = ['mentor', 'student', 'boss', 'staff']
     if role not in roles:
@@ -30,6 +47,7 @@ def users_list_by_role(role):
 
 
 @users_ctrl.route('/users/new/<role>', methods=['GET', 'POST'])
+@permission_check
 def user_add(role):
     if request.method == "POST":
         name = request.form['firstname'] + ' ' + request.form['lastname']
@@ -46,6 +64,7 @@ def user_add(role):
 
 
 @users_ctrl.route('/users/edit/<user_id>', methods=['GET', 'POST'])
+@permission_check
 def user_edit(user_id):
     if not user_id.isnumeric():
         flash("Site not found")
@@ -68,6 +87,7 @@ def user_edit(user_id):
 
 
 @users_ctrl.route('/users/remove/<user_id>')
+@permission_check
 def user_remove(user_id):
     user_to_remove = User.get_user_by_id(user_id)
     user_to_remove.remove()

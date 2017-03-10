@@ -33,5 +33,10 @@ class Menu:
             menu_list.append(Menu(*data))
         return menu_list
 
+    @classmethod
+    def get_menu_by_name(cls, menu_name):
+        menu_data = DB.read_menu_by_name(menu_name)
+        return Menu(*menu_data)
+
 
 
