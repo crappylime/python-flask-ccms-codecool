@@ -36,7 +36,6 @@ def attendances():
     if chosen_date:  # show by date
         attendances_list = Attendance.get_attendance_list_by_date(chosen_date)
         overall = Attendance.get_overall_attendance_by_date(chosen_date)
-        print(overall)
     elif chosen_student and chosen_student != 'all':  # show by chosen student
         attendances_list = Attendance.get_attendance_list_by_student_id(name_id_dict[chosen_student])
         overall = Attendance.get_overall_attendance(name_id_dict[chosen_student])
