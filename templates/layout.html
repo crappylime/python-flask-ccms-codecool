@@ -27,6 +27,7 @@
              {% if session['user_role'] in menu.permissions %}
              <li><a href={{ url_for(menu.url_for, role=menu.url_for_args) }}>{{ menu.name }}</a></li>
              {% endif %}
+
             <ul class="submenu">
                 {% for submenu in menu.submenus %}
                     {% if session['user_role'] in submenu.permissions %}

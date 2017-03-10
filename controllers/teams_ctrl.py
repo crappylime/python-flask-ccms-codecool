@@ -9,6 +9,7 @@ teams_ctrl = Blueprint('teams_ctrl', __name__)
 
 mainmenu = Menu.get_main_menu()
 
+
 @teams_ctrl.route("/teams")
 def teams():
     return render_template("teams.html", teams_list=Team.get_list_teams(), mainmenu=mainmenu)
@@ -44,7 +45,6 @@ def team_edit(team_id):
                 Team.get_team_by_id(team_id).add_member(User.get_user_by_id(student_id))
     return render_template("edit_team_form.html", team=Team.get_team_by_id(team_id),
                            student_list=User.get_user_list_by_role('student'), mainmenu=mainmenu)
-
 
 
 @teams_ctrl.route("/teams/<team_id>/edit/<student_id>")

@@ -4,8 +4,10 @@ from models.assignments import Assignment
 from models.menus import Menu
 from db_controller import DB
 
+
 assignments_ctrl = Blueprint('assignments_ctrl', __name__)
 mainmenu = Menu.get_main_menu()
+
 
 @assignments_ctrl.route("/assignments")
 def assignments():
@@ -33,7 +35,6 @@ def assignment_new():
     return render_template("add_assignment.html", title="Add an assignment", mainmenu=mainmenu)
 
 
-
 @assignments_ctrl.route("/assignments/<assignment_id>/edit", methods=["GET", "POST"])
 def assignment_edit(assignment_id):
     if request.method == "POST":
@@ -50,9 +51,7 @@ def assignment_edit(assignment_id):
     return render_template("edit_assignment.html", title="Edit an assignment", assignment=Assignment.get_assignment_by_id(assignment_id), mainmenu=mainmenu)
 
 
-
 @assignments_ctrl.route("/assignments/<assignment_id>/remove")
 def assignment_remove(assignment_id):
     DB.delete_assignment_record(assignment_id)
     return redirect(url_for('assignments_ctrl.assignments'))
-

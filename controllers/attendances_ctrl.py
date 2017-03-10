@@ -10,6 +10,7 @@ attendances_ctrl = Blueprint('attendances_ctrl', __name__)
 
 mainmenu = Menu.get_main_menu()
 
+
 @attendances_ctrl.route("/attendances", methods=['GET', 'POST'])
 def attendances():
     """Show attendances list with overall attendance
@@ -46,8 +47,6 @@ def attendances():
     attendances_list = sorted(attendances_list, key=lambda att: att.get_date(), reverse=True)  # sort by date (DESC)
     return render_template('attendance_list.html', attendances_list=attendances_list,
                            chosen_date=chosen_date, names=sorted_name_list, overall=overall, mainmenu=mainmenu)
-
-
 
 
 @attendances_ctrl.route("/attendances/edit/<att_id>", methods=['GET', 'POST'])

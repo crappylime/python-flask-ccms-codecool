@@ -1,8 +1,6 @@
 from models.submissions import Submission
 from models.assignments import Assignment
-
 from models.menus import Menu
-
 from flask import Blueprint, render_template, url_for, request, redirect, session, flash
 
 
