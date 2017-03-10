@@ -33,12 +33,9 @@ def submission_add(assignment_id):
     student_id = session['user_id']
     assignment = Assignment.get_assignment_by_id(assignment_id)
     if request.method == 'POST':
-        if student_id in [submission.get_student().get_id() for submission in Submission.get_submission_list_by_user_id(student_id)]:
-            flash("You have already sent the submission to \"{}\" assignment".format(assignment.get_title()))
-        else:
-            submission = Submission.add_submission(assignment_id, student_id, request.form['content'])
-            flash('Submission {} has been added.'.format(submission.get_content()))
-            return redirect(url_for('assignments_ctrl.assignments'))
+        submission = Submission.add_submission(assignment_id, student_id, request.form['content'])
+        flash('Submission {} has been added.'.format(submission.get_content()))
+        return redirect(url_for('assignments_ctrl.assignments'))
     return render_template('add_submission.html', assignment=assignment, mainmenu=mainmenu)
 
 
