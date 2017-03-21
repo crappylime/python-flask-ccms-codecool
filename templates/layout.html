@@ -38,7 +38,7 @@
 
              {% endfor %}
              {#   MODAL ---------------- ADD ASIGNMENT   -----------------------MODAL #}
-            <button onclick="showModalAdd('new_assignment')">+ Add new assignment TEST</button>
+            <button onclick="showModalAdd('new_assignment_empty_form')">+ Add new assignment TEST</button>
             {#   MODAL ---------------- ADD ASIGNMENT   -----------------------MODAL #}
          </ul>
                          </nav>
@@ -62,6 +62,10 @@
       {% block content %}{% endblock %}
       </div>
     </div>
+
+  {#   MODAL ---------------- ADD ASIGNMENT   -----------------------MODAL #}
+{% include 'assignment_add_panel.html' %}
+{#   MODAL ---------------- ADD ASIGNMENT   -----------------------MODAL #}
 
   </body>
 </html>

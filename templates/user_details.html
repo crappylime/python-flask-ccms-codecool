@@ -11,10 +11,6 @@ User details
 <p>mail: {{ user.get_mail() }}</p>
 <p><a href={{ url_for('users_ctrl.user_edit', user_id = user.get_id()) }}>edit profile</a></p>
 
-{#   MODAL ---------------- ADD ASIGNMENT   -----------------------MODAL #}
-{% include 'assignment_add_panel.html' %}
-{#   MODAL ---------------- ADD ASIGNMENT   -----------------------MODAL #}
-
 {% if user.get_user_class_name() == "Student" %}
 <a href="/attendances?student={{ user.get_name() }}" class="info_box"><h2>overall attendance</h2><span>{{ user.get_overall_attendance() }}%</span></a>
 <span class="info_box"><h2>overall grade</h2><span>{{ user.get_overall_grade() }}%</span></span>
