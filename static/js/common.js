@@ -123,13 +123,22 @@ function add_new_or_edit_assignment(choice, id) {
             url: '/edit_assignment',
             contentType: 'application/json',
             data: JSON_new_assignment,
-            success: function() {         // response_data = sorted to-do list in JSON format
+            success: function(edited_assignment) {         // response_data = sorted to-do list in JSON format
                 modalAdd.style.display = "none";
                 $('#assignment_title').val(undefined);
                 $("#is_team").prop('checked', false);
                 $('#due_date').val(undefined);
                 $('#max_points').val(undefined);
                 $('#content').val(undefined);
+
+                //INSERT EDITED DATA TO TABLE WITHOUT REFRESHING:
+                $('#' + id + ' td:nth-child(2)').text(new_assignment["assignment_title"]);
+                if (new_assignment["is_team"] == 0) {
+                    $('#' + id + ' td:nth-child(3)').text("No");
+                }
+                else {$('#' + id + ' td:nth-child(3)').text("Yes");}
+
+
             },
             error: function () {
                 alert('error adding new thing')

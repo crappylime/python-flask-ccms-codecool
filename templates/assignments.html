@@ -10,7 +10,7 @@
 <!-- Table
 ================================================== -->
 {% if assignment_list %}
-    <table>
+    <table id="assignments_table">
         <thead>
             <tr>
                 <th>id</th>
@@ -22,9 +22,9 @@
         </thead>
         <tbody>
             {% for assignment in assignment_list %}
-                <tr>
+                <tr id="{{ assignment.get_id() }}">
 {#                    <td>{{loop.index}}. {{item}}</td>#}
-                    <td id="{{ assignment.get_id() }}">{{loop.index}}. {{item}}</td>
+                    <td>{{loop.index}}. {{item}}</td>
                     <td>{{ assignment.get_title() }}</td>
                     <td>
                         {% if assignment.get_assignment_type() %}

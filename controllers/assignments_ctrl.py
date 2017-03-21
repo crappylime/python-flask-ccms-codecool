@@ -86,7 +86,9 @@ def edit_assignment():
 
     Assignment.get_assignment_by_id(assignment_id).edit_assignment(assignment_title, is_team, content, due_date,
                                                                    max_points)
-    return 'edited'
+    edited_assignment = Assignment.get_assignment_by_id(assignment_id)
+    edited_assignment_in_json = json.dumps(edited_assignment.__dict__, ensure_ascii=False).encode('utf8')
+    return edited_assignment_in_json
 
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
