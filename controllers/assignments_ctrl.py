@@ -35,6 +35,21 @@ def assignment_new():
     return render_template("add_edit_assignment.html", title="Add an assignment", mainmenu=mainmenu)
 
 
+@assignments_ctrl.route("/new_assignment", methods=["GET", "POST"])
+def new_assignment():
+    print('im in flask new_assignment')
+    assignment_content = request.get_json()
+    print(assignment_content)
+
+    assignment_title = assignment_content["assignment_title"]
+    content = assignment_content["content"]
+    due_date = assignment_content["due_date"]
+    max_points = assignment_content["max_points"]
+    is_team = assignment_content["is_team"]
+
+    Assignment.add_assignment(assignment_title, is_team, content, due_date, max_points)
+    return 'added'
+
 @assignments_ctrl.route("/assignments/<assignment_id>/edit", methods=["GET", "POST"])
 def assignment_edit(assignment_id):
     if request.method == "POST":
