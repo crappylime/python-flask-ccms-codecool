@@ -10,7 +10,7 @@
 <!-- Table
 ================================================== -->
 {% if assignment_list %}
-    <table id="assignments_table">
+    <table>
         <thead>
             <tr>
                 <th>id</th>
@@ -20,7 +20,7 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="assignments_table_body">
             {% for assignment in assignment_list %}
                 <tr id="{{ assignment.get_id() }}">
 {#                    <td>{{loop.index}}. {{item}}</td>#}

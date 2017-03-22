@@ -96,6 +96,12 @@ function add_new_or_edit_assignment(choice, id) {
             content: content.val(),
             id: id      // necessary when we want to edit assignment / automatically excluded if we add new assignment
         };
+
+        if (new_assignment["is_team"] == 0) {
+                    var team_in_table = 'No';
+                }
+                else {var team_in_table = 'Yes'}
+
         var JSON_new_assignment = JSON.stringify(new_assignment);  // convert JS object to JSON string
 
         // --------- send values to controller by AJAX: ------------- //
@@ -105,13 +111,25 @@ function add_new_or_edit_assignment(choice, id) {
             url: '/new_assignment',
             contentType: 'application/json',
             data: JSON_new_assignment,
-            success: function() {         // response_data = sorted to-do list in JSON format
+            success: function(newest_assignment) {         // response_data = sorted to-do list in JSON format
                 modalAdd.style.display = "none";
+                var new_assignment_js = JSON.parse(newest_assignment);
+
                 $('#assignment_title').val(undefined);
                 $("#is_team").prop('checked', false);
                 $('#due_date').val(undefined);
                 $('#max_points').val(undefined);
                 $('#content').val(undefined);
+                var rowCount = $('#assignments_table_body tr').length + 1;
+                $('#assignments_table_body').append(
+                    '<tr id="'+ new_assignment_js['id'] +'"><td>' + rowCount + '.</td>' +
+                    '<td>' + new_assignment_js['title'] + '</td>' +
+                    '<td>' + team_in_table + '</td>' +
+                    '<td><a href="/assignments/' + new_assignment_js['id'] + '"' + ' class="button assignment_buttons">Details</a></td>' +
+                    '<td><a onclick="showModalAdd(' + new_assignment_js['id'] + ')" class="button">Edit</a>' +
+                    '<a href="/assignments/' + new_assignment_js['id'] +  '/remove' + '"' + ' class="button">Remove</a>' +
+                    '<a href="/assignments/' + new_assignment_js['id'] +  '/submissions" class="button">Submissions list</a></td></tr>'
+                )
             },
             error: function () {
                 alert('error adding new thing')
@@ -123,7 +141,7 @@ function add_new_or_edit_assignment(choice, id) {
             url: '/edit_assignment',
             contentType: 'application/json',
             data: JSON_new_assignment,
-            success: function(edited_assignment) {         // response_data = sorted to-do list in JSON format
+            success: function() {         // response_data = sorted to-do list in JSON format
                 modalAdd.style.display = "none";
                 $('#assignment_title').val(undefined);
                 $("#is_team").prop('checked', false);
@@ -134,9 +152,9 @@ function add_new_or_edit_assignment(choice, id) {
                 //INSERT EDITED DATA TO TABLE WITHOUT REFRESHING:
                 $('#' + id + ' td:nth-child(2)').text(new_assignment["assignment_title"]);
                 if (new_assignment["is_team"] == 0) {
-                    $('#' + id + ' td:nth-child(3)').text("No");
+                    $('#' + id + ' td:nth-child(3)').text(team_in_table);
                 }
-                else {$('#' + id + ' td:nth-child(3)').text("Yes");}
+                else {$('#' + id + ' td:nth-child(3)').text(team_in_table);}
 
 
             },

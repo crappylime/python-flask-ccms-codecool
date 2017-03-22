@@ -52,8 +52,12 @@ def new_assignment():
     max_points = assignment_content["max_points"]
     is_team = assignment_content["is_team"]
 
-    Assignment.add_assignment(assignment_title, is_team, content, due_date, max_points)
-    return 'added'
+    new_assignment = Assignment.add_assignment(assignment_title, is_team, content, due_date, max_points)
+    new_assignment_in_json = json.dumps(new_assignment.__dict__, ensure_ascii=False).encode('utf8')
+
+    print(new_assignment_in_json)
+
+    return new_assignment_in_json
 
 
 @assignments_ctrl.route("/get_assignment_by_id", methods=["POST"])
