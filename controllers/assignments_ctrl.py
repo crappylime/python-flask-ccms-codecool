@@ -94,6 +94,19 @@ def edit_assignment():
     edited_assignment_in_json = json.dumps(edited_assignment.__dict__, ensure_ascii=False).encode('utf8')
     return edited_assignment_in_json
 
+
+@assignments_ctrl.route("/remove_assignment", methods=["POST"])
+def remove_assignment():
+    print('im in remove')
+
+    assignment_id = request.get_json()
+
+    print(assignment_id)
+
+    DB.delete_assignment_record(assignment_id)
+
+    return ''
+
 # ----------------------------------------------------------------------
 # ----------------------------------------------------------------------
 

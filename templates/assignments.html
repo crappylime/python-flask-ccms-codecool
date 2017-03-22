@@ -22,7 +22,7 @@
         </thead>
         <tbody id="assignments_table_body">
             {% for assignment in assignment_list %}
-                <tr id="{{ assignment.get_id() }}">
+                <tr id="as{{ assignment.get_id() }}">
 {#                    <td>{{loop.index}}. {{item}}</td>#}
                     <td>{{loop.index}}. {{item}}</td>
                     <td>{{ assignment.get_title() }}</td>
@@ -39,7 +39,8 @@
                     <td>
 {#                        <a href="{{ url_for('assignments_ctrl.assignment_edit', assignment_id=assignment.get_id()) }}" class="button">Edit</a>#}
                         <a onclick="showModalAdd({{ assignment.get_id() }})" class="button">Edit</a>
-                        <a href="{{ url_for('assignments_ctrl.assignment_remove', assignment_id=assignment.get_id()) }}" class="button">Remove</a>
+{#                        <a href="{{ url_for('assignments_ctrl.assignment_remove', assignment_id=assignment.get_id()) }}" class="button">Remove</a>#}
+                        <a onclick="showModalRemove({{ assignment.get_id() }})"  class="button">Remove</a>
                         {% if session['user_role'] == 'Student' %}
                         <a href="{{ url_for('submissions_ctrl.submission_add', assignment_id=assignment.get_id()) }}" class="button">Submit assignment</a>
                         {% endif %}

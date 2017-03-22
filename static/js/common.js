@@ -9,14 +9,40 @@
 
 $(document).ready(function() {
     // GET THE MODAL to do: ADD / EDIT  //
-    var modalAdd = document.getElementById('modalAdd');
+    // var modalAdd = document.getElementById('modalAdd');
+    // var modalRemove = document.getElementById('modalRemove');
+
+    var all_modals = document.getElementsByClassName('modal');
+
+    window.onclick = function (event) {
+        for (var i = 0; i < all_modals.length; i++) {
+            if (event.target == all_modals[i])
+            all_modals[i].style.display = "none";
+        }
+
+    };
+    //     alert('click');
+    //     var element;
+    //     for (element in all_modals) {
+    //     element.style.display = "none";
+    // }
+    // };
+
+
+    //  window.onclick = function (event) {
+    //     if (event.target == modalAdd) {
+    //         modalAdd.style.display = "none";
+    //     }
+    // };
+
+
 
     // When the user clicks anywhere outside of the modal, close it //
-    window.onclick = function (event) {
-        if (event.target == modalAdd) {
-            modalAdd.style.display = "none";
-        }
-    };
+    // window.onclick = function (event) {
+    //     if (event.target == modalAdd) {
+    //         modalAdd.style.display = "none";
+    //     }
+    // };
 });
 
     // SHOW MODAL
@@ -70,13 +96,6 @@ function add_new_or_edit_assignment(choice, id) {
 
         var modalAdd = document.getElementById('modalAdd');
 
-        if (choice == 'new_assignment') {
-            var path = '/new_assignment';
-        }
-        else {
-            var path = '/edit_assignment';
-        }
-
         // --------------- get values from form -------------------- //
         var assignment_title = $('#assignment_title');
         var is_team = $("#is_team");
@@ -122,12 +141,12 @@ function add_new_or_edit_assignment(choice, id) {
                 $('#content').val(undefined);
                 var rowCount = $('#assignments_table_body tr').length + 1;
                 $('#assignments_table_body').append(
-                    '<tr id="'+ new_assignment_js['id'] +'"><td>' + rowCount + '.</td>' +
+                    '<tr id="as'+ new_assignment_js['id'] +'"><td>' + rowCount + '.</td>' +
                     '<td>' + new_assignment_js['title'] + '</td>' +
                     '<td>' + team_in_table + '</td>' +
                     '<td><a href="/assignments/' + new_assignment_js['id'] + '"' + ' class="button assignment_buttons">Details</a></td>' +
                     '<td><a onclick="showModalAdd(' + new_assignment_js['id'] + ')" class="button">Edit</a>' +
-                    '<a href="/assignments/' + new_assignment_js['id'] +  '/remove' + '"' + ' class="button">Remove</a>' +
+                    '<a onclick="showModalRemove(' + new_assignment_js['id'] +  ')"' + ' class="button">Remove</a>' +
                     '<a href="/assignments/' + new_assignment_js['id'] +  '/submissions" class="button">Submissions list</a></td></tr>'
                 )
             },
@@ -150,41 +169,61 @@ function add_new_or_edit_assignment(choice, id) {
                 $('#content').val(undefined);
 
                 //INSERT EDITED DATA TO TABLE WITHOUT REFRESHING:
-                $('#' + id + ' td:nth-child(2)').text(new_assignment["assignment_title"]);
+                $('#as' + id + ' td:nth-child(2)').text(new_assignment["assignment_title"]);
                 if (new_assignment["is_team"] == 0) {
-                    $('#' + id + ' td:nth-child(3)').text(team_in_table);
+                    $('#as' + id + ' td:nth-child(3)').text(team_in_table);
                 }
-                else {$('#' + id + ' td:nth-child(3)').text(team_in_table);}
+                else {$('#as' + id + ' td:nth-child(3)').text(team_in_table);}
 
 
             },
             error: function () {
                 alert('error adding new thing')
-            }});
-
-
+            }})
         }}
+
+//-------------------------------------------------------------------------------------//
+//                              MODAL'S REMOVE ASSIGNMENT
+//-------------------------------------------------------------------------------------//
+
+function remove_assignment(id) {
+    document.getElementById('modalRemove').style.display = "none";
+
+    $('#as'+ id + '').css('opacity', '0.4').css('textDecoration', 'line-through');
+
+    var id_in_JSON = JSON.stringify(id);
+
+    $.ajax({
+            type: 'POST',
+            url: '/remove_assignment',
+            contentType: 'application/json',
+            data: id_in_JSON,
+            success: function() {         // response_data = sorted to-do list in JSON format
+                console.log('removed by me');},
+            error: function () {
+                alert('error removing thing')
+
+
+            }});
+}
 
 //-------------------------------------------------------------------------------------//
 //                                  MODAL'S REMOVE
 //-------------------------------------------------------------------------------------//
 
-// $(document).ready(function() {
-//     var modalAdd = document.getElementById('modalRemove');
-//
-//     // When the user clicks anywhere outside of the modal, close it //
-//     window.onclick = function (event) {
-//         if (event.target == modalAdd) {
-//             modalAdd.style.display = "none";
-//         }
-//     };
-// });
-//
-//     // SHOW MODAL
-// function showModalRemove() {
-//     var modalAdd = document.getElementById('modalRemove');
-//     modalAdd.style.display = "block";
-// }
+
+// ----------------------  SHOW MODAL REMOVE ------------------------- //
+function showModalRemove(id) {
+    var modalRemove = document.getElementById('modalRemove');
+    modalRemove.style.display = "block";
+       $('#button_remove_yes').attr('onclick', 'remove_assignment('+ id +')');
+
+
+}
+
+
+
+
 
 
 //------------------------------    TRASH       -----------------------------------------------//
