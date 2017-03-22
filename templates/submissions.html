@@ -40,8 +40,13 @@
                     </td>
                     <td>
                         <a href="{{ url_for('submissions_ctrl.submission_details', submission_id=submission.get_id()) }}" class="button">Details</a>
-                        <a href="{{ url_for('submissions_ctrl.submission_grade', submission_id=submission.get_id()) }}" class="button">Grade</a>
+                        <button onclick="showModal({{ submission.get_id() }})">Grade</button>
                     </td>
+                    <div class="modal" id="{{ submission.get_id() }}">
+                        <div class="modal_content">
+                            {% include 'submission_grade.html' %}
+                        </div>
+                    </div>
                 </tr>
             {% endfor %}
         </tbody>
@@ -49,4 +54,9 @@
 {% else %}
     <p><em>Unbelievable. No submissions here so far</em></p>
 {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<!-- JavaScript -->
+<script src="/static/js/submissions.js"></script>
 {% endblock %}

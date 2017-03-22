@@ -13,12 +13,22 @@
     <table class="details_table">
         <tr>
             <th>Grade</th>
-            <td>{% if submission.get_points() %}
-                {{ submission.get_points() }}
-            {% else %}
-                – –
-            {% endif %}
-            /{{ assignment.get_max_points() }} <a href="{{ url_for('submissions_ctrl.submission_grade', submission_id=submission.get_id()) }}" class="button">Grade</a></td>
+            <td>
+                {% if submission.get_points() %}
+                    {{ submission.get_points() }}
+                {% else %}
+                    – –
+                {% endif %}
+                /{{ assignment.get_max_points() }}
+                {% if session['user_role'] == 'Mentor' %}
+                    <button onclick="showModal({{ submission.get_id() }})">Grade</button>
+                    <div class="modal" id="{{ submission.get_id() }}">
+                        <div class="modal_content">
+                            {% include 'submission_grade.html' %}
+                        </div>
+                    </div>
+                {% endif %}
+            </td>
         </tr>
             <th>Due date</th>
             <td>{{ assignment.get_due_date() }}</td>
@@ -32,4 +42,9 @@
             <td><a href="{{ submission.get_content() }}" target="_blank">{{ submission.get_content() }}</a></td>
         </tr>
     </table>
+{% endblock %}
+
+{% block scripts %}
+<!-- JavaScript -->
+<script src="/static/js/submissions.js"></script>
 {% endblock %}
