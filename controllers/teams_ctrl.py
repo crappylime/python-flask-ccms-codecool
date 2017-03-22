@@ -53,7 +53,8 @@ def team_remove_student(team_id, student_id):
     return redirect(url_for('teams_ctrl.team_edit', team_id=team_id))
 
 
-@teams_ctrl.route("/teams/<team_id>/remove")
-def team_remove(team_id):
+@teams_ctrl.route("/teams/remove", methods=["POST"])
+def team_remove():
+    team_id = request.get_json()
     DB.delete_team_record(team_id)
-    return redirect(url_for('teams_ctrl.teams'))
+    return ""
