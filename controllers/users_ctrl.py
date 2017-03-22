@@ -30,7 +30,6 @@ def users_list():
 
 
 @users_ctrl.route('/users/<user_id>')
-
 def user_details(user_id):
     if not user_id.isnumeric():
         flash("Site not found")
@@ -89,10 +88,10 @@ def user_edit(user_id):
     return render_template('add_edit_person_form.html', user=User.get_user_by_id(user_id), fieldset_title="Edit ", role=None, mainmenu=mainmenu)
 
 
-@users_ctrl.route('/users/remove/<user_id>')
-
-def user_remove(user_id):
+@users_ctrl.route('/users/remove', methods=["POST"])
+def user_remove():
+    user_id = request.get_json()
     user_to_remove = User.get_user_by_id(user_id)
     user_to_remove.remove()
     flash("{} {} has been removed".format(user_to_remove.get_user_class_name(), user_to_remove.name))
-    return redirect(url_for('users_ctrl.users_list_by_role', role=user_to_remove.get_user_class_name().lower()))
+    return ''
