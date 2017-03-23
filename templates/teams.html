@@ -19,11 +19,11 @@
             {% for team in teams_list %}
                 <tr id="team_{{ team.get_id() }}">
                     <td>{{ team.get_id() }}</td>
-                    <td>{{ team.get_name() }}</td>
+                    <td id="tbody_team_{{ team.get_id() }}">{{ team.get_name() }}</td>
                     <td>
-                        <ol>
+                        <ol id="team_{{ team.get_id() }}_members">
                             {% for student in team.get_members() %}
-                                <li>{{ student.get_name() }}</li>
+                                <li id="member_{{ student.get_name().replace(' ', '') }}">{{ student.get_name() }}</li>
                             {% endfor %}
                         </ol>
                     </td>

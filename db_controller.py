@@ -139,7 +139,7 @@ class DB:
         query = "SELECT `student_id` FROM `members` WHERE `team_id` = ?;"
         cursor.execute(query, (team_id,))
         temp_list = cursor.fetchall()
-        user_list = [int(elem[0]) for elem in temp_list]
+        user_list = [elem[0] for elem in temp_list]
         conn.close()
         return user_list
 

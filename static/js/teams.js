@@ -16,6 +16,10 @@ $(document).ready(function() {
             modalRemoveTeam.style.display = "none";
             modalAddTeam.style.display = "none";
             modalEditTeam.style.display = "none";
+            $("#team_members").empty()
+            $('#member_list').val('')
+            $('#team_name').val('')
+
         }
     };
 });
@@ -61,7 +65,7 @@ function remove_team(team_id) {
 
 
 //-------------------------------------------------------------------------------------//
-//                                  MODAL'S ADD/EDIT
+//                                  MODAL'S ADD TEAM
 //-------------------------------------------------------------------------------------//
 
 function showModalAddTeam() {
@@ -69,34 +73,7 @@ function showModalAddTeam() {
     modalAddTeam.style.display = "block";
 }
 
-function showModalEditTeam(id) {
-    var modalEditTeam = document.getElementById('modalEditTeam');
-    modalEditTeam.style.display = "block";
-    var team_name = $('#team_name');
-    var member_list = $('#member_list');
 
-    var team_id_in_JSON = JSON.stringify(id);
-    alert(team_id_in_JSON)
-    $.ajax({
-        type: 'POST',
-        url: '/get_team_by_id',
-        contentType: 'application/json',
-        data: team_id_in_JSON,
-        success: function(team_data_json_object) {
-            var new_team_js = JSON.parse(team_data_json_object);
-            console.log(new_team_js);
-        students = new_team_js[0][0]
-        members = new_team_js[0][1]
-
-
-        },
-        error: function () {
-            alert('error filling add team fields')
-        }
-    });
-
-    $("#edit_team_button").attr("onclick", "EditTeam("+id+")");
-}
 
     // SHOW MODAL
 function AddTeam() {
@@ -116,6 +93,7 @@ function AddTeam() {
                 $('#name').val(new_team_js.name);
 
                 modalAddTeam.style.display = "none";
+                $('#team_name').val('')
                 $("#team_table_body").append(
                     '<tr id="team_'+ new_team_js['id'] +'">' +
                     '<td>'+new_team_js['id']+'</td>' +
@@ -139,8 +117,40 @@ function AddTeam() {
 
 
 //-------------------------------------------------------------------------------------//
-//                              MODAL'S ADD TEAM
+//                              MODAL'S EDIT TEAM
 //-------------------------------------------------------------------------------------//
+
+function showModalEditTeam(id) {
+    var modalEditTeam = document.getElementById('modalEditTeam');
+    modalEditTeam.style.display = "block";
+    var team_name = $('#team_name');
+    var member_list = $('#member_list');
+
+    var team_id_in_JSON = JSON.stringify(id);
+    $.ajax({
+        type: 'POST',
+        url: '/get_team_by_id',
+        contentType: 'application/json',
+        data: team_id_in_JSON,
+        success: function(team_data_json_object) {
+            var new_team_js = JSON.parse(team_data_json_object);
+        var students = new_team_js[0];
+        var team_name = new_team_js[1];
+        $("#team_name_form").attr("value", ""+team_name+"");
+        for (var x=0; x<students.length; x++) {
+            $("#team_members").append(
+            '<option>'+students[x]+'</option>')
+        }
+
+
+        },
+        error: function () {
+            alert('error filling edit team fields')
+        }
+    });
+
+    $("#edit_team_button").attr("onclick", "EditTeam("+id+")");
+}
 
 
 function EditTeam(id) {
@@ -148,42 +158,42 @@ function EditTeam(id) {
         var modalEditTeam = document.getElementById('modalEditTeam');
 
         // --------------- get values from form -------------------- //
-        var team_name = $('#team_name');
-        var member_list = $('#member_list');
-
+        var new_team_name = $('#team_name_form');
+        var new_member = $('#member_list');
             var edited_team = {
-            name: team_name.val(),
+            name: new_team_name.val(),
+            new_member: new_member.val(),
             id: id      // necessary when we want to edit team / automatically excluded if we add new team
         };
 
-        var JSON_new_team = JSON.stringify(new_team);  // convert JS object to JSON string
-
+        var JSON_edited_team = JSON.stringify(edited_team);  // convert JS object to JSON string
         // --------- send values to controller by AJAX: ------------- //
-        if (choice == 'new_team') {
         $.ajax({
             type: 'POST',
-            url: '/teams/new',
+            url: '/edit_team',
             contentType: 'application/json',
-            data: JSON_new_team,
-            success: function(newest_team) {         // response_data = sorted to-do list in JSON format
-                modalAdd.style.display = "none";
-                var new_team_js = JSON.parse(newest_team);
-
-                $('#name').val(JS_object.name);//TODO
-                $('#member_list').val(JS_object.name);
-                $('#team_assignments_list').val(JS_object.name);
-
-                var rowCount = $('#teams_table_body tr').length + 1;
-                $('#teams_table_body').append(
-                    '<tr id="team_'+ new_team_js['id'] +'"><td>' + rowCount + '.</td>' +
-                    '<td>' + new_team_js['name'] + '</td>' +
-                    '<td>' + team_in_table + '</td>' +
-                    '<td><a href="/assignments/' + new_assignment_js['id'] + '"' + ' class="button assignment_buttons">Details</a></td>' +
-                    '<td><a onclick="showModalAdd(' + new_assignment_js['id'] + ')" class="button">Edit</a>' +
-                    '<a href="/assignments/' + new_assignment_js['id'] +  '/remove' + '"' + ' class="button">Remove</a>' +
-                    '<a href="/assignments/' + new_assignment_js['id'] +  '/submissions" class="button">Submissions list</a></td></tr>'
-                )
+            data: JSON_edited_team,
+            success: function(edited_data) {         // response_data = sorted to-do list in JSON format
+                alert(edited_data)
+                modalEditTeam.style.display = "none";
+                $('#member_list').val('')
+                var new_team_data = JSON.parse(edited_data)
+                alert(typeof new_team_data)
+                if (typeof new_team_data === 'object'){
+                    var team_name = new_team_data[0];
+                    var member_name = new_team_data[1];
+                    $('#tbody_team_'+id+'').text(team_name);
+                    $('#member_'+member_name.replace(/ /g,'')+'').remove();
+                    $('#team_'+id+'_members').append(
+                    '<li id="member_'+member_name.replace(/ /g,'')+'">'+member_name+'</li>'
+                    );
+                    $("#team_members").empty()
+                 } else {
+                    team_name = new_team_data
+                     $('#tbody_team_'+id+'').text(team_name);
+                     $("#team_members").empty()
+                 }
             },
             error: function () {
                 alert('error adding new team')
-            }});}}
+            }});}
