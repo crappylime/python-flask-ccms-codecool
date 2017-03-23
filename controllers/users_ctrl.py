@@ -1,6 +1,6 @@
 from models.users import User
 from models.assignments import Assignment
-from flask import Blueprint, render_template, redirect, url_for, request, flash, session
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session, json
 from models.menus import Menu
 from functools import wraps
 
@@ -48,8 +48,7 @@ def users_list_by_role(role):
     return render_template('users.html', users=enumerate(users), role=role, mainmenu=mainmenu)
 
 
-@users_ctrl.route('/users/new/<role>', methods=['GET', 'POST'])
-
+@users_ctrl.route('/users/new/<role>', methods=['POST'])
 def user_add(role):
     if request.method == "POST":
         name = request.form['firstname'] + ' ' + request.form['lastname']
@@ -95,3 +94,21 @@ def user_remove():
     user_to_remove.remove()
     flash("{} {} has been removed".format(user_to_remove.get_user_class_name(), user_to_remove.name))
     return ''
+
+@users_ctrl.route("/new_user", methods=["GET", "POST"])
+def new_user():
+    user_content = request.get_json()
+    print(user_content)
+
+    firstname = user_content["firstname"]
+    lastname = user_content["lastname"]
+    email = user_content["email"]
+    password = user_content["password"]
+    role = user_content["role"]
+
+    new_user = User.add_user(firstname+' '+lastname, email, password, role)
+    new_user_in_json = json.dumps(new_user.__dict__, ensure_ascii=False)
+
+    print(new_user_in_json)
+
+    return new_user_in_json

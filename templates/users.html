@@ -16,7 +16,7 @@
     {{ message }}
     {% endfor %}
       <div class="content">
-        <table>
+        <table id={{ role }}>
             <thead>
                 <tr>
                     <th>id</th>
@@ -35,11 +35,11 @@
                         <a href={{ url_for('users_ctrl.user_details', user_id = user.get_id()) }} class="button user_button">Details</a>
 
                         {% if user.get_user_class_name() == 'Mentor' and session['user_role'] == 'Boss' %}
-                        <a href={{ url_for('users_ctrl.user_edit', user_id = user.get_id()) }} class="button user_button">Edit</a>
+                        <button onclick=showModalAdd({{user.get_id()}}) class="button user_button">Edit</button>
                         {% endif %}
 
                         {% if user.get_user_class_name()== 'Mentor' and session['user_role'] == 'Boss' %}
-                        <button onclick=showModalRemove({{user.get_id()}}) class="button user_button">Remove</button>
+                        <button class="button user_button" onclick=showModalRemove({{user.get_id()}})>Remove</button>
                         {% endif %}
 
                     </td>

@@ -1,4 +1,4 @@
-<form method="POST">
+<form id="" method="POST">
     <fieldset>
         {%  for message in get_flashed_messages() %}
             {{ message }}
@@ -13,6 +13,6 @@
             <label for="password">Password </label>
             <input type="password" name="password" id="password" pattern=".{6,}" title="Six or more characters"
                  {% if role %} required {% endif %}/>
-                 <button onclick=add_edit_user("new_user") type="submit" class="submit_button">Save</button>
+                 <button onclick=add_edit_user(this.form.id) type="submit" class="submit_button">Save</button>
     </fieldset>
 </form>
