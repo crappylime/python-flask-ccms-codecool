@@ -28,11 +28,11 @@ User details
             <th>Grade</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="submission_table">
         {% for assignment in assignment_list %}
             {% for submission in user.get_submission_list() %}
             <tr>
-                {% if assignment.get_id()  == submission.get_assignment().get_id() %}
+                {% if assignment.get_id() == submission.get_assignment().get_id() %}
                     <td>{{loop.index}}. {{item}}</td>
                     <td><a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{ assignment.get_title() }}</a></td>
                     <td>submitted</td>
@@ -71,19 +71,17 @@ User details
     </thead>
     <tbody>
       {% for assignment in assignment_list %}
-          <tr>
+          {% if user.get_id() not in assignment.active_user_list %}
+          <tr id="ass{{ assignment.get_id() }}">
               <td>{{loop.index}}. {{item}}</td>
               <td><a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{ assignment.get_title() }}</a></td>
               <td>
-                  <button onclick="showModal({{ assignment.get_id() }})">Submit assignment</button>
+                  <button onclick="showModal({{ assignment.get_id() }})" id="add_submission_button">Submit assignment</button>
               </td>
-              <div class="modal" id="{{ assignment.get_id() }}">
-                  <div class="modal_content">
-                      {% include 'add_submission.html' %}
-                  </div>
-              </div>
           </tr>
+          {% endif %}
       {% endfor %}
+      {% include 'add_submission.html' %}
     </tbody>
 </table>
 {% endif %}

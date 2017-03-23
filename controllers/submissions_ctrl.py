@@ -1,7 +1,9 @@
 from models.submissions import Submission
 from models.assignments import Assignment
 from models.menus import Menu
+from models.users import User
 from flask import Blueprint, render_template, url_for, request, redirect, session, flash
+import json
 
 
 submissions_ctrl = Blueprint('submissions_ctrl', __name__)
@@ -24,19 +26,24 @@ def submission_details(submission_id):
     return render_template('submission_details.html', submission=submission, assignment=submission.get_assignment(), mainmenu=mainmenu)
 
 
-@submissions_ctrl.route('/assignments/<assignment_id>/submissions/new', methods=['GET', 'POST'])
-def submission_add(assignment_id):
-    """ Creates new submission
-    If the method was GET it should show new submission form.
-    If the method was POST it should create, save new submission.
-    """
+@submissions_ctrl.route('/add_submission', methods=['POST'])
+def add_submission():
     student_id = session['user_id']
-    assignment = Assignment.get_assignment_by_id(assignment_id)
-    if request.method == 'POST':
-        submission = Submission.add_submission(assignment_id, student_id, request.form['content'])
-        flash('Submission {} has been added.'.format(submission.get_content()))
-        return redirect(url_for('assignments_ctrl.assignments'))
-    return render_template('add_submission.html', assignment=assignment, mainmenu=mainmenu)
+    user = User.get_user_by_id(student_id)
+    submission_content_list = request.get_json()
+    submission_link = submission_content_list[0]
+    assignment_id = submission_content_list[1]
+    for submission in user.get_submission_list():
+        if submission.get_assignment().get_id() == assignment_id:
+            return 'Already added'
+    else:
+        submission = Submission.add_submission(assignment_id, student_id, submission_link)
+        submission.student = ''
+        submission.assignment_title = submission.get_assignment().get_title()
+        submission.assignment_max_points = submission.get_assignment().get_max_points()
+        submission.assignment = submission.get_assignment().get_id()
+        new_submission_in_json = json.dumps(submission.__dict__, ensure_ascii=False)
+    return new_submission_in_json
 
 
 @submissions_ctrl.route('/submissions/<submission_id>/grade', methods=['GET', 'POST'])
