@@ -11,7 +11,7 @@
 {% block content %}
     {%  if (role == 'mentor' and session['user_role'] == 'Boss')  or
             (role == 'student' and session['user_role'] in ['Boss', 'Mentor']) %}
-    <button class="button submit_button" onclick=showModalAdd('new_user')>Add new {{ role }}</button>
+    <button class="button submit_button" onclick=showModalAddUser('new_user')>Add new {{ role }}</button>
     {% endif %}
       {% for message in get_flashed_messages() %}
     {{ message }}
@@ -37,11 +37,11 @@
 
                         {% if (user.get_user_class_name() == 'Mentor' and session['user_role'] == 'Boss')
                                 or  (user.get_user_class_name() == 'Student' and session['user_role'] in ['Boss', 'Mentor']) %}
-                        <button onclick=showModalAdd({{user.get_id()}}) class="button user_button">Edit</button>
+                        <button onclick=showModalAddUser({{user.get_id()}}) class="button user_button">Edit</button>
                         {% endif %}
 
                         {% if user.get_user_class_name()== 'Mentor' and session['user_role'] == 'Boss' %}
-                        <button class="button user_button" onclick=showModalRemove({{user.get_id()}})>Remove</button>
+                        <button class="button user_button" onclick=showModalRemoveUser({{user.get_id()}})>Remove</button>
                         {% endif %}
 
                     </td>

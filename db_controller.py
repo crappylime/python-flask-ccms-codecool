@@ -253,13 +253,11 @@ class DB:
     @classmethod
     def read_menu_by_name(cls, menu_name):
         """"""
-
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT id, `name`, url_for, url_for_args, `position`, upper_menu_id FROM menus WHERE url_for = ?"
         cursor.execute(query, (menu_name,))
         menu_data = cursor.fetchall()[0]
-
         conn.close()
         return menu_data
 
@@ -493,7 +491,6 @@ class DB:
         conn.close()
         return team_id
 
-
     @classmethod
     def update_name(cls, user_id, name):
         """Update name in user record by provided user id"""
@@ -542,7 +539,7 @@ class DB:
         args = (name, mail, password, user_id)
         cls.execute_query(query, args)
 
-
+    @classmethod
     def update_title(cls, assignment_id, title):
         """Update title of assignment by provided assignment id"""
         query = "UPDATE `assignments` SET `title` = ? WHERE `assignment_id` = ?;"

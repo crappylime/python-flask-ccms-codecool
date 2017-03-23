@@ -56,8 +56,8 @@ function add_edit_user() {
                     "<td><a href='/users/" + new_user_data['id'] + "'>" + new_user_data['name'] + "</a></td>" +
                     "<td><a href='mailto://" + new_user_data['mail'] + "'>" + new_user_data['mail'] + "</td>" +
                     '<td>' +
-                    "<button onclick='showModalAdd(" + new_user_data['id'] + ")' class='button user_button'>Edit</button>" +
-                    '<button class="button user_button" onclick=showModalRemove(' + new_user_data['id'] + ')>Remove</button></td>'
+                    "<button onclick='showModalAddUser(" + new_user_data['id'] + ")' class='button user_button'>Edit</button>" +
+                    '<button class="button user_button" onclick=showModalRemoveUser(' + new_user_data['id'] + ')>Remove</button></td>'
                 if (path == '/new_user') {
 
 
@@ -101,7 +101,7 @@ $(document).ready(function () {
 });
 
 // SHOW MODAL
-function showModalAdd(id) {
+function showModalAddUser(id) {
     var modalAdd = document.getElementById('new_user_modal');
     var addForm = modalAdd.getElementsByTagName('form')[0];
     addForm.id = id;
@@ -129,8 +129,8 @@ function showModalAdd(id) {
 }
 
 
-function showModalRemove(user_id) {
-    var modalRemove = document.getElementById('modalRemove');
+function showModalRemoveUser(user_id) {
+    var modalRemove = document.getElementById('modalRemoveUser');
     modalRemove.style.display = "block";
     $('#button_remove_yes').attr('onclick', 'remove_user(' + user_id + ')');
 
@@ -146,7 +146,7 @@ function remove_user(user_id) {
         data: myJSON,
         success: function () {
             $('#user' + user_id.toString()).remove();
-            $('#modalRemove').css({"display": "none"});
+            $('#modalRemoveUser').css({"display": "none"});
             var table_indexes = document.getElementsByClassName('table_index');
             for (var i = 0; i < table_indexes.length; i++) {
                 table_indexes[i].innerHTML = (i + 1) + '.';
