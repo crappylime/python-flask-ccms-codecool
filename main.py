@@ -3,6 +3,7 @@ from db_controller import DB
 from models.users import User
 from models.assignments import Assignment
 from models.menus import Menu
+from common import login_required
 
 from functools import wraps
 import os
@@ -29,16 +30,16 @@ app.secret_key = os.urandom(24)
 mainmenu = Menu.get_main_menu()
 
 
-# login required decorator
-def login_required(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'logged_in' in session:
-            return f(*args, **kwargs)
-        else:
-            flash('You need to login first.')
-            return redirect(url_for('login'))
-    return wrap
+# # login required decorator
+# def login_required(f):
+#     @wraps(f)
+#     def wrap(*args, **kwargs):
+#         if 'logged_in' in session:
+#             return f(*args, **kwargs)
+#         else:
+#             flash('You need to login first.')
+#             return redirect(url_for('login'))
+#     return wrap
 
 
 @app.route("/login", methods=['GET', 'POST'])

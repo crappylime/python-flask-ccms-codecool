@@ -1,7 +1,6 @@
 from db_controller import DB
 from models.submissions import Submission
 from models.attendances import Attendance
-from functools import wraps
 
 
 class User:

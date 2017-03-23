@@ -2,34 +2,25 @@ from models.users import User
 from models.assignments import Assignment
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session, json
 from models.menus import Menu
-from functools import wraps
+from common import login_required, permission
+
 
 users_ctrl = Blueprint('users_ctrl', __name__)
 mainmenu = Menu.get_main_menu()
 
 
-def permission_check(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        function_name = __name__.split('.')[-1]+'.'+f.__name__
-        if session['user_role'] in Menu.get_menu_by_name(function_name).permissions:
-            return f(*args, **kwargs)
-        else:
-            flash('Access denied.')
-            return redirect(url_for('index'))
-    return wrap
-
-
-
 
 @users_ctrl.route('/users')
-
+@permission(["Student", "Mentor"])
+@login_required
 def users_list():
     users = User.get_user_list()
     return render_template('users.html', users=enumerate(users), role=None)
 
 
 @users_ctrl.route('/users/<user_id>')
+@permission(["Student", "Mentor", "Boss"])
+@login_required
 def user_details(user_id):
     if not user_id.isnumeric():
         flash("Site not found")
@@ -39,16 +30,23 @@ def user_details(user_id):
 
 
 @users_ctrl.route('/users/role=<role>')
-
+@login_required
 def users_list_by_role(role):
-    roles = ['mentor', 'student', 'boss', 'staff']
+    roles = {'mentor': ['Mentor, User, Boss, Staff, Student'],
+             'student': ['Mentor, User, Boss, Staff, Student'],
+             'boss': ['Mentor, User, Boss, Staff'],
+             'staff': ['Mentor, User, Boss, Staff']}
     if role not in roles:
         return redirect(url_for('users_ctrl.users_list'))
+    if session["user_role"] not in roles[role]:
+        flash('Access denied.')
+        return redirect('/')
     users = User.get_user_list_by_role(role)
     return render_template('users.html', users=enumerate(users), role=role, mainmenu=mainmenu)
 
 
 @users_ctrl.route('/users/new/<role>', methods=['POST'])
+@login_required
 def user_add(role):
     if request.method == "POST":
         name = request.form['firstname'] + ' ' + request.form['lastname']
@@ -65,7 +63,8 @@ def user_add(role):
 
 
 @users_ctrl.route('/users/edit/<user_id>', methods=['GET', 'POST'])
-
+@permission(['Mentor', 'Boss'])
+@login_required
 def user_edit(user_id):
     if not user_id.isnumeric():
         flash("Site not found")
@@ -88,6 +87,7 @@ def user_edit(user_id):
 
 
 @users_ctrl.route('/users/remove', methods=["POST"])
+@login_required
 def user_remove():
     user_id = request.get_json()
     user_to_remove = User.get_user_by_id(user_id)
@@ -95,7 +95,9 @@ def user_remove():
     flash("{} {} has been removed".format(user_to_remove.get_user_class_name(), user_to_remove.name))
     return ''
 
+
 @users_ctrl.route("/new_user", methods=["GET", "POST"])
+@login_required
 def new_user():
     user_content = request.get_json()
     print(user_content)
@@ -105,7 +107,6 @@ def new_user():
     email = user_content["email"]
     password = user_content["password"]
     role = user_content["role"]
-
     new_user = User.add_user(firstname+' '+lastname, email, password, role)
     new_user_in_json = json.dumps(new_user.__dict__, ensure_ascii=False)
 
