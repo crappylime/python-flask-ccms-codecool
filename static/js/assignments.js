@@ -147,6 +147,8 @@ function add_new_or_edit_assignment(choice, id) {
                     $('#as' + id + ' td:nth-child(3)').text(team_in_table);
                 }
                 else {$('#as' + id + ' td:nth-child(3)').text(team_in_table);}
+
+
             },
             error: function () {
                 alert('error adding new thing')
@@ -173,6 +175,8 @@ function remove_assignment(id) {
                 console.log('removed by me');},
             error: function () {
                 alert('error removing thing')
+
+
             }});
 }
 
@@ -186,4 +190,6 @@ function showModalRemove(id) {
     var modalRemove = document.getElementById('modalRemove');
     modalRemove.style.display = "block";
        $('#button_remove_yes').attr('onclick', 'remove_assignment('+ id +')');
+
+
 }

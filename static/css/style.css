@@ -433,7 +433,7 @@ a.info_box:hover {
 }
 
 /* -----------------------------------  MODAL  -----------------------------------------------*/
-#modalAdd {
+#modalAddAssignment {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -446,7 +446,7 @@ a.info_box:hover {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-#modalAdd.content {
+#modalAddAssignment.content {
     background-color: red;
     font-size: 2vw;
 }

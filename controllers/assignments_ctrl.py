@@ -42,20 +42,15 @@ def assignment_new():
 
 @assignments_ctrl.route("/new_assignment", methods=["GET", "POST"])
 def new_assignment():
-    print('im in flask new_assignment')
-    assignment_content = request.get_json()
-    print(assignment_content)
 
+    assignment_content = request.get_json()
     assignment_title = assignment_content["assignment_title"]
     content = assignment_content["content"]
     due_date = assignment_content["due_date"]
     max_points = assignment_content["max_points"]
     is_team = assignment_content["is_team"]
-
     new_assignment = Assignment.add_assignment(assignment_title, is_team, content, due_date, max_points)
-    new_assignment_in_json = json.dumps(new_assignment.__dict__, ensure_ascii=False).encode('utf8')
-
-    print(new_assignment_in_json)
+    new_assignment_in_json = json.dumps(new_assignment.__dict__, ensure_ascii=False)
 
     return new_assignment_in_json
 
@@ -63,13 +58,9 @@ def new_assignment():
 @assignments_ctrl.route("/get_assignment_by_id", methods=["POST"])
 def get_assignment_by_id():
 
-    print('im in get_assignment_by_id')
-
     assignment_id = request.get_json()
-
     assignment = Assignment.get_assignment_by_id(assignment_id)
-    assignment_in_json = json.dumps(assignment.__dict__, ensure_ascii=False).encode('utf8')
-    print(assignment_in_json)
+    assignment_in_json = json.dumps(assignment.__dict__, ensure_ascii=False)
 
     return assignment_in_json
 
@@ -77,10 +68,7 @@ def get_assignment_by_id():
 @assignments_ctrl.route("/edit_assignment", methods=["POST"])
 def edit_assignment():
 
-    print('im in flask edit_assignment')
-
     assignment_content = request.get_json()
-    print(assignment_content)
     assignment_title = assignment_content["assignment_title"]
     content = assignment_content["content"]
     due_date = assignment_content["due_date"]
@@ -91,18 +79,14 @@ def edit_assignment():
     Assignment.get_assignment_by_id(assignment_id).edit_assignment(assignment_title, is_team, content, due_date,
                                                                    max_points)
     edited_assignment = Assignment.get_assignment_by_id(assignment_id)
-    edited_assignment_in_json = json.dumps(edited_assignment.__dict__, ensure_ascii=False).encode('utf8')
+    edited_assignment_in_json = json.dumps(edited_assignment.__dict__, ensure_ascii=False)
     return edited_assignment_in_json
 
 
 @assignments_ctrl.route("/remove_assignment", methods=["POST"])
 def remove_assignment():
-    print('im in remove')
 
     assignment_id = request.get_json()
-
-    print(assignment_id)
-
     DB.delete_assignment_record(assignment_id)
 
     return ''
