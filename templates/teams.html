@@ -5,7 +5,7 @@
 {% block page_name_h1 %}List of teams{% endblock %}
 
 {% block content %}
-    <button class="button team_button" onclick="showModalAdd()">Add new team</button>
+    <button class="button team_button" onclick="showModalAddTeam()">Add new team</button>
     <table>
         <thead>
             <tr>
@@ -15,7 +15,7 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="team_table_body">
             {% for team in teams_list %}
                 <tr id="team_{{ team.get_id() }}">
                     <td>{{ team.get_id() }}</td>
@@ -29,25 +29,31 @@
                     </td>
                     <td>
                         <a href="{{ url_for('teams_ctrl.team_details', team_id=team.get_id()) }}"  class="button team_button">Details</a>
-                        <a href="{{ url_for('teams_ctrl.team_edit', team_id=team.get_id()) }}" class="button team_button">Edit</a>
-                        <button class="button team_button" onclick="showModalRemove({{team.get_id()}})">Remove</button>
+                        <button class="button team_button" onclick="showModalEditTeam({{team.get_id()}})">Edit</button>
+                        <button class="button team_button" onclick="showModalRemoveTeam({{team.get_id()}})">Remove</button>
                     </td>
                 </tr>
 
             {% endfor %}
-            <div id="modalRemove">
+            <div id="modalRemoveTeam">
                 <div class="modal_content">
                     <p>Are you sure</p>
                     <button id="button_remove_yes" onclick="remove_team()" class="button team_button">Yes</button>
-                    <p class="button team_button">No</p>
+                    <p onclick="hideModalRemoveTeam()" class="button team_button">No</p>
                 </div>
             </div>
-            <div id="modalAdd">
+            <div id="modalAddTeam">
                 <div class="modal_content">
                     {% include '/add_team_form.html' %}
                 </div>
             </div>
+            <div id="modalEditTeam">
+                <div class="modal_content">
+                    {% include '/edit_team_form.html' %}
+                </div>
+            </div>
+
         </tbody>
     </table>
-<script src="/static/js/teams.js"></script>
+
 {% endblock %}

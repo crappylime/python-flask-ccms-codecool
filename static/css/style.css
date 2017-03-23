@@ -433,7 +433,7 @@ a.info_box:hover {
 }
 
 /* -----------------------------------  MODAL  -----------------------------------------------*/
-#modalAdd {
+#modalAddTeam, #modalEditTeam, #modalRemoveTeam{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -446,12 +446,12 @@ a.info_box:hover {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-#modalAdd.content {
+#modalAddTeam.content, #modalEditTeam.content, #modalRemoveTeam.content {
     background-color: red;
     font-size: 2vw;
 }
 
-#modalRemove {
+#modalAddTeam, #modalEditTeam, #modalRemoveTeam {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -464,7 +464,7 @@ a.info_box:hover {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-#modalremove.content {
+#modalAddTeam.content, #modalEditTeam.content, #modalRemoveTeam.content {
   background-color: red;
   font-size: 2vw;
 }

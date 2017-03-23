@@ -245,13 +245,11 @@ class DB:
     @classmethod
     def read_menu_by_name(cls, menu_name):
         """"""
-        print(menu_name)
         conn = cls.connect()
         cursor = conn.cursor()
         query = "SELECT id, `name`, url_for, url_for_args, `position`, upper_menu_id FROM menus WHERE url_for = ?"
         cursor.execute(query, (menu_name,))
         menu_data = cursor.fetchall()[0]
-        print(menu_data)
         conn.close()
         return menu_data
 
@@ -264,7 +262,6 @@ class DB:
         cursor.execute(query, (menu_id,))
         perm_list = list(cursor.fetchall()[0])
         conn.close()
-        print(perm_list)
         return perm_list
 
 
@@ -484,7 +481,6 @@ class DB:
         except IndexError:
             team_id = None
         conn.close()
-        print(team_id)
         return team_id
 
 
