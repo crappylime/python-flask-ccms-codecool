@@ -24,6 +24,18 @@ class User:
         return cls.create_user(user_id)
 
     @classmethod
+    def get_user_by_email(cls, email):
+        """
+        Returns user object.
+        :return:
+            user: object
+        """
+        query = "SELECT user_id FROM users WHERE mail=?"
+        values = (email, )
+        user_id = DB.execute_select_query(query, values)[0][0]
+        return cls.create_user(user_id)
+
+    @classmethod
     def get_user_list(cls):
         """
         Returns list with user objects
@@ -129,6 +141,14 @@ class User:
     def get_class_name(cls):
         """Returns user instance subclass name"""
         return cls.__name__
+
+    @classmethod
+    def is_user_with_email_in_user_list(cls, email):
+        """checks that is user with given email in database"""
+        query = "SELECT * FROM users WHERE mail=?"
+        values = (email, )
+        user_from_db = DB.execute_select_query(query, values)
+        return bool(user_from_db)
 
     def get_name(self):
         """Returns user instance name"""

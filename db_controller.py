@@ -31,6 +31,14 @@ class DB:
         return last_id
 
     @classmethod
+    def execute_select_query(cls, query, args):
+        """Execute select query and return fetchall"""
+        conn = cls.connect()
+        cur = conn.cursor()
+        cur.execute(query, args)
+        return cur.fetchall()
+
+    @classmethod
     def create_user_record(cls, values):
         """Add new user record to database"""
         query = 'INSERT INTO users (`name`, `mail`, `password`, `role`) VALUES (?, ?, ?, ?);'

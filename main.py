@@ -46,8 +46,8 @@ def login():
     error = None
     if request.method == 'POST':
         user_mail = request.form['email']
-        if user_mail in User.get_mails_list():
-            logged_user = list(filter(lambda x: x.get_mail() == user_mail, User.get_user_list()))[0]
+        if User.is_user_with_email_in_user_list(user_mail):
+            logged_user = User.get_user_by_email(user_mail)
             if request.form['password'] != logged_user.get_password():
                 error = "Wrong password. Try again"
             else:
