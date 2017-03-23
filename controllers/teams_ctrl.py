@@ -71,7 +71,7 @@ def edit_team():
         else:
             Team.get_team_by_id(team_id).add_member(User.get_user_by_id(student_id))
         student_name = Student.get_user_by_id(student_id).get_name()
-        edited_data = (new_team_name, student_name)
+        edited_data = (new_team_name, student_name, student_id)
         edited_data_json = json.dumps(edited_data)
         return edited_data_json
     else:
@@ -82,8 +82,17 @@ def edit_team():
 
 @teams_ctrl.route("/teams/<team_id>/edit/<student_id>")
 def team_remove_student(team_id, student_id):
+
     Team.get_team_by_id(team_id).remove_member(User.get_user_by_id(student_id))
     return redirect(url_for('teams_ctrl.team_edit', team_id=team_id))
+
+
+@teams_ctrl.route("/remove_member", methods=["POST"])
+def remove_member():
+    team_id = request.get_json()['team_id']
+    student_id = request.get_json()['member_id']
+    Team.get_team_by_id(team_id).remove_member(User.get_user_by_id(student_id))
+    return ''
 
 
 @teams_ctrl.route("/teams/remove", methods=["POST"])

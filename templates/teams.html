@@ -52,7 +52,13 @@
                     {% include '/edit_team_form.html' %}
                 </div>
             </div>
-
+            <div id="modalRemoveMember">
+                <div class="modal_content">
+                    <p>Are you sure</p>
+                    <button id="button_remove_member_yes" onclick="remove_member()" class="button team_button">Yes</button>
+                    <p onclick="hideModalRemoveMember()" class="button team_button">No</p>
+                </div>
+        </div>
         </tbody>
     </table>
 

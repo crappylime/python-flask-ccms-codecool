@@ -2,22 +2,23 @@
 
 {% block title %}{{ team.get_name() }} | {{ super() }}{% endblock %}
 
-{% block page_name_h1 %}{{ team.get_name() }}{% endblock %}
+{% block page_name_h1 %}Team details {% endblock %}
 
 {% block content %}
-    <h2>Team members<a href="{{ url_for('teams_ctrl.team_edit', team_id=team.get_id()) }}" class="button add_button">Edit team</a></h2>
+    <h2 id="tbody_team_{{ team.get_id() }}">{{ team.get_name() }}</h2>
+    <button class="button team_button" onclick="showModalEditTeam({{team.get_id()}})">Edit</button>
     <table>
         <thead>
             <tr>
                 <th>id</th><th>Student</th><th>Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="team_members_table">
             {% for student in team.get_members() %}
-                <tr>
+                <tr id="member_{{ student.get_id() }}">
                     <td>{{ student.get_id() }}</td>
-                    <td><a href="user_details.html">{{ student.get_name() }}</a></td>
-                    <td><a href="#" class="button">Remove</a></td>
+                    <td><a href="/users/{{ student.get_id() }}">{{ student.get_name() }}</a></td>
+                    <td><button class="button team_button" onclick="showModalRemoveMember({{team.get_id()}}, {{ student.get_id() }})">Remove</button></td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -41,6 +42,17 @@
                 </tr>
             {% endfor %}
         </tbody>
-
+        <div id="modalEditTeam">
+                <div class="modal_content">
+                    {% include '/edit_team_form.html' %}
+                </div>
+        </div>
+        <div id="modalRemoveMember">
+                <div class="modal_content">
+                    <p>Are you sure</p>
+                    <button id="button_remove_member_yes" onclick="remove_member()" class="button team_button">Yes</button>
+                    <p onclick="hideModalRemoveMember()" class="button team_button">No</p>
+                </div>
+        </div>
     </table>
 {% endblock %}
