@@ -32,10 +32,10 @@ def user_details(user_id):
 @users_ctrl.route('/users/role=<role>')
 @login_required
 def users_list_by_role(role):
-    roles = {'mentor': ['Mentor, User, Boss, Staff, Student'],
-             'student': ['Mentor, User, Boss, Staff, Student'],
-             'boss': ['Mentor, User, Boss, Staff'],
-             'staff': ['Mentor, User, Boss, Staff']}
+    roles = {'mentor': ['Mentor', 'User', 'Boss', 'Staff', 'Student'],
+             'student': ['Mentor', 'User', 'Boss', 'Staff', 'Student'],
+             'boss': ['Mentor', 'User', 'Boss', 'Staff'],
+             'staff': ['Mentor', 'User', 'Boss', 'Staff']}
     if role not in roles:
         return redirect(url_for('users_ctrl.users_list'))
     if session["user_role"] not in roles[role]:
@@ -97,7 +97,6 @@ def user_remove():
 
 
 @users_ctrl.route("/new_user", methods=["GET", "POST"])
-@login_required
 def new_user():
     user_content = request.get_json()
     print(user_content)
@@ -105,6 +104,8 @@ def new_user():
     firstname = user_content["firstname"]
     lastname = user_content["lastname"]
     email = user_content["email"]
+    if User.is_user_with_email_in_user_list(email):
+        return "email taken"
     password = user_content["password"]
     role = user_content["role"]
     new_user = User.add_user(firstname+' '+lastname, email, password, role)
@@ -113,3 +114,39 @@ def new_user():
     print(new_user_in_json)
 
     return new_user_in_json
+
+
+@users_ctrl.route("/edit_user", methods=["GET", "POST"])
+def edit_user():
+    user_content = request.get_json()
+    print(user_content)
+    user_id = user_content['id']
+    firstname = user_content["firstname"]
+    lastname = user_content["lastname"]
+    email = user_content["email"]
+    if User.is_user_with_email_in_user_list(email):
+        return "email taken"
+    password = user_content["password"]
+
+    user_to_edit = User.get_user_by_id(user_id)
+    user_to_edit.set_name(firstname+' '+lastname)
+    user_to_edit.set_mail(email)
+    user_to_edit.set_password(password)
+    user_to_edit.save_changes()
+
+    edited_user_in_json = json.dumps(user_to_edit.__dict__, ensure_ascii=False)
+
+
+
+    return edited_user_in_json
+
+@users_ctrl.route("/get_user_by_id", methods=["GET", "POST"])
+def get_user_by_id():
+
+    user_id = request.get_json()
+
+    user = User.get_user_by_id(user_id)
+    user_in_json = json.dumps(user.__dict__, ensure_ascii=False)
+    print(user_in_json)
+
+    return user_in_json

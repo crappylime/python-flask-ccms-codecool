@@ -9,7 +9,8 @@
 {% endblock %}
 
 {% block content %}
-    {%  if role == 'mentor' and session['user_role'] == 'Boss'  %}
+    {%  if (role == 'mentor' and session['user_role'] == 'Boss')  or
+            (role == 'student' and session['user_role'] in ['Boss', 'Mentor']) %}
     <button class="button submit_button" onclick=showModalAdd('new_user')>Add new {{ role }}</button>
     {% endif %}
       {% for message in get_flashed_messages() %}
@@ -25,7 +26,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="user_table_body">
             {% for index, user in users %}
                 <tr id="user{{ user.get_id() }}">
                     <td class="table_index">{{ index+1 }}.</td>
@@ -34,7 +35,8 @@
                     <td>
                         <a href={{ url_for('users_ctrl.user_details', user_id = user.get_id()) }} class="button user_button">Details</a>
 
-                        {% if user.get_user_class_name() == 'Mentor' and session['user_role'] == 'Boss' %}
+                        {% if (user.get_user_class_name() == 'Mentor' and session['user_role'] == 'Boss')
+                                or  (user.get_user_class_name() == 'Student' and session['user_role'] in ['Boss', 'Mentor']) %}
                         <button onclick=showModalAdd({{user.get_id()}}) class="button user_button">Edit</button>
                         {% endif %}
 
@@ -49,7 +51,7 @@
         </table>
       </div>
     {% include 'remove_confirm.html' %}
-    <div id="new_user" class="modal">
+    <div id="new_user_modal" class="modal">
     {% include 'add_edit_person_form.html' %}
     </div>
 {% endblock %}
