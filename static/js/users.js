@@ -118,7 +118,7 @@ function showModalAddUser(id) {
 
                 $('#firstname').val(user_data.name.split(" ")[0]);
                 $('#lastname').val(user_data.name.split(" ")[1]);
-                $('#mail').val(user_data.mail);
+                $('#mail').val(user_data.email);
 
             }
         });

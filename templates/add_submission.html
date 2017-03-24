@@ -1,19 +1,13 @@
-{% extends "layout.html" %}
-
-{% block title %}Submit assignment | {{ super() }}{% endblock %}
-
-{% block page_name_h1 %}Submit assignment{% endblock %}
-
-{% block content %}
-<h2>Assignment - <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{
-    assignment.get_title() }}</a></h2>
-<form class="add_submission_form" action="" method="POST">
-    <fieldset>
-        <legend>Submission</legend>
-        <label for="submission_link">Submission link </label>
-        <input type="url" name="content" id="submission_link" placeholder="Type link with http:// at the beginning :-)"
-               autofocus required/>
-        <button type="submit" class="submit_button">Save</button>
-    </fieldset>
-</form>
-{% endblock %}
+<div class="modal" id="addSubmission">
+  <div class="modal_content">
+    <h2>Submit assignment</h2>
+    <form class="add_submission_form">
+        <fieldset>
+            <legend>Submission</legend>
+            <label for="submission_link">Submission link </label>
+            <input type="url" name="content" id="submission_link" placeholder="Type link with http:// at the beginning :-)" autofocus required/>
+        </fieldset>
+    </form>
+    <button id="add_submission_save_button" type="submit" class="submit_button" onclick="addSubmission(id)">Save</button>
+  </div>
+</div>

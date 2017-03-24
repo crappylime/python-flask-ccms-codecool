@@ -10,45 +10,51 @@
 {% if list_assignment_submissions %}
 <table>
     <thead>
-    <tr>
-        <th>id</th>
-        <th>Student name</th>
-        <th>Status</th>
-        <th>Points</th>
-        <th>Actions</th>
-    </tr>
+        <tr>
+            <th>id</th>
+            <th>Student name</th>
+            <th>Status</th>
+            <th>Points</th>
+            <th>Actions</th>
+        </tr>
     </thead>
     <tbody>
-    {% for submission in list_assignment_submissions %}
-    <tr>
-        <td>{{ submission.get_id() }}</td>
-        <td>{{ submission.get_student().get_name() }}</td>
-        <td>
-            {% if submission.get_points() %}
-            graded
-            {% else %}
-            not graded
-            {% endif %}
-        </td>
-        <td>
-            {% if submission.get_points() %}
-            {{ submission.get_points() }}
-            {% else %}
-            – –
-            {% endif %}
-            /{{ assignment.get_max_points() }}
-        </td>
-        <td>
-            <a href="{{ url_for('submissions_ctrl.submission_details', submission_id=submission.get_id()) }}"
-               class="button">Details</a>
-            <a href="{{ url_for('submissions_ctrl.submission_grade', submission_id=submission.get_id()) }}"
-               class="button">Grade</a>
-        </td>
-    </tr>
-    {% endfor %}
+        {% for submission in list_assignment_submissions %}
+            <tr>
+                <td>{{ submission.get_id() }}</td>
+                <td><a href="{{ url_for('users_ctrl.user_details', user_id=submission.get_student().get_id()) }}">{{ submission.get_student().get_name() }}</a></td>
+                <td>
+                {% if submission.get_points() %}
+                    graded
+                {% else %}
+                    not graded
+                {% endif %}
+                </td>
+                <td>
+                {% if submission.get_points() %}
+                    {{ submission.get_points() }}
+                {% else %}
+                      – –
+                {% endif %}
+                /{{ assignment.get_max_points() }}
+                </td>
+                <td>
+                    <a href="{{ url_for('submissions_ctrl.submission_details', submission_id=submission.get_id()) }}" class="button">Details</a>
+                    {% if session['user_role'] == 'Mentor' %}
+                        <button onclick="showGradeModal({{ submission.get_id() }})">Grade</button>
+                        {% include 'submission_grade.html' %}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
 {% else %}
 <p><em>Unbelievable. No submissions here so far</em></p>
 {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<!-- JavaScript -->
+<script src="/static/js/submissions.js"></script>
 {% endblock %}
