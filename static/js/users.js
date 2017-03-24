@@ -84,22 +84,6 @@ function add_edit_user() {
 //-------------------------------------------------------------------------------------//
 
 
-$(document).ready(function () {
-    // GET THE MODAL to do: ADD / EDIT  //
-    var modals = document.getElementsByClassName('modal');
-
-
-    // When the user clicks anywhere outside of the modal, close it //
-
-    window.onclick = function (event) {
-        for (var i = 0; i < modals.length; i++) {
-            if (event.target == modals[i]) {
-                modals[i].style.display = "none";
-            }
-        }
-    };
-});
-
 // SHOW MODAL
 function showModalAddUser(id) {
     var modalAdd = document.getElementById('new_user_modal');

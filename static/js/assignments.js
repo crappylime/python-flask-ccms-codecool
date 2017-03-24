@@ -7,19 +7,7 @@
 //                                  MODAL'S FUNCTIONS
 //-------------------------------------------------------------------------------------//
 
-$(document).ready(function () {
 
-    var all_modals = document.getElementsByClassName('modal');
-
-    window.onclick = function (event) {
-        for (var i = 0; i < all_modals.length; i++) {
-            if (event.target == all_modals[i])
-                all_modals[i].style.display = "none";
-        }
-
-    };
-
-});
 
 // --------------------------------------------
 // SHOW MODAL FOR ADDING / EDITING ASSIGNMENTS:
