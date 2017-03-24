@@ -85,6 +85,36 @@ class Assignment:
         new_assignment = cls.get_assignment_by_id(new_assignment_id)
         return new_assignment
 
+    @property
+    def submission_list(self):
+        """
+        Returns submission list of instances.
+
+       :return:
+            submission_list: list
+        """
+        return self.create_submission_list_by_assignment_id(self.assignment_id)
+
+    @property
+    def active_user_list(self):
+        """
+        Returns submission list of instances.
+
+       :return:
+            active_user_list: list
+        """
+        return self.create_active_user_list_by_assignment_id(self.id)
+
+    @classmethod
+    def create_active_user_list_by_assignment_id(cls, assignment_id):
+        """
+        Creates instance of user
+        :return:
+            user: object
+        """
+        users_data = DB.read_active_user_record_list_by_assignment_id(assignment_id)
+        return [user[0] for user in users_data]
+
     def get_id(self):
         """Returns assignment instance id"""
         return self.id

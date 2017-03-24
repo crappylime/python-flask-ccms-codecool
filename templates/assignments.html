@@ -41,9 +41,6 @@
                         <a onclick="showModalAddAssignment({{ assignment.get_id() }})" class="button">Edit</a>
 {#                        <a href="{{ url_for('assignments_ctrl.assignment_remove', assignment_id=assignment.get_id()) }}" class="button">Remove</a>#}
                         <a onclick="showModalRemoveAssignment({{ assignment.get_id() }})"  class="button">Remove</a>
-                        {% if session['user_role'] == 'Student' %}
-                        <a href="{{ url_for('submissions_ctrl.submission_add', assignment_id=assignment.get_id()) }}" class="button">Submit assignment</a>
-                        {% endif %}
                         <a href="{{ url_for('submissions_ctrl.list_assignment_submissions', assignment_id=assignment.get_id()) }}" class="button">Submissions list</a>
                     </td>
                 </tr>

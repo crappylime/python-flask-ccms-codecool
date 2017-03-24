@@ -239,6 +239,17 @@ class DB:
         return user_submission_list
 
     @classmethod
+    def read_active_user_record_list_by_assignment_id(cls, assignment_id):
+        """Read submission record list by provided assignment id"""
+        conn = cls.connect()
+        cursor = conn.cursor()
+        query = "SELECT user_id FROM `submissions` WHERE assignment_id = ?;"
+        cursor.execute(query, (assignment_id,))
+        user_submission_list = cursor.fetchall()
+        conn.close()
+        return user_submission_list
+
+    @classmethod
     def read_menu_record_list_by_upper_menu_id(cls, upper_menu_id):
         """"""
         conn = cls.connect()
