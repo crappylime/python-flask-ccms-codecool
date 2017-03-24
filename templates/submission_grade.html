@@ -1,14 +1,12 @@
-{% block page_name_h1 %}
-<a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{ assignment.get_title() }}</a> -
-<a href="student_details">{{ submission.get_student().get_name() }}</a> grade
-{% endblock %}
-
-{% block content %}
-    <form action="" method="POST">
-        <fieldset>
-            <legend>Grade</legend>
-            <input type="number" name="points" min="0" max="{{ assignment.get_max_points() }}" value="{{ submission.get_points() }}" autofocus required>
-            <input class="button grade_button" type="submit" value="Grade">
-        </fieldset>
-    </form>
-{% endblock %}
+<div class="modal" id="gradeSubmission">
+  <div class="modal_content">
+  <h2>Grade submission</h2>
+      <form>
+          <fieldset>
+              <legend>Grade</legend>
+              <input type="number" name="points" id="points" min="0" max="{{ assignment.get_max_points() }}" value="{{ submission.get_points() }}" autofocus required>
+          </fieldset>
+      </form>
+      <button class="grade_button" type="submit" id="grade_submission_save_button" onclick="gradeSubmission(id)">Grade</button>
+  </div>
+</div>

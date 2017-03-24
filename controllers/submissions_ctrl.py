@@ -10,6 +10,7 @@ submissions_ctrl = Blueprint('submissions_ctrl', __name__)
 
 mainmenu = Menu.get_main_menu()
 
+
 @submissions_ctrl.route("/assignments/<assignment_id>/submissions")
 def list_assignment_submissions(assignment_id, methods=['GET', 'POST']):
     """ Shows list of submissions stored in the database.
@@ -46,18 +47,19 @@ def add_submission():
     return new_submission_in_json
 
 
-@submissions_ctrl.route('/submissions/<submission_id>/grade', methods=['GET', 'POST'])
-def submission_grade(submission_id):
-    """ Creates new submission
-    If the method was GET it should show new submission form.
-    If the method was POST it should create, save new submission.
-    """
+@submissions_ctrl.route('/grade_submission', methods=['POST'])
+def grade_submission():
+    grade_submission_content_list = request.get_json()
+    points = int(grade_submission_content_list[0])
+    submission_id = grade_submission_content_list[1]
     submission = Submission.get_submission_by_id(submission_id)
     user_id = submission.get_student().get_id()
     assignment = submission.get_assignment()
-    if request.method == 'POST':
-        points = int(request.form['points'])
-        Submission.set_grade_submission(user_id, assignment.get_id(), points)
-        flash("{}'s submission has been graded.".format(submission.get_student().get_name()))
-        return redirect(url_for('submissions_ctrl.list_assignment_submissions', assignment_id=assignment.get_id()))
-    return render_template('submission_grade.html', assignment=assignment, submission=submission, mainmenu=mainmenu)
+    max_points = assignment.get_max_points()
+    if points > max_points:
+        return ''
+    Submission.set_grade_submission(user_id, assignment.get_id(), points)
+    submission.student = ''
+    submission.assignment = ''
+    graded_submission_in_json = json.dumps(submission.__dict__, ensure_ascii=False)
+    return graded_submission_in_json

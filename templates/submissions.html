@@ -22,7 +22,7 @@
             {% for submission in list_assignment_submissions %}
                 <tr>
                     <td>{{ submission.get_id() }}</td>
-                    <td>{{ submission.get_student().get_name() }}</td>
+                    <td><a href="{{ url_for('users_ctrl.user_details', user_id=submission.get_student().get_id()) }}">{{ submission.get_student().get_name() }}</a></td>
                     <td>
                     {% if submission.get_points() %}
                         graded
@@ -40,13 +40,11 @@
                     </td>
                     <td>
                         <a href="{{ url_for('submissions_ctrl.submission_details', submission_id=submission.get_id()) }}" class="button">Details</a>
-                        <button onclick="showModal({{ submission.get_id() }})">Grade</button>
-                    </td>
-                    <div class="modal" id="{{ submission.get_id() }}">
-                        <div class="modal_content">
+                        {% if session['user_role'] == 'Mentor' %}
+                            <button onclick="showGradeModal({{ submission.get_id() }})">Grade</button>
                             {% include 'submission_grade.html' %}
-                        </div>
-                    </div>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

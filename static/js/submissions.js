@@ -18,8 +18,10 @@ $(document).ready(function() {
 function showModal(id) {
     var modal = document.getElementById('addSubmission');
     modal.style.display = "block";
-    $("#add_submission_button2").attr("onclick","addSubmission(" + id + ")"); // construct custom link
+    $("#add_submission_save_button").attr("onclick","addSubmission(" + id + ")"); // construct custom link
+    $("#grade_submission_save_button").attr("onclick","addSubmission(" + id + ")");
 }
+
 
 function addSubmission(id) {
     var submission_link = $('#submission_link').val();
@@ -51,3 +53,46 @@ function addSubmission(id) {
         }});
     modal.style.display = "block";
 }
+
+
+$(document).ready(function() {
+    // GET THE MODAL for actions: ADD, GRADE  //
+    var grade_modal = document.getElementById('gradeSubmission');
+
+    // user who clicks anywhere outside of the grade_modal closes it //
+    window.onclick = function (event) {
+      if (event.target == grade_modal) {
+          grade_modal.style.display = "none";
+      }
+    };
+});
+
+
+function showGradeModal(id) {
+    var grade_modal = document.getElementById('gradeSubmission');
+    grade_modal.style.display = "block";
+    $("#grade_submission_save_button").attr("onclick","gradeSubmission(" + id + ")");
+    $('#points').attr('value', '')
+}
+
+
+function gradeSubmission(id) {
+    var points = $('#points').val();
+    var grade_submission_content_list = [points, id];
+    var JSON_new_submission_grade = JSON.stringify(grade_submission_content_list);  // convert JS object to JSON string
+
+    $.ajax({
+        type: 'POST',
+        url: '/grade_submission',
+        contentType: 'application/json',
+        data: JSON_new_submission_grade,
+        success: function(last_submission) {         // response_data = sorted to-do list in JSON format
+            var grade_modal = document.getElementById('gradeSubmission');
+            grade_modal.style.display = "none";
+            var graded_submission_js = JSON.parse(last_submission);
+          },
+          error: function () {
+              alert('You cannot give so much points!');
+          }});
+      grade_modal.style.display = "block";
+  }

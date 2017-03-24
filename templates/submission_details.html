@@ -6,7 +6,7 @@
 
 {% block page_name_h1 %}
     <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{ assignment.get_title() }}</a> -
-    <a href="student_details">{{ submission.get_student().get_name() }}</a> submission
+    <a href="{{ url_for('users_ctrl.user_details', user_id=submission.get_student().get_id()) }}">{{ submission.get_student().get_name() }}</a> submission
 {% endblock %}
 
 {% block content %}
@@ -21,12 +21,8 @@
                 {% endif %}
                 /{{ assignment.get_max_points() }}
                 {% if session['user_role'] == 'Mentor' %}
-                    <button onclick="showModal({{ submission.get_id() }})">Grade</button>
-                    <div class="modal" id="{{ submission.get_id() }}">
-                        <div class="modal_content">
-                            {% include 'submission_grade.html' %}
-                        </div>
-                    </div>
+                    <button onclick="showGradeModal({{ submission.get_id() }})">Grade</button>
+                    {% include 'submission_grade.html' %}
                 {% endif %}
             </td>
         </tr>
