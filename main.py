@@ -38,6 +38,7 @@ def login_required(f):
         else:
             flash('You need to login first.')
             return redirect(url_for('login'))
+
     return wrap
 
 
@@ -75,7 +76,8 @@ def page_not_found(e):
         assignment_list = Assignment.get_assignment_list()
     else:
         assignment_list = []
-    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']), assignment_list=assignment_list)
+    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']),
+                           assignment_list=assignment_list)
 
 
 @app.route("/")
@@ -85,7 +87,8 @@ def index():
         assignment_list = Assignment.get_assignment_list()
     else:
         assignment_list = []
-    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']), assignment_list=assignment_list, mainmenu=mainmenu, dashboard=True)
+    return render_template('user_details.html', user=User.get_user_by_id(session['user_id']),
+                           assignment_list=assignment_list, mainmenu=mainmenu, dashboard=True)
 
 
 if __name__ == "__main__":

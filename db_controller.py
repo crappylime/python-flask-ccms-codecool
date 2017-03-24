@@ -2,7 +2,6 @@ import sqlite3
 
 
 class DB:
-
     @classmethod
     def connect(cls):
         """Connect with database"""
@@ -264,8 +263,6 @@ class DB:
         conn.close()
         return perm_list
 
-
-
     @classmethod
     def read_submission_record_list(cls):
         """Read submission record list"""
@@ -457,7 +454,6 @@ class DB:
         conn.close()
         return overall_checkpoint
 
-
     @classmethod
     def read_team_list(cls):
         """Read team record list"""
@@ -482,7 +478,6 @@ class DB:
             team_id = None
         conn.close()
         return team_id
-
 
     @classmethod
     def update_name(cls, user_id, name):
@@ -532,7 +527,6 @@ class DB:
         args = (name, mail, password, user_id)
         cls.execute_query(query, args)
 
-
     def update_title(cls, assignment_id, title):
         """Update title of assignment by provided assignment id"""
         query = "UPDATE `assignments` SET `title` = ? WHERE `assignment_id` = ?;"
@@ -577,7 +571,6 @@ class DB:
         query = "UPDATE `members` SET `team_id` = ? WHERE `student_id` = ?;"
         args = (team_id, student_id)
         cls.execute_query(query, args)
-
 
     @classmethod
     def delete_assignment_record(cls, assignment_id):

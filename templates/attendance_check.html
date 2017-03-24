@@ -5,30 +5,33 @@
 {% block page_name_h1 %}Students attendance check{% endblock %}
 
 {% block content %}
-    <!-- Table
-    ================================================== -->
-    <form action method="GET">
+<!-- Table
+================================================== -->
+<form action method="GET">
     <div id="label-input">
         <label>Date </label><input type="date" name="date" placeholder="Date" required
                                    onchange="this.form.submit()"
-           {{ "value={}".format(chosen_date) if chosen_date }} >
-      </div>
-    </form>
-    <form action method="POST">
-      <table id="attendance_table">
-          {% for student in students_list %}
-          <tr>
-              <td> {{ student.get_name() }}</td>
+                                   {{ "value={}".format(chosen_date) if chosen_date }} >
+    </div>
+</form>
+<form action method="POST">
+    <table id="attendance_table">
+        {% for student in students_list %}
+        <tr>
+            <td> {{ student.get_name() }}</td>
 
-              <td><input type="radio" name="{{ student.get_id() }}" value=1 required
-                      {{ "checked=checked" if student_status_dict[student.get_id()] == 1}}/>Present</td>
-              <td><input type="radio" name="{{ student.get_id() }}" value=0.8 required
-                      {{ "checked=checked" if student_status_dict[student.get_id()] == 0.8}}/>Late</td>
-              <td><input type="radio" name="{{ student.get_id() }}" value=0 required
-                      {{ "checked=checked" if student_status_dict[student.get_id()] == 0}}/>Absent</td>
-          </tr>
-          {% endfor %}
-      <button class="submit_button" type="submit" name="button">Save</button>
-      </table>
-    </form>
+            <td><input type="radio" name="{{ student.get_id() }}" value=1 required
+                       {{ "checked=checked" if student_status_dict[student.get_id()] == 1}}/>Present
+            </td>
+            <td><input type="radio" name="{{ student.get_id() }}" value=0.8 required
+                       {{ "checked=checked" if student_status_dict[student.get_id()] == 0.8}}/>Late
+            </td>
+            <td><input type="radio" name="{{ student.get_id() }}" value=0 required
+                       {{ "checked=checked" if student_status_dict[student.get_id()] == 0}}/>Absent
+            </td>
+        </tr>
+        {% endfor %}
+        <button class="submit_button" type="submit" name="button">Save</button>
+    </table>
+</form>
 {% endblock %}

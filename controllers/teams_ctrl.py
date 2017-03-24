@@ -62,7 +62,8 @@ def team_edit(team_id):
 def edit_team():
     team_id = request.get_json()['id']
     new_team_name = request.get_json()['name']
-    if request.get_json()['new_member'] != '':
+    if request.get_json()['new_member'] != '' and (
+            new_team_name == Team.get_team_by_id(team_id).get_name() or not Team.get_team_by_name(new_team_name)):
         new_member = request.get_json()['new_member']
         Team.get_team_by_id(team_id).set_name(new_team_name)
         student_id = int(''.join(filter(lambda x: x.isdigit(), new_member)))
@@ -74,15 +75,17 @@ def edit_team():
         edited_data = (new_team_name, student_name, student_id)
         edited_data_json = json.dumps(edited_data)
         return edited_data_json
-    else:
+    elif new_team_name == Team.get_team_by_id(team_id).get_name() or not Team.get_team_by_name(new_team_name):
         Team.get_team_by_id(team_id).set_name(new_team_name)
         edited_data = new_team_name
         edited_data_json = json.dumps(edited_data)
         return edited_data_json
+    else:
+        return ''
+
 
 @teams_ctrl.route("/teams/<team_id>/edit/<student_id>")
 def team_remove_student(team_id, student_id):
-
     Team.get_team_by_id(team_id).remove_member(User.get_user_by_id(student_id))
     return redirect(url_for('teams_ctrl.team_edit', team_id=team_id))
 

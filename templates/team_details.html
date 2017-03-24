@@ -5,54 +5,69 @@
 {% block page_name_h1 %}Team details {% endblock %}
 
 {% block content %}
-    <h2 id="tbody_team_{{ team.get_id() }}">{{ team.get_name() }}</h2>
-    <button class="button team_button" onclick="showModalEditTeam({{team.get_id()}})">Edit</button>
-    <table>
-        <thead>
-            <tr>
-                <th>id</th><th>Student</th><th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="team_members_table">
-            {% for student in team.get_members() %}
-                <tr id="member_{{ student.get_id() }}">
-                    <td>{{ student.get_id() }}</td>
-                    <td><a href="/users/{{ student.get_id() }}">{{ student.get_name() }}</a></td>
-                    <td><button class="button team_button" onclick="showModalRemoveMember({{team.get_id()}}, {{ student.get_id() }})">Remove</button></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<h2 id="tbody_team_{{ team.get_id() }}">{{ team.get_name() }}</h2>
+<button class="button team_button" onclick="showModalEditTeam({{team.get_id()}})">Edit</button>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Student</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody id="team_members_table">
+    {% for student in team.get_members() %}
+    <tr id="member_{{ student.get_id() }}">
+        <td>{{ student.get_id() }}</td>
+        <td><a href="/users/{{ student.get_id() }}">{{ student.get_name() }}</a></td>
+        <td>
+            <button class="button team_button"
+                    onclick="showModalRemoveMember({{team.get_id()}}, {{ student.get_id() }})">Remove
+            </button>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
-    <h2>Team assigments</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>id</th><th>Assignment name</th><th>Status</th><th>Submission</th><th>Grade</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for assignment in team.get_team_assignments() %}
-                <tr>
-                    <td>1.</td>
-                    <td><a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{ assignment.get_title() }}</a></td>
-                    <td>Submitted, Graded</td>
-                    <td><a href="submission_details.html" class="button">View submission</a></td>
-                    <td>50/55 pt <a href="#" class="button">Change grade</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-        <div id="modalEditTeam">
-                <div class="modal_content">
-                    {% include '/edit_team_form.html' %}
-                </div>
+<h2>Team assigments</h2>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Assignment name</th>
+        <th>Status</th>
+        <th>Submission</th>
+        <th>Grade</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for assignment in team.get_team_assignments() %}
+    <tr>
+        <td>1.</td>
+        <td><a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{
+            assignment.get_title() }}</a></td>
+        <td>Submitted, Graded</td>
+        <td><a href="submission_details.html" class="button">View submission</a></td>
+        <td>50/55 pt <a href="#" class="button">Change grade</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+    <div id="modalEditTeam">
+        <div class="modal_content">
+            {% include '/edit_team_form.html' %}
         </div>
-        <div id="modalRemoveMember">
-                <div class="modal_content">
-                    <p>Are you sure</p>
-                    <button id="button_remove_member_yes" onclick="remove_member()" class="button team_button">Yes</button>
-                    <p onclick="hideModalRemoveMember()" class="button team_button">No</p>
-                </div>
+    </div>
+    <div id="modalRemoveMember">
+        <div class="modal_content">
+            <p>Are you sure</p>
+            <button id="button_remove_member_yes" onclick="remove_member()" class="button team_button">Yes</button>
+            <p onclick="hideModalRemoveMember()" class="button team_button">No</p>
         </div>
-    </table>
+    </div>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/teams.js"></script>
 {% endblock %}

@@ -10,44 +10,49 @@
 <!-- Table
 ================================================== -->
 {% if assignment_list %}
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>Title</th>
-                <th>Team</th>
-                <th>Content</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for assignment in assignment_list %}
-                <tr>
-                    <td>{{loop.index}}. {{item}}</td>
-                    <td>{{ assignment.get_title() }}</td>
-                    <td>
-                        {% if assignment.get_assignment_type() %}
-                             Yes
-                        {% else %}
-                             No
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}" class="button assignment_buttons">Details</a>
-                    </td>
-                    <td>
-                        <a href="{{ url_for('assignments_ctrl.assignment_edit', assignment_id=assignment.get_id()) }}" class="button">Edit</a>
-                        <a href="{{ url_for('assignments_ctrl.assignment_remove', assignment_id=assignment.get_id()) }}" class="button">Remove</a>
-                        {% if session['user_role'] == 'Student' %}
-                        <a href="{{ url_for('submissions_ctrl.submission_add', assignment_id=assignment.get_id()) }}" class="button">Submit assignment</a>
-                        {% endif %}
-                        <a href="{{ url_for('submissions_ctrl.list_assignment_submissions', assignment_id=assignment.get_id()) }}" class="button">Submissions list</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Title</th>
+        <th>Team</th>
+        <th>Content</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for assignment in assignment_list %}
+    <tr>
+        <td>{{loop.index}}. {{item}}</td>
+        <td>{{ assignment.get_title() }}</td>
+        <td>
+            {% if assignment.get_assignment_type() %}
+            Yes
+            {% else %}
+            No
+            {% endif %}
+        </td>
+        <td>
+            <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}"
+               class="button assignment_buttons">Details</a>
+        </td>
+        <td>
+            <a href="{{ url_for('assignments_ctrl.assignment_edit', assignment_id=assignment.get_id()) }}"
+               class="button">Edit</a>
+            <a href="{{ url_for('assignments_ctrl.assignment_remove', assignment_id=assignment.get_id()) }}"
+               class="button">Remove</a>
+            {% if session['user_role'] == 'Student' %}
+            <a href="{{ url_for('submissions_ctrl.submission_add', assignment_id=assignment.get_id()) }}"
+               class="button">Submit assignment</a>
+            {% endif %}
+            <a href="{{ url_for('submissions_ctrl.list_assignment_submissions', assignment_id=assignment.get_id()) }}"
+               class="button">Submissions list</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% else %}
-    <p><em>Unbelievable. No assignments here so far</em></p>
+<p><em>Unbelievable. No assignments here so far</em></p>
 {% endif %}
 {% endblock %}

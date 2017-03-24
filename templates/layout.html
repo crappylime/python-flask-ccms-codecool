@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>{% block title %}Beloved Codecool CCMS{% endblock %}</title>
     <!-- Custom Fonts -->
@@ -8,57 +8,60 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/static/css/style.css">
     <!-- JavaScript -->
-  </head>
-  <body>
-    <sidebar>
-      <!-- Sidebar Header
-      ================================================== -->
-      <header class="sideheader">
+</head>
+<body>
+<sidebar>
+    <!-- Sidebar Header
+    ================================================== -->
+    <header class="sideheader">
         <p>You're logged in as:</p>
         <img id="logo" src="/static/images/logo.png" alt="logo">
         <h2>{{ session['user_role'] }}<br>{{session['user_name']}}</h2>
         <a href={{ url_for('logout') }}>Logout</a>
-      </header>
-      <!-- Navigation
-      ================================================== -->
-      <nav>
-         <ul>{% for menu in mainmenu %}
-             {% if session['user_role'] in menu.permissions %}
-             <li><a href={{ url_for(menu.url_for, role=menu.url_for_args) }}>{{ menu.name }}</a></li>
-             {% endif %}
+    </header>
+    <!-- Navigation
+    ================================================== -->
+    <nav>
+        <ul>{% for menu in mainmenu %}
+            {% if session['user_role'] in menu.permissions %}
+            <li><a href={{ url_for(menu.url_for, role=menu.url_for_args) }}>{{ menu.name }}</a></li>
+            {% endif %}
 
             <ul class="submenu">
                 {% for submenu in menu.submenus %}
-                    {% if session['user_role'] in submenu.permissions %}
+                {% if session['user_role'] in submenu.permissions %}
                 <li><a href={{ url_for(submenu.url_for, role=submenu.url_for_args) }}>{{ submenu.name }}</a></li>
                 {% endif %}
                 {% endfor %}
             </ul>
 
-             {% endfor %}
-         </ul>
-      </nav>
+            {% endfor %}
+        </ul>
+    </nav>
 
 
-    </sidebar>
-    <div class="wrap">
-      <div class="messages">
+</sidebar>
+<div class="wrap">
+    <div class="messages">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
         <ul class="flashes">
-          {% for message in messages %}
-          <li>{{ message }}</li>
-          {% endfor %}
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
         </ul>
         {% endif %}
         {% endwith %}
-      </div>
-      <h1>{% block page_name_h1 %}{% endblock %}</h1>
-      <div class="content">
-      {% block content %}{% endblock %}
-      </div>
     </div>
-    <script src="/static/js/jquery-3.1.1.min.js"></script>
-    <script src="/static/js/teams.js"></script>
-  </body>
+    <h1>{% block page_name_h1 %}{% endblock %}</h1>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+{% block scripts %}
+
+{% endblock %}
+
+</body>
 </html>

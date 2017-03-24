@@ -134,7 +134,7 @@ function AddTeam() {
          var team_name_in_JSON = JSON.stringify(team_name);
          $.ajax({
             type: 'POST',
-            url: '/add_team', //TODO
+            url: '/add_team',
             contentType: 'application/json',
             data: team_name_in_JSON,
             success: function(team_json_object) {
@@ -233,6 +233,7 @@ function EditTeam(id) {
                     var student_id = new_team_data[2];
                     $('#tbody_team_'+id+'').text(team_name);
                     $('#member_'+member_name.replace(/ /g,'')+'').remove();
+                    $('#member_'+student_id+'').remove();
                     $('#team_'+id+'_members').append(
                     '<li id="member_'+member_name.replace(/ /g,'')+'">'+member_name+'</li>'
                     )

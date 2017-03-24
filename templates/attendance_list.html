@@ -5,13 +5,13 @@
 {% block page_name_h1 %}Students attendance{% endblock %}
 
 {% block content %}
-        <form action method="GET">
+<form action method="GET">
         <span id="date-style"><label>date</label><input type="date" name="date" placeholder="Date"
-                                   onchange="this.form.submit()" {{ "value={}".format(chosen_date) if chosen_date }} >
+                                                        onchange="this.form.submit()" {{ "value={}".format(chosen_date) if chosen_date }} >
         </span>
-        </form>
-        {% if session['user_role'] != 'Student' %}
-        <form action method="GET">
+</form>
+{% if session['user_role'] != 'Student' %}
+<form action method="GET">
         <span id="select_student"><label>student</label><select name="student" onchange="this.form.submit()">
                         <option>--</option>
                         <option>all</option>
@@ -19,33 +19,42 @@
                                     <option>{{ name }}</option>
                         {% endfor %}
                                 </select></span>
-        </form>
+</form>
+{% endif %}
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>option</th>
+        {% if session['user_role'] != 'Student' %}
+        <th>option</th>
         {% endif %}
-            <table>
-                <thead>
-                    <tr>
-                    <th>id</th><th>Name</th><th>Date</th><th>Status</th><th>option</th>
-                         {% if session['user_role'] != 'Student' %}
-                        <th>option</th>
-                        {% endif %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% if not attendances_list[1] %}
-                    <tr><td>No attendance data</td></tr>
-                    {% endif %}
-                {% for item in attendances_list %}
-                <tr>
-                    <td>{{ attendances_list.index(item) + 1 }}</td><td>{{ item.get_student().get_name() }}</td><td>{{ item.get_date()}}</td>
-                    <td>{{ "Present" if item.get_status() == 1 }} {{ "Late" if item.get_status() == 0.8 }}
-                    {{ "Absent" if item.get_status() == 0 }} </td>
-                    {% if session['user_role'] != 'Student' %}
-                <td><a href="{{ url_for('attendances_ctrl.attendance_edit', att_id=item.get_id()) }}">edit</a></td>
-                    {% endif %}
-                <td><a href="?student={{ item.get_student().get_name() }}" onclick="this.form.submit()">all dates</a></td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            <span class="info_box"><h2>overall attendance</h2><span>{{ overall }} %</span></span>
+    </tr>
+    </thead>
+    <tbody>
+    {% if not attendances_list[1] %}
+    <tr>
+        <td>No attendance data</td>
+    </tr>
+    {% endif %}
+    {% for item in attendances_list %}
+    <tr>
+        <td>{{ attendances_list.index(item) + 1 }}</td>
+        <td>{{ item.get_student().get_name() }}</td>
+        <td>{{ item.get_date()}}</td>
+        <td>{{ "Present" if item.get_status() == 1 }} {{ "Late" if item.get_status() == 0.8 }}
+            {{ "Absent" if item.get_status() == 0 }}
+        </td>
+        {% if session['user_role'] != 'Student' %}
+        <td><a href="{{ url_for('attendances_ctrl.attendance_edit', att_id=item.get_id()) }}">edit</a></td>
+        {% endif %}
+        <td><a href="?student={{ item.get_student().get_name() }}" onclick="this.form.submit()">all dates</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<span class="info_box"><h2>overall attendance</h2><span>{{ overall }} %</span></span>
 {% endblock %}

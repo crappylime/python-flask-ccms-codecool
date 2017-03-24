@@ -73,7 +73,6 @@ class Attendance:
         :return:
             all students overall attendances by date
         """
-        print('date z get:', date)
         return cls.create_overall_attendance_by_date(date)
 
     @classmethod
