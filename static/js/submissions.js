@@ -2,18 +2,6 @@
 //               SUBMISSIONS MODALS FUNCTIONS
 //---------------------------------------------------------------//
 
-$(document).ready(function() {
-    // GET THE MODAL for actions: ADD, GRADE  //
-    var modal = document.getElementById('addSubmission');
-
-    // user who clicks anywhere outside of the modal closes it //
-    window.onclick = function (event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
-      }
-    };
-});
-
 
 function showModal(id) {
     var modal = document.getElementById('addSubmission');
@@ -54,18 +42,6 @@ function addSubmission(id) {
     modal.style.display = "block";
 }
 
-
-$(document).ready(function() {
-    // GET THE MODAL for actions: ADD, GRADE  //
-    var grade_modal = document.getElementById('gradeSubmission');
-
-    // user who clicks anywhere outside of the grade_modal closes it //
-    window.onclick = function (event) {
-      if (event.target == grade_modal) {
-          grade_modal.style.display = "none";
-      }
-    };
-});
 
 
 function showGradeModal(id) {
