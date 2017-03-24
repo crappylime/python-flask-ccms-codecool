@@ -5,7 +5,6 @@ from models.menus import Menu
 from db_controller import DB
 import json
 
-
 assignments_ctrl = Blueprint('assignments_ctrl', __name__)
 mainmenu = Menu.get_main_menu()
 
@@ -17,7 +16,8 @@ def assignments():
 
 @assignments_ctrl.route("/assignments/<assignment_id>")
 def assignment_details(assignment_id):
-    return render_template("assignment_details.html", assignment=Assignment.get_assignment_by_id(assignment_id), mainmenu=mainmenu)
+    return render_template("assignment_details.html", assignment=Assignment.get_assignment_by_id(assignment_id),
+                           mainmenu=mainmenu)
 
 
 @assignments_ctrl.route("/assignments/new", methods=["GET", "POST"])
@@ -106,9 +106,11 @@ def assignment_edit(assignment_id):
         content = request.form['content']
         due_date = request.form['due_date']
         max_points = request.form['max_points']
-        Assignment.get_assignment_by_id(assignment_id).edit_assignment(assignment_title, is_team, content, due_date, max_points)
+        Assignment.get_assignment_by_id(assignment_id).edit_assignment(assignment_title, is_team, content, due_date,
+                                                                       max_points)
         return redirect(url_for('assignments_ctrl.assignments'))
-    return render_template("add_edit_assignment.html", title="Edit an assignment", assignment=Assignment.get_assignment_by_id(assignment_id), mainmenu=mainmenu)
+    return render_template("add_edit_assignment.html", title="Edit an assignment",
+                           assignment=Assignment.get_assignment_by_id(assignment_id), mainmenu=mainmenu)
 
 
 @assignments_ctrl.route("/assignments/<assignment_id>/remove")

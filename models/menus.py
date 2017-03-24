@@ -20,7 +20,6 @@ class Menu:
         role_perm = DB.read_menu_permission(self.id)
         return [role_dict[index] for index, value in enumerate(role_perm) if value == 1]
 
-
     @classmethod
     def get_main_menu(cls):
         return cls.get_menu_by_upper_menu_id(upper_menu_id=0)
@@ -37,6 +36,3 @@ class Menu:
     def get_menu_by_name(cls, menu_name):
         menu_data = DB.read_menu_by_name(menu_name)
         return Menu(*menu_data)
-
-
-

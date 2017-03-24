@@ -5,7 +5,6 @@ from models.users import *
 from flask import Blueprint
 import time
 
-
 attendances_ctrl = Blueprint('attendances_ctrl', __name__)
 
 mainmenu = Menu.get_main_menu()
@@ -23,7 +22,7 @@ def attendances():
     # ------------------ retrieve data helpers section --------------------------------
     name_id_dict = {}  # create dict with pairs: student name - student id to retrieve student id from selected name
     for stu in student_list:
-            name_id_dict[stu.get_name()] = stu.get_id()
+        name_id_dict[stu.get_name()] = stu.get_id()
 
     names_list = []  # create names list to view sorted names list in select form
     for name in name_id_dict.keys():

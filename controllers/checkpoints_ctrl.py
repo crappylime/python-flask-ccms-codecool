@@ -33,7 +33,6 @@ def checkpoints():
     if chosen_date:  # show by date
         checkpoints_list = Checkpoint.get_checkpoint_list_by_date(chosen_date)
         overall = Checkpoint.get_overall_checkpoint_by_date(chosen_date)
-        print(overall)
     elif chosen_student and chosen_student != 'all':  # show by chosen student
         checkpoints_list = Checkpoint.get_checkpoint_list_by_student_id(name_id_dict[chosen_student])
         overall = Checkpoint.get_overall_checkpoint(name_id_dict[chosen_student])
@@ -97,7 +96,6 @@ def check_checkpoint():
         checkpoints_list = []
 
         if chosen_title is None:  # load checkpoints for default date (if any)
-            print('100 if chosen_title is None:')
             # chosen_date = time.strftime("%Y-%m-%d")
             by_date_list = Checkpoint.get_checkpoint_list_by_date(chosen_title)
 
@@ -110,9 +108,6 @@ def check_checkpoint():
         else:
             # update checkpoints records for selected day
             for student in students_list:
-                print(student.get_id())
-                print(chosen_title)
-                print(request.form[str(student.get_id())])
                 checkpoints_list.append((student.get_id(), chosen_title, request.form[str(student.get_id())]))
             for checkpoint in checkpoints_list:
                 Checkpoint.update_checkpoint(checkpoint[0], checkpoint[1], checkpoint[2])

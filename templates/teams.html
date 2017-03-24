@@ -5,34 +5,66 @@
 {% block page_name_h1 %}List of teams{% endblock %}
 
 {% block content %}
-    <table>
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>Name</th>
-                <th>Students</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for team in teams_list %}
-                <tr>
-                    <td>{{ team.get_id() }}</td>
-                    <td>{{ team.get_name() }}</td>
-                    <td>
-                        <ol>
-                            {% for student in team.get_members() %}
-                                <li>{{ student.get_name() }}</li>
-                            {% endfor %}
-                        </ol>
-                    </td>
-                    <td>
-                        <a href="{{ url_for('teams_ctrl.team_details', team_id=team.get_id()) }}"  class="button team_button">Details</a>
-                        <a href="{{ url_for('teams_ctrl.team_edit', team_id=team.get_id()) }}" class="button team_button">Edit</a>
-                        <a href="{{ url_for('teams_ctrl.team_remove', team_id=team.get_id()) }}" class="button team_button">Remove</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<button class="button team_button" onclick="showModalAddTeam()">Add new team</button>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Students</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="team_table_body">
+    {% for team in teams_list %}
+    <tr id="team_{{ team.get_id() }}">
+        <td>{{ team.get_id() }}</td>
+        <td id="tbody_team_{{ team.get_id() }}">{{ team.get_name() }}</td>
+        <td>
+            <ol id="team_{{ team.get_id() }}_members">
+                {% for student in team.get_members() %}
+                <li id="member_{{ student.get_name().replace(' ', '') }}">{{ student.get_name() }}</li>
+                {% endfor %}
+            </ol>
+        </td>
+        <td>
+            <a href="{{ url_for('teams_ctrl.team_details', team_id=team.get_id()) }}"
+               class="button team_button">Details</a>
+            <button class="button team_button" onclick="showModalEditTeam({{team.get_id()}})">Edit</button>
+            <button class="button team_button" onclick="showModalRemoveTeam({{team.get_id()}})">Remove</button>
+        </td>
+    </tr>
+
+    {% endfor %}
+    <div id="modalRemoveTeam" class="modal">
+        <div class="modal_content">
+            <p>Are you sure</p>
+            <button id="button_remove_yes" onclick="remove_team()" class="button team_button">Yes</button>
+            <p onclick="hideModalRemoveTeam()" class="button team_button">No</p>
+        </div>
+    </div>
+    <div id="modalAddTeam" class="modal">
+        <div class="modal_content">
+            {% include '/add_team_form.html' %}
+        </div>
+    </div>
+    <div id="modalEditTeam" class="modal">
+        <div class="modal_content">
+            {% include '/edit_team_form.html' %}
+        </div>
+    </div>
+    <div id="modalRemoveMember" class="modal">
+        <div class="modal_content">
+            <p>Are you sure</p>
+            <button id="button_remove_member_yes" onclick="remove_member()" class="button team_button">Yes</button>
+            <p onclick="hideModalRemoveMember()" class="button team_button">No</p>
+        </div>
+    </div>
+    </tbody>
+</table>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/teams.js"></script>
 {% endblock %}

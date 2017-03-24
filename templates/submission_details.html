@@ -5,31 +5,34 @@
 {% endblock %}
 
 {% block page_name_h1 %}
-    <a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{ assignment.get_title() }}</a> -
-    <a href="student_details">{{ submission.get_student().get_name() }}</a> submission
+<a href="{{ url_for('assignments_ctrl.assignment_details', assignment_id=assignment.get_id()) }}">{{
+    assignment.get_title() }}</a> -
+<a href="student_details">{{ submission.get_student().get_name() }}</a> submission
 {% endblock %}
 
 {% block content %}
-    <table class="details_table">
-        <tr>
-            <th>Grade</th>
-            <td>{% if submission.get_points() %}
-                {{ submission.get_points() }}
+<table class="details_table">
+    <tr>
+        <th>Grade</th>
+        <td>{% if submission.get_points() %}
+            {{ submission.get_points() }}
             {% else %}
-                – –
+            – –
             {% endif %}
-            /{{ assignment.get_max_points() }} <a href="{{ url_for('submissions_ctrl.submission_grade', submission_id=submission.get_id()) }}" class="button">Grade</a></td>
-        </tr>
-            <th>Due date</th>
-            <td>{{ assignment.get_due_date() }}</td>
-        <tr>
-            <th>Time of submission</th>
-            <td>{{ submission.get_date() }}</td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <th>Submission content</th>
-            <td><a href="{{ submission.get_content() }}" target="_blank">{{ submission.get_content() }}</a></td>
-        </tr>
-    </table>
+            /{{ assignment.get_max_points() }} <a
+                    href="{{ url_for('submissions_ctrl.submission_grade', submission_id=submission.get_id()) }}"
+                    class="button">Grade</a></td>
+    </tr>
+    <th>Due date</th>
+    <td>{{ assignment.get_due_date() }}</td>
+    <tr>
+        <th>Time of submission</th>
+        <td>{{ submission.get_date() }}</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <th>Submission content</th>
+        <td><a href="{{ submission.get_content() }}" target="_blank">{{ submission.get_content() }}</a></td>
+    </tr>
+</table>
 {% endblock %}

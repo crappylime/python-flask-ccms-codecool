@@ -5,13 +5,13 @@
 {% block page_name_h1 %}Students checkpoint{% endblock %}
 
 {% block content %}
-        <form action method="GET">
+<form action method="GET">
         <span id="date-style"><label>date</label><input type="date" name="date" placeholder="Date"
-                                   onchange="this.form.submit()" {{ "value={}".format(chosen_date) if chosen_date }} >
+                                                        onchange="this.form.submit()" {{ "value={}".format(chosen_date) if chosen_date }} >
         </span>
-        </form>
+</form>
 
-        <form action method="GET">
+<form action method="GET">
         <span id="select_student"><label>student</label><select name="student" onchange="this.form.submit()">
                         <option>--</option>
                         <option>all</option>
@@ -19,27 +19,37 @@
                                     <option>{{ name }}</option>
                         {% endfor %}
                                 </select></span>
-        </form>
-            <table>
-                <thead>
-                    <tr>
-                    <th>id</th><th>Name</th><th>Date</th><th>card</th><th>option</th><th>option</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% if not checkpoints_list[0] %}
-                    <tr><td>No checkpoint data</td></tr>
-                    {% endif %}
-                {% for item in checkpoints_list %}
-                <tr>
-                    <td>{{ checkpoints_list.index(item) + 1 }}</td><td>{{ item.get_student().get_name() }}</td><td>{{ item.get_date()}}</td>
-                    <td>{{ "Green" if item.get_card() == 1 }} {{ "Yellow" if item.get_card() == 0.8 }}
-                    {{ "Red" if item.get_card() == 0 }} </td>
-                <td><a href="{{ url_for('checkpoints_ctrl.checkpoint_edit', att_id=item.get_id()) }}">edit</a></td>
-                <td><a href="?student={{ item.get_student().get_name() }}" onclick="this.form.submit()">all dates</a></td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            <span class="info_box"><h2>Overall checkpoint:</h2><span>{{ overall }} %</span></span>
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>Name</th>
+        <th>Date</th>
+        <th>card</th>
+        <th>option</th>
+        <th>option</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if not checkpoints_list[0] %}
+    <tr>
+        <td>No checkpoint data</td>
+    </tr>
+    {% endif %}
+    {% for item in checkpoints_list %}
+    <tr>
+        <td>{{ checkpoints_list.index(item) + 1 }}</td>
+        <td>{{ item.get_student().get_name() }}</td>
+        <td>{{ item.get_date()}}</td>
+        <td>{{ "Green" if item.get_card() == 1 }} {{ "Yellow" if item.get_card() == 0.8 }}
+            {{ "Red" if item.get_card() == 0 }}
+        </td>
+        <td><a href="{{ url_for('checkpoints_ctrl.checkpoint_edit', att_id=item.get_id()) }}">edit</a></td>
+        <td><a href="?student={{ item.get_student().get_name() }}" onclick="this.form.submit()">all dates</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<span class="info_box"><h2>Overall checkpoint:</h2><span>{{ overall }} %</span></span>
 {% endblock %}

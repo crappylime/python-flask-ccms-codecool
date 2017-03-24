@@ -83,9 +83,7 @@ class Checkpoint:
         :return:
             all students overall checkpoints by date
         """
-        print('date z get:', date)
         return cls.create_overall_checkpoint_by_date(date)
-
 
     @classmethod
     def create_checkpoint_by_id(cls, checkpoint_id):

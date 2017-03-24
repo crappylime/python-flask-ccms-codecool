@@ -83,5 +83,3 @@ class Team:
         """
         self.name = new_name
         DB.update_team_name(self.id, self.name)
-
-

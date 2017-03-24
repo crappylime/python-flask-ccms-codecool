@@ -172,17 +172,17 @@ class User:
     def set_name(self, new_name):
         """Sets users name"""
         self.name = new_name
-        #DB.update_name(self.get_id(), new_name)
+        # DB.update_name(self.get_id(), new_name)
 
     def set_mail(self, new_mail):
         """Sets users mail"""
         self.mail = new_mail
-        #DB.update_mail(self.get_id(), new_mail)
+        # DB.update_mail(self.get_id(), new_mail)
 
     def set_password(self, new_password):
         """Sets users password"""
         self.password = new_password
-        #DB.update_password(self.get_id(), new_password)
+        # DB.update_password(self.get_id(), new_password)
 
     def save_changes(self):
         DB.update_user(self.id, self.name, self.mail, self.password)
